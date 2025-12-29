@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taxpayer Transactions</title>
+    <link rel="stylesheet" href="../../extjs/resources/ext-all.css">
+    <link rel="stylesheet" href="../../css/all.css">
+    <link rel="stylesheet" href="../../css/general/transactions.css">
+</head>
+<body>
+    
+    <!-- Disclaimer Banner -->
+    <div class="disclaimer-banner">
+        <strong>⚠️ IMPORTANT NOTICE:</strong> This website is provided strictly for training and demonstration purposes only. 
+        It is NOT connected to the official Inland Revenue Department (IRD) of Nepal. 
+        Do not enter any real, sensitive, or confidential taxpayer information. 
+        Any data entered here will not be processed or submitted to the actual IRD system. 
+        For official tax filing, please visit the authentic IRD portal.
+    </div>
+
+
+    <div id="TaxpayersTransaction-body" class="x-panel-body x-panel-body-default-framed" style="overflow: auto; padding: 10px; background: #DFE9F6;">
+        
+        <!-- Form Panel -->
+        <div id="frmTaxpayersTransactions" class="x-panel x-panel-default-framed">
+            <div class="x-panel-body" style="padding: 10px;">
+                
+                <!-- Buttons and Dropdown Container -->
+                <div class="x-container">
+                    <!-- Buttons Row -->
+                    <div style="margin-bottom: 20px;">
+                        <!-- Back Button -->
+                        <div class="x-btn x-btn-default-small" style="padding: 5px; display: inline-block;">
+                            <button type="button" onclick="goBack()" class="x-btn-center">
+                                <span class="x-btn-inner">Back</span>
+                            </button>
+                        </div>
+                        
+                        <!-- Cancel Button -->
+                        <div class="x-btn x-btn-default-small" style="padding: 5px; margin: 0px 0px 0px 5px; display: inline-block;">
+                            <button type="button" onclick="clearSelection()" class="x-btn-center">
+                                <span class="x-btn-inner">Cancel</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Transactions For Dropdown Row -->
+                    <div class="x-field x-form-item" style="margin: 10px 0;">
+                        <label class="x-form-item-label x-form-item-label-left" style="width:120px;">Transactions For:</label>
+                        <div class="x-form-item-body" style="display: inline-block;">
+                            <select id="cboTTApplication" class="x-form-field x-form-text" style="width: 200px;" onchange="showTransactionType()">
+                                <option value="">-------- Select --------</option>
+                                <option value="vat">VAT</option>
+                                <option value="tds">TDS</option>
+                                <option value="it">IT</option>
+                                <option value="excise">Excise</option>
+                                <option value="installment">Installment Return</option>
+                                <option value="extension">Extension of Filing Period</option>
+                                <option value="withholdee">Withholdee Information</option>
+                                <option value="education">Education Tax</option>
+                                <option value="health">Health Tax</option>
+                                <option value="software">Enlisted Software</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Hidden fields for PAN and Username -->
+                <input type="hidden" id="hdnTTpan" value="">
+                <input type="hidden" id="hdnTTusername" value="">
+            </div>
+        </div>
+
+        <!-- VAT Returns List Container -->
+        <div id="cntTTVatRetList" class="x-container" style="display: none; margin-top: 10px;">
+            <div class="x-panel x-panel-default">
+                <div class="x-panel-header x-panel-header-default">
+                    <span class="x-panel-header-text">VAT Returns' List</span>
+                </div>
+                <div class="x-panel-body">
+                    <div class="x-grid">
+                        <table class="x-grid-table" id="vatReturnsTable">
+                            <thead>
+                                <tr>
+                                    <th>SubmissionNo</th>
+                                    <th>PAN</th>
+                                    <th>TradeName</th>
+                                    <th>SubmissionDate</th>
+                                    <th>TransactionDate</th>
+                                    <th>Taxyear</th>
+                                    <th>FilingPeriod</th>
+                                    <th>Period</th>
+                                    <th>&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tbody id="vatReturnsBody">
+                                <tr><td colspan="9" style="text-align: center;">No data available</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Excise Returns List Container -->
+        <div id="cntTTExciseRetList" class="x-container" style="display: none; margin-top: 10px;">
+            <div class="x-panel x-panel-default">
+                <div class="x-panel-header x-panel-header-default">
+                    <span class="x-panel-header-text">Excise Returns' List</span>
+                </div>
+                <div class="x-panel-body">
+                    <div class="x-grid">
+                        <table class="x-grid-table">
+                            <thead>
+                                <tr>
+                                    <th>SubmissionNo</th>
+                                    <th>PAN</th>
+                                    <th>TradeName</th>
+                                    <th>SubmissionDate</th>
+                                    <th>TransactionDate</th>
+                                    <th>Taxyear</th>
+                                    <th>FilingPeriod</th>
+                                    <th>Period</th>
+                                    <th>&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td colspan="9" style="text-align: center;">No data available</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- List Payments Container -->
+        <div id="cntTTListVatPayment" class="x-container" style="display: none; margin-top: 10px;">
+            <div class="x-panel x-panel-default">
+                <div class="x-panel-header x-panel-header-default">
+                    <span class="x-panel-header-text">List Payments</span>
+                </div>
+                <div class="x-panel-body">
+                    <div class="x-grid">
+                        <table class="x-grid-table" id="paymentsTable">
+                            <thead>
+                                <tr>
+                                    <th>ReceiptDate</th>
+                                    <th>PaymentTypeCode</th>
+                                    <th>VoucherNo</th>
+                                    <th>Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody id="paymentsBody">
+                                <tr><td colspan="4" style="text-align: center;">No data available</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TDS Returns List Container -->
+        <div id="cntTTTdsRetList" class="x-container" style="display: none; margin-top: 10px;">
+            <div class="x-panel x-panel-default">
+                <div class="x-panel-header x-panel-header-default">
+                    <span class="x-panel-header-text">TDS Returns' List</span>
+                </div>
+                <div class="x-panel-body">
+                    <div class="x-grid">
+                        <table class="x-grid-table" id="tdsReturnsTable">
+                            <thead>
+                                <tr>
+                                    <th>SubmissionNo</th>
+                                    <th>PAN</th>
+                                    <th>TradeName</th>
+                                    <th>SubmissionDate</th>
+                                    <th>TransactionDate</th>
+                                    <th>Taxyear</th>
+                                    <th>FilingPeriod</th>
+                                    <th>Period</th>
+                                    <th>&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tdsReturnsBody">
+                                <tr><td colspan="9" style="text-align: center;">No data available</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TDS Payments List Container -->
+        <div id="cntTTListTdsPayment" class="x-container" style="display: none; margin-top: 10px;">
+            <div class="x-panel x-panel-default">
+                <div class="x-panel-header x-panel-header-default">
+                    <span class="x-panel-header-text">List Payments</span>
+                </div>
+                <div class="x-panel-body">
+                    <div class="x-grid">
+                        <table class="x-grid-table" id="tdsPaymentsTable">
+                            <thead>
+                                <tr>
+                                    <th>ReceiptDate</th>
+                                    <th>PaymentTypeCode</th>
+                                    <th>VoucherNo</th>
+                                    <th>Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tdsPaymentsBody">
+                                <tr><td colspan="4" style="text-align: center;">No data available</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- List Assessment Container -->
+        <div id="cntTTListAssessCont" class="x-container" style="display: none; margin-top: 10px;">
+            <div class="x-panel x-panel-default">
+                <div class="x-panel-header x-panel-header-default">
+                    <span class="x-panel-header-text">List Assessment</span>
+                </div>
+                <div class="x-panel-body">
+                    <div class="x-grid">
+                        <table class="x-grid-table">
+                            <thead>
+                                <tr>
+                                    <th>Pan</th>
+                                    <th>FiscalYear</th>
+                                    <th>AssessmentNo</th>
+                                    <th>&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td colspan="4" style="text-align: center;">No data available</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- List Installment Container -->
+        <div id="cntTTListInstall" class="x-container" style="display: none; margin-top: 10px;">
+            <div class="x-panel x-panel-default">
+                <div class="x-panel-header x-panel-header-default">
+                    <span class="x-panel-header-text">List Installment</span>
+                </div>
+                <div class="x-panel-body">
+                    <div class="x-grid">
+                        <table class="x-grid-table">
+                            <thead>
+                                <tr>
+                                    <th>PAN</th>
+                                    <th>FiscalYear</th>
+                                    <th>SubmissionNumber</th>
+                                    <th>FilingDate</th>
+                                    <th>&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td colspan="5" style="text-align: center;">No data available</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tax Clearance Container -->
+        <div id="container-1263" class="x-container" style="display: none; margin-top: 10px;">
+            <div class="x-panel x-panel-default">
+                <div class="x-panel-header x-panel-header-default">
+                    <span class="x-panel-header-text">Tax Clearance</span>
+                </div>
+                <div class="x-panel-body">
+                    <div class="x-grid">
+                        <table class="x-grid-table">
+                            <thead>
+                                <tr>
+                                    <th>Request No</th>
+                                    <th>Office Code</th>
+                                    <th>Cert Type</th>
+                                    <th>Fiscal Year</th>
+                                    <th>Rec Date</th>
+                                    <th>&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td colspan="6" style="text-align: center;">No data available</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- IT Extension Container -->
+        <div id="container-1276" class="x-container" style="display: none; margin-top: 10px;">
+            <div class="x-panel x-panel-default">
+                <div class="x-panel-header x-panel-header-default">
+                    <span class="x-panel-header-text">IT Extension</span>
+                </div>
+                <div class="x-panel-body">
+                    <div class="x-grid">
+                        <table class="x-grid-table">
+                            <thead>
+                                <tr>
+                                    <th>Fiscal Year</th>
+                                    <th>ApplicationDate</th>
+                                    <th>Extended Upto</th>
+                                    <th>PAN</th>
+                                    <th>Office Code</th>
+                                    <th>&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td colspan="6" style="text-align: center;">No data available</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="../../js/general/transactions.js"></script>
+</body>
+</html>
