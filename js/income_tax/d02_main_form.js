@@ -46,7 +46,29 @@ function loadD02Data() {
 
 // Setup automatic calculations
 function setupCalculations() {
-    // Calculate total income (कारोबार रकम - कट्टी हुने रकम)
+    // Validate and calculate total income (कारोबार रकम - कट्टी हुने रकम)
+    $('#transactionAmount').on('blur', function() {
+        const transaction = parseFloat($(this).val()) || 0;
+        
+        // Validate: Transaction amount must be between 30 lakhs and 1 crore
+        if (transaction > 10000000) {
+            showModal('कारोबार रकम १ करोड भन्दा बढी हुन सक्दैन। कृपया D-03 प्रयोग गर्नुहोस्।');
+            $(this).val('');
+            $('#totalIncome').val('');
+            return;
+        }
+        
+        if (transaction > 0 && transaction < 3000000) {
+            showModal('D-02 को लागि कारोबार रकम कम्तिमा ३० लाख हुनुपर्छ।');
+            $(this).val('');
+            $('#totalIncome').val('');
+            return;
+        }
+        
+        const deductible = parseFloat($('#deductibleAmount').val()) || 0;
+        $('#totalIncome').val((transaction - deductible).toFixed(2));
+    });
+    
     $('#transactionAmount, #deductibleAmount').on('input', function() {
         const transaction = parseFloat($('#transactionAmount').val()) || 0;
         const deductible = parseFloat($('#deductibleAmount').val()) || 0;
@@ -513,6 +535,11 @@ function submitD02Form() {
         // You can redirect to a success page or print page
         // window.location.href = 'd02_success.html';
     }
+}
+
+// Show modal function for validation messages
+function showModal(message) {
+    alert(message);
 }
 
 // Fallback loadInParentIframe for D-02 form

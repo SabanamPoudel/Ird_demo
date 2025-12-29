@@ -144,9 +144,8 @@ function displayPaymentDetails(fiscalYear, transactionAmt, expenseAmt) {
         return;
     }
     
-    // D-01 presumptive tax calculation: 0.25% of transaction amount
-    const taxRate = 0.0025;
-    const taxAmount = transactionAmt * taxRate;
+    // D-01 presumptive tax: Fixed amount of 7,500 for small businesses
+    const taxAmount = 7500;
     
     // Section 117 fee calculation (approximate - 1% of tax or minimum 200)
     const section117Fee = Math.max(taxAmount * 0.01, 200);
