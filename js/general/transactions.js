@@ -23,6 +23,7 @@ function hideAllContainers() {
     document.getElementById('cntTTExciseRetList').style.display = 'none';
     document.getElementById('cntTTListVatPayment').style.display = 'none';
     document.getElementById('cntTTListExcisePayment').style.display = 'none';
+    document.getElementById('cntTDSContainer').style.display = 'none';
     document.getElementById('cntTTTdsRetList').style.display = 'none';
     document.getElementById('cntTTListTdsPayment').style.display = 'none';
     document.getElementById('cntTTListAssessCont').style.display = 'none';
@@ -47,10 +48,7 @@ function showTransactionType() {
             loadPayments();
             break;
         case 'tds':
-            document.getElementById('cntTTTdsRetList').style.display = 'block';
-            document.getElementById('cntTTListTdsPayment').style.display = 'block';
-            loadTDSReturns();
-            loadTDSPayments();
+            document.getElementById('cntTDSContainer').style.display = 'block';
             break;
         case 'it':
             // IT related containers
@@ -142,8 +140,8 @@ function loadVATReturns() {
                     <div class="x-grid-cell-inner">${item.period}</div>
                 </td>
                 <td class="x-grid-cell x-grid-cell-last">
-                    <div class="x-grid-cell-inner">
-                        <img alt="" src="../../resources/ok.png" class="eye-icon" style="width:16px; height:16px; cursor:pointer;" onclick="viewVATReturn('${item.submissionNo}')">
+                    <div class="x-grid-cell-inner center-text">
+                        <a href="javascript:void(0)" onclick="viewVATReturn('${item.submissionNo}')" class="view-action">👁</a>
                     </div>
                 </td>
             </tr>
@@ -302,7 +300,35 @@ function loadTDSPayments() {
 
 // View TDS Return details
 function viewTDSReturn(submissionNo) {
-    alert('Viewing TDS Return: ' + submissionNo + '\n\nThis feature will open the TDS return details.');
+    window.open('CommonReportViewer.pdf', '_blank');
+}
+
+// Search TDS Transactions
+function searchTDSTransactions() {
+    const fromDate = document.getElementById('tdsFromDate').value;
+    const toDate = document.getElementById('tdsToDate').value;
+    
+    if (!fromDate || !toDate) {
+        alert('कृपया देखि र सम्म मिति भर्नुहोस्। (Please enter From and To dates)');
+        return;
+    }
+    
+    // Show the TDS results
+    document.getElementById('cntTTTdsRetList').style.display = 'block';
+    document.getElementById('cntTTListTdsPayment').style.display = 'block';
+    
+    // Load the data
+    loadTDSReturns();
+    loadTDSPayments();
+}
+
+// Clear TDS Search
+function clearTDSSearch() {
+    document.getElementById('tdsFromDate').value = '';
+    document.getElementById('tdsToDate').value = '';
+    document.getElementById('tdsCalendarType').value = 'BS';
+    document.getElementById('cntTTTdsRetList').style.display = 'none';
+    document.getElementById('cntTTListTdsPayment').style.display = 'none';
 }
 
 // Load Excise Returns
@@ -415,7 +441,7 @@ function loadExcisePayments() {
 
 // View Excise Return details
 function viewExciseReturn(submissionNo) {
-    alert('Viewing Excise Return: ' + submissionNo + '\n\nThis feature will open the Excise return details.');
+    window.open('CommonReportViewer.pdf', '_blank');
 }
 
 // Load Installment Returns
@@ -509,17 +535,17 @@ function loadExtensionData() {
 
 // View Installment details
 function viewInstallment(submissionNo) {
-    alert('Viewing Installment Return: ' + submissionNo + '\n\nThis feature will open the installment return details.');
+    window.open('CommonReportViewer.pdf', '_blank');
 }
 
 // View Extension details
 function viewExtension(fiscalYear) {
-    alert('Viewing IT Extension: ' + fiscalYear + '\n\nThis feature will open the extension details.');
+    window.open('CommonReportViewer.pdf', '_blank');
 }
 
 // View VAT Return details
 function viewVATReturn(submissionNo) {
-    alert('Viewing VAT Return: ' + submissionNo + '\n\nThis feature will open the VAT return details.');
+    window.open('CommonReportViewer.pdf', '_blank');
 }
 
 // Go back to dashboard
