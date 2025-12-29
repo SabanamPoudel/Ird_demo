@@ -53,12 +53,47 @@
     ============================================ -->
     <script src="https://ird.gov.np/public/frontend/js/modernizr-2.8.3.min.js"></script>
     <script src="https://use.fontawesome.com/8d1a368670.js"></script>
+    
+    <style>
+        .disclaimer-banner {
+            background-color: #fff3cd;
+            border: 2px solid #ffc107;
+            color: #856404;
+            padding: 15px 20px;
+            margin: 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            line-height: 1.6;
+            text-align: left;
+        }
+        @media screen and (max-width: 768px) {
+            .disclaimer-banner {
+                font-size: 12px;
+                padding: 12px 15px;
+            }
+        }
+        @media screen and (max-width: 480px) {
+            .disclaimer-banner {
+                font-size: 11px;
+                padding: 10px 12px;
+            }
+        }
+    </style>
 </head>
 <body class="frontpage">
 
 <!--[if lt IE 8]>
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
+
+<!-- Disclaimer Banner -->
+<div class="disclaimer-banner">
+    <strong>⚠️ IMPORTANT NOTICE:</strong> This website is provided strictly for training and demonstration purposes only. 
+    It is NOT connected to the official Inland Revenue Department (IRD) of Nepal. 
+    Do not enter any real, sensitive, or confidential taxpayer information. 
+    Any data entered here will not be processed or submitted to the actual IRD system. 
+    For official tax filing, please visit the authentic IRD portal.
+</div>
 
 <!--Header Area Start-->
 <section class="header">
