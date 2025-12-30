@@ -55,9 +55,7 @@ function showTransactionType() {
             break;
         case 'excise':
             document.getElementById('cntTTExciseRetList').style.display = 'block';
-            document.getElementById('cntTTListExcisePayment').style.display = 'block';
             loadExciseReturns();
-            loadExcisePayments();
             break;
         case 'installment':
             document.getElementById('cntTTListInstall').style.display = 'block';
@@ -197,25 +195,14 @@ function loadTDSReturns() {
     const pan = loginData.panNumber || '610015263';
     const tradeName = loginData.tradeName || 'खाता विजनेश एकेडेमी प्रा.लि.';
     
-    // Sample TDS returns data
+    // Sample TDS returns data (simplified format matching screenshot)
     const tdsReturns = [
-        { submissionNo: '800059591625', pan: pan, tradeName: tradeName, submissionDate: '2080.11.24', transactionDate: '2080.11.24', taxYear: '2080', filingPeriod: 'M', period: '10' },
-        { submissionNo: '800060192365', pan: pan, tradeName: tradeName, submissionDate: '2080.12.25', transactionDate: '2080.12.25', taxYear: '2080', filingPeriod: 'M', period: '11' },
-        { submissionNo: '810060662279', pan: pan, tradeName: tradeName, submissionDate: '2081.01.25', transactionDate: '2081.01.25', taxYear: '2080', filingPeriod: 'M', period: '12' },
-        { submissionNo: '810061133576', pan: pan, tradeName: tradeName, submissionDate: '2081.02.25', transactionDate: '2081.02.25', taxYear: '2081', filingPeriod: 'M', period: '1' },
-        { submissionNo: '810061756287', pan: pan, tradeName: tradeName, submissionDate: '2081.03.25', transactionDate: '2081.03.25', taxYear: '2081', filingPeriod: 'M', period: '2' },
-        { submissionNo: '810062855703', pan: pan, tradeName: tradeName, submissionDate: '2081.04.25', transactionDate: '2081.04.25', taxYear: '2081', filingPeriod: 'M', period: '3' },
-        { submissionNo: '810063750268', pan: pan, tradeName: tradeName, submissionDate: '2081.05.25', transactionDate: '2081.05.25', taxYear: '2081', filingPeriod: 'M', period: '4' },
-        { submissionNo: '810064906692', pan: pan, tradeName: tradeName, submissionDate: '2081.06.29', transactionDate: '2081.06.29', taxYear: '2081', filingPeriod: 'M', period: '5' },
-        { submissionNo: '810065481681', pan: pan, tradeName: tradeName, submissionDate: '2081.07.25', transactionDate: '2081.07.25', taxYear: '2081', filingPeriod: 'M', period: '6' },
-        { submissionNo: '810066296459', pan: pan, tradeName: tradeName, submissionDate: '2081.08.25', transactionDate: '2081.08.25', taxYear: '2081', filingPeriod: 'M', period: '7' },
-        { submissionNo: '810067303463', pan: pan, tradeName: tradeName, submissionDate: '2081.09.25', transactionDate: '2081.09.25', taxYear: '2081', filingPeriod: 'M', period: '8' },
-        { submissionNo: '810068113974', pan: pan, tradeName: tradeName, submissionDate: '2081.10.25', transactionDate: '2081.10.25', taxYear: '2081', filingPeriod: 'M', period: '9' },
-        { submissionNo: '810068933918', pan: pan, tradeName: tradeName, submissionDate: '2081.11.25', transactionDate: '2081.11.25', taxYear: '2081', filingPeriod: 'M', period: '10' },
-        { submissionNo: '810069794654', pan: pan, tradeName: tradeName, submissionDate: '2081.12.24', transactionDate: '2081.12.24', taxYear: '2081', filingPeriod: 'M', period: '11' },
-        { submissionNo: '820070339377', pan: pan, tradeName: tradeName, submissionDate: '2082.01.25', transactionDate: '2082.01.25', taxYear: '2081', filingPeriod: 'M', period: '12' },
-        { submissionNo: '820070828316', pan: pan, tradeName: tradeName, submissionDate: '2082.02.25', transactionDate: '2082.02.25', taxYear: '2082', filingPeriod: 'M', period: '1' },
-        { submissionNo: '820071391583', pan: pan, tradeName: tradeName, submissionDate: '2082.03.25', transactionDate: '2082.03.25', taxYear: '2082', filingPeriod: 'M', period: '2' }
+        { submissionNo: '820069996088', pan: pan, status: 'Verified' },
+        { submissionNo: '820070853857', pan: pan, status: 'Verified' },
+        { submissionNo: '820071234567', pan: pan, status: 'Verified' },
+        { submissionNo: '820072345678', pan: pan, status: 'Verified' },
+        { submissionNo: '820073456789', pan: pan, status: 'Verified' },
+        { submissionNo: '820074567890', pan: pan, status: 'Verified' }
     ];
     
     let html = '';
@@ -223,33 +210,21 @@ function loadTDSReturns() {
         const rowClass = index % 2 === 1 ? ' x-grid-row-alt' : '';
         html += `
             <tr class="x-grid-row${rowClass}">
-                <td class="x-grid-cell x-grid-cell-first">
+                <td class="x-grid-cell x-grid-cell-first" style="text-align: center;">
+                    <div class="x-grid-cell-inner">${index + 1}</div>
+                </td>
+                <td class="x-grid-cell">
                     <div class="x-grid-cell-inner">${item.submissionNo}</div>
                 </td>
                 <td class="x-grid-cell">
                     <div class="x-grid-cell-inner">${item.pan}</div>
                 </td>
                 <td class="x-grid-cell">
-                    <div class="x-grid-cell-inner">${item.tradeName}</div>
+                    <div class="x-grid-cell-inner">${item.status}</div>
                 </td>
-                <td class="x-grid-cell">
-                    <div class="x-grid-cell-inner">${item.submissionDate}</div>
-                </td>
-                <td class="x-grid-cell">
-                    <div class="x-grid-cell-inner">${item.transactionDate}</div>
-                </td>
-                <td class="x-grid-cell">
-                    <div class="x-grid-cell-inner">${item.taxYear}</div>
-                </td>
-                <td class="x-grid-cell">
-                    <div class="x-grid-cell-inner">${item.filingPeriod}</div>
-                </td>
-                <td class="x-grid-cell">
-                    <div class="x-grid-cell-inner">${item.period}</div>
-                </td>
-                <td class="x-grid-cell x-grid-cell-last">
-                    <div class="x-grid-cell-inner center-text">
-                        <a href="javascript:void(0)" onclick="viewTDSReturn('${item.submissionNo}')" class="view-action">👁</a>
+                <td class="x-grid-cell x-grid-cell-last" style="text-align: center;">
+                    <div class="x-grid-cell-inner">
+                        <a href="javascript:void(0)" onclick="viewTDSReturn('${item.submissionNo}')" class="view-action" title="Print">🖨️</a>
                     </div>
                 </td>
             </tr>
@@ -300,7 +275,7 @@ function loadTDSPayments() {
 
 // View TDS Return details
 function viewTDSReturn(submissionNo) {
-    window.open('CommonReportViewer.pdf', '_blank');
+    window.open('TDSReport.pdf', '_blank');
 }
 
 // Search TDS Transactions
@@ -313,13 +288,11 @@ function searchTDSTransactions() {
         return;
     }
     
-    // Show the TDS results
+    // Show the TDS results (only returns list, not payments)
     document.getElementById('cntTTTdsRetList').style.display = 'block';
-    document.getElementById('cntTTListTdsPayment').style.display = 'block';
     
     // Load the data
     loadTDSReturns();
-    loadTDSPayments();
 }
 
 // Clear TDS Search
@@ -334,109 +307,17 @@ function clearTDSSearch() {
 // Load Excise Returns
 function loadExciseReturns() {
     const tbody = document.getElementById('exciseReturnsBody');
-    const loginData = JSON.parse(localStorage.getItem('lastLoginAttempt') || '{}');
-    const pan = loginData.panNumber || '610015263';
-    const tradeName = loginData.tradeName || 'खाता विजनेश एकेडेमी प्रा.लि.';
     
-    // Sample Excise returns data
-    const exciseReturns = [
-        { submissionNo: '800059591626', pan: pan, tradeName: tradeName, submissionDate: '2080.11.24', transactionDate: '2080.11.24', taxYear: '2080', filingPeriod: 'M', period: '10' },
-        { submissionNo: '800060192366', pan: pan, tradeName: tradeName, submissionDate: '2080.12.25', transactionDate: '2080.12.25', taxYear: '2080', filingPeriod: 'M', period: '11' },
-        { submissionNo: '810060662280', pan: pan, tradeName: tradeName, submissionDate: '2081.01.25', transactionDate: '2081.01.25', taxYear: '2080', filingPeriod: 'M', period: '12' },
-        { submissionNo: '810061133577', pan: pan, tradeName: tradeName, submissionDate: '2081.02.25', transactionDate: '2081.02.25', taxYear: '2081', filingPeriod: 'M', period: '1' },
-        { submissionNo: '810061756288', pan: pan, tradeName: tradeName, submissionDate: '2081.03.25', transactionDate: '2081.03.25', taxYear: '2081', filingPeriod: 'M', period: '2' },
-        { submissionNo: '810062855704', pan: pan, tradeName: tradeName, submissionDate: '2081.04.25', transactionDate: '2081.04.25', taxYear: '2081', filingPeriod: 'M', period: '3' },
-        { submissionNo: '810063750269', pan: pan, tradeName: tradeName, submissionDate: '2081.05.25', transactionDate: '2081.05.25', taxYear: '2081', filingPeriod: 'M', period: '4' },
-        { submissionNo: '810064906693', pan: pan, tradeName: tradeName, submissionDate: '2081.06.29', transactionDate: '2081.06.29', taxYear: '2081', filingPeriod: 'M', period: '5' },
-        { submissionNo: '810065481682', pan: pan, tradeName: tradeName, submissionDate: '2081.07.25', transactionDate: '2081.07.25', taxYear: '2081', filingPeriod: 'M', period: '6' },
-        { submissionNo: '810066296460', pan: pan, tradeName: tradeName, submissionDate: '2081.08.25', transactionDate: '2081.08.25', taxYear: '2081', filingPeriod: 'M', period: '7' },
-        { submissionNo: '810067303464', pan: pan, tradeName: tradeName, submissionDate: '2081.09.25', transactionDate: '2081.09.25', taxYear: '2081', filingPeriod: 'M', period: '8' },
-        { submissionNo: '810068113975', pan: pan, tradeName: tradeName, submissionDate: '2081.10.25', transactionDate: '2081.10.25', taxYear: '2081', filingPeriod: 'M', period: '9' },
-        { submissionNo: '810068933919', pan: pan, tradeName: tradeName, submissionDate: '2081.11.25', transactionDate: '2081.11.25', taxYear: '2081', filingPeriod: 'M', period: '10' },
-        { submissionNo: '810069794655', pan: pan, tradeName: tradeName, submissionDate: '2081.12.24', transactionDate: '2081.12.24', taxYear: '2081', filingPeriod: 'M', period: '11' },
-        { submissionNo: '820070339378', pan: pan, tradeName: tradeName, submissionDate: '2082.01.25', transactionDate: '2082.01.25', taxYear: '2081', filingPeriod: 'M', period: '12' },
-        { submissionNo: '820070828317', pan: pan, tradeName: tradeName, submissionDate: '2082.02.25', transactionDate: '2082.02.25', taxYear: '2082', filingPeriod: 'M', period: '1' },
-        { submissionNo: '820071391584', pan: pan, tradeName: tradeName, submissionDate: '2082.03.25', transactionDate: '2082.03.25', taxYear: '2082', filingPeriod: 'M', period: '2' }
-    ];
-    
-    let html = '';
-    exciseReturns.forEach((item, index) => {
-        const rowClass = index % 2 === 1 ? ' x-grid-row-alt' : '';
-        html += `
-            <tr class="x-grid-row${rowClass}">
-                <td class="x-grid-cell x-grid-cell-first">
-                    <div class="x-grid-cell-inner">${item.submissionNo}</div>
-                </td>
-                <td class="x-grid-cell">
-                    <div class="x-grid-cell-inner">${item.pan}</div>
-                </td>
-                <td class="x-grid-cell">
-                    <div class="x-grid-cell-inner">${item.tradeName}</div>
-                </td>
-                <td class="x-grid-cell">
-                    <div class="x-grid-cell-inner">${item.submissionDate}</div>
-                </td>
-                <td class="x-grid-cell">
-                    <div class="x-grid-cell-inner">${item.transactionDate}</div>
-                </td>
-                <td class="x-grid-cell">
-                    <div class="x-grid-cell-inner">${item.taxYear}</div>
-                </td>
-                <td class="x-grid-cell">
-                    <div class="x-grid-cell-inner">${item.filingPeriod}</div>
-                </td>
-                <td class="x-grid-cell">
-                    <div class="x-grid-cell-inner">${item.period}</div>
-                </td>
-                <td class="x-grid-cell x-grid-cell-last">
-                    <div class="x-grid-cell-inner center-text">
-                        <a href="javascript:void(0)" onclick="viewExciseReturn('${item.submissionNo}')" class="view-action">👁</a>
-                    </div>
-                </td>
-            </tr>
-        `;
-    });
-    
-    tbody.innerHTML = html;
+    // Show only headers - no sample data
+    tbody.innerHTML = '<tr><td colspan="9" style="text-align: center;">No data available</td></tr>';
 }
 
 // Load Excise Payments
 function loadExcisePayments() {
     const tbody = document.getElementById('excisePaymentsBody');
     
-    // Sample Excise payments data
-    const excisePayments = [
-        { receiptDate: '2080.12.09', paymentTypeCode: 'BK', voucherNo: '60948840', amount: '1383' },
-        { receiptDate: '2081.08.27', paymentTypeCode: 'BK', voucherNo: '73346736', amount: '32825' },
-        { receiptDate: '2081.09.27', paymentTypeCode: 'BK', voucherNo: '74946554', amount: '14250' },
-        { receiptDate: '2081.10.27', paymentTypeCode: 'BK', voucherNo: '76610536', amount: '12041' },
-        { receiptDate: '2081.11.27', paymentTypeCode: 'BK', voucherNo: '78132195', amount: '13558' },
-        { receiptDate: '2081.12.27', paymentTypeCode: 'BK', voucherNo: '79573749', amount: '12826' },
-        { receiptDate: '2082.01.27', paymentTypeCode: 'BK', voucherNo: '81027365', amount: '6570' }
-    ];
-    
-    let html = '';
-    excisePayments.forEach((item, index) => {
-        const rowClass = index % 2 === 1 ? ' x-grid-row-alt' : '';
-        html += `
-            <tr class="x-grid-row${rowClass}">
-                <td class="x-grid-cell x-grid-cell-first">
-                    <div class="x-grid-cell-inner">${item.receiptDate}</div>
-                </td>
-                <td class="x-grid-cell">
-                    <div class="x-grid-cell-inner">${item.paymentTypeCode}</div>
-                </td>
-                <td class="x-grid-cell">
-                    <div class="x-grid-cell-inner">${item.voucherNo}</div>
-                </td>
-                <td class="x-grid-cell x-grid-cell-last">
-                    <div class="x-grid-cell-inner">${item.amount}</div>
-                </td>
-            </tr>
-        `;
-    });
-    
-    tbody.innerHTML = html;
+    // Show only headers - no sample data
+    tbody.innerHTML = '<tr><td colspan="4" style="text-align: center;">No data available</td></tr>';
 }
 
 // View Excise Return details
@@ -540,12 +421,12 @@ function viewInstallment(submissionNo) {
 
 // View Extension details
 function viewExtension(fiscalYear) {
-    window.open('CommonReportViewer.pdf', '_blank');
+    window.open('ExtensionReport.pdf', '_blank');
 }
 
 // View VAT Return details
 function viewVATReturn(submissionNo) {
-    window.open('CommonReportViewer.pdf', '_blank');
+    window.open('VATReport.pdf', '_blank');
 }
 
 // Go back to dashboard
