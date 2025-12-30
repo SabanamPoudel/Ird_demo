@@ -295,6 +295,13 @@
                     </ul>
                 </li>
             </ul>
+            
+            <!-- Clear Cache Button -->
+            <div style="padding: 5px 8px; background-color: #f9f9f9; border-top: 1px solid #ddd; text-align: center;">
+                <button onclick="clearCache()" style="padding: 4px 12px; background-color: #d3d3d3; border: 1px solid #999; border-radius: 4px; cursor: pointer; font-weight: normal; font-size: 10px; color: #333;">
+                    🗑️ Clear Cache
+                </button>
+            </div>
         </aside>
 
         <!-- Content Area -->
@@ -337,5 +344,14 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="js/taxpayer_portal.js"></script>
+    <script>
+        function clearCache() {
+            if (confirm('के तपाईं सबै स्थानीय डाटा हटाउन चाहनुहुन्छ?\n\nDo you want to clear all local data?')) {
+                localStorage.clear();
+                alert('सबै स्थानीय डाटा सफा गरियो।\n\nAll local data has been cleared.');
+                location.reload();
+            }
+        }
+    </script>
 </body>
 </html>
