@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excise Return Form - IRD</title>
+    <link rel="stylesheet" href="../../css/income_tax/d01_return_entry.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .form.card { border: 1px solid gray; margin-top: 10px; }
+        .card-header { background: #e9ecef; padding: 10px; font-weight: bold; }
+        .card-body { padding: 15px; }
+        .white-bg { background: white; }
+        .table { width: 100%; border-collapse: collapse; }
+        .table-bordered { border: 1px solid gray; }
+        .table-bordered td, .table-bordered th { border: 1px solid gray; padding: 5px; }
+        .form-control { padding: 3px; font-size: 12px; }
+        .btn { padding: 5px 10px; cursor: pointer; }
+        .text-center { text-align: center; }
+        .mt-1 { margin-top: 5px; }
+        .mt-2 { margin-top: 10px; }
+        .mb-2 { margin-bottom: 10px; }
+        .mb-4 { margin-bottom: 20px; }
+        .col { width: 100%; }
+        .row { display: flex; margin-bottom: 5px; }
+        .col-sm-1 { width: 8.33%; }
+        .col-sm-2 { width: 16.66%; }
+        .col-sm-3 { width: 25%; }
+        .col-sm-5 { width: 41.66%; }
+        .col-sm-6 { width: 50%; }
+        .col-sm-8 { width: 66.66%; }
+        .col-sm-12 { width: 100%; }
+        .p-0 { padding: 0; }
+        .pl-0 { padding-left: 0; }
+        .pr-0 { padding-right: 0; }
+        .form-label { display: inline-block; margin-bottom: 5px; font-size: 12px; }
+        .red { color: red; }
+        .table-responsive { overflow-x: auto; }
+    </style>
+</head>
+<body>
+    <nav class="navbar shadow-sm mb-2">
+        <div class="container-fluid">
+            <div class="collapse show navbar-collapse">
+                <div class="header-section">
+                    <div class="header-left">
+                        <img src="../../media/resources/logo.gif" alt="IRD Logo">
+                    </div>
+                    <div class="header-center">
+                        <img src="../../media/resources/flag.gif" alt="Nepal Flag">
+                        <img src="../../media/resources/slogan.jpg" alt="Slogan" style="height: 75px; width: auto; margin-left: 150px;">
+                    </div>
+                    <div class="header-right">
+                        <label class="dt" id="currentDate">Date: 2082.07.23</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-layout">
+        <!-- Sidebar (same as other pages) -->
+        <div class="sidebar is-open">
+            <div class="side-menu">
+                <ul class="list-unstyled pb-3 nav flex-column">
+                    <!-- Excise menu expanded -->
+                    <li class="nav-item">
+                        <a class="dropdown-toggle nav-link active" href="#" onclick="toggleMenu(this)">Excise</a>
+                        <ul class="submenu">
+                            <li><a href="excise_return_entry_login.html">Return Entry</a></li>
+                            <li><a href="#">Excise Return Login</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Content Area with the Excise Form -->
+        <div class="content-area">
+            <div class="container-fluid" style="padding: 20px;">
+                
+                <!-- START OF EXCISE FORM FROM IRD -->
+                <div class="form card" style="border: 1px solid gray; margin-top: 10px;">
+                    <div class="card-header col">E-Excise Return Entry ( Excise Returns)</div>
+                    <div class="card-body white-bg col">
+                        <div>
+                            <div class="text-center mb-4">
+                                <p><span style="font-size: 14px;">अनुसुची - ४(ङ)</span></p>
+                                <p><span style="font-size: 14px;">( नियम १३ ग संग सम्बन्धित )</span></p>
+                                <p><span style="font-size: 14px;">अन्त: शुल्क कर विवरण फारम</span></p>
+                                <p><span style="font-size: 10px;">Your submission No:: 820076580309</span></p>
+                            </div>
+
+                            <!-- Year/Month Section -->
+                            <div class="card mt-2" style="border: 1px solid gray;">
+                                <div class="card-header col">वर्ष \महिना सम्बन्धि विवरण</div>
+                                <div class="card-body white-bg">
+                                    <div class="row">
+                                        <div class="col-sm-1"><label class="pl-0 pr-0 form-label">प्यान:</label></div>
+                                        <div class="p-0 col-sm-2"><input id="pan" value="601563148" readonly type="text" class="form-control"></div>
+                                        <div class="col-sm-2"><label class="pl-0 pr-0 form-label">खाताको किसिम:</label></div>
+                                        <div class="p-0 col-sm-1"><input id="accountType" value="20" readonly type="text" class="form-control"></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-1"><label class="pl-0 pr-0 form-label">बर्ष:</label></div>
+                                        <div class="p-0 col-sm-2"><input id="fiscalYear" type="text" class="form-control" style="width: 60px;"></div>
+                                        <div class="col-sm-2"><label class="pl-0 pr-0 form-label">महिना:</label></div>
+                                        <div class="p-0 col-sm-1">
+                                            <select style="width: 100px;">
+                                                <option value="DEFAULT" disabled selected>---छान्नुहोस्---</option>
+                                                <option value="1">वैशाख</option>
+                                                <option value="2">जेष्ठ</option>
+                                                <option value="3">असार</option>
+                                                <option value="4">श्रावण</option>
+                                                <option value="5">भाद्र</option>
+                                                <option value="6">आश्विन</option>
+                                                <option value="7">कार्तिक</option>
+                                                <option value="8">मंसिर</option>
+                                                <option value="9">पुष</option>
+                                                <option value="10">माघ</option>
+                                                <option value="11">फाल्गुन</option>
+                                                <option value="12">चैत्र</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-2"><label class="pl-0 pr-0 form-label">जुन महिना हो त्यो महिना छान्नुहोस</label></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Taxpayer Details -->
+                            <div class="card mt-2" style="border: 1px solid gray;">
+                                <div class="card-header col">करदाताको विवरण</div>
+                                <div class="card-body white-bg">
+                                    <div class="row">
+                                        <div class="col-sm-1"><label class="pl-0 pr-0 form-label">नाम:</label></div>
+                                        <div class="p-0 col-sm-3"><label class="pl-0 pr-0 form-label">एप्पल सोप एण्ड केमिकल इण्डष्ट्रिज प्रा.लि.</label></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-1"><label class="pl-0 pr-0 form-label">ठेगाना:</label></div>
+                                        <div class="p-0 col-sm-3"><label class="pl-0 pr-0 form-label">शरदपुर-8,भरतपुर</label></div>
+                                        <div class="col-sm-1"><label class="pl-0 pr-0 form-label">फोन नं:</label></div>
+                                        <div class="p-0 col-sm-2"><label class="pl-0 pr-0 form-label">9855054550</label></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Transaction Details - Simplified for demo -->
+                            <div class="card mt-2" style="border: 1px solid gray;">
+                                <div class="card-header col">करदाताको कारोवार विवरण</div>
+                                <div class="card-body white-bg col">
+                                    <div><label class="pl-0 pr-0 form-label">यदि यस अवधिमा कारोवार नगरेको भए तलको महलमा शुन्य राखेर विवरणमा हस्ताक्षर गर्नुहोस्।</label></div>
+                                    <p style="margin: 20px 0;">For demonstration purposes, the full form has been simplified...</p>
+                                </div>
+                            </div>
+
+                            <!-- Submit Buttons -->
+                            <div class="card-body white-bg">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <label class="pl-0 pr-0 form-label" style="margin-left: 140px;">
+                                            <input type="checkbox" class="form-check-input"> &nbsp; म, यस कर विवरणमा उल्लेख गरिएको जानकारी सत्य र पुरा भएको व्यहोरा प्रमाणित गर्दछु।
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="row" style="text-align: center; margin-top: 20px;">
+                                    <div class="col-sm-12">
+                                        <button class="btn m-1 pl-2 pr-2" style="background-color: rgb(48, 102, 190); color: white;">Save</button>
+                                        <button class="btn m-1 pl-2 pr-2" style="background-color: rgb(48, 102, 190); color: white;">Print</button>
+                                        <button class="btn m-1 pl-2 pr-2" style="background-color: rgb(48, 102, 190); color: white;">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END OF EXCISE FORM -->
+
+            </div>
+        </div>
+    </div>
+
+    <script src="../../js/excise/excise_return_entry.js"></script>
+</body>
+</html>

@@ -158,9 +158,10 @@
 </head>
 <body>
     <div class="x-panel-body" style="padding: 10px; width: 100%;">
-        <!-- Logout Button -->
+        <!-- Logout and Clear Cache Buttons -->
         <div style="height: 30px; margin-bottom: 10px;">
             <label class="logout-label" onclick="logout()">Taxpayer Logout</label>
+            <label class="logout-label" onclick="clearCache()" style="margin-left: 10px; background-color: #f0e68c;">Clear Cache</label>
         </div>
 
         <!-- User Information Fieldset -->
@@ -320,6 +321,14 @@
             if (confirm('के तपाईं लग आउट गर्न चाहनुहुन्छ? (Do you want to logout?)')) {
                 localStorage.removeItem('lastLoginAttempt');
                 // Redirect to login page in the iframe
+                window.location.href = 'taxpayer_login.html';
+            }
+        }
+
+        function clearCache() {
+            if (confirm('के तपाईं सबै स्थानीय डाटा हटाउन चाहनुहुन्छ? (Do you want to clear all local data?)')) {
+                localStorage.clear();
+                alert('सबै स्थानीय डाटा सफा गरियो। (All local data has been cleared.)');
                 window.location.href = 'taxpayer_login.html';
             }
         }
