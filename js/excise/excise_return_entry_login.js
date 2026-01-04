@@ -101,11 +101,8 @@ $(document).ready(function() {
         // Save current registration to sessionStorage for the next page
         sessionStorage.setItem('excise_current_registration', JSON.stringify(exciseEntry));
 
-        // Show success message
-        alert('दर्ता सफल भयो! (Registration successful!)');
-        
         // Redirect to Excise form page
-        window.location.href = 'excise_return_entry.html';
+        window.location.href = 'excise_form.html';
     });
 
     // Reset button functionality

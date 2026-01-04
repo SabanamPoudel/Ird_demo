@@ -59,16 +59,197 @@
     </nav>
 
     <div class="main-layout">
-        <!-- Sidebar (same as other pages) -->
+        <!-- Sidebar -->
         <div class="sidebar is-open">
             <div class="side-menu">
                 <ul class="list-unstyled pb-3 nav flex-column">
-                    <!-- Excise menu expanded -->
+                    <!-- General -->
+                    <li class="nav-item">
+                        <a class="dropdown-toggle nav-link" href="#" onclick="toggleMenu(this)">General</a>
+                        <ul class="submenu">
+                            <li><a href="#">Taxpayer Login</a></li>
+                            <li><a href="#">Create Taxpayer Login</a></li>
+                            <li><a href="#">Forgot Password</a></li>
+                            <li><a href="#">Drug Manufacturer's Login</a></li>
+                            <li><a href="#">Payment Voucher Search</a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Registration -->
+                    <li class="nav-item">
+                        <a class="dropdown-toggle nav-link" href="#" onclick="toggleMenu(this)">Registration(PAN, VAT, EXCISE)</a>
+                        <ul class="submenu">
+                            <li><a href="#">Application For Registration</a></li>
+                            <li><a href="#">Registration Log In</a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- VAT -->
+                    <li class="nav-item">
+                        <a class="dropdown-toggle nav-link" href="#" onclick="toggleMenu(this)">VAT</a>
+                        <ul class="submenu">
+                            <li><a href="#">VAT Return Entry</a></li>
+                            <li><a href="#">VAT Return Login</a></li>
+                            <li><a href="#">VAT Close Of Business Entry</a></li>
+                            <li><a href="#">VAT Close Of Business Login</a></li>
+                            <li><a href="#">Help</a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Non-Resident Person -->
+                    <li class="nav-item">
+                        <a class="dropdown-toggle nav-link" href="#" onclick="toggleMenu(this)">Non-Resident Person (DST/VAT)</a>
+                        <ul class="submenu">
+                            <li><a href="#">Application For DST Registration</a></li>
+                            <li><a href="#">Registration Log In</a></li>
+                            <li><a href="#">VAT Return Entry</a></li>
+                            <li><a href="#">VAT Return Login</a></li>
+                            <li><a href="#">DST Return Entry</a></li>
+                            <li><a href="#">DST VAT Return Entry</a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Non-Resident Airlines -->
+                    <li class="nav-item">
+                        <a class="dropdown-toggle nav-link" href="#" onclick="toggleMenu(this)">Non-Resident Airlines</a>
+                        <ul class="submenu">
+                            <li><a href="#">Application For Registration</a></li>
+                            <li><a href="#">Registration Log In</a></li>
+                            <li><a href="#">NRA VAT Return Entry</a></li>
+                            <li><a href="#">NRA VAT Return Login</a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Estimated Return -->
+                    <li class="nav-item">
+                        <a class="dropdown-toggle nav-link" href="#" onclick="toggleMenu(this)">Estimated Return</a>
+                        <ul class="submenu">
+                            <li><a href="#">Estimated Return Entry</a></li>
+                            <li><a href="#">Estimated Return D02 Entry</a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Income Tax -->
+                    <li class="nav-item">
+                        <a class="dropdown-toggle nav-link" href="#" onclick="toggleMenu(this)">Income Tax</a>
+                        <ul class="submenu">
+                            <li><a href="#">D-01 Return Entry</a></li>
+                            <li><a href="#">D-02 Return Entry</a></li>
+                            <li><a href="#">D-03 Return Entry</a></li>
+                            <li><a href="#">D-04 Return Entry</a></li>
+                            <li><a href="#">Jeopardy Assessment</a></li>
+                            <li><a href="#">Change of Control</a></li>
+                            <li><a href="#">Close of Business D-01</a></li>
+                            <li><a href="#">Close of Business D-02</a></li>
+                            <li><a href="#">Close of Business D-03</a></li>
+                            <li><a href="#">Tax Return Login</a></li>
+                            <li><a href="#">Help</a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Excise -->
                     <li class="nav-item">
                         <a class="dropdown-toggle nav-link active" href="#" onclick="toggleMenu(this)">Excise</a>
-                        <ul class="submenu">
+                        <ul class="submenu" style="display: block;">
                             <li><a href="excise_return_entry_login.html">Return Entry</a></li>
                             <li><a href="#">Excise Return Login</a></li>
+                            <li><a href="#">Close Of Business Entry</a></li>
+                            <li><a href="#">Excise Close Of Business Login</a></li>
+                            <li><a href="#">Self Renew Permit</a></li>
+                            <li><a href="#">New Permit</a></li>
+                            <li><a href="#">Manufacturer's Login</a></li>
+                            <li><a href="#">Brand Registration</a></li>
+                            <li><a href="#">Brand Registration Login</a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- E-TDS -->
+                    <li class="nav-item">
+                        <a class="dropdown-toggle nav-link" href="#" onclick="toggleMenu(this)">E-TDS</a>
+                        <ul class="submenu">
+                            <li><a href="#">E-TDS</a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Diplomatic Refund -->
+                    <li class="nav-item">
+                        <a class="dropdown-toggle nav-link" href="#" onclick="toggleMenu(this)">Diplomatic Refund</a>
+                        <ul class="submenu">
+                            <li><a href="#">Diplomatic Refund Login</a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Health Tax -->
+                    <li class="nav-item">
+                        <a class="dropdown-toggle nav-link" href="#" onclick="toggleMenu(this)">Health Tax</a>
+                        <ul class="submenu">
+                            <li><a href="#">Returns Entry</a></li>
+                            <li><a href="#">Returns Login</a></li>
+                            <li><a href="#">Close of Business Entry</a></li>
+                            <li><a href="#">Close of Business Login</a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Education Tax -->
+                    <li class="nav-item">
+                        <a class="dropdown-toggle nav-link" href="#" onclick="toggleMenu(this)">Education Tax</a>
+                        <ul class="submenu">
+                            <li><a href="#">Returns Entry</a></li>
+                            <li><a href="#">Returns Login</a></li>
+                            <li><a href="#">Close Of Business Entry</a></li>
+                            <li><a href="#">Close Of Business Login</a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Electronic Billing -->
+                    <li class="nav-item">
+                        <a class="dropdown-toggle nav-link" href="#" onclick="toggleMenu(this)">Electronic Billing</a>
+                        <ul class="submenu">
+                            <li><a href="#">Electronic Billing Software Listing</a></li>
+                            <li><a href="#">Software Listing Login</a></li>
+                            <li><a href="#">Electronic Billing User Permission</a></li>
+                            <li><a href="#">User Permission Login</a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Education Service Fee -->
+                    <li class="nav-item">
+                        <a class="dropdown-toggle nav-link" href="#" onclick="toggleMenu(this)">Education Service Fee</a>
+                        <ul class="submenu">
+                            <li><a href="#">Education Service Fee Entry</a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Foreign Employment Service Fee -->
+                    <li class="nav-item">
+                        <a class="dropdown-toggle nav-link" href="#" onclick="toggleMenu(this)">Foreign Employment Service Fee</a>
+                        <ul class="submenu">
+                            <li><a href="#">Foreign Employment Service Fee Entry</a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Foreign Tourism Fee -->
+                    <li class="nav-item">
+                        <a class="dropdown-toggle nav-link" href="#" onclick="toggleMenu(this)">Foreign Tourism Fee</a>
+                        <ul class="submenu">
+                            <li><a href="#">Foreign Tourism Fee Entry</a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Luxury Fee -->
+                    <li class="nav-item">
+                        <a class="dropdown-toggle nav-link" href="#" onclick="toggleMenu(this)">Luxury Fee</a>
+                        <ul class="submenu">
+                            <li><a href="#">Luxury Fee Entry</a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Other Offices -->
+                    <li class="nav-item">
+                        <a class="dropdown-toggle nav-link" href="#" onclick="toggleMenu(this)">Other Offices</a>
+                        <ul class="submenu">
+                            <li><a href="#">Log In/Out</a></li>
+                            <li><a href="#">Bank Login</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -81,32 +262,40 @@
                 
                 <!-- START OF EXCISE FORM FROM IRD -->
                 <div class="form card" style="border: 1px solid gray; margin-top: 10px;">
-                    <div class="card-header col">E-Excise Return Entry ( Excise Returns)</div>
+                    <div class="card-header col" style="background-color: #e9ecef; color: black; font-size: 13px;">E-Excise Return Entry ( Excise Returns)</div>
                     <div class="card-body white-bg col">
                         <div>
                             <div class="text-center mb-4">
                                 <p><span style="font-size: 14px;">अनुसुची - ४(ङ)</span></p>
-                                <p><span style="font-size: 14px;">( नियम १३ ग संग सम्बन्धित )</span></p>
-                                <p><span style="font-size: 14px;">अन्त: शुल्क कर विवरण फारम</span></p>
-                                <p><span style="font-size: 10px;">Your submission No:: 820076580309</span></p>
+                                <p><span style="font-size: 14px;">( नियम ४३ ग आंग सम्बन्धित )</span></p>
+                                <p><span style="font-size: 14px;">अन्त: शुल्क कर विवरण फाराम</span></p>
+                                <p><span style="font-size: 10px;">Your submission No:: 820076613090</span></p>
                             </div>
 
                             <!-- Year/Month Section -->
                             <div class="card mt-2" style="border: 1px solid gray;">
-                                <div class="card-header col">वर्ष \महिना सम्बन्धि विवरण</div>
+                                <div class="card-header col" style="background-color: #e9ecef; color: black; font-size: 13px;">वर्ष / महिना सम्बन्धी विवरण</div>
                                 <div class="card-body white-bg">
-                                    <div class="row">
-                                        <div class="col-sm-1"><label class="pl-0 pr-0 form-label">प्यान:</label></div>
-                                        <div class="p-0 col-sm-2"><input id="pan" value="601563148" readonly type="text" class="form-control"></div>
-                                        <div class="col-sm-2"><label class="pl-0 pr-0 form-label">खाताको किसिम:</label></div>
-                                        <div class="p-0 col-sm-1"><input id="accountType" value="20" readonly type="text" class="form-control"></div>
+                                    <!-- ROW 1: प्यान and खाताको किसिम -->
+                                    <div class="row mb-3">
+                                        <div class="col-sm-6">
+                                            <label class="form-label" style="display: inline-block; width: 100px;">प्यान:</label>
+                                            <input id="pan" value="601563148" readonly type="text" class="form-control" style="display: inline-block; width: calc(100% - 110px);">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label class="form-label" style="display: inline-block; width: 120px;">खाताको किसिम:</label>
+                                            <input id="accountType" value="20" readonly type="text" class="form-control" style="display: inline-block; width: calc(100% - 130px);">
+                                        </div>
                                     </div>
+                                    <!-- ROW 2: वर्ष and महिना -->
                                     <div class="row">
-                                        <div class="col-sm-1"><label class="pl-0 pr-0 form-label">बर्ष:</label></div>
-                                        <div class="p-0 col-sm-2"><input id="fiscalYear" type="text" class="form-control" style="width: 60px;"></div>
-                                        <div class="col-sm-2"><label class="pl-0 pr-0 form-label">महिना:</label></div>
-                                        <div class="p-0 col-sm-1">
-                                            <select style="width: 100px;">
+                                        <div class="col-sm-6">
+                                            <label class="form-label" style="display: inline-block; width: 100px;">वर्ष:</label>
+                                            <input id="fiscalYear" type="text" class="form-control" style="display: inline-block; width: calc(100% - 110px);">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label class="form-label" style="display: inline-block; width: 120px;">महिना:</label>
+                                            <select id="month" class="form-control" style="display: inline-block; width: calc(100% - 130px);">
                                                 <option value="DEFAULT" disabled selected>---छान्नुहोस्---</option>
                                                 <option value="1">वैशाख</option>
                                                 <option value="2">जेष्ठ</option>
@@ -122,34 +311,125 @@
                                                 <option value="12">चैत्र</option>
                                             </select>
                                         </div>
-                                        <div class="col-sm-2"><label class="pl-0 pr-0 form-label">जुन महिना हो त्यो महिना छान्नुहोस</label></div>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Taxpayer Details -->
                             <div class="card mt-2" style="border: 1px solid gray;">
-                                <div class="card-header col">करदाताको विवरण</div>
-                                <div class="card-body white-bg">
+                                <div class="card-header col" style="background-color: #e9ecef; color: black; font-size: 13px;">करदाताको विवरण</div>
+                                <div class="card-body white-bg" style="padding: 20px;">
                                     <div class="row">
-                                        <div class="col-sm-1"><label class="pl-0 pr-0 form-label">नाम:</label></div>
-                                        <div class="p-0 col-sm-3"><label class="pl-0 pr-0 form-label">एप्पल सोप एण्ड केमिकल इण्डष्ट्रिज प्रा.लि.</label></div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-1"><label class="pl-0 pr-0 form-label">ठेगाना:</label></div>
-                                        <div class="p-0 col-sm-3"><label class="pl-0 pr-0 form-label">शरदपुर-8,भरतपुर</label></div>
-                                        <div class="col-sm-1"><label class="pl-0 pr-0 form-label">फोन नं:</label></div>
-                                        <div class="p-0 col-sm-2"><label class="pl-0 pr-0 form-label">9855054550</label></div>
+                                        <div class="col-auto">
+                                            <span style="font-size: 13px;">नाम:</span>
+                                            <span id="companyName" style="font-size: 13px; margin-left: 5px;">एप्पल सोप एण्ड केमिकल इण्डष्ट्रिज प्रा.लि.</span>
+                                        </div>
+                                        <div class="col-auto" style="margin-left: 30px;">
+                                            <span style="font-size: 13px;">ठेगाना:</span>
+                                            <span id="address" style="font-size: 13px; margin-left: 5px;">शरदपुर-8,भरतपुर</span>
+                                        </div>
+                                        <div class="col-auto" style="margin-left: 30px;">
+                                            <span style="font-size: 13px;">फोन नं:</span>
+                                            <span id="phoneNumber" style="font-size: 13px; margin-left: 5px;">9855054550,</span>
+                                        </div>
+                                        <div class="col-auto" style="margin-left: 30px;">
+                                            <span style="font-size: 13px;">फ्याक्स नं:</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Transaction Details - Simplified for demo -->
+                            <!-- Transaction Details -->
                             <div class="card mt-2" style="border: 1px solid gray;">
-                                <div class="card-header col">करदाताको कारोवार विवरण</div>
-                                <div class="card-body white-bg col">
-                                    <div><label class="pl-0 pr-0 form-label">यदि यस अवधिमा कारोवार नगरेको भए तलको महलमा शुन्य राखेर विवरणमा हस्ताक्षर गर्नुहोस्।</label></div>
-                                    <p style="margin: 20px 0;">For demonstration purposes, the full form has been simplified...</p>
+                                <div class="card-header col" style="background-color: #e9ecef; color: black; font-size: 13px;">करदाताको कारोवार विवरण</div>
+                                <div class="card-body white-bg col"><div><label for="name" class="pl-0 pr-0 form-label">यदि यस अवधिमा कारोवार नगरेको भए तलको महलमा शुन्य राखेर विवरणमा हस्ताक्षर गर्नुहोस्। रू १ भन्दा घटि भएमा पैसालाई रू. १ मा मिलान गरि विवरण भर्नुहोला।</label><table class="table table-sm table-bordered" style="border: 1px solid gray; font-size: 12px;"><tbody><tr><td colspan="4"><label for="name" class="form-label"></label></td></tr><tr style="height: 50px;"><td style="width: 20%;"></td><td style="width: 20%;"><label for="name" class="form-label" style="text-align: center; padding: 10px;">कारोबार मूल्य</label></td><td style="width: 20%;"><label for="name" class="form-label" style="text-align: center; padding: 10px;">खरिदमा तिरेको अन्त:शुल्क</label></td><td style="width: 20%;"><label for="name" class="form-label" style="text-align: center; padding: 10px;">खरिदमा तिरेको कर क्रेडिट</label></td><td style="width: 20%;"><label for="name" class="form-label" style="text-align: center; padding: 10px;">विक्रिमा तिरेको कर डेविट</label></td></tr><tr><td colspan="5"><label for="name" class="form-label">१. विक्री / निष्कासन</label></td></tr><tr><td><label for="name" class="form-label" style="margin-left: 20px;">१.१. अन्त: शुल्क योग्य विक्री</label></td><td colspan="2"><input name="txtTaxableSale" id="txtTaxableSale" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td><td></td><td><input name="txtVatOnSale" id="txtVatOnSale" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td></tr><tr><td><label for="name" class="form-label" style="margin-left: 20px;">१.२. निकासी</label></td><td colspan="4"><input name="txtExport" id="txtExport" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td></tr><tr><td><label for="name" class="form-label">२. खरिद पैठारी</label></td><td colspan="4"><input name="txtTaxablePur" id="txtTaxablePur" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td></tr><tr><td><label for="name" class="form-label" style="margin-left: 20px;">२.१. अन्त: शुल्क योग्य कच्चा पदार्थ खरीद</label></td><td><input name="txtTaxablePurchase" id="txtTaxablePurchase" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td><td><input name="txtExciseOnPurchase" id="txtExciseOnPurchase" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td><td colspan="2"><input name="txtVatOnPurchase" id="txtVatOnPurchase" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td></tr><tr><td><label for="name" class="form-label" style="margin-left: 20px;">२.२ . अन्त: शुल्क योग्य अन्य पदार्थ खरीद</label></td><td><input name="txtTaxablePurchaseOther" id="txtTaxablePurchaseOther" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td><td><input name="txtExciseOnPurchaseOther" id="txtExciseOnPurchaseOther" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td><td colspan="2"></td></tr><tr><td><label for="name" class="form-label" style="margin-left: 20px;">२.३ . अन्त: शुल्क योग्य कच्चा पदार्थ पैठारी</label></td><td><input name="txtTaxablePurI" id="txtTaxablePurI" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td><td><input name="txtExciseOnPur" id="txtExciseOnPur" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td><td colspan="2"><input name="txtVatOnPurI" id="txtVatOnPurI" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td></tr><tr><td><label for="name" class="form-label" style="margin-left: 20px;">२.४ . अन्त: शुल्क योग्य अन्य पदार्थ पैठारी</label></td><td><input name="txtTaxablePurIOther" id="txtTaxablePurIOther" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td><td><input name="txtExciseOnPurI" id="txtExciseOnPurI" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td><td colspan="2"></td></tr><tr><td><label for="name" class="form-label" style="margin-left: 20px;">२.५ . छुट खरिद</label></td><td colspan="4"><input name="txtExemptPurchase" id="txtExemptPurchase" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td></tr><tr><td><label for="name" class="form-label" style="margin-left: 20px;">२.६. छुट पैठारी</label></td><td colspan="4"><input name="txtExemptPurI" id="txtExemptPurI" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td></tr><tr><td><label for="name" class="form-label">३. अन्य</label></td><td colspan="4"></td></tr><tr><td><label for="name" class="form-label" style="margin-left: 20px;">३.१. अन्य थपघट</label></td><td></td><td></td><td><table class="table table-sm table-bordered" style="border: 1px solid gray; font-size: 12px;"><tbody><tr><td><input name="txtAdjCredit" id="txtAdjCredit" readonly="" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 85px; text-align: right;"></td><td><button onclick="openCreditModal()" class="btn pl-1 pr-1" style="background-color: rgb(48, 102, 190); font-size: 12px; height: 32px; color: white;"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" style="color: white; font-size: 20px; padding-right: 7px;"><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm144 276c0 6.6-5.4 12-12 12h-92v92c0 6.6-5.4 12-12 12h-56c-6.6 0-12-5.4-12-12v-92h-92c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12h92v-92c0-6.6 5.4-12 12-12h56c6.6 0 12 5.4 12 12v92h92c6.6 0 12 5.4 12 12v56z"></path></svg> अन्य थपघट क्रेडिट छ ?</button></td></tr></tbody></table></td><td><table class="table table-sm table-bordered" style="border: 1px solid gray; font-size: 12px;"><tbody><tr><td><input name="txtAdjDebit" id="txtAdjDebit" readonly="" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 85px; text-align: right;"></td><td><button onclick="openDebitModal()" class="btn pl-1 pr-1" style="background-color: rgb(48, 102, 190); font-size: 12px; height: 32px; color: white;"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" style="color: white; font-size: 20px; padding-right: 7px;"><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm144 276c0 6.6-5.4 12-12 12h-92v92c0 6.6-5.4 12-12 12h-56c-6.6 0-12-5.4-12-12v-92h-92c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12h92v-92c0-6.6 5.4-12 12-12h56c6.6 0 12 5.4 12 12v92h92c6.6 0 12 5.4 12 12v56z"></path></svg>अन्य थपघट डेविट छ ?</button></td></tr></tbody></table></td></tr><tr hidden=""><td><label for="name" class="form-label" style="margin-left: 20px;">३.२. खपत भएको कच्चा पदार्थमा तिरेको अन्त: शुल्क क्रेडिट</label></td><td><input name="txtAdjRawExOnPurchase" id="txtAdjRawExOnPurchase" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td><td></td><td><input name="txtAdjRawExVATOnPur" id="txtAdjRawExVATOnPur" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td></tr><tr hidden=""><td><label for="name" class="form-label" style="margin-left: 20px;">३.३. कर कट्टी दाबी गरिसकेको स्टक</label></td><td><input name="txtStockAmount" id="txtStockAmount" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td><td></td><td></td><td><input name="txtStockTax" id="txtStockTax" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td></tr><tr><td colspan="2"><label for="name" class="form-label">४.जम्मा</label></td><td><input name="txtTotalExcise" id="txtTotalExcise" readonly="" type="text" class="form-control" value="0" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td><td><input name="txtTotalCredit" id="txtTotalCredit" readonly="" type="text" class="form-control" value="0" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td><td><input name="txtTotalDebit" id="txtTotalDebit" readonly="" type="text" class="form-control" value="0" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td></tr><tr><td colspan="4"><label for="name" class="form-label">५. डेविट-क्रेडिट (‌‌+ वा -)</label></td><td><input name="txtVatDueTM" id="txtVatDueTM" readonly="" type="text" class="form-control" value="0" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td></tr><tr><td colspan="4"><label for="name" class="form-label">६. गत महिनाको मिलान गर्न बांकी क्रेडिट</label></td><td><input name="txtCreditBF" id="txtCreditBF" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td></tr><tr><td colspan="4"><label for="name" class="form-label">७. तिर्नु पर्ने कर रू.(५-६) (‌‌+ वा -)</label></td><td><input name="txtVatDue" id="txtVatDue" readonly="" type="text" class="form-control" value="0" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td></tr><tr><td colspan="4"><label for="name" class="form-label">८. कर फिर्ता माग गरिएको रकम</label></td><td><input name="txtRefClaimAmt" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td></tr><tr><td colspan="4"><div class="row"><div class="col-sm-8"><label for="name" class="form-label" style="margin-left: 15px;">कर फिर्ता माग गरेको अधार</label></div><div class="p-0 col-sm-4"></div></div></td><td></td></tr><tr hidden=""><td colspan="4"><div class="row"><div class="col-sm-8"><label for="name" class="form-label">९. स्वास्थ्य जोखिम कर बापत दाखिला गर्नु पर्ने रकम</label></div><div class="p-0 col-sm-4"></div></div></td><td><input name="txtHhTax" id="txtHhTax" type="text" class="text-end undefined form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td></tr></tbody></table><table class="table table-sm table-bordered" style="border: 1px solid gray; font-size: 12px; width: 50%;"><tbody><tr><td><label for="name" class="form-label" style="margin-left: 10px;">प्राप्त विजक संख्या :</label></td><td><input name="txtRecptBillCount" id="txtRecptBillCount" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td><td><label for="name" class="form-label" style="margin-left: 10px;">जारी गरेको विजक संख्या :</label></td><td><input name="txtIssueByBillCount" id="txtIssueByBillCount" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td></tr><tr><td><label for="name" class="form-label" style="margin-left: 10px;">डेबिट नोट संख्या :</label></td><td><input name="txtDebitNoteCount" id="txtDebitNoteCount" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td><td><label for="name" class="form-label" style="margin-left: 10px;">क्रेडिट नोट संख्या :</label></td><td><input name="txtCreditNoteCount" id="txtCreditNoteCount" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td></tr></tbody></table></div></div>
+
+                            <!-- Raw Material Details Section -->
+                            <div class="card mt-2" style="border: 1px solid gray;"><div class="card-header col" style="background-color: #e9ecef; color: black; font-size: 13px;">कच्चा पदार्थको विवरण</div><div class="card-body white-bg" style="padding: 15px;"><div class="card mt-1 mb-2" style="border: 1px solid gray;"><div class="mt-1 col" style="padding: 15px;"><div class="row" style="gap: 15px;"><div class="col-sm-3"><label for="name" class="pl-0 pr-0 form-label" style="margin-left: 20px; font-size: 10px;"><input type="checkbox" class="form-check-input"> Load Records From Excel</label></div><div class="col-sm-3"><input accept=".xlsx" disabled="" type="file" class="form-control" style="font-size: 10px;"></div><div class="p-0 m-0 col-sm-5" style="display: flex; gap: 10px;"><button disabled="" class="btn pl-1 pr-1" style="font-size: 10px; background-color: rgb(48, 102, 190); height: 27px; padding: 0px 10px; color: white;"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 384 512" class="mr-1" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" style="font-size: 10px;"><path d="M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm65.18 216.01H224v80c0 8.84-7.16 16-16 16h-32c-8.84 0-16-7.16-16-16v-80H94.82c-14.28 0-21.41-17.29-11.27-27.36l96.42-95.7c6.65-6.61 17.39-6.61 24.04 0l96.42 95.7c10.15 10.07 3.03 27.36-11.25 27.36zM377 105L279.1 7c-4.5-4.5-10.6-7-17-7H256v128h128v-6.1c0-6.3-2.5-12.4-7-16.9z"></path></svg> load</button><a href="\EXCISE_RAW_MATERIAL_REPORT_DETAIL_SAMPLE.xlsx" download="EXCISE_RAW_MATERIAL_REPORT_DETAIL_SAMPLE" target="_blank"><button class="btn pl-1 pr-1" style="font-size: 10px; background-color: rgb(48, 102, 190); height: 27px; padding: 0px 10px; color: white;"> <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 576 512" class="mr-1" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" style="font-size: 10px;"><path d="M288 144a110.94 110.94 0 0 0-31.24 5 55.4 55.4 0 0 1 7.24 27 56 56 0 0 1-56 56 55.4 55.4 0 0 1-27-7.24A111.71 111.71 0 1 0 288 144zm284.52 97.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400c-98.65 0-189.09-55-237.93-144C98.91 167 189.34 112 288 112s189.09 55 237.93 144C477.1 345 386.66 400 288 400z"></path></svg> Download Sample Excel File Here</button></a><button class="btn pl-1 pr-1" style="background-color: rgb(48, 102, 190); font-size: 10px; height: 27px; padding: 0px 10px; color: white;"> Base Unit Sample</button></div></div></div></div><div class="card mt-2" style="background-color: rgb(223, 233, 245); border: 1px solid gray;"></div></div></div>
+
+                            <!-- Transaction Details Section -->
+                            <div class="card mt-2" style="border: 1px solid gray; border-radius: 6px;">
+                                <div class="card-header" style="background-color: #e9ecef; color: black; font-size: 13px; font-weight: bold;">Transaction Details</div>
+                                <div class="card-body" style="background-color: #fff; padding: 15px;">
+                                    <!-- Top Toolbar - Single Horizontal Row of Buttons -->
+                                    <div class="mb-3" style="display: flex; gap: 10px; flex-wrap: wrap;">
+                                        <button class="btn" style="background-color: rgb(48, 102, 190); color: white; border-radius: 20px; padding: 8px 16px; font-size: 13px; display: inline-flex; align-items: center; gap: 6px; border: none; white-space: nowrap;">
+                                            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="16" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm144 276c0 6.6-5.4 12-12 12h-92v92c0 6.6-5.4 12-12 12h-56c-6.6 0-12-5.4-12-12v-92h-92c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12h92v-92c0-6.6 5.4-12 12-12h56c6.6 0 12 5.4 12 12v92h92c6.6 0 12 5.4 12 12v56z"></path></svg>
+                                            Add
+                                        </button>
+                                        <button class="btn" style="background-color: rgb(48, 102, 190); color: white; border-radius: 20px; padding: 8px 16px; font-size: 13px; border: none; white-space: nowrap;">
+                                            Show All
+                                        </button>
+                                        <button class="btn" style="background-color: rgb(48, 102, 190); color: white; border-radius: 20px; padding: 8px 16px; font-size: 13px; display: inline-flex; align-items: center; gap: 6px; border: none; white-space: nowrap;">
+                                            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="16" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"></path></svg>
+                                            Check Transactions
+                                        </button>
+                                        <button class="btn" style="background-color: rgb(48, 102, 190); color: white; border-radius: 20px; padding: 8px 16px; font-size: 13px; display: inline-flex; align-items: center; gap: 6px; border: none; white-space: nowrap;">
+                                            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="16" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"></path></svg>
+                                            Delete All
+                                        </button>
+                                        <button class="btn" style="background-color: rgb(48, 102, 190); color: white; border-radius: 20px; padding: 8px 16px; font-size: 13px; border: none; white-space: nowrap;">
+                                            Export To Excel
+                                        </button>
+                                    </div>
+
+                                    <!-- Transaction Cards Grid (Hidden by default, populated dynamically) -->
+                                    <div id="transactionCardsContainer" class="row d-none">
+                                        <!-- Transaction cards will be dynamically inserted here -->
+                                        <!-- Example card structure (for reference):
+                                        <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
+                                            <div class="card" style="border: 1px solid #dee2e6; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.08);">
+                                                <div class="card-body" style="padding: 12px;">
+                                                    <div class="mb-2"><span style="font-size: 10px; color: #6c757d; font-weight: 600;">Item Name:</span> <span style="font-size: 12px; color: #333;">Product Name</span></div>
+                                                    <div class="mb-2"><span style="font-size: 10px; color: #6c757d; font-weight: 600;">Base Unit:</span> <span style="font-size: 12px; color: #333;">KG</span></div>
+                                                    <div class="mb-2"><span style="font-size: 10px; color: #6c757d; font-weight: 600;">Strength:</span> <span style="font-size: 12px; color: #333;">100</span></div>
+                                                    <div class="mb-2"><span style="font-size: 10px; color: #6c757d; font-weight: 600;">Opening Stock (Qty):</span> <span style="font-size: 12px; color: #333;">50</span></div>
+                                                    <div class="mb-2"><span style="font-size: 10px; color: #6c757d; font-weight: 600;">Purchase Quantity:</span> <span style="font-size: 12px; color: #333;">200</span></div>
+                                                    <div class="mb-2"><span style="font-size: 10px; color: #6c757d; font-weight: 600;">Consumption Quantity:</span> <span style="font-size: 12px; color: #333;">150</span></div>
+                                                    <div class="mb-2"><span style="font-size: 10px; color: #6c757d; font-weight: 600;">Sales Quantity:</span> <span style="font-size: 12px; color: #333;">80</span></div>
+                                                    <div class="mb-2"><span style="font-size: 10px; color: #6c757d; font-weight: 600;">Closing Stock (Qty):</span> <span style="font-size: 12px; color: #333;">20</span></div>
+                                                    <div class="mb-1"><span style="font-size: 10px; color: #6c757d; font-weight: 600;">Remarks:</span> <span style="font-size: 12px; color: #333;">N/A</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        -->
+                                    </div>
+
+                                    <!-- Empty State (Shown when no transactions exist) -->
+                                    <div id="transactionEmptyState" class="text-center" style="padding: 40px 20px; color: #6c757d; font-size: 14px;">
+                                        No transactions added yet. Click "Add" to create a new transaction.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Tax Calculation Section -->
+                            <div class="card mt-2" style="border: 1px solid gray;">
+                                <div class="card-header col" style="background-color: #e9ecef; color: black; font-size: 13px;">कर गणना</div>
+                                <div class="card-body white-bg">
+                                    <table class="table table-bordered" style="font-size: 11px;">
+                                        <tbody>
+                                            <tr>
+                                                <td style="width: 70%;">विक्रिमा लिइएको कर (माथिको दफा ४ को कर)</td>
+                                                <td><input type="text" class="form-control" readonly style="background-color: #f0f0f0;"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>खरिदमा तिरेको कर क्रेडिट (माथिको दफा ४ को कर क्रेडिट)</td>
+                                                <td><input type="text" class="form-control" readonly style="background-color: #f0f0f0;"></td>
+                                            </tr>
+                                            <tr style="background-color: #fff3cd;">
+                                                <td><strong>तिर्नुपर्ने वा फिर्ता पाउनुपर्ने कर</strong></td>
+                                                <td><input type="text" class="form-control" readonly style="background-color: #ffe69c; font-weight: bold;"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <!-- Remarks Section -->
+                            <div class="card mt-2" style="border: 1px solid gray;">
+                                <div class="card-header col">कैफियत</div>
+                                <div class="card-body white-bg">
+                                    <textarea class="form-control" rows="3" placeholder="यदि केही कुरा उल्लेख गर्नुपर्ने भए यहाँ लेख्नुहोस्..."></textarea>
                                 </div>
                             </div>
 
@@ -180,5 +460,182 @@
     </div>
 
     <script src="../../js/excise/excise_return_entry.js"></script>
+    <script>
+        // Toggle submenu function
+        function toggleMenu(element) {
+            const submenu = element.nextElementSibling;
+            if (submenu && submenu.classList.contains('submenu')) {
+                const isOpen = submenu.style.display === 'block';
+                submenu.style.display = isOpen ? 'none' : 'block';
+            }
+        }
+
+        // Credit Modal Functions
+        function openCreditModal() {
+            document.getElementById('creditModal').style.display = 'block';
+        }
+
+        function closeCreditModal() {
+            document.getElementById('creditModal').style.display = 'none';
+        }
+
+        function saveCreditAdjustment() {
+            const advice = parseFloat(document.getElementById('creditAdvice').value) || 0;
+            const other = parseFloat(document.getElementById('creditOther').value) || 0;
+            const total = advice + other;
+            
+            document.getElementById('creditTotal').value = total;
+            document.getElementById('txtAdjCredit').value = total;
+            
+            closeCreditModal();
+        }
+
+        // Debit Modal Functions
+        function openDebitModal() {
+            document.getElementById('debitModal').style.display = 'block';
+        }
+
+        function closeDebitModal() {
+            document.getElementById('debitModal').style.display = 'none';
+        }
+
+        function saveDebitAdjustment() {
+            const advice = parseFloat(document.getElementById('debitAdvice').value) || 0;
+            const ticket = parseFloat(document.getElementById('debitTicket').value) || 0;
+            const other = parseFloat(document.getElementById('debitOther').value) || 0;
+            const total = advice + ticket + other;
+            
+            document.getElementById('debitTotal').value = total;
+            document.getElementById('txtAdjDebit').value = total;
+            
+            closeDebitModal();
+        }
+
+        // Auto-calculate credit total
+        document.addEventListener('DOMContentLoaded', function() {
+            const creditAdvice = document.getElementById('creditAdvice');
+            const creditOther = document.getElementById('creditOther');
+            
+            if (creditAdvice && creditOther) {
+                creditAdvice.addEventListener('input', updateCreditTotal);
+                creditOther.addEventListener('input', updateCreditTotal);
+            }
+
+            const debitAdvice = document.getElementById('debitAdvice');
+            const debitTicket = document.getElementById('debitTicket');
+            const debitOther = document.getElementById('debitOther');
+            
+            if (debitAdvice && debitTicket && debitOther) {
+                debitAdvice.addEventListener('input', updateDebitTotal);
+                debitTicket.addEventListener('input', updateDebitTotal);
+                debitOther.addEventListener('input', updateDebitTotal);
+            }
+        });
+
+        function updateCreditTotal() {
+            const advice = parseFloat(document.getElementById('creditAdvice').value) || 0;
+            const other = parseFloat(document.getElementById('creditOther').value) || 0;
+            document.getElementById('creditTotal').value = advice + other;
+        }
+
+        function updateDebitTotal() {
+            const advice = parseFloat(document.getElementById('debitAdvice').value) || 0;
+            const ticket = parseFloat(document.getElementById('debitTicket').value) || 0;
+            const other = parseFloat(document.getElementById('debitOther').value) || 0;
+            document.getElementById('debitTotal').value = advice + ticket + other;
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const creditModal = document.getElementById('creditModal');
+            const debitModal = document.getElementById('debitModal');
+            if (event.target == creditModal) {
+                closeCreditModal();
+            }
+            if (event.target == debitModal) {
+                closeDebitModal();
+            }
+        }
+    </script>
+
+    <!-- Credit Adjustment Modal -->
+    <div id="creditModal" class="modal" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4);">
+        <div class="modal-content" style="background-color: #fefefe; margin: 10% auto; padding: 0; border: 1px solid #888; width: 35%; border-radius: 8px;">
+            <div class="modal-header" style="padding: 15px; background-color: #e9ecef; border-bottom: 1px solid #dee2e6; border-radius: 8px 8px 0 0;">
+                <h5 style="margin: 0; font-size: 16px;">अन्य थपघट क्रेडिट</h5>
+            </div>
+            <div class="modal-body" style="padding: 20px;">
+                <h6 style="margin-bottom: 15px; font-size: 14px;">अन्य थपघटका कारणहरु</h6>
+                <table class="table table-bordered" style="font-size: 13px;">
+                    <thead>
+                        <tr style="background-color: #f8f9fa;">
+                            <th style="width: 50%; padding: 10px;">कारण</th>
+                            <th style="width: 50%; padding: 10px;">रकम</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 10px;">क्रेडिट एडभाइस</td>
+                            <td style="padding: 10px;"><input id="creditAdvice" type="text" class="form-control" style="font-size: 12px; text-align: right;"></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px;">अन्य</td>
+                            <td style="padding: 10px;"><input id="creditOther" type="text" class="form-control" style="font-size: 12px; text-align: right;"></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; text-align: center;"><strong>जम्मा रकम</strong></td>
+                            <td style="padding: 10px;"><input id="creditTotal" type="text" class="form-control" readonly value="0" style="font-size: 12px; text-align: right; background-color: #f8f9fa;"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="text-align: center; margin-top: 20px;">
+                    <button onclick="saveCreditAdjustment()" class="btn" style="background-color: #28a745; color: white; padding: 8px 30px; margin-right: 10px; border-radius: 4px; border: none; font-size: 13px;">OK</button>
+                    <button onclick="closeCreditModal()" class="btn" style="background-color: #dc3545; color: white; padding: 8px 30px; border-radius: 4px; border: none; font-size: 13px;">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Debit Adjustment Modal -->
+    <div id="debitModal" class="modal" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4);">
+        <div class="modal-content" style="background-color: #fefefe; margin: 10% auto; padding: 0; border: 1px solid #888; width: 35%; border-radius: 8px;">
+            <div class="modal-header" style="padding: 15px; background-color: #e9ecef; border-bottom: 1px solid #dee2e6; border-radius: 8px 8px 0 0;">
+                <h5 style="margin: 0; font-size: 16px;">अन्य थपघट डेबिट</h5>
+            </div>
+            <div class="modal-body" style="padding: 20px;">
+                <h6 style="margin-bottom: 15px; font-size: 14px;">अन्य थपघटका कारणहरु</h6>
+                <table class="table table-bordered" style="font-size: 13px;">
+                    <thead>
+                        <tr style="background-color: #f8f9fa;">
+                            <th style="width: 50%; padding: 10px;">कारण</th>
+                            <th style="width: 50%; padding: 10px;">रकम</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 10px;">डेबिट एडभाइस</td>
+                            <td style="padding: 10px;"><input id="debitAdvice" type="text" class="form-control" style="font-size: 12px; text-align: right;"></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px;">अन्त:शुल्क टिकट खरिद</td>
+                            <td style="padding: 10px;"><input id="debitTicket" type="text" class="form-control" style="font-size: 12px; text-align: right;"></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px;">अन्य</td>
+                            <td style="padding: 10px;"><input id="debitOther" type="text" class="form-control" style="font-size: 12px; text-align: right;"></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; text-align: center;"><strong>जम्मा रकम</strong></td>
+                            <td style="padding: 10px;"><input id="debitTotal" type="text" class="form-control" readonly value="0" style="font-size: 12px; text-align: right; background-color: #f8f9fa;"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="text-align: center; margin-top: 20px;">
+                    <button onclick="saveDebitAdjustment()" class="btn" style="background-color: #28a745; color: white; padding: 8px 30px; margin-right: 10px; border-radius: 4px; border: none; font-size: 13px;">OK</button>
+                    <button onclick="closeDebitModal()" class="btn" style="background-color: #dc3545; color: white; padding: 8px 30px; border-radius: 4px; border: none; font-size: 13px;">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
