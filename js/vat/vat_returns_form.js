@@ -258,6 +258,30 @@ function initializeDropdowns() {
 
 // Initialize calculation functionality
 function initializeCalculations() {
+    // Add input validation for amount fields - only allow whole numbers
+    const amountFields = document.querySelectorAll('input[name^="txt"][type="text"]');
+    amountFields.forEach(field => {
+        // Skip non-numeric fields like PAN, Account Type, Year
+        if (field.name === 'txtPan' || field.name === 'txtAccountType' || field.name === 'txtTaxYear') {
+            return;
+        }
+        
+        field.addEventListener('input', function(e) {
+            // Remove any decimal points and keep only digits
+            let value = this.value.replace(/[^\d]/g, '');
+            this.value = value;
+        });
+        
+        field.addEventListener('keypress', function(e) {
+            // Prevent decimal point, comma, and other non-digit characters
+            if (e.key === '.' || e.key === ',' || !/^\d$/.test(e.key)) {
+                if (e.key !== 'Backspace' && e.key !== 'Delete' && e.key !== 'ArrowLeft' && e.key !== 'ArrowRight' && e.key !== 'Tab') {
+                    e.preventDefault();
+                }
+            }
+        });
+    });
+    
     // Calculate totals and related fields automatically
     function calculateTotals() {
         // Credit column (खरिदमा तिरेको कर क्रेडिट)
@@ -269,7 +293,7 @@ function initializeCalculations() {
         const totalCredit = vatOnPurchase + vatOnPurI + adjCredit;
         const totalCreditField = document.querySelector('input[name="txtTotalCredit"]');
         if (totalCreditField) {
-            totalCreditField.value = totalCredit.toFixed(2);
+            totalCreditField.value = Math.round(totalCredit);
         }
         
         // Debit column (बिक्रीमा संकलन गरेको कर डेबिट)
@@ -280,14 +304,14 @@ function initializeCalculations() {
         const totalDebit = vatOnSale + adjDebit;
         const totalDebitField = document.querySelector('input[name="txtTotalDebit"]');
         if (totalDebitField) {
-            totalDebitField.value = totalDebit.toFixed(2);
+            totalDebitField.value = Math.round(totalDebit);
         }
         
         // ५. डेविट-क्रेडिट (+ वा -) = Total Debit - Total Credit
         const debitMinusCredit = totalDebit - totalCredit;
         const vatDueTM = document.querySelector('input[name="txtVatDueTM"]');
         if (vatDueTM) {
-            vatDueTM.value = debitMinusCredit.toFixed(2);
+            vatDueTM.value = Math.round(debitMinusCredit);
         }
         
         // ७. तिर्नु पर्ने कर रू.(५-६) (+ वा -) = (डेविट-क्रेडिट) - (गत महिनाको क्रेडिट)
@@ -295,7 +319,7 @@ function initializeCalculations() {
         const vatDue = debitMinusCredit - creditBF;
         const vatDueField = document.querySelector('input[name="txtVatDue"]');
         if (vatDueField) {
-            vatDueField.value = vatDue.toFixed(2);
+            vatDueField.value = Math.round(vatDue);
         }
     }
     
