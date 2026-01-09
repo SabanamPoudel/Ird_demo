@@ -353,8 +353,8 @@ function initializeVATValidation() {
         const vatValue = parseFloat(vatField.value) || 0;
         
         if (transactionValue > 0 && vatValue > 0) {
-            const expectedVAT = transactionValue * 0.13;
-            const tolerance = 0.01; // Allow small rounding differences
+            const expectedVAT = Math.round(transactionValue * 0.13); // Round to whole number
+            const tolerance = 1; // Allow rounding difference of 1 rupee for whole numbers
             
             if (Math.abs(vatValue - expectedVAT) > tolerance) {
                 // Show error popup
@@ -595,7 +595,7 @@ function initializeExcelControls() {
                                 }
                                 
                                 // Excel rows might have fewer columns if trailing cells are empty
-                                // Column mapping: 0=PAN, 1=TradeName, 2=TradeNameType, 3=SORP, 4=TaxableAmount, 5=ExemptedAmount, 6=Remarks
+                                // Column mapping: 0=SNo, 1=PAN, 2=TradeName, 3=TradeNameType, 4=SORP, 5=TaxableAmount, 6=ExemptedAmount, 7=Remarks
                                 const normalizeTradeNameType = (val) => {
                                     const normalized = String(val).trim().toLowerCase();
                                     if (normalized === 'english' || normalized === 'e') return 'English';
@@ -618,13 +618,13 @@ function initializeExcelControls() {
                                 };
                                 
                                 const rowData = {
-                                    pan: String(row[0] !== undefined ? row[0] : '').trim(),
-                                    tradeName: String(row[1] !== undefined ? row[1] : '').trim(),
-                                    tradeNameType: normalizeTradeNameType(row[2]),
-                                    sorp: normalizeSorp(row[3]),
-                                    taxableAmount: String(row[4] !== undefined ? row[4] : '').trim(),
-                                    exemptedAmount: String(row[5] !== undefined ? row[5] : '').trim(),
-                                    remarks: normalizeRemarks(row[6])
+                                    pan: String(row[1] !== undefined ? row[1] : '').trim(),
+                                    tradeName: String(row[2] !== undefined ? row[2] : '').trim(),
+                                    tradeNameType: normalizeTradeNameType(row[3]),
+                                    sorp: normalizeSorp(row[4]),
+                                    taxableAmount: String(row[5] !== undefined ? row[5] : '').trim(),
+                                    exemptedAmount: String(row[6] !== undefined ? row[6] : '').trim(),
+                                    remarks: normalizeRemarks(row[7])
                                 };
                                 
                                 console.log('  Row data extracted:', rowData);
@@ -681,17 +681,17 @@ function initializeExcelControls() {
                                     return '';
                                 };
                                 
-                                // Make sure we have enough columns (at least 7)
-                                // Column mapping: 0=PAN, 1=TradeName, 2=TradeNameType, 3=SORP, 4=TaxableAmount, 5=ExemptedAmount, 6=Remarks
-                                if (columns.length >= 7) {
+                                // Make sure we have enough columns (at least 8)
+                                // Column mapping: 0=SNo, 1=PAN, 2=TradeName, 3=TradeNameType, 4=SORP, 5=TaxableAmount, 6=ExemptedAmount, 7=Remarks
+                                if (columns.length >= 8) {
                                     rowsData.push({
-                                        pan: cleanValue(columns[0]),
-                                        tradeName: cleanValue(columns[1]),
-                                        tradeNameType: normalizeTradeNameType(columns[2]),
-                                        sorp: normalizeSorp(columns[3]),
-                                        taxableAmount: cleanValue(columns[4]),
-                                        exemptedAmount: cleanValue(columns[5]),
-                                        remarks: normalizeRemarks(columns[6])
+                                        pan: cleanValue(columns[1]),
+                                        tradeName: cleanValue(columns[2]),
+                                        tradeNameType: normalizeTradeNameType(columns[3]),
+                                        sorp: normalizeSorp(columns[4]),
+                                        taxableAmount: cleanValue(columns[5]),
+                                        exemptedAmount: cleanValue(columns[6]),
+                                        remarks: normalizeRemarks(columns[7])
                                     });
                                 }
                             }
