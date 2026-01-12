@@ -767,96 +767,216 @@ function closeDepreciationModal() {
 }
 
 function calculateDepreciation() {
-    // Calculate row 1.1 total (ह्रास आधारमा थपघट)
-    let row1_1_total = 0;
-    for (let i = 1; i <= 5; i++) {
-        const val = parseFloat(document.getElementById('dep1_1_' + i).value.replace(/,/g, '') || 0);
-        row1_1_total += val;
-    }
-    document.getElementById('dep1_1_total').value = row1_1_total.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0});
-    
-    // Calculate row 1.2 (यो वर्ष कायम हुने शुरु ह्रास आधार) = row 1 + row 1.1
-    for (let i = 1; i <= 5; i++) {
-        const row1 = parseFloat(document.getElementById('dep1_' + i).value.replace(/,/g, '') || 0);
-        const row1_1 = parseFloat(document.getElementById('dep1_1_' + i).value.replace(/,/g, '') || 0);
-        const total = row1 + row1_1;
-        document.getElementById('dep1_2_' + i).value = total.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0});
-    }
-    
-    // Calculate row 1.2 total
-    let row1_2_total = 0;
-    for (let i = 1; i <= 5; i++) {
-        const val = parseFloat(document.getElementById('dep1_2_' + i).value.replace(/,/g, '') || 0);
-        row1_2_total += val;
-    }
-    document.getElementById('dep1_2_total').value = row1_2_total.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0});
-    
-    // Calculate totals for rows 2-10
-    for (let row = 2; row <= 10; row++) {
-        let rowTotal = 0;
-        const maxCol = (row === 5 || row === 6 || row === 8 || row === 9) ? 4 : 5;
-        for (let i = 1; i <= maxCol; i++) {
-            const val = parseFloat(document.getElementById('dep' + row + '_' + i).value.replace(/,/g, '') || 0);
-            rowTotal += val;
+    try {
+        // Calculate row 1.1 total (ह्रास आधारमा थपघट)
+        let row1_1_total = 0;
+        for (let i = 1; i <= 5; i++) {
+            const element = document.getElementById('dep1_1_' + i);
+            if (element && element.value) {
+                const val = parseFloat(element.value.replace(/,/g, '') || 0);
+                row1_1_total += val;
+            }
         }
-        if (document.getElementById('dep' + row + '_total')) {
-            document.getElementById('dep' + row + '_total').value = rowTotal.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0});
+        const totalElement = document.getElementById('dep1_1_total');
+        if (totalElement) {
+            totalElement.value = row1_1_total.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0});
         }
+        
+        // Calculate row 1.2 (यो वर्ष कायम हुने शुरु ह्रास आधार) = row 1 + row 1.1
+        for (let i = 1; i <= 5; i++) {
+            const row1Element = document.getElementById('dep1_' + i);
+            const row1_1Element = document.getElementById('dep1_1_' + i);
+            const row1_2Element = document.getElementById('dep1_2_' + i);
+            
+            if (row1Element && row1_1Element && row1_2Element) {
+                const row1 = parseFloat((row1Element.value || '0').replace(/,/g, ''));
+                const row1_1 = parseFloat((row1_1Element.value || '0').replace(/,/g, ''));
+                const total = row1 + row1_1;
+                row1_2Element.value = total.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0});
+            }
+        }
+        
+        // Calculate row 1.2 total
+        let row1_2_total = 0;
+        for (let i = 1; i <= 5; i++) {
+            const element = document.getElementById('dep1_2_' + i);
+            if (element && element.value) {
+                const val = parseFloat(element.value.replace(/,/g, '') || 0);
+                row1_2_total += val;
+            }
+        }
+        const row1_2_totalElement = document.getElementById('dep1_2_total');
+        if (row1_2_totalElement) {
+            row1_2_totalElement.value = row1_2_total.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0});
+        }
+        
+        // Calculate totals for rows 2-10
+        for (let row = 2; row <= 10; row++) {
+            let rowTotal = 0;
+            const maxCol = (row === 5 || row === 6 || row === 8 || row === 9) ? 4 : 5;
+            for (let i = 1; i <= maxCol; i++) {
+                const element = document.getElementById('dep' + row + '_' + i);
+                if (element && element.value) {
+                    const val = parseFloat(element.value.replace(/,/g, '') || 0);
+                    rowTotal += val;
+                }
+            }
+            const totalElement = document.getElementById('dep' + row + '_total');
+            if (totalElement) {
+                totalElement.value = rowTotal.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0});
+            }
+        }
+        
+        // Calculate row 11 (समूह ङ को कुल जम्मा - Total Depreciation Expense)
+        // This is the actual depreciation for the year based on:
+        // Row 1.2 (depreciation base) × Row 7 (depreciation rate %) / 100
+        // Plus additions from rows 2-4 minus deductions from rows 6-10
+        
+        let totalDepreciation = 0;
+        
+        // Calculate depreciation for each group (क, ख, ग, घ)
+        for (let i = 1; i <= 4; i++) {
+            // Get depreciation base (row 1.2)
+            const baseElement = document.getElementById('dep1_2_' + i);
+            const base = baseElement ? parseFloat((baseElement.value || '0').replace(/,/g, '')) : 0;
+            
+            // Get depreciation rate (row 7)
+            const rateElement = document.getElementById('dep7_' + i);
+            const rate = rateElement ? parseFloat((rateElement.value || '0').replace(/,/g, '')) : 0;
+            
+            // Calculate basic depreciation
+            let groupDepreciation = (base * rate) / 100;
+            
+            // Add: Assets acquired during year (rows 2, 3, 4)
+            for (let row = 2; row <= 4; row++) {
+                const element = document.getElementById('dep' + row + '_' + i);
+                if (element && element.value) {
+                    groupDepreciation += parseFloat(element.value.replace(/,/g, '') || 0);
+                }
+            }
+            
+            // Subtract: Disposals and adjustments (rows 6, 8, 9, 10)
+            const adjustmentRows = [6, 8, 9, 10];
+            for (let row of adjustmentRows) {
+                const element = document.getElementById('dep' + row + '_' + i);
+                if (element && element.value) {
+                    groupDepreciation -= parseFloat(element.value.replace(/,/g, '') || 0);
+                }
+            }
+            
+            totalDepreciation += groupDepreciation;
+        }
+        
+        // For Group ङ (column 5), use the depreciation base directly
+        const dep1_2_5Element = document.getElementById('dep1_2_5');
+        const group5Base = dep1_2_5Element ? parseFloat((dep1_2_5Element.value || '0').replace(/,/g, '')) : 0;
+        
+        // Add group 5 additions (rows 2-4)
+        let group5Depreciation = group5Base;
+        for (let row = 2; row <= 4; row++) {
+            const element = document.getElementById('dep' + row + '_5');
+            if (element && element.value) {
+                group5Depreciation += parseFloat(element.value.replace(/,/g, '') || 0);
+            }
+        }
+        
+        // Subtract group 5 deductions (row 10)
+        const dep10_5Element = document.getElementById('dep10_5');
+        if (dep10_5Element && dep10_5Element.value) {
+            group5Depreciation -= parseFloat(dep10_5Element.value.replace(/,/g, '') || 0);
+        }
+        
+        totalDepreciation += group5Depreciation;
+        
+        // Update row 11 fields
+        const dep11_5Element = document.getElementById('dep11_5');
+        const dep11_totalElement = document.getElementById('dep11_total');
+        
+        if (dep11_5Element) {
+            dep11_5Element.value = group5Depreciation.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0});
+        }
+        if (dep11_totalElement) {
+            dep11_totalElement.value = totalDepreciation.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0});
+        }
+    } catch (error) {
+        console.error('Error in calculateDepreciation:', error);
     }
-    
-    // Calculate row 11 (समूह ङ को कुल जम्मा)
-    // This would typically be calculated based on specific depreciation rules
-    // For now, just sum the relevant fields
-    const dep11_5_value = parseFloat(document.getElementById('dep1_2_5').value.replace(/,/g, '') || 0);
-    document.getElementById('dep11_5').value = dep11_5_value.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0});
-    document.getElementById('dep11_total').value = dep11_5_value.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0});
 }
 
 function saveDepreciationDetails() {
-    // Get the total depreciation value (you may need to adjust which field to use)
-    const totalValue = document.getElementById('dep11_total').value;
-    
-    // Update the main form field
-    document.getElementById('de4').value = totalValue;
-    
-    // Save depreciation details to localStorage
-    const depData = {};
-    for (let row = 1; row <= 11; row++) {
-        for (let col = 1; col <= 5; col++) {
-            const fieldId = 'dep' + row + '_' + col;
-            if (document.getElementById(fieldId)) {
-                depData[fieldId] = document.getElementById(fieldId).value;
-            }
+    try {
+        console.log('saveDepreciationDetails started');
+        
+        // Recalculate to ensure we have the latest total
+        calculateDepreciation();
+        console.log('calculateDepreciation completed');
+        
+        // Get the total depreciation value from row 11 total
+        const totalValueElement = document.getElementById('dep11_total');
+        if (!totalValueElement) {
+            alert('Error: dep11_total field not found');
+            return;
         }
-        // Save sub-rows
-        if (row === 1) {
-            for (let subRow = 1; subRow <= 2; subRow++) {
-                for (let col = 1; col <= 5; col++) {
-                    const fieldId = 'dep1_' + subRow + '_' + col;
+        const totalValue = totalValueElement.value;
+        console.log('Total value:', totalValue);
+        
+        // Update the main form field de6 (Row 23 - Depreciation)
+        const de6Field = document.getElementById('de6');
+        if (!de6Field) {
+            alert('Error: de6 field not found');
+            return;
+        }
+        de6Field.value = totalValue;
+        console.log('de6 field updated');
+        
+        // Save depreciation details to localStorage
+        const depData = {};
+        for (let row = 1; row <= 11; row++) {
+            for (let col = 1; col <= 5; col++) {
+                const fieldId = 'dep' + row + '_' + col;
+                if (document.getElementById(fieldId)) {
+                    depData[fieldId] = document.getElementById(fieldId).value;
+                }
+            }
+            // Save sub-rows
+            if (row === 1) {
+                for (let subRow = 1; subRow <= 2; subRow++) {
+                    for (let col = 1; col <= 5; col++) {
+                        const fieldId = 'dep1_' + subRow + '_' + col;
+                        if (document.getElementById(fieldId)) {
+                            depData[fieldId] = document.getElementById(fieldId).value;
+                        }
+                    }
+                }
+            }
+            // Save checkboxes for row 6.1
+            if (row === 6) {
+                for (let col = 1; col <= 4; col++) {
+                    const fieldId = 'dep6_1_' + col;
                     if (document.getElementById(fieldId)) {
-                        depData[fieldId] = document.getElementById(fieldId).value;
+                        depData[fieldId] = document.getElementById(fieldId).checked;
                     }
                 }
             }
         }
-        // Save checkboxes for row 6.1
-        if (row === 6) {
-            for (let col = 1; col <= 4; col++) {
-                const fieldId = 'dep6_1_' + col;
-                if (document.getElementById(fieldId)) {
-                    depData[fieldId] = document.getElementById(fieldId).checked;
-                }
-            }
+        
+        localStorage.setItem('d03_annex5_depreciation_details', JSON.stringify(depData));
+        console.log('Data saved to localStorage');
+        
+        // Recalculate deduction total
+        if (typeof calculateDeTotal === 'function') {
+            calculateDeTotal();
+            console.log('calculateDeTotal completed');
         }
+        
+        // Close modal
+        closeDepreciationModal();
+        console.log('Modal closed - saveDepreciationDetails completed successfully');
+        
+    } catch (error) {
+        console.error('Error in saveDepreciationDetails:', error);
+        alert('Error saving depreciation details: ' + error.message);
     }
-    
-    localStorage.setItem('d03_annex5_depreciation_details', JSON.stringify(depData));
-    
-    // Recalculate deduction total
-    calculateDeTotal();
-    
-    // Close modal
-    closeDepreciationModal();
 }
 
 function printDepreciationReport() {
