@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estimated Return Entry</title>
+    <link rel="stylesheet" type="text/css" href="../../extjs/resources/ext-all.css">
+    <link rel="stylesheet" type="text/css" href="../../css/estimated_return/estimated_return_entry.css">
+</head>
+<body>
+    <div class="form-container">
+        <div class="form-content">
+            <div class="form-left">
+                <div class="form-group">
+                    <label for="username">प्रयोगकर्ताको नाम *:</label>
+                    <input type="text" id="username" name="txtVatUsername" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">पासवर्ड *:</label>
+                    <input type="password" id="password" name="txtVatPassword" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="retypePassword">पुनः पासवर्ड *:</label>
+                    <input type="password" id="retypePassword" name="txtVatReTypePassword" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="panNo">स्थायी लेखा नम्बर *:</label>
+                    <input type="text" id="panNo" name="txtVATPANNo" maxlength="9" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="fiscalYear">आर्थिक बर्ष *:</label>
+                    <select id="fiscalYear" name="fiscalYear">
+                        <option value="">---छान्नुहोस् ---</option>
+                        <option value="2082.083" selected>2082/083</option>
+                        <option value="2081.082">2081/082</option>
+                        <option value="2080.081">2080/081</option>
+                        <option value="2079.080">2079/080</option>
+                        <option value="2078.079">2078/079</option>
+                        <option value="2077.078">2077/078</option>
+                        <option value="2076.077">2076/077</option>
+                        <option value="2075.076">2075/076</option>
+                        <option value="2074.075">2074/075</option>
+                        <option value="2073.074">2073/074</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">इमेल ठेगाना :</label>
+                    <input type="email" id="email" name="txtVatEmailId">
+                </div>
+
+                <div class="form-group">
+                    <label for="contactNo">सम्पर्क नम्बर *:</label>
+                    <input type="text" id="contactNo" name="contactNo" maxlength="10" required>
+                </div>
+            </div>
+
+            <div class="form-right">
+                <div class="instructions">
+                    <h3>ई-फाइलिङ्ग भर्ने प्रकृया:</h3>
+                    <p>१. प्रयोगकर्ताको नाम भर्नुहोस्</p>
+                    <p>२. पासवर्ड भर्नुहोस्</p>
+                    <p>३. कृपया पुन: पासवर्ड भर्नुहोस्</p>
+                    <p>४. स्थायी लेखा नम्बर भर्नुहोस्</p>
+                    <p>५. इमेल ठेगाना भर्नुहोस्</p>
+                    <p>६. सम्पर्क नम्बर भर्नुहोस्</p>
+                    <p>७. Register बटनमा क्लिक गर्नुहोस्</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button type="button" class="btn-register" onclick="registerEstimatedReturn()">
+                <span class="icon-ok"></span> Register
+            </button>
+            <button type="button" class="btn-reset" onclick="resetForm()">
+                <span class="icon-cancel"></span> Reset
+            </button>
+            <p class="note">* चिन्ह भएको सबै कोष्ठहरु भर्न जरुरी छ ।</p>
+        </div>
+    </div>
+
+    <script src="../../js/estimated_return/estimated_return_entry.js"></script>
+</body>
+</html>

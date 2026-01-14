@@ -1,12 +1,19 @@
-body {
-    font-family: Arial, sans-serif;
+/* Excise Return Login Styles */
+
+.page-title {
+    padding: 15px 30px;
     margin: 0;
-    padding: 0;
-    background-color: transparent;
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    border-bottom: 1px solid #e0e0e0;
+    background-color: #f8f9fa;
 }
 
 .login-form-container {
-    padding: 10px;
+    padding: 40px 30px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .login-table {
@@ -15,28 +22,28 @@ body {
 }
 
 .login-table tr {
-    height: 45px;
+    height: 50px;
 }
 
 .label-cell {
     text-align: right;
     padding-right: 15px;
-    font-weight: 500;
+    font-weight: 400;
     color: #333;
-    width: 140px;
+    width: 150px;
     font-size: 14px;
 }
 
 .input-cell {
     padding: 5px 10px;
-    width: 200px;
+    width: 250px;
 }
 
 .login-input {
-    width: 150px;
-    padding: 6px 10px;
+    width: 240px;
+    padding: 8px 10px;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 3px;
     font-size: 14px;
     transition: border-color 0.3s;
 }
@@ -48,45 +55,47 @@ body {
 }
 
 .info-cell {
-    padding: 10px 20px;
-    background-color: transparent;
-    border-left: none;
-    font-size: 13px;
-    line-height: 1.6;
-    color: #555;
+    padding: 30px 40px;
+    background: linear-gradient(135deg, #4a8fda 0%, #5b9de8 100%);
+    color: white;
+    font-size: 15px;
+    line-height: 1.8;
     vertical-align: middle;
-    width: 300px;
+    width: 600px;
+    border-radius: 0 20px 20px 0;
+    box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
 }
 
 .button-cell {
-    padding-top: 20px;
-    text-align: right;
-    padding-right: 110px;
+    padding-top: 30px;
+    text-align: left;
+    padding-left: 0;
 }
 
 .login-btn {
-    background-color: #e8e8e8;
-    color: #333;
+    background: linear-gradient(135deg, #4a8fda 0%, #5b9de8 100%);
+    color: white;
     border: none;
-    padding: 8px 24px;
-    border-radius: 4px;
+    padding: 10px 30px;
+    border-radius: 5px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 500;
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    transition: background-color 0.3s, transform 0.1s;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    gap: 8px;
+    transition: all 0.3s;
+    box-shadow: 0 3px 8px rgba(74, 144, 226, 0.4);
 }
 
 .login-btn:hover {
-    background-color: #d0d0d0;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(135deg, #3a7fca 0%, #4b8dd8 100%);
+    box-shadow: 0 4px 12px rgba(74, 144, 226, 0.5);
+    transform: translateY(-1px);
 }
 
 .login-btn:active {
-    transform: scale(0.98);
+    transform: translateY(0);
 }
 
 .btn-icon {
@@ -126,11 +135,11 @@ body {
 
     .info-cell {
         margin-top: 20px;
-        border-left: none;
-        border-top: 3px solid #4a90e2;
+        border-radius: 10px;
     }
 
     .button-cell {
         text-align: center;
+        padding-left: 0;
     }
 }
