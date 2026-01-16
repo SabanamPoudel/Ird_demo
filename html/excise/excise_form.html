@@ -552,7 +552,7 @@
                                 </div>
                                 <div class="row" style="text-align: center; margin-top: 20px;">
                                     <div class="col-sm-12">
-                                        <button class="btn m-1 pl-2 pr-2" style="background-color: rgb(48, 102, 190); color: white;">Save</button>
+                                        <button class="btn m-1 pl-2 pr-2" style="background-color: rgb(48, 102, 190); color: white;" onclick="showSaveSuccessModal()">Save</button>
                                         <button class="btn m-1 pl-2 pr-2" style="background-color: rgb(48, 102, 190); color: white;">Print</button>
                                         <button class="btn m-1 pl-2 pr-2" style="background-color: rgb(48, 102, 190); color: white;">Submit</button>
                                     </div>
@@ -757,6 +757,93 @@
                     <label style="font-size: 11px; font-weight: normal;">समूह:</label>
                     <select id="productGroup" class="form-control" style="font-size: 11px; padding: 6px;">
                         <option value="">---छान्नुहोस्---</option>
+                        <option value="0201">𝟎𝟐𝟎𝟏 – चौपाया (कुखुराको जातिको) ताजा वा चिसो परेको (फल्सेस वा चिल्ड) मासु फेर्नेमा मात्र ।</option>
+                        <option value="0202">𝟎𝟐𝟎𝟐 – चौपाया (कुखुराको जातिको) हिमीकृत (फल्सेजेन) मासु फेर्नेमा मात्र ।</option>
+                        <option value="0203">𝟎𝟐𝟎𝟑 – सुंगुरको मासु ताजा, चिसो परेको वा हिमीकृत (फल्सेजेन, चिल्ड वा फ्रोजन) फेर्नेमा मात्र ।</option>
+                        <option value="0204">𝟎𝟐𝟎𝟒 – भेडा वा खसी बोकाको ताजा, चिसो परेको वा हिमीकृत मासु फेर्नेमा मात्र ।</option>
+                        <option value="0205">[0205] – भेडा, गाई, भैंसी र घोडासहितको ताजा, चिसो, वा हिमीकृत (फल्सेजेन) मासु फेर्नेमा मात्र ।</option>
+                        <option value="0206">[0206] – चौपाया जातिका (कुखुरा, हाँस, बटेर, टर्की, आदि) मासु तथा तिनका खाने योग्य भाग (फल्सेजेन, चिल्ड वा हिमीकृत) खाने हुने कच्चा मासु (हड्डी, छाला आदि सहित) ।</option>
+                        <option value="0207">[0207] – रक्तको ०.९% भन्दा कमको ताजा, चिसो परेको वा हिमीकृत मासु खाने वा अन्य फल्सेजेन मासु फेर्नेमा मात्र ।</option>
+                        <option value="0208">[0208] – ताजा, चिसो परेको वा हिमीकृत अन्य मासु र खाने हुने अपल मासु फेर्नेमा मात्र ।</option>
+                        <option value="0209">[0209] – चराचुरुङ्गी वा अन्य प्रकारले नसुकेको, ताजा, चिरिएको, हिमीकृत, नुन पानीमा डुबाएको, सुखाएको वा धुवाँमा नभएको सुकेको बोसो (फ्याट) ।</option>
+                        <option value="0210">[0210] – मासु र खाने हुने अपल मासुहरू हल्का नुन पानीमा डुबाएको, सुखाएको वा धुवाँ (स्मोक) वा हावा (ड्राइङ) लगाई वा फल्सेज एण्ड मिल्क समेत फेर्नेमा मात्र ।</option>
+                        <option value="0304">[0304] – ताजा, चिसो परेको र हिमीकृत माछा फेर्नेमा मात्र, माछाका फिलेट र अन्य माछाका मासुका टुक्राहरू फेर्नेमा मात्र ।</option>
+                        <option value="0305">[0305] – सुकेको, नुनिलो गरेको वा नुन पानीमा हालिएको माछा; धुवाँमा पकाएको माछा; माछाको मासु वा धुवाँ गर्दा पूर्ण रूपमा नपकाएको; माछाको खाने हुने धुलो, पिठो र प्यालेट फेर्नेमा मात्र ।</option>
+                        <option value="0306">[0306] – खबड मिश्र भएको वा नभएको जीवित, ताजा, चिसो परेको, हिमीकृत, सुकेको, नुनिलो गरेको वा नुन पानीमा हालिएको क्रस्टेसियन; खबड मिश्र भएको वा नभएको, धुवाँमा पकाएको ।</option>
+                        <option value="0307">[0307] – खबड मिश्र भएको वा नभएको, जीवित, ताजा, चिसो परेको, हिमीकृत, सुकेको, नुनिलो गरिएको वा नुन पानीमा राखिएको मोलस्क्स; खबड मिश्र भएको वा नभएको, धुवाँमा पकाएको ।</option>
+                        <option value="0308">[0308] – क्रस्टेसियन र मोलस्क्स बाहेकका, जीवित, ताजा, चिरिएको, हिमीकृत, सुखाएको, नुनिलो पारिएको वा नुनिलो पानीमा राखिएका डाइभ हाड नभएका जलचरहरू; धुवाँमा पकाएको ।</option>
+                        <option value="0802">[0802] – अन्य कागजहरू, ताजा वा सुखाएको, खबड नछोडिएको वा नछोडिएको, बोक्रा लागेको वा नलागेको फेर्नेमा मात्र ।</option>
+                        <option value="0804">[0804] – खजुर (छोटो), अंजीर, सुक्खा द्राक्ष (मनुका जस्तो फल), अनार, आँप, पाइनएप्पल, ताजा वा सुक्का फेर्नेमा मात्र ।</option>
+                        <option value="0806">[0806] – ताजा अथवा सुख्खा अङ्गुर फेर्नेमा मात्र ।</option>
+                        <option value="0809">[0809] – खुर्पानी (एप्रिकोट), चेरी (पेचिङ्ग), आरु (नेक्टारिन समेत), आलुबखडा (प्लम) र स्याउ (स्लो), ताजा फेर्नेमा मात्र ।</option>
+                        <option value="0812">[0812] – अस्थायी रूपमा संरक्षित फलफूल (नुन पानी, चिनी पानी वा यसै अन्य सुरक्षित राख्ने तरल पदार्थमा राखी) अस्थायी रूपमा सुरक्षित गरिएको, तर यस स्थितिमा तुरुन्त खाने उद्देश्यका लागि होइन ।</option>
+                        <option value="0813">[0813] – शीर्षक ०८.०२ देखि ०८.०६ सम्मको बाहेक सुखाएको फलफूल; यसमा कागतीको बोक्रा वा सुन्तला फलफूलहरूको मिश्रण फेर्नेमा मात्र ।</option>
+                        <option value="0906">[0906] – दालचिनी र दालचिनीको टुक्राको फूलहरू फेर्नेमा मात्र ।</option>
+                        <option value="1404">[1404] – अन्य अप्रशोधित तरल पदार्थ ।</option>
+                        <option value="1601">[1601] – ससेज र मासु, अफल र रगतबाट बनेको उत्पादन ।</option>
+                        <option value="1602">[1602] – तयार वा सुरक्षित मासु, अफल वा रगत ।</option>
+                        <option value="1603">[1603] – मासु, माछा, क्रस्टेसियन, मोलस्क वा अन्य जलीय इनभर्टिब्रेटको सार र रस ।</option>
+                        <option value="1604">[1604] – तयार वा सुरक्षित माछा ।</option>
+                        <option value="1605">[1605] – तयार वा सुरक्षित क्रस्टेसियन, मोलस्क र अन्य हाडको हाड नभएका (इनभर्टिब्रेट) जलचरहरू ।</option>
+                        <option value="1701">[1701] – चिनी वा चुकन्दर र रासायनिक रूपमा शुद्ध गरिएको सुक्रोज (ठोस पनि) ।</option>
+                        <option value="1703">[1703] – चिनीबाट निकालिने सिरा वा चुक्को रस (स्रोत चुक्को समेत) ।</option>
+                        <option value="1704" style="font-weight: normal;">[1704] – कोको नभएको चिनीको मिठाई (सेतो चकलेट सहित) ।</option>
+                        <option value="1805">𝟏𝟖𝟎𝟓 – कोकोको धुलो, चिनी वा गुलियो पदार्थ नहालेको ।</option>
+                        <option value="1806">𝟏𝟖𝟎𝟔 – चकलेट र अन्य कोको मिश्रित खाद्य पदार्थ ।</option>
+                        <option value="1902">𝟏𝟗𝟎𝟐 – पास्ता, चाहे पकाएको, भरेको (मासु वा अन्य पदार्थ) वा वर्णन गरिएको वा अन्य किसिमले तयार गरिएको । [1902] – स्पेगेटी, म्याकरोनी, नुडल्स, लसाने, ग्नोकी, राभियोली, क्यानेलोनी कुकुर जस्ता पास्ताहरू वा पकाएको, (मासु वा अन्य पदार्थ) भरिएको वा नभरिएको वा अन्य किसिमले तयार गरिएको ।</option>
+                        <option value="1905">𝟏𝟗𝟎𝟓 – कोको परेको वा नपरेको फार्टो, ब्रेड, केक, बिस्कुट र अरु रोटी सम्बन्धी सामान; कन्फेक्सनरी, केकहरू (पाकेको रोटी बिक्रीका लागि काम गर्ने), औषधि मर्मत हुने चल्ने बिस्कुट ।</option>
+                        <option value="2005" style="font-weight: normal;">[2005] – निको (भिनेगर) वा एसिटिक एसिडबाट बनेर विभिन्न तरिकाबाट तयार वा सुरक्षित गरिएको, हिमीकृत नगरीएका अन्य तरकारीहरू, शीर्षक ०७.०६ का उत्पादनहरू बाहेक ।</option>
+                        <option value="2008" style="font-weight: normal;">[2008] – चिनी वा चिनीमा घुलिने पदार्थ हालि सुरक्षित गरिएको वा अन्य प्रकारले तयार गरिएको अन्य फलफूल, काक्रोफल र अन्य बोट बिरुवाबाट खान हुने अंश ।</option>
+                        <option value="2009">𝟐𝟎𝟎𝟗 – चिनी हालिएको वा नहालिएको, फ्रुट जुस (अङ्गुरको रस समेत) र तरकारी रस ।</option>
+                        <option value="2101">[2101] – कफी, चिया वा माटे र तिनका एसन्स, एक्स्ट्र्याक्ट र कन्सन्ट्रेट; कफी, चिया वा माटेमा आधारित वा कफी, चिया वा माटेको आधार लिइ बनाइएको तयारी पदार्थहरू (चिकोरी समेत) ।</option>
+                        <option value="2105">[2105] – आइसक्रिम र अन्य खाद्य आइस ।</option>
+                        <option value="2106">[2106] – अन्य नरोकिएको खाद्य पदार्थ ।</option>
+                        <option value="2202">[2202] – चिनी हालिएको वा नहालिएको वा स्वाद आउने सुरक्षित पानी, प्राकृतिक र कृत्रिम खनिज पानी र वायु प्रवाहित पानी (एरियटेड) समेत; शीर्षक २०.०९ का फलफूल रस र तरकारी रस बाहेक ।</option>
+                        <option value="2203">[2203] – जौबाट बनेको बियर ।</option>
+                        <option value="2204">[2204] – ताजा अङ्गुरबाट बनाइएको वाइन, अन्य किण्वित पेयहरू समेत; शीर्षक २०.०९ को दाख रस (ग्रेप मस्ट) ।</option>
+                        <option value="2205">[2205] – भर्मुथ र अन्य अङ्गुर रस वा सुगन्धित बोट बिरुवा मिश्रित ताजा अङ्गुरको अन्य वाइन ।</option>
+                        <option value="2206">[2206] – अन्य किण्वित पेयहरू (उदाहरण: साइडर, नासपातीबाट बनेको पेरी, कुहिएको मह र पानी मिसाएको मिड); अन्य नरोकिएको वा समावेश गरिएको ।</option>
+                        <option value="2207">[2207] – ८० प्रतिशतभन्दा बढी अल्कोहल शक्ति भएको अधिनिष्क्रिय इथाइल अल्कोहल र जुनुकै अल्कोहल शक्ति भएको अधिनिष्क्रिय इथाइल अल्कोहल ।</option>
+                        <option value="2208">[2208] – ८० प्रतिशतभन्दा कम अल्कोहल शक्ति भएको अधिनिष्क्रिय इथाइल अल्कोहल; अरक (स्पिरिट), मदिरा (लिकर) र अन्य मादक (स्पिरिटुअस) पेयहरू ।</option>
+                        <option value="2401">[2401] – अप्रसोधित (अनम्यानुफ्याक्चर्ड) सुर्ती, सुर्तीको अवशेष (फेर्नेमा मात्र) ।</option>
+                        <option value="2402">[2402] – सुर्ती वा सुर्तीको प्रतिस्थापक (सब्स्टिच्युट) भएको सिगरेट, सिगार (सिगारिल्ला) र चुरोट (सिगरेट) ।</option>
+                        <option value="2403">[2403] – अन्य निर्मित (म्यानुफ्याक्चर्ड) सुर्ती र सुर्तीका विकल्प; सुँघ्ने (स्नफिङ्ग) वा चपाउने सुर्ती; सुर्तीको रस र सार ।</option>
+                        <option value="2515">[2515] – अलि अलि काटिएको वा क्रान्तिबाट काटेको वा अन्य किसिमले काटेको विशेष गुरुत्व २.५ वा बढी भएको च्यापटे (मार्बल समेत) ढुंगा वा पाता मार्बल (स्लिम्बर), टाइल्स ।</option>
+                        <option value="2516">[2516] – क्रान्तिबाट वा अन्य किसिमले अलि अलि काटिएको, काटिएको वा टुक्राएको च्यापटे (ग्रेनाइट समेत) ढुंगा वा पाताको रूपमा रहेको ग्रेनाइट (कडा पत्थर), पर्फिरी ।</option>
+                        <option value="2523">[2523] – पोर्टल्यान्ड सिमेन्ट ।</option>
+                        <option value="3208">[3208] – जलमै माध्यम भएका (एक्रिलिक) वा इमल्सन (डिस्पर्सन) भएका कृत्रिम पोलिमरहरू (रङ्गमा) वा रासायनिक रूपले परिवर्तन गरिएको प्राकृतिक पोलिमरहरूमा आधारित रङ्ग ।</option>
+                        <option value="3209">[3209] – अन्य माध्यममा आधारित (डिस्पर्सन) रङ्गहरू (जस्तै: सिंथेटिक रासायनिक पदार्थमा आधारित); रासायनिक रूपले परिवर्तन गरिएको प्राकृतिक पोलिमरहरूमा आधारित रङ्गहरू ।</option>
+                        <option value="3210">[3210] – अन्य रङ्गहरू र पिग्मेन्टहरू (भर्निश, एनामेल, लाख) र इन्डस्ट्रियल साइज र फिलरहरू; रङ्ग बनाउन प्रयोग गरिने तयारी पदार्थहरू ।</option>
+                        <option value="3214">[3214] – फ्लेक्स, प्रिन्टरको मसी, लेख्ने मसी, सिमेन्ट, कोक (सिंथेटिक) ग्राफाइट र अन्य मसीहरू (छोटो); चित्रकारको मसी (फिल्मिङ) हरू; मुद्रण मसी ।</option>
+                        <option value="3303">[3303] – सुगन्धित वा शरीर सफाइ सम्बन्धी पानी ।</option>
+                        <option value="3304">[3304] – सौन्दर्य वा रूप-सज्जा (मेक-अप) का सामानहरू (औषधि बाहेक), छालाको सुरक्षाको लागि प्रयोग गरिने वस्तुहरू; घाम छल्ने वा घामबाट बचाउने (सनस्क्रिन) सामग्री ।</option>
+                        <option value="3305">[3305] – कपालका लागि तयारी सामग्रीहरू ।</option>
+                        <option value="3306">[3306] – मुख सम्बन्धी (ओरल) वा दन्त सम्बन्धी (डेन्टल) स्वास्थ्य (हाइजिन) निमित्तका तयारी वस्तुहरू (प्रिपरेसन), दन्त स्टिकर, दाँत सफा गर्ने चूर्ण (डेन्टल फिक्सिङ पेस्ट र पाउडर) ।</option>
+                        <option value="3307">[3307] – दाह्री बनाउने (शेभिङ), शोडिङ र आफ्टरशेभ सामानहरू; गन्ध हटाउने, दुर्गन्ध हटाउने सामानहरू; र दुर्गन्ध हटाउने अन्य तयारी; अन्य सुगन्धित शारीरिक वा सरसफाइका तयारी ।</option>
+                        <option value="3401">[3401] – साबुन; साबुन भएको वा नभएको छाला धुने (बार) टिकिया (केक); साबुन भएको वा नभएको, बाह्य प्रभाव पार्ने (सर्फेस एक्टिभ) शारीरिक धुने तयारी ।</option>
+                        <option value="3402">[3402] – शारीरिक बाह्य प्रभाव पार्ने कारकहरू (एजेन्ट) (साबुन बाहेक); बाह्य प्रभाव पार्ने तयारी वस्तुहरू; धुने (वासिङ) उत्पादनहरू (धुने सहायक सामान समेत) र सफा गर्ने तयारी ।</option>
+                        <option value="3814">[3814] – कार्बनिक संयुक्त द्रावक (सोल्भेन्ट) र पेन्ट हटाउने (थिनर) पदार्थ, अन्य नरोकिएको; पेन्ट र रोगन (वार्निस) हटाउने तयारी सामग्री ।</option>
+                        <option value="3916">[3916] – प्लास्टिकको कुनै पनि कट मेसनले बनाएको ९ एम.एम. भन्दा बढी मोटाइ भएको मोनोफिलामेन्ट, स्ट्रिप (तस्मा) कारी गरिएको वा नगरेको वा त्यस बाहेकको कुनै पनि आकारको ।</option>
+                        <option value="3920">[3920] – अन्य प्लास्टिक प्लेट, सिट, फिल्म, फोइल र स्ट्रिप, आत्म-चिप्किने (लमिनेट) गरिएको, आधार (सपोर्ट) सहितको वा त्यसबाहेकको ।</option>
+                        <option value="3921">[3921] – प्लास्टिकका अन्य प्लेट, सिट, फिल्म, फोइल र स्ट्रिप ।</option>
+                        <option value="3922">[3922] – प्लास्टिकका स्यानिटरी (बाथ) हरू, दुहाइ स्यानिटरी (सावर बाथ) हरू, पानी आउने र निकास व्यवस्था सहितको टब (सिंक) हरू, प्रवाहानुसार (फ्लो-बेसिन), स्यानिटरी ।</option>
+                        <option value="3923">[3923] – मालसामानको ओसारपसार (कन्टेनर) वा प्याकेजिङ (प्याक) गर्न प्लास्टिकका सामानहरू; प्लास्टिकको बोतल वा जार (स्टोरेज ड्रम), बक्स (क्यारेज) र अन्य ।</option>
+                        <option value="3924">[3924] – प्लास्टिकका भान्साका उपकरणहरू (डिनर-वेयर), भान्साको पकाउने उपकरणहरू (किचन-वेयर), अन्य घरेलु सामानहरू र सरसफाइ सम्बन्धी (हाइजिनिक) वा शृङ्गार (टॉयलेट) का सामानहरू ।</option>
+                        <option value="3925">[3925] – अन्य नरोकिएका कृत्रिम प्लास्टिकका सामग्रीहरू (लाइटर कभर) ।</option>
+                        <option value="3926">[3926] – प्लास्टिकबाट बनेका अन्य सामग्रीहरू शीर्षक ३९.०१ देखि ३९.१४ बाहेक ।</option>
+                        <option value="4402">[4402] – काठबाट तयार गरिएको कोइला (चारकोल), खबड (लम्प) का वा पिसिएको (पाउडर) को गोल समेत ।</option>
+                        <option value="4403">[4403] – बोक्रा नहटाइएको काठ वा आंशिक रूपमा छालासहितको काठ, चिरिएको वा नचिरिएको वा मनोनीत ढङ्गले परेको अप्रशोधित काठ ।</option>
+                        <option value="6305">[6305] – बस्त्रबाट बनेका थैलाहरू (साक), जूट आदि ।</option>
+                        <option value="6802">[6802] – शीर्षक ६८.०१ का बाहेक ढुंगाका स्मारक वा निर्माणका लागि तयार गरिएका ढुंगा (स्लेट ढुंगा) र तिनका सामानहरू, चिल्लो सामग्री (व्यक्तिक) भएको वा नभएको प्राकृतिक ।</option>
+                        <option value="6803">[6803] – शीर्षक ६८.०१ का बाहेक ढुंगाका स्मारक वा निर्माणका लागि तयार गरिएका ढुंगा (स्लेट ढुंगा) र तिनका सामानहरू, चिल्लो सामग्री (व्यक्तिक) भएको वा नभएको प्राकृतिक ।</option>
+                        <option value="6813">[6813] – अस्बेस्टस (एस्बेस्टस) वा अन्य तन्तुबाट बनेका सामग्रीहरू, कागज वा अन्य आधार पदार्थमा आधारित (फ्रिक्सन सामग्री) जस्तै: ब्रेक वा क्लच प्याड, लाइनिङ ।</option>
+                        <option value="6908">[6908] – ग्लेज गरिएको (लेड गरेको) माटोको टाइल, अग्नि वा चुना नलागेको फिनिशिङ टाइल; असर (व्यक्तिक) भएको वा नभएको ग्लेज गरिएको सिरेमिक टाइल ।</option>
+                        <option value="7003">[7003] – अवशोषक, प्रतिबिम्बित वा अप्रतिबिम्बित तह (लेयर) भएको वा नभएको, पाता (सिट) वा प्रोफाइलको रूपमा भएको, अझ कुनै किसिमको काम नगरेको, ढलाइएको काँच ।</option>
+                        <option value="7004">[7004] – अवशोषक, प्रतिबिम्बित वा अप्रतिबिम्बित तह (लेयर) भएको वा नभएको, तर अन्य कुनै काम नगरेको, पाता (सिट) को रूपमा भएको तनावरहित (फ्लोट) काँच ।</option>
+                        <option value="7005">[7005] – अवशोषक, प्रतिबिम्बित वा अप्रतिबिम्बित तह (लेयर) भएको वा नभएको, तर अन्य किसिमको कुनै काम नगरेको, पाता (सिट) मा भएको फ्लोट ग्लास वा सतह गरिएको काँच ।</option>
+                        <option value="7006">[7006] – शीर्षक ७०.०३, ७०.०४ वा ७०.०५ का काँचबाट बनेका वस्तुहरू; ढिक्का (ब्लक), किनाराको काम गरिएको (एज वर्क), खोक्रो (ड्रिल), इनेमल लगाइएको वा अन्य ।</option>
+                        <option value="7007">[7007] – कडा बनाइएको वा टेम्पर्ड काँच भएको सुरक्षा काँच ।</option>
+                        <option value="7008">[7008] – काँचको बहुपरतिय अवशोषक इकाइ (मल्टिपल वाल इन्सुलेटेड युनिट) ।</option>
                     </select>
                 </div>
                 <div style="display: grid; grid-template-columns: 180px 1fr; gap: 12px; align-items: center; margin-bottom: 12px;">
@@ -777,20 +864,102 @@
                     <label style="font-size: 11px; font-weight: normal;">Base Unit:</label>
                     <select id="productBaseUnit" class="form-control" style="font-size: 11px; padding: 6px; width: 400px;">
                         <option value="">---छान्नुहोस्---</option>
-                        <option value="CFT">CFT</option>
-                        <option value="SFT">SFT</option>
-                        <option value="GM">GM</option>
+                        <option value="10M">10M</option>
+                        <option value="1M">1M</option>
+                        <option value="30PKT-400GM">30PKT-400GM</option>
+                        <option value="50PKT-8GM">50PKT-8GM</option>
+                        <option value="5M">5M</option>
                         <option value="BAG">BAG</option>
+                        <option value="BOT25UP180ML">BOT25UP180ML</option>
+                        <option value="BOT25UP375ML">BOT25UP375ML</option>
+                        <option value="BOT25UP750ML">BOT25UP750ML</option>
+                        <option value="BOT30UP1000ML">BOT30UP1000ML</option>
+                        <option value="BOT30UP180ML">BOT30UP180ML</option>
+                        <option value="BOT30UP375ML">BOT30UP375ML</option>
+                        <option value="BOT30UP750ML">BOT30UP750ML</option>
+                        <option value="BOT30UP90ML">BOT30UP90ML</option>
+                        <option value="BOT325">BOT325</option>
+                        <option value="BOT330">BOT330</option>
+                        <option value="BOT40UP180ML">BOT40UP180ML</option>
+                        <option value="BOT40UP375ML">BOT40UP375ML</option>
+                        <option value="BOT40UP750ML">BOT40UP750ML</option>
+                        <option value="BOT50UP180ML">BOT50UP180ML</option>
+                        <option value="BOT50UP375ML">BOT50UP375ML</option>
+                        <option value="BOT50UP750ML">BOT50UP750ML</option>
+                        <option value="BOT650">BOT650</option>
+                        <option value="BOT70UP300ML">BOT70UP300ML</option>
+                        <option value="BOT750">BOT750</option>
+                        <option value="BOX">BOX</option>
+                        <option value="CAN330">CAN330</option>
+                        <option value="CASE-25UP-1000ML-9BOT">CASE-25UP-1000ML-9BOT</option>
+                        <option value="CASE-25UP-180ML-24BOT">CASE-25UP-180ML-24BOT</option>
+                        <option value="CASE-25UP-180ML-48BOT">CASE-25UP-180ML-48BOT</option>
+                        <option value="CASE-25UP-375ML-12BOT">CASE-25UP-375ML-12BOT</option>
+                        <option value="CASE-25UP-375ML-24BOT">CASE-25UP-375ML-24BOT</option>
+                        <option value="CASE-25UP-750ML-12BOT">CASE-25UP-750ML-12BOT</option>
+                        <option value="CASE-25UP-750ML-6BOT">CASE-25UP-750ML-6BOT</option>
+                        <option value="CASE-25UP-90ML-100BOT">CASE-25UP-90ML-100BOT</option>
+                        <option value="CASE-25UP-90ML-50BOT">CASE-25UP-90ML-50BOT</option>
+                        <option value="CASE-275ML-24BOT">CASE-275ML-24BOT</option>
+                        <option value="CASE-275ML-24CAN">CASE-275ML-24CAN</option>
+                        <option value="CASE-30UP-1000ML-9BOT">CASE-30UP-1000ML-9BOT</option>
+                        <option value="CASE-30UP-180ML-24BOT">CASE-30UP-180ML-24BOT</option>
+                        <option value="CASE-30UP-180ML-48BOT">CASE-30UP-180ML-48BOT</option>
+                        <option value="CASE-30UP-375ML-12BOT">CASE-30UP-375ML-12BOT</option>
+                        <option value="CASE-30UP-375ML-24BOT">CASE-30UP-375ML-24BOT</option>
+                        <option value="CASE-30UP-750ML-12BOT">CASE-30UP-750ML-12BOT</option>
+                        <option value="CASE-30UP-750ML-6BOT">CASE-30UP-750ML-6BOT</option>
+                        <option value="CASE-30UP-90ML-100BOT">CASE-30UP-90ML-100BOT</option>
+                        <option value="CASE-30UP-90ML-50BOT">CASE-30UP-90ML-50BOT</option>
+                        <option value="CASE-375ML-24BOT">CASE-375ML-24BOT</option>
+                        <option value="CASE-40UP-180ML-24BOT">CASE-40UP-180ML-24BOT</option>
+                        <option value="CASE-40UP-180ML-48BOT">CASE-40UP-180ML-48BOT</option>
+                        <option value="CASE-40UP-375ML-12BOT">CASE-40UP-375ML-12BOT</option>
+                        <option value="CASE-40UP-375ML-24BOT">CASE-40UP-375ML-24BOT</option>
+                        <option value="CASE-40UP-750ML-12BOT">CASE-40UP-750ML-12BOT</option>
+                        <option value="CASE-40UP-750ML-6BOT">CASE-40UP-750ML-6BOT</option>
+                        <option value="CASE-4L-4BAG">CASE-4L-4BAG</option>
+                        <option value="CASE-500ML-12BOT">CASE-500ML-12BOT</option>
+                        <option value="CASE-500ML-12CAN">CASE-500ML-12CAN</option>
+                        <option value="CASE-50UP-180ML-24BOT">CASE-50UP-180ML-24BOT</option>
+                        <option value="CASE-50UP-180ML-48BOT">CASE-50UP-180ML-48BOT</option>
+                        <option value="CASE-50UP-500ML-18BOT">CASE-50UP-500ML-18BOT</option>
+                        <option value="CASE-650ML-12BOT">CASE-650ML-12BOT</option>
+                        <option value="CASE-70UP-300ML-30BOT">CASE-70UP-300ML-30BOT</option>
+                        <option value="CASE-750ML-12BOT">CASE-750ML-12BOT</option>
+                        <option value="CASEBOT250ML-12BOT">CASEBOT250ML-12BOT</option>
+                        <option value="CASEBOT330-24BOT">CASEBOT330-24BOT</option>
+                        <option value="CASEBOT500-12BOT">CASEBOT500-12BOT</option>
+                        <option value="CASEBOT650-12BOT">CASEBOT650-12BOT</option>
+                        <option value="CASEBOT750-12BOT">CASEBOT750-12BOT</option>
+                        <option value="CASECAN250-24CANS">CASECAN250-24CANS</option>
+                        <option value="CASECAN330-24CANS">CASECAN330-24CANS</option>
+                        <option value="CASECAN500-12CAN">CASECAN500-12CAN</option>
+                        <option value="CFT">CFT</option>
+                        <option value="GM">GM</option>
+                        <option value="KEG-10L">KEG-10L</option>
+                        <option value="KEG-20L">KEG-20L</option>
+                        <option value="KEG-30L">KEG-30L</option>
+                        <option value="KEG-50L">KEG-50L</option>
+                        <option value="KG">KG</option>
+                        <option value="LPLTR">LPLTR</option>
+                        <option value="LTR">LTR</option>
+                        <option value="LTR-25up">LTR-25up</option>
+                        <option value="LTR-30UP">LTR-30UP</option>
+                        <option value="LTR-40UP">LTR-40UP</option>
+                        <option value="LTR-50UP">LTR-50UP</option>
+                        <option value="LTR-70UP">LTR-70UP</option>
+                        <option value="MT">MT</option>
+                        <option value="PIECE">PIECE</option>
+                        <option value="PKT-150GM">PKT-150GM</option>
+                        <option value="PKT-400GM">PKT-400GM</option>
+                        <option value="PKT-450GM">PKT-450GM</option>
+                        <option value="PKT-750GM">PKT-750GM</option>
+                        <option value="QNT">QNT</option>
+                        <option value="SFT">SFT</option>
+                        <option value="SQFT">SQFT</option>
                         <option value="stick">stick</option>
                         <option value="TON">TON</option>
-                        <option value="LPLTR">LPLTR</option>
-                        <option value="PIECE">PIECE</option>
-                        <option value="MT">MT</option>
-                        <option value="BOX">BOX</option>
-                        <option value="LTR">LTR</option>
-                        <option value="BOT650">BOT650</option>
-                        <option value="KG">KG</option>
-                        <option value="EM">EM</option>
                     </select>
                 </div>
                 <div style="text-align: center; margin-bottom: 15px;">
@@ -857,6 +1026,23 @@
         </div>
     </div>
 
+    <!-- Save Success Modal -->
+    <div id="saveSuccessModal" style="display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4);">
+        <div style="background-color: #fefefe; margin: 15% auto; padding: 0; border: 1px solid #888; width: 400px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <div style="padding: 20px; text-align: center;">
+                <div style="margin-bottom: 20px;">
+                    <svg width="60" height="60" viewBox="0 0 60 60" style="margin: 0 auto;">
+                        <circle cx="30" cy="30" r="28" fill="#4CAF50" />
+                        <path d="M 15 30 L 25 40 L 45 20" stroke="white" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <h3 style="margin: 0 0 10px 0; font-size: 18px; font-weight: bold; color: #333;">सफलतापूर्वक सुरक्षित गरियो!</h3>
+                <p style="margin: 0 0 20px 0; font-size: 14px; color: #666;">Saved Successfully!</p>
+                <button onclick="closeSaveSuccessModal()" style="background-color: #4CAF50; color: white; border: none; padding: 10px 30px; border-radius: 4px; font-size: 14px; cursor: pointer;">ठीक छ (OK)</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         function openBaseUnitModal() {
             document.getElementById('baseUnitModal').style.display = 'block';
@@ -869,6 +1055,116 @@
         function openRegisterProductModal() {
             document.getElementById('registerProductModal').style.display = 'block';
         }
+
+        // Populate sub-group dropdown based on selected group
+        document.addEventListener('DOMContentLoaded', function() {
+            const groupSelect = document.getElementById('productGroup');
+            const subGroupSelect = document.getElementById('productSubGroup');
+
+            // Sub-group data for each group
+            const subGroupData = {
+                '0201': [
+                    { value: '0201.10.00', text: '[0201.10.00] — सिङ्गो र आधा शरीरहरू (करकस र हाफ करकस)' },
+                    { value: '0201.20.00', text: '[0201.20.00] — हाड सहितको अन्य टुक्राहरू' },
+                    { value: '0201.30.00', text: '[0201.30.00] — हाड नभएको' }
+                ],
+                '0202': [
+                    { value: '0202.10.00', text: '[0202.10.00] — सिङ्गो र आधा शरीरहरू (करकस र हाफ करकस)' },
+                    { value: '0202.20.00', text: '[0202.20.00] — हाड सहितको अन्य टुक्राहरू' },
+                    { value: '0202.30.00', text: '[0202.30.00] — हाड नभएको' }
+                ],
+                '0203': [
+                    { value: '0203.11.00', text: '[0203.11.00] — सिङ्गो र आधा शरीरहरू (करकस र हाफ करकस)' },
+                    { value: '0203.12.00', text: '[0203.12.00] — हाड सहितको अगाडि र पछाडिको सापहरू र सापबाट काटिएका अन्य टुक्राहरू' },
+                    { value: '0203.19.00', text: '[0203.19.00] — अन्य' },
+                    { value: '0203.21.00', text: '[0203.21.00] — सिङ्गो र आधा शरीरहरू (करकस र हाफ करकस)' },
+                    { value: '0203.22.00', text: '[0203.22.00] — हाड सहितको अगाडि र पछाडिको सापहरू र सापबाट काटिएका अन्य टुक्राहरू' },
+                    { value: '0203.29.00', text: '[0203.29.00] — अन्य' }
+                ],
+                '0204': [
+                    { value: '0204.10.00', text: '[0204.10.00] — भेडा (पाठो) को ताजा वा चिसो परेको सिङ्गो र आधा शरीरहरू (करकस र हाफ करकस)' },
+                    { value: '0204.21.00', text: '[0204.21.00] — सिङ्गो र आधा शरीरहरू (करकस र हाफ करकस)' },
+                    { value: '0204.22.00', text: '[0204.22.00] — हाडसहितको अन्य टुक्रा' },
+                    { value: '0204.23.00', text: '[0204.23.00] — हाड नभएको' },
+                    { value: '0204.30.00', text: '[0204.30.00] — भेडा (पाठो) को हिमीकृत (फ्रोजन) सिङ्गो र आधा शरीरहरू (करकस र हाफ करकस)' },
+                    { value: '0204.41.00', text: '[0204.41.00] — सिङ्गो र आधा शरीरहरू (करकस र हाफ करकस)' },
+                    { value: '0204.42.00', text: '[0204.42.00] — हाडसहितको अन्य टुक्राहरू' },
+                    { value: '0204.43.00', text: '[0204.43.00] — हाड नभएको' },
+                    { value: '0204.50.00', text: '[0204.50.00] — खसी बोकाको मासु' }
+                ],
+                '1805': [
+                    { value: '1805.00.00', text: '[1805.00.00] — कोकोको धुलो, चिनी वा गुलियो पदार्थ नहालेको ।' }
+                ],
+                '1806': [
+                    { value: '1806.10.00', text: '[1806.10.00] — कोकोको धुलो, चिनी वा गुलियो पदार्थ हालेको' },
+                    { value: '1806.20.00', text: '[1806.20.00] — २ केजी भन्दा बढी तौलको टिक्का (ब्लक वा स्ल्याब) वा डण्डी (बार) को रूपमा रहेका अन्य परिकार, तरल, माण्ड, धुलो, दानादार वा अन्य यथ्री (बल्क) को रूपमा' },
+                    { value: '1806.31.00', text: '[1806.31.00] — भरिएको' },
+                    { value: '1806.32.00', text: '[1806.32.00] — नभएको' },
+                    { value: '1806.90.00', text: '[1806.90.00] — अन्य' }
+                ],
+                '1902': [
+                    { value: '1902.11.00', text: '[1902.11.00] — फूल हालेको' },
+                    { value: '1902.19.00', text: '[1902.19.00] — अन्य' },
+                    { value: '1902.20.00', text: '[1902.20.00] — पकाएको वा नपकाएको वा अन्य प्रकारले तयार गरेको भरेको पास्ता (मुछेको पिठो)' },
+                    { value: '1902.30.00', text: '[1902.30.00] — अन्य पास्ता (मुछेको पिठो)' },
+                    { value: '1902.40.00', text: '[1902.40.00] — कुसकुस (उत्तरी अफ्रिकी खाद्य पदार्थ)' }
+                ],
+                '1905': [
+                    { value: '1905.10.00', text: '[1905.10.00] — चुरम चुरम जाने रोटी (क्रिस्प ब्रेड)' },
+                    { value: '1905.20.00', text: '[1905.20.00] — अदुवा हालेको एक किसिमको रोटी (जिन्जर ब्रेड)' },
+                    { value: '1905.31.00', text: '[1905.31.00] — गुलियो बिस्कुटहरू' },
+                    { value: '1905.32.00', text: '[1905.32.00] — पिठो मुछेर बनाएको एक किसिमको खरो (क्रिस्प) रोटी (वेफर) र पातलो रोटी (वेफर्स)' },
+                    { value: '1905.40.00', text: '[1905.40.00] — पास्ताको धुलोबाट बनेको रोटी वा बिस्कुट (रस्क), टोस्ट गरेको रोटी र त्यस्तै उत्पादन' },
+                    { value: '1905.90.10', text: '[1905.90.10] — पिज्जा' },
+                    { value: '1905.90.20', text: '[1905.90.20] — आलु चिप्स, कुरकुरे, कुरमुरे, लेज, चिजबल' },
+                    { value: '1905.90.70', text: '[1905.90.70] — पास्तोटी' },
+                    { value: '1905.90.30', text: '[1905.90.30] — पापड' },
+                    { value: '1905.90.50', text: '[1905.90.50] — अन्यत्र उल्लेख नभएका बिस्कुटहरू' },
+                    { value: '1905.90.60', text: '[1905.90.60] — केक, कुकीज र पेष्टी' },
+                    { value: '1905.90.81', text: '[1905.90.81] — फ्राई नगरेका' },
+                    { value: '1905.90.89', text: '[1905.90.89] — अन्य' },
+                    { value: '1905.90.90', text: '[1905.90.90] — अन्य' }
+                ],
+                '2009': [
+                    { value: '2009.11.00', text: '[2009.11.00] — हिमीकृत (फ्रोजन)' },
+                    { value: '2009.12.00', text: '[2009.12.00] — हिमीकृत नगरीएको, वृक्ष मूल्य २० ननाघेको' },
+                    { value: '2009.19.00', text: '[2009.19.00] — अन्य' },
+                    { value: '2009.21.00', text: '[2009.21.00] — वृक्ष मूल्य २० ननाघेको' },
+                    { value: '2009.29.00', text: '[2009.29.00] — अन्य' },
+                    { value: '2009.31.00', text: '[2009.31.00] — वृक्ष मूल्य २० ननाघेको' },
+                    { value: '2009.39.00', text: '[2009.39.00] — अन्य' },
+                    { value: '2009.41.00', text: '[2009.41.00] — वृक्ष मूल्य २० भन्दा बढी नभएको' },
+                    { value: '2009.49.00', text: '[2009.49.00] — अन्य' },
+                    { value: '2009.50.00', text: '[2009.50.00] — गोलभेँडाको रस (टमाटो जुस)' },
+                    { value: '2009.61.00', text: '[2009.61.00] — वृक्ष मूल्य ३० ननाघेको' },
+                    { value: '2009.69.00', text: '[2009.69.00] — अन्य' },
+                    { value: '2009.71.00', text: '[2009.71.00] — वृक्ष मूल्य २० ननाघेको' },
+                    { value: '2009.79.00', text: '[2009.79.00] — अन्य' },
+                    { value: '2009.81.00', text: '[2009.81.00] — क्रानबेरी (भ्याक्सिनियम म्याक्रोकार्पोन, भ्याक्सिनियम अक्सिकार्पस, भ्याक्सिनियम मिटिस–इडिया) को रस (जुस)' },
+                    { value: '2009.89.00', text: '[2009.89.00] — अन्य' },
+                    { value: '2009.89.10', text: '[2009.89.10] — आँपको रस' },
+                    { value: '2009.89.90', text: '[2009.89.90] — अन्य' },
+                    { value: '2009.90.00', text: '[2009.90.00] — रसको मिश्रण' }
+                ]
+            };
+
+            groupSelect.addEventListener('change', function() {
+                const selectedGroup = this.value;
+                
+                // Clear existing options except the first one
+                subGroupSelect.innerHTML = '<option value="">---छान्नुहोस्---</option>';
+                
+                // If group has sub-groups, populate them
+                if (selectedGroup && subGroupData[selectedGroup]) {
+                    subGroupData[selectedGroup].forEach(function(item) {
+                        const option = document.createElement('option');
+                        option.value = item.value;
+                        option.textContent = item.text;
+                        subGroupSelect.appendChild(option);
+                    });
+                }
+            });
+        });
 
         function closeRegisterProductModal() {
             document.getElementById('registerProductModal').style.display = 'none';
@@ -916,15 +1212,23 @@
         function saveProducts() {
             const tbody = document.getElementById('productTableBody');
             if (tbody.children.length === 0) {
-                alert('कृपया कम्तिमा एउटा उत्पादन थप्नुहोस् (Please add at least one product)');
                 closeRegisterProductModal();
                 return;
             }
             
-            alert('उत्पादनहरू सफलतापूर्वक सुरक्षित गरियो! (Products saved successfully!)');
             // Clear table after saving
             tbody.innerHTML = '';
             closeRegisterProductModal();
+        }
+
+        // Show save success modal
+        function showSaveSuccessModal() {
+            document.getElementById('saveSuccessModal').style.display = 'block';
+        }
+
+        // Close save success modal
+        function closeSaveSuccessModal() {
+            document.getElementById('saveSuccessModal').style.display = 'none';
         }
 
         // Close modal when clicking outside of it
