@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>अनुमानित करको विवरण</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #dfe9f6;
+            padding: 10px;
+            font-size: 11px;
+        }
+
+        .form-container {
+            background: transparent;
+            border: none;
+            padding: 10px;
+            margin: 10px auto;
+            width: 920px;
+        }
+
+        .form-header {
+            text-align: right;
+            color: #666;
+            font-size: 11px;
+            margin-bottom: 10px;
+        }
+
+        .form-title {
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        .form-title h3 {
+            font-weight: bold;
+            margin: 5px 0;
+        }
+
+        .form-title h2 {
+            font-size: 20px;
+            margin: 5px 0;
+        }
+
+        .section {
+            border: 1px solid #d0d0d0;
+            margin: 5px 0;
+            background: #dfe9f6;
+        }
+
+        .section-header {
+            background: #dfe9f6;
+            border-bottom: 1px solid #bcbcbc;
+            padding: 5px 10px;
+            font-weight: bold;
+            font-size: 11px;
+        }
+
+        .section-body {
+            padding: 10px;
+            background: #dfe9f6;
+        }
+
+        .form-row {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+        }
+
+        .form-label {
+            font-size: 11px;
+            margin-right: 5px;
+        }
+
+        .form-input {
+            border: 1px solid #b5b8c8;
+            padding: 3px 5px;
+            font-size: 11px;
+        }
+
+        .form-input:read-only {
+            background: #f5f5f5;
+        }
+
+        .form-select {
+            border: 1px solid #b5b8c8;
+            padding: 3px;
+            font-size: 11px;
+        }
+
+        table.form-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table.form-table td {
+            padding: 5px;
+            vertical-align: top;
+        }
+
+        .calc-table {
+            width: 100%;
+        }
+
+        .calc-row {
+            display: flex;
+            margin: 4px 0;
+            align-items: center;
+        }
+
+        .calc-label {
+            flex: 1;
+            padding-right: 10px;
+        }
+
+        .calc-input {
+            width: 195px;
+            text-align: right;
+            border: 1px solid #b5b8c8;
+            padding: 3px 5px;
+            font-size: 11px;
+        }
+
+        .calc-input:read-only {
+            background: #f5f5f5;
+        }
+
+        .amount-header {
+            text-align: right;
+            margin-bottom: 5px;
+            margin-right: 90px;
+        }
+
+        .grid-container {
+            margin: 10px 0;
+        }
+
+        .grid-header {
+            display: flex;
+            background: #f0f0f0;
+            border: 1px solid #d0d0d0;
+            font-weight: bold;
+            font-size: 11px;
+        }
+
+        .grid-cell {
+            padding: 5px;
+            border-right: 1px solid #d0d0d0;
+            text-align: center;
+        }
+
+        .grid-body {
+            min-height: 60px;
+            border: 1px solid #d0d0d0;
+            border-top: none;
+        }
+
+        .grid-row {
+            display: flex;
+            border-bottom: 1px solid #d0d0d0;
+        }
+
+        .grid-row:last-child {
+            border-bottom: none;
+        }
+
+        .grid-input {
+            width: 100%;
+            border: none;
+            padding: 5px;
+            font-size: 11px;
+            text-align: center;
+        }
+
+        .grid-input:focus {
+            outline: 1px solid #4a90e2;
+        }
+
+        .action-buttons {
+            text-align: right;
+            margin: 10px 0;
+        }
+
+        .btn {
+            padding: 5px 12px;
+            margin: 0 5px;
+            border: 1px solid #bcbcbc;
+            background: linear-gradient(to bottom, #fff 0%, #e6e6e6 100%);
+            cursor: pointer;
+            font-size: 11px;
+        }
+
+        .btn:hover {
+            background: linear-gradient(to bottom, #f0f0f0 0%, #d0d0d0 100%);
+        }
+
+        .btn-icon {
+            margin-right: 5px;
+        }
+
+        .address-grid {
+            display: grid;
+            grid-template-columns: auto auto auto auto auto auto;
+            gap: 5px;
+            align-items: center;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .radio-label {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            font-size: 11px;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <!-- Header -->
+        <div class="form-header">
+            फाराम-आयकर-डे-०६-०२-०३-६४
+        </div>
+
+        <!-- Title Section -->
+        <div class="form-title">
+            <h3>अनुसूची - २</h3>
+            <h2>अनुमानित करको विवरण</h2>
+            <p>(नियम ३४ संग सम्बधित)</p>
+        </div>
+
+        <!-- Submission Number -->
+        <div class="form-row">
+            <label class="form-label" style="width: 150px;">सब्मिशन नं:</label>
+            <div id="submissionNoDisplay" style="font-weight: bold;">820077331564</div>
+        </div>
+
+        <div class="form-row">
+            <label class="form-label" style="width: 180px;">आन्तरिक राजस्व कार्यालयको नाम</label>
+            <div style="font-weight: bold;">आन्तरिक राजस्व कार्यालय भरतपुर</div>
+            <label class="form-label" style="width: 170px; margin-left: 50px;">अनुमानित करको प्रकार *:</label>
+            <select class="form-select" style="width: 270px;">
+                <option>---छान्नुहोस्.---</option>
+                <option value="IN">Estimated Tax Return (IN)</option>
+                <option value="IR">Revised Estimated Tax Return (IR)</option>
+            </select>
+        </div>
+
+        <!-- Section 1: Taxpayer Details -->
+        <div class="section">
+            <div class="section-header">१ करदाता सम्बन्धी विवरण</div>
+            <div class="section-body">
+                <table class="form-table">
+                    <tr>
+                        <td colspan="3">
+                            <label class="form-label" style="width: 80px; display: inline-block;">स्था . ले . नं . :</label>
+                            <input type="text" class="form-input" id="panNoInput" style="width: 79px;" maxlength="9" readonly>
+                        </td>
+                        <td colspan="3">
+                            <label class="form-label" style="width: 100px; display: inline-block; margin-left: 10px;">खाताको किसिम:</label>
+                            <input type="text" class="form-input" style="width: 45px;" maxlength="2" readonly>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="6">
+                            <label class="form-label" style="width: 80px; display: inline-block;">नाम :</label>
+                            <input type="text" id="companyName" class="form-input" style="width: 635px;" value="Company Name Pvt. Ltd." readonly>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label class="form-label">ठेगाना</label></td>
+                        <td><label class="form-label">घर नं .</label></td>
+                        <td><label class="form-label">वार्ड नं .</label></td>
+                        <td><label class="form-label">गांउ / टोल र बाटोको नाम</label></td>
+                        <td>
+                            <div class="radio-group">
+                                <div>
+                                    <div class="radio-label"><input type="radio" checked disabled> म. न. पा.</div>
+                                    <div class="radio-label"><input type="radio" disabled> न. पा.</div>
+                                </div>
+                                <div>
+                                    <div class="radio-label"><input type="radio" disabled> उ. म. न. पा.</div>
+                                    <div class="radio-label"><input type="radio" disabled> गा. पा.</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td><label class="form-label">जिल्ला</label></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <input type="text" class="form-input" style="width: 50px; margin-left: 90px;" readonly>
+                        </td>
+                        <td>
+                            <input type="text" class="form-input" style="width: 50px;" readonly>
+                        </td>
+                        <td>
+                            <input type="text" class="form-input" style="width: 140px;" readonly>
+                        </td>
+                        <td>
+                            <input type="text" class="form-input" style="width: 200px;" readonly>
+                        </td>
+                        <td>
+                            <input type="text" class="form-input" style="width: 100px;" readonly>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <label class="form-label" style="width: 60px; display: inline-block;">फोन :</label>
+                            <input type="text" class="form-input" style="width: 85px;" readonly>
+                        </td>
+                        <td colspan="2">
+                            <label class="form-label" style="width: 62px; display: inline-block;">मोबाइल :</label>
+                            <input type="text" class="form-input" style="width: 140px;" readonly>
+                        </td>
+                        <td colspan="2">
+                            <label class="form-label" style="width: 60px; display: inline-block;">इमेल :</label>
+                            <input type="text" class="form-input" style="width: 275px;" readonly>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <label class="form-label" style="width: 60px; display: inline-block; margin-left: 5px;">आय बर्ष *:</label>
+                            <select class="form-select" style="width: 150px;">
+                                <option>---छान्नुहोस्.---</option>
+                                <option selected>2082.083</option>
+                            </select>
+                        </td>
+                        <td colspan="4">
+                            <label class="form-label" style="margin-left: 4px;">( भर्ने उदाहरण २०६२.०६३ )</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="6">
+                            <label class="form-label" style="width: 100px; display: inline-block;">करदाताको स्थिति :</label>
+                            <span style="font-weight: bold;">सक्रिय</span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- Section 2: Tax Calculation -->
+        <div class="section">
+            <div class="section-header">२ अनुमानित करको गणना</div>
+            <div class="section-body">
+                <div class="amount-header">रू</div>
+                <div class="calc-table">
+                    <div class="calc-row">
+                        <span style="margin-right: 20px;">१</span>
+                        <label class="calc-label">चालु आ.व. मा व्यवसाय वा लगानीबाट प्राप्त हुने अनुमानित मुनाफा वा लाभ</label>
+                        <input type="text" id="row1" class="calc-input" maxlength="18" oninput="calculateTax()">
+                    </div>
+                    <div class="calc-row">
+                        <span style="margin-right: 20px;">२</span>
+                        <label class="calc-label">कट्टी हुने रकम</label>
+                        <input type="text" id="row2" class="calc-input" maxlength="18" oninput="calculateTax()">
+                    </div>
+                    <div class="calc-row">
+                        <span style="margin-right: 20px;">३</span>
+                        <label class="calc-label">आयकर ऐन २०५८ को दफा ११ तथा ६४ बमोजिमको कर छुट हुने रकम</label>
+                        <input type="text" id="row3" class="calc-input" maxlength="18" oninput="calculateTax()">
+                    </div>
+                    <div class="calc-row">
+                        <span style="margin-right: 20px;">४</span>
+                        <label class="calc-label">आय वा नोक्सानी &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;row 1 - row(2+3)</label>
+                        <input type="text" id="row4" class="calc-input" value="0" readonly>
+                    </div>
+                    <div class="calc-row">
+                        <span style="margin-right: 20px;">५</span>
+                        <label class="calc-label">अन्य व्यवसाय वा लगानीको आय</label>
+                        <input type="text" id="row5" class="calc-input" maxlength="18" oninput="calculateTax()">
+                    </div>
+                    <div class="calc-row">
+                        <span style="margin-right: 20px;">६</span>
+                        <label class="calc-label">निर्धारण योग्य आय  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;row 4 + row5</label>
+                        <input type="text" id="row6" class="calc-input" value="0" readonly>
+                    </div>
+                    <div class="calc-row">
+                        <span style="margin-right: 20px;">७</span>
+                        <label class="calc-label">कर छुट भएको संस्थालाई दिएको चन्दा</label>
+                        <input type="text" id="row7" class="calc-input" maxlength="18" oninput="calculateTax()">
+                    </div>
+                    <div class="calc-row">
+                        <span style="margin-right: 20px;">८</span>
+                        <label class="calc-label">अवकाश योगदान</label>
+                        <input type="text" id="row8" class="calc-input" maxlength="18" oninput="calculateTax()">
+                    </div>
+                    <div class="calc-row">
+                        <span style="margin-right: 20px;">९</span>
+                        <label class="calc-label">करयोग्य आय  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;row 6 - row(7+8)</label>
+                        <input type="text" id="row9" class="calc-input" value="0" readonly>
+                    </div>
+                    <div class="calc-row">
+                        <span style="margin-right: 15px;">१०</span>
+                        <label class="calc-label">उपरोक्त बमोजिमको करयोग्य आयमा आयकर ऐन २०५८ को अनुसुचि १ बमोजिम लाग्ने कर</label>
+                        <input type="text" class="calc-input" maxlength="18">
+                    </div>
+                    <div class="calc-row">
+                        <span style="margin-right: 15px;">११</span>
+                        <label class="calc-label">स्रोतमा कट्टि भएको रकम</label>
+                        <input type="text" class="calc-input" maxlength="18">
+                    </div>
+                    <div class="calc-row">
+                        <span style="margin-right: 15px;">१२</span>
+                        <label class="calc-label">किस्ता रकम</label>
+                        <input type="text" class="calc-input" maxlength="18">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: Foreign Tax -->
+        <div class="section">
+            <div class="section-header">३ अनुमानित विदेशी कर</div>
+            <div class="section-body">
+                <div class="amount-header">रू</div>
+                <div class="calc-table">
+                    <div class="calc-row">
+                        <span style="margin-right: 25px;">१</span>
+                        <label class="calc-label">चालु आयबर्षमा विदेशी स्रोतको आय भएमा विदेशमा तिरेको वा तिर्नु पर्ने अनुमानित आयकर रकम</label>
+                        <input type="text" class="calc-input" maxlength="18">
+                    </div>
+                    <div class="calc-row">
+                        <span style="margin-right: 20px;">२</span>
+                        <label class="calc-label">गैर बासिन्दा व्यक्तिको नेपाल स्थित स्थायी संस्थापनले चालु आयबर्षमा विदेश पठाउने आय</label>
+                        <input type="text" class="calc-input" maxlength="18">
+                    </div>
+                    <div class="calc-row">
+                        <span style="margin-right: 20px;">३</span>
+                        <label class="calc-label">विदेश पठाउने आयमा लाग्ने कर</label>
+                        <input type="text" class="calc-input" maxlength="18">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 4: Tax Payment Details -->
+        <div class="section">
+            <div class="section-header">४ कर दाखिला विवरण</div>
+            <div class="section-body">
+                <!-- Column Headers -->
+                <div style="display: flex; text-align: center; margin-bottom: 5px;">
+                    <div style="width: 50px;"></div>
+                    <div style="width: 110px;">१</div>
+                    <div style="width: 110px;">२</div>
+                    <div style="width: 120px;">३</div>
+                    <div style="width: 300px;">४</div>
+                    <div style="width: 100px;">५</div>
+                    <div style="width: 100px;">६</div>
+                </div>
+                
+                <!-- Grid -->
+                <div style="margin-bottom: 10px;">
+                    <button class="btn" type="button" onclick="addPaymentRow()">
+                        <span class="btn-icon">+</span> Add
+                    </button>
+                </div>
+                <div class="grid-header">
+                    <div class="grid-cell" style="width: 50px;">क्र. स.</div>
+                    <div class="grid-cell" style="width: 300px;">राजस्व खाता नं</div>
+                    <div class="grid-cell" style="width: 110px;">भुक्तानीको किसिम</div>
+                    <div class="grid-cell" style="width: 120px;">भौचर / रसिद नं .</div>
+                    <div class="grid-cell" style="width: 300px;">बैंकको नाम</div>
+                    <div class="grid-cell" style="width: 100px;">दाखीला मिति</div>
+                    <div class="grid-cell" style="width: 100px; border-right: none;">दाखीला रकम</div>
+                </div>
+                <div class="grid-body" id="paymentGridBody"></div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <button class="btn">
+                <span class="btn-icon">💾</span> Save
+            </button>
+            <button class="btn">
+                <span class="btn-icon">🗑️</span> Delete
+            </button>
+            <button class="btn">
+                <span class="btn-icon">✓</span> Submit
+            </button>
+            <button class="btn">
+                <span class="btn-icon">✗</span> Cancel
+            </button>
+            <button class="btn">
+                <span class="btn-icon">🖨️</span> Print
+            </button>
+        </div>
+    </div>
+
+    <script>
+        let paymentRowCounter = 0;
+
+        // Calculate tax values
+        function calculateTax() {
+            // Get values (convert to number, default to 0 if empty)
+            const row1 = parseFloat(document.getElementById('row1').value) || 0;
+            const row2 = parseFloat(document.getElementById('row2').value) || 0;
+            const row3 = parseFloat(document.getElementById('row3').value) || 0;
+            const row5 = parseFloat(document.getElementById('row5').value) || 0;
+            const row7 = parseFloat(document.getElementById('row7').value) || 0;
+            const row8 = parseFloat(document.getElementById('row8').value) || 0;
+
+            // Calculate row 4: row 1 - row(2+3)
+            const row4 = row1 - (row2 + row3);
+            document.getElementById('row4').value = row4.toFixed(2);
+
+            // Calculate row 6: row 4 + row5
+            const row6 = row4 + row5;
+            document.getElementById('row6').value = row6.toFixed(2);
+
+            // Calculate row 9: row 6 - row(7+8)
+            const row9 = row6 - (row7 + row8);
+            document.getElementById('row9').value = row9.toFixed(2);
+        }
+
+        // Add payment row to grid
+        function addPaymentRow() {
+            paymentRowCounter++;
+            const gridBody = document.getElementById('paymentGridBody');
+            
+            const row = document.createElement('div');
+            row.className = 'grid-row';
+            row.innerHTML = `
+                <div class="grid-cell" style="width: 50px;">
+                    <input type="text" class="grid-input" value="${paymentRowCounter}" readonly>
+                </div>
+                <div class="grid-cell" style="width: 300px;">
+                    <input type="text" class="grid-input" placeholder="">
+                </div>
+                <div class="grid-cell" style="width: 110px;">
+                    <select class="grid-input" style="text-align: left;">
+                        <option value="">---छान्नुहोस्---</option>
+                        <option value="cash">Cash</option>
+                        <option value="bank">Bank</option>
+                        <option value="cheque">Cheque</option>
+                        <option value="draft">Draft</option>
+                    </select>
+                </div>
+                <div class="grid-cell" style="width: 120px;">
+                    <input type="text" class="grid-input" placeholder="">
+                </div>
+                <div class="grid-cell" style="width: 300px;">
+                    <select class="grid-input" style="text-align: left;">
+                        <option value="">---छान्नुहोस्---</option>
+                        <option value="Nepal Rastra Bank">Nepal Rastra Bank</option>
+                        <option value="Nepal Bank Limited">Nepal Bank Limited</option>
+                        <option value="Rastriya Banijya Bank">Rastriya Banijya Bank</option>
+                        <option value="Nepal Bangladesh Bank">Nepal Bangladesh Bank</option>
+                        <option value="Everest Bank Limited">Everest Bank Limited</option>
+                        <option value="Bank of Kathmandu">Bank of Kathmandu</option>
+                        <option value="Global IME Bank">Global IME Bank</option>
+                        <option value="Agricultural Development Bank">Agricultural Development Bank</option>
+                        <option value="Century Commercial Bank">Century Commercial Bank</option>
+                        <option value="Nepal Investment Bank">Nepal Investment Bank</option>
+                        <option value="NIC Asia Bank">NIC Asia Bank</option>
+                        <option value="SANIMA BANK">SANIMA BANK</option>
+                        <option value="NMB BANK">NMB BANK</option>
+                        <option value="Prabhu Bank">Prabhu Bank</option>
+                        <option value="Nepal Credit and Commerce Bank Limited">Nepal Credit and Commerce Bank Limited</option>
+                        <option value="Civil Bank Limited">Civil Bank Limited</option>
+                        <option value="Nabil Bank Limited">Nabil Bank Limited</option>
+                        <option value="Machhapuchhre Bank Limited">Machhapuchhre Bank Limited</option>
+                        <option value="Siddhartha Bank Limited">Siddhartha Bank Limited</option>
+                        <option value="Mega Bank Nepal Ltd.">Mega Bank Nepal Ltd.</option>
+                        <option value="Sunrise Bank Ltd.">Sunrise Bank Ltd.</option>
+                        <option value="KUMARI BANK LTD.">KUMARI BANK LTD.</option>
+                        <option value="Himalayan Bank Limited">Himalayan Bank Limited</option>
+                        <option value="Standard Chartered Bank Nepal Limited">Standard Chartered Bank Nepal Limited</option>
+                        <option value="Nepal SBI Bank Limited">Nepal SBI Bank Limited</option>
+                    </select>
+                </div>
+                <div class="grid-cell" style="width: 100px;">
+                    <input type="text" class="grid-input" placeholder="">
+                </div>
+                <div class="grid-cell" style="width: 100px; border-right: none;">
+                    <input type="number" class="grid-input" placeholder="" step="0.01">
+                </div>
+            `;
+            
+            gridBody.appendChild(row);
+        }
+
+        // Get submission number and other details from URL parameters
+        window.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const submissionNo = urlParams.get('submissionNo');
+            const panNo = urlParams.get('panNo');
+            
+            if (submissionNo) {
+                document.getElementById('submissionNoDisplay').textContent = submissionNo;
+            }
+            if (panNo) {
+                document.getElementById('panNoInput').value = panNo;
+            }
+        });
+    </script>
+</body>
+</html>

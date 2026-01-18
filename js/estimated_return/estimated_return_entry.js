@@ -69,8 +69,12 @@ function registerEstimatedReturn() {
         return;
     }
 
+    // Generate submission number (timestamp + random)
+    const submissionNo = Date.now().toString() + Math.floor(Math.random() * 10000).toString().padStart(4, '0');
+    
     // Store data in localStorage
     const registrationData = {
+        submissionNo: submissionNo,
         username: username,
         password: password,
         panNo: panNo,
@@ -80,13 +84,12 @@ function registerEstimatedReturn() {
         registrationDate: new Date().toISOString()
     };
 
-    localStorage.setItem('estimated_return_registration', JSON.stringify(registrationData));
+    localStorage.setItem('estimated_return_registration_' + submissionNo, JSON.stringify(registrationData));
 
-    // Success message
-    alert('दर्ता सफल भयो!\nRegistration Successful!\n\nUsername: ' + username + '\nPAN: ' + panNo + '\nFiscal Year: ' + fiscalYear);
-
-    // Reset form
-    resetForm();
+    // Redirect to success page with data
+    window.location.href = 'estimated_return_success.html?submissionNo=' + submissionNo + 
+                           '&username=' + encodeURIComponent(username) + 
+                           '&panNo=' + encodeURIComponent(panNo);
 }
 
 function resetForm() {
