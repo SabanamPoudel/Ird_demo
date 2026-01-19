@@ -22,18 +22,19 @@ function loginEstimatedReturn() {
         return;
     }
 
-    // Demo credentials for testing
-    const validSubmission = '123456789012';
-    const validUsername = 'demo';
-    const validPassword = 'demo123';
-
-    if (submissionNo === validSubmission && username === validUsername && password === validPassword) {
-        alert('सफलतापूर्वक लगइन भयो!\nLogin Successful!\n\nEstimated Return Entry page will be loaded.');
-        // Redirect to estimated return entry page when available
-        // window.location.href = 'estimated_return_entry.html';
-    } else {
-        alert('अवैध सब्मिशन नं., प्रयोगकर्ताको नाम वा पासवर्ड।\nInvalid Submission Number, Username or Password.\n\nDemo Credentials:\nSubmission No: 123456789012\nUsername: demo\nPassword: demo123');
+    // Allow any submission number - redirect to form
+    // Get PAN number from localStorage if available, otherwise use submission number
+    const storedDataKey = 'estimated_return_registration_' + submissionNo;
+    const storedData = localStorage.getItem(storedDataKey);
+    let panNo = submissionNo; // Default to submission number
+    
+    if (storedData) {
+        const registrationData = JSON.parse(storedData);
+        panNo = registrationData.panNo || submissionNo;
     }
+    
+    // Redirect to form with iframe
+    window.location.href = `estimated_return_main.html?submissionNo=${submissionNo}&username=${username}&panNo=${panNo}`;
 }
 
 // Add Enter key support
