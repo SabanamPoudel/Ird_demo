@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ट्रान्स्याकशन विवरण - E-TDS</title>
+    <link rel="stylesheet" href="../../css/e_tds/etds_transaction_entry.css">
+    
+    <style>
+        /* Disclaimer Banner */
+        .disclaimer-banner {
+            background-color: #fff3cd;
+            border: 2px solid #ffc107;
+            color: #856404;
+            padding: 15px 20px;
+            margin: 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            line-height: 1.6;
+            text-align: left;
+        }
+
+        @media screen and (max-width: 768px) {
+            .disclaimer-banner {
+                font-size: 12px;
+                padding: 12px 15px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .disclaimer-banner {
+                font-size: 11px;
+                padding: 10px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="transaction-container">
+        <div class="transaction-panel">
+            <!-- Header -->
+            <div class="panel-header">
+                <h2 class="header-text">ट्रान्स्याकशन विवरण</h2>
+            </div>
+
+            <!-- Panel Body -->
+            <div class="panel-body">
+                <!-- Top Info Section -->
+                <div class="info-container">
+                    <div class="info-field">
+                        <label class="info-label">सब्मिशन नं.:</label>
+                        <span class="info-value" id="displaySubmissionNo"></span>
+                    </div>
+                    <div class="info-field">
+                        <label class="info-label">विथहोल्डरको स्थायी लेखा नं.:</label>
+                        <span class="info-value" id="displayWithholderPan"></span>
+                    </div>
+                    <div class="info-field">
+                        <label class="info-label">विथहोल्डरको नाम:</label>
+                        <span class="info-value" id="displayWithholderName"></span>
+                    </div>
+                    <div class="info-field">
+                        <label class="info-label">टि. डि. एस कलेक्सन अन्तराल:</label>
+                        <span class="info-value" id="displayDateFrom"></span>
+                        <span>देखि</span>
+                        <span class="info-value" id="displayDateTo"></span>
+                        <span class="info-value" id="displayDateType"></span>
+                        <span>सम्म</span>
+                    </div>
+                </div>
+
+                <!-- Action Buttons Section -->
+                <div class="action-panel">
+                    <button type="button" id="btnPrintPreview" class="action-btn" disabled>Print Preview</button>
+                    <button type="button" id="btnPrintEnglish" class="action-btn" disabled>Print Preview in English</button>
+                    <button type="button" id="btnDownloadSample" class="action-btn">Download Sample</button>
+                    <div class="file-actions">
+                        <input type="file" id="fileLoadXML" accept=".xml" style="display: none;">
+                        <a href="#" id="linkLoadXML" class="link-action">Load XML file</a>
+                        <input type="file" id="fileLoadExcel" accept=".xls,.xlsx" style="display: none;">
+                        <a href="#" id="linkLoadExcel" class="link-action">Load EXCEL file</a>
+                    </div>
+                    <div class="save-actions">
+                        <a href="#" id="linkSaveXML" class="link-action">Save Records to XML file</a>
+                        <a href="#" id="linkSaveExcel" class="link-action">Save Records to EXCEL file</a>
+                    </div>
+                </div>
+
+                <!-- Note -->
+                <div class="note-section">
+                    <p class="note-text">Note:- First row of excel is reserved for header. So it will be ignored during upload</p>
+                </div>
+
+                <!-- Form Section -->
+                <div class="form-panel">
+                    <!-- Single Row with Labels and Inputs -->
+                    <div class="form-single-row">
+                        <div class="form-field-group">
+                            <label>स्थायी लेखा नं./पान नं.</label>
+                            <input type="text" id="txtPan" class="form-input-small" maxlength="9" placeholder="">
+                        </div>
+                        <div class="form-field-group">
+                            <label>नाम</label>
+                            <input type="text" id="txtName" class="form-input-small" placeholder="">
+                        </div>
+                        <div class="form-field-group">
+                            <label>भुक्तानी मिति:</label>
+                            <div class="date-input-wrapper">
+                                <div class="date-checkboxes-inline">
+                                    <input type="checkbox" id="chkBS" checked>
+                                    <label for="chkBS">वि.सं.</label>
+                                    <input type="checkbox" id="chkAD">
+                                    <label for="chkAD">ई.सं.</label>
+                                </div>
+                                <input type="text" id="txtPayDate" class="form-input-small" maxlength="10" placeholder="YYYY.MM.DD">
+                            </div>
+                        </div>
+                        <div class="form-field-group">
+                            <label>भुक्तानी रकम</label>
+                            <input type="text" id="txtPayAmount" class="form-input-small" placeholder="">
+                        </div>
+                        <div class="form-field-group">
+                            <label>टि.डि.एस रकम</label>
+                            <input type="text" id="txtTDSAmount" class="form-input-small" placeholder="">
+                        </div>
+                        <div class="form-field-group">
+                            <label>टि.डि.एस किसिम</label>
+                            <select id="selTDSType" class="form-select-small">
+                                <option value="">----Select TDS Type----</option>
+                                <option value="11111">(19) 11111 Individual or Proprietorship Firm</option>
+                                <option value="11112">(20) 11112 Remuneration Income Tax</option>
+                                <option value="11113">(21) 11113 Capital Gain Tax – Individual</option>
+                                <option value="11115">(35) 11115 Windfall Gain Tax For Individual</option>
+                                <option value="11121">(22) 11121 Government Institutions</option>
+                                <option value="11122">(23) 11122 Public Limited</option>
+                                <option value="11123">(24) 11123 Private Limited</option>
+                                <option value="11124">(25) 11124 Other Entities</option>
+                                <option value="11125">(26) 11125 Capital Gain Tax – Entity</option>
+                                <option value="11126">(36) 11126 Windfall Gain Tax For Entity</option>
+                                <option value="11131">(27) 11131 Rental Tax</option>
+                                <option value="11132">(28) 11132 Interest Tax</option>
+                                <option value="11133">(29) 11133 Dividend Tax</option>
+                                <option value="11134">(30) 11134 Tax on Other Investment Income</option>
+                                <option value="11135">(31) 11135 Windfall Gain Tax</option>
+                                <option value="11139">(34) 11139 Other Income Tax</option>
+                                <option value="11211">(33) 11211 Social Security Tax based on Remuneration</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Search Section -->
+                    <div class="search-section">
+                        <div class="search-group">
+                            <label>स्थायी लेखा नं./पान नं.:</label>
+                            <input type="text" id="txtSearchPan" class="form-input" maxlength="9">
+                        </div>
+                        <div class="search-group">
+                            <label>नाम खोज्ने आधार:</label>
+                            <input type="radio" id="rdEnglish" name="searchLang" checked>
+                            <label for="rdEnglish">English</label>
+                            <input type="radio" id="rdNepali" name="searchLang">
+                            <label for="rdNepali">Nepali</label>
+                        </div>
+                        <div class="search-group">
+                            <label>नाम:</label>
+                            <input type="text" id="txtSearchName" class="form-input">
+                        </div>
+                        <button type="button" id="btnSearch" class="btn-search">🔍 Search</button>
+                    </div>
+
+                    <!-- Control Buttons -->
+                    <div class="control-buttons">
+                        <button type="button" id="btnDeleteAll" class="control-btn">Delete All</button>
+                        <button type="button" id="btnAdd" class="control-btn">Add</button>
+                        <button type="button" id="btnReset" class="control-btn">Reset</button>
+                        <button type="button" id="btnSave" class="control-btn btn-save">Save</button>
+                        <button type="button" id="btnSubmit" class="control-btn btn-submit">Submit</button>
+                    </div>
+                </div>
+
+                <!-- Transaction Grid Section -->
+                <div class="grid-panel">
+                    <div class="grid-header">
+                        <h3 class="grid-title">ट्रान्स्याकशनहरु</h3>
+                    </div>
+                    <div class="grid-body">
+                        <table class="transaction-table" id="transactionTable">
+                            <thead>
+                                <tr>
+                                    <th>सि. न.</th>
+                                    <th>स्थायी लेखा नं.</th>
+                                    <th>नाम</th>
+                                    <th>दाखिला मिति</th>
+                                    <th>भुक्तानी रकम</th>
+                                    <th>टि.डि.एस रकम</th>
+                                    <th>टि.डि.एस किसिम</th>
+                                    <th>&nbsp;</th>
+                                    <th>&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tbody id="transactionTableBody">
+                                <!-- Transactions will be added here dynamically -->
+                            </tbody>
+                        </table>
+                        <div class="grid-toolbar">
+                            <button type="button" id="btnPrevious" class="toolbar-btn"><b>←</b> Previous</button>
+                            <button type="button" id="btnNext" class="toolbar-btn">Next <b>→</b></button>
+                            <button type="button" id="btnRefresh" class="toolbar-btn"><span style="color: #00ff00;">🔄</span> Refresh</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Summary Section -->
+                <div class="summary-section">
+                    <div class="summary-item">
+                        <label class="summary-label">जम्मा भुक्तानी रकम:</label>
+                        <span class="summary-value" id="totalPayAmount">0.00</span>
+                    </div>
+                    <div class="summary-item">
+                        <label class="summary-label">जम्मा टि.डि.एस रकम:</label>
+                        <span class="summary-value" id="totalTDSAmount">0.00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Submit Confirmation Modal -->
+    <div id="submitModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Confirm Action</h3>
+                <button type="button" class="modal-close" id="btnCloseModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-icon">
+                    <span class="question-icon">?</span>
+                </div>
+                <p class="modal-message">एकपटक Submit गरिसकेपछि अर्को पटक विवरण फेरि परिवर्तन गर्न पाइने छैन। के तपाईं Submit गर्न चाहनुहुन्छ ?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnConfirmSubmit" class="modal-btn modal-btn-yes">Yes</button>
+                <button type="button" id="btnCancelSubmit" class="modal-btn modal-btn-no">No</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Submission Successful</h3>
+                <button type="button" class="modal-close" id="btnCloseSuccessModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-icon">
+                    <span class="success-icon">✓</span>
+                </div>
+                <div class="success-message-container">
+                    <p class="modal-message">Submission Successful</p>
+                    <p class="submission-number-text">Your Submission Number: <strong id="displaySubmissionNumber"></strong></p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnCloseSuccess" class="modal-btn modal-btn-ok">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Save Success Modal -->
+    <div id="saveSuccessModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>SUCCESS</h3>
+                <button type="button" class="modal-close" id="btnCloseSaveModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-icon">
+                    <span class="info-icon">i</span>
+                </div>
+                <div class="success-message-container">
+                    <p class="modal-message">Successfully Saved</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnCloseSave" class="modal-btn modal-btn-ok">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../js/xlsx.full.min.js"></script>
+    <script src="../../js/e_tds/etds_transaction_entry.js"></script>
+</body>
+</html>

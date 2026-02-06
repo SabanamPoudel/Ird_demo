@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>सब्मिशन नम्बर देखाउने फाराम</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #dfe9f6;
+            padding: 0;
+        }
+
+        .form-panel {
+            text-align: center;
+            width: 960px;
+            margin: 0 auto;
+        }
+
+        .form-body {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .message-container {
+            text-align: center;
+            margin-top: 100px;
+            margin-bottom: 50px;
+        }
+
+        .success-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .success-subtitle {
+            font-size: 17px;
+            color: #555;
+        }
+
+        .fields-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 25px;
+            margin-bottom: 35px;
+        }
+
+        .field-item {
+            display: inline-flex;
+            align-items: center;
+            margin: 0;
+        }
+
+        .field-item label {
+            margin-right: 5px;
+            font-size: 14px;
+            color: #333;
+            white-space: nowrap;
+        }
+
+        .field-item .value {
+            font-weight: bold;
+            color: #000;
+        }
+
+        .field-submission {
+            width: 305px;
+            margin-left: 100px;
+        }
+
+        .field-submission label {
+            width: 150px;
+            display: inline-block;
+            text-align: left;
+        }
+
+        .field-username {
+            width: 245px;
+            margin-left: 0;
+        }
+
+        .field-username label {
+            width: 140px;
+            display: inline-block;
+            text-align: left;
+        }
+
+        .field-pan {
+            width: 205px;
+            margin-left: 0;
+        }
+
+        .field-pan label {
+            width: 100px;
+            display: inline-block;
+            text-align: left;
+        }
+
+        .button-container {
+            text-align: left;
+            margin-left: 15px;
+            margin-top: 10px;
+        }
+
+        .btn-proceed {
+            background: #f0f0f0;
+            border: 1px solid #bcbcbc;
+            padding: 5px 12px;
+            font-size: 13px;
+            cursor: pointer;
+            border-radius: 3px;
+            color: #333;
+        }
+
+        .btn-proceed:hover {
+            background: #e8e8e8;
+            border-color: #a0a0a0;
+        }
+
+        .btn-proceed:active {
+            background: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-panel">
+        <div class="form-body">
+            <div class="message-container">
+                <div class="success-title">तपाई सफलतापूर्वक दर्ता हुनुभयो!!! </div>
+                <div class="success-subtitle">कृपया तपाईको सब्मिशन नं.,  प्रयोगकर्ताको नाम   र  पासवर्ड टिपिराख्नुहोस् । </div>
+            </div>
+
+            <div class="fields-container">
+                <div class="field-item field-submission">
+                    <label> तपाईको सब्मिशन नं.:</label>
+                    <div class="value" id="submissionNo">820077331564</div>
+                </div>
+                <div class="field-item field-username">
+                    <label>प्रयोगकर्ताको नाम   :</label>
+                    <div class="value" id="username">610015263</div>
+                </div>
+                <div class="field-item field-pan">
+                    <label>स्था . ले . नं . :</label>
+                    <div class="value" id="panNo">610015263</div>
+                </div>
+            </div>
+
+            <div class="button-container">
+                <button type="button" class="btn-proceed" onclick="proceedToLogin()">Proceed &gt;</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get data from URL parameters
+        window.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const submissionNo = urlParams.get('submissionNo');
+            const username = urlParams.get('username');
+            const panNo = urlParams.get('panNo');
+
+            if (submissionNo) {
+                document.getElementById('submissionNo').textContent = submissionNo;
+            }
+            if (username) {
+                document.getElementById('username').textContent = username;
+            }
+            if (panNo) {
+                document.getElementById('panNo').textContent = panNo;
+            }
+        });
+
+        function proceedToLogin() {
+            // Get submission number and pass it to main page
+            const submissionNo = document.getElementById('submissionNo').textContent;
+            const username = document.getElementById('username').textContent;
+            const panNo = document.getElementById('panNo').textContent;
+            window.location.href = `estimated_return_main.html?submissionNo=${submissionNo}&username=${username}&panNo=${panNo}`;
+        }
+    </script>
+</body>
+</html>

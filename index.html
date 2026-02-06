@@ -1,0 +1,969 @@
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>आन्तरिक राजस्व विभाग - प्रशिक्षण पोर्टल</title>
+    <meta name="description" content="IRD Training Portal - For Educational Purposes Only">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        /* Global Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto Condensed', sans-serif;
+            background-color: #ffffff;
+            color: #333;
+        }
+        
+        /* Disclaimer Banner */
+        .disclaimer-banner {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffe9a6 100%);
+            border: 3px solid #ffc107;
+            border-left: 8px solid #ff6b6b;
+            color: #856404;
+            padding: 12px 20px;
+            margin: 0;
+            font-size: 13px;
+            line-height: 1.5;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 10000;
+        }
+        .disclaimer-banner strong {
+            color: #d32f2f;
+            font-size: 15px;
+            display: inline;
+            margin-bottom: 5px;
+        }
+        
+        /* Modern Header Styles */
+        .header-7 {
+            width: 100%;
+        }
+        
+        .header-7-top {
+            background: #fff;
+            position: relative;
+            padding: 20px 0;
+            width: 100%;
+        }
+        
+        .decorative__img img {
+            width: 100%;
+            height: auto;
+            position: absolute;
+            top: 0;
+            right: 0;
+            opacity: 0.1;
+        }
+        
+        .top__group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .top-logo-box {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .top-logo-box img {
+            width: 80px;
+            height: auto;
+        }
+        
+        .logo-info h3 {
+            margin: 0;
+            font-size: 18px;
+            color: #1e3c72;
+            font-weight: 600;
+        }
+        
+        .logo-info h2 {
+            margin: 5px 0;
+            font-size: 24px;
+            color: #d32f2f;
+            font-weight: 700;
+        }
+        
+        .hidden__cta {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .language__select select, .nice-select {
+            padding: 8px 15px;
+            border: 2px solid #1e3c72;
+            border-radius: 5px;
+            background: #fff;
+            color: #1e3c72;
+            font-weight: 600;
+        }
+        
+        .search__cta .cta__btn {
+            background: #1e3c72;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .marquee-slider {
+            background: #d32f2f;
+            color: white;
+            padding: 10px 20px;
+            width: 100%;
+        }
+        
+        .marquee-slider h2 {
+            display: inline-block;
+            font-size: 16px;
+            font-weight: 700;
+            margin-right: 15px;
+        }
+        
+        .swiper-slide h3 {
+            color: white;
+            font-size: 14px;
+            margin: 0;
+            display: inline-block;
+        }
+        
+        .swiper-slide a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        .swiper-slide a:hover {
+            text-decoration: underline;
+        }
+        
+        .animated__flag {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 20px;
+            background: rgba(255,255,255,0.95);
+            width: 100%;
+        }
+        
+        .flag__img img {
+            width: 60px;
+            height: auto;
+        }
+        
+        .date p {
+            margin: 5px 0;
+            font-size: 13px;
+            color: #333;
+        }
+        
+        /* Bottom Navigation */
+        .header-7-bottom {
+            background: #1e3c72;
+            padding: 0;
+            width: 100%;
+        }
+        
+        .bottom-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+        
+        .header__menu {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .nav__link {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            padding: 10px 0;
+            display: block;
+            transition: all 0.3s;
+        }
+        
+        .nav__link:hover {
+            color: #ffc107;
+        }
+        
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown__menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 250px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 1000;
+            padding: 10px 0;
+        }
+        
+        .dropdown:hover .dropdown__menu {
+            display: block;
+        }
+        
+        .dropdown__link {
+            color: #333;
+            padding: 10px 20px;
+            display: block;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .dropdown__link:hover {
+            background: #f5f5f5;
+            color: #1e3c72;
+        }
+        
+        .social__media {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .social__icon {
+            color: white;
+            font-size: 20px;
+            transition: all 0.3s;
+        }
+        
+        .social__icon:hover {
+            color: #ffc107;
+        }
+        
+        /* Slider Section */
+        .slider-content {
+            max-width: 1400px;
+            margin: 40px auto;
+            padding: 0 20px;
+            background: white;
+        }
+        
+        .grid__card {
+            background: white;
+        }
+        
+        .card__img img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        
+        .card__title {
+            text-align: center;
+            font-size: 28px;
+            color: #1e3c72;
+            font-weight: 700;
+            margin-top: 20px;
+        }
+        
+        .card__title a {
+            color: #1e3c72;
+            text-decoration: none;
+        }
+        
+        /* Service Icons */
+        .service-icon-box {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            min-width: 150px;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .service-icon-box:hover {
+            background: #1e3c72;
+            border-color: #ffc107;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        
+        .service-icon-box:hover .service-icon,
+        .service-icon-box:hover h5 {
+            color: white;
+        }
+        
+        .service-icon {
+            font-size: 40px;
+            color: #1e3c72;
+            margin-bottom: 10px;
+            transition: all 0.3s;
+        }
+        
+        .service-icon-box h5 {
+            color: #333;
+            font-weight: 600;
+            margin: 0;
+            transition: all 0.3s;
+        }
+        
+        .service-icon-box a {
+            text-decoration: none;
+            display: block;
+        }
+        
+        /* Responsive */
+        @media screen and (max-width: 768px) {
+            .disclaimer-banner {
+                font-size: 11px;
+                padding: 10px 12px;
+            }
+            
+            .disclaimer-banner strong {
+                font-size: 13px;
+                display: block;
+                margin-bottom: 5px;
+            }
+            
+            /* Header Responsive */
+            .header-7-top {
+                padding: 15px 0 !important;
+            }
+            
+            .top-logo-box img {
+                width: 50px !important;
+                margin-right: 10px !important;
+            }
+            
+            .logo-info h3 {
+                font-size: 12px !important;
+            }
+            
+            .logo-info h2 {
+                font-size: 14px !important;
+            }
+            
+            /* महत्त्वपूर्ण सूचना box */
+            .col-md-6 > div[style*="background: rgba(255,255,255,0.2)"] {
+                padding: 8px 15px !important;
+                margin: 10px 0 !important;
+            }
+            
+            .col-md-6 > div h4 {
+                font-size: 14px !important;
+            }
+            
+            .col-md-6 > div p {
+                font-size: 11px !important;
+            }
+            
+            /* Flag and date section */
+            .col-md-3:last-child img {
+                width: 40px !important;
+            }
+            
+            .col-md-3:last-child p {
+                font-size: 11px !important;
+            }
+            
+            /* Navigation Menu */
+            .header-navigation {
+                padding: 10px 0 !important;
+            }
+            
+            .navigation-menu {
+                flex-direction: column !important;
+                gap: 5px !important;
+                width: 100%;
+            }
+            
+            .menu-item {
+                width: 100% !important;
+                text-align: left !important;
+            }
+            
+            .menu-item > a {
+                font-size: 13px !important;
+                padding: 10px 15px !important;
+            }
+            
+            .dropdown-menu {
+                position: static !important;
+                width: 100% !important;
+                box-shadow: none !important;
+                border-left: 3px solid #2c5282 !important;
+                margin-left: 15px !important;
+            }
+            
+            .search-language-social {
+                flex-direction: column !important;
+                width: 100% !important;
+                gap: 10px !important;
+                padding: 10px 15px !important;
+            }
+            
+            .search-box input {
+                width: 100% !important;
+                font-size: 13px !important;
+            }
+            
+            .language-selector {
+                font-size: 13px !important;
+            }
+            
+            .social-icons a {
+                font-size: 18px !important;
+            }
+            
+            /* Main Content Banner */
+            .card__title {
+                font-size: 18px !important;
+            }
+            
+            .card__img img {
+                border-radius: 5px !important;
+            }
+            
+            /* Services Section */
+            h3[style*="display: inline-block"] {
+                font-size: 18px !important;
+            }
+            
+            .col-md-8, .col-md-4 {
+                padding: 0 15px !important;
+            }
+            
+            .col-md-8 > div[style*="border: 1px solid"] {
+                padding: 15px !important;
+                margin-bottom: 20px;
+            }
+            
+            .col-md-4 .col-sm-6 {
+                flex: 0 0 50% !important;
+                max-width: 50% !important;
+            }
+            
+            /* Service Icons - 2 per row on mobile */
+            .service-icon-box {
+                padding: 15px 10px !important;
+                min-width: auto !important;
+            }
+            
+            /* Officials Section */
+            .col-md-4 > div[style*="border: 1px solid"] {
+                margin-bottom: 15px !important;
+                padding: 15px !important;
+            }
+            
+            .col-md-4 img {
+                width: 100px !important;
+                height: 120px !important;
+            }
+            
+            .col-md-4 h4 {
+                font-size: 15px !important;
+            }
+            
+            .col-md-4 p {
+                font-size: 12px !important;
+            }
+            
+            /* Footer */
+            .footer-area {
+                padding: 20px 0 !important;
+                font-size: 12px !important;
+            }
+            
+            .footer-area .col-lg-4,
+            .footer-area .col-md-4 {
+                margin-bottom: 15px;
+                text-align: center;
+            }
+        }
+        
+        @media screen and (max-width: 480px) {
+            .disclaimer-banner {
+                font-size: 10px;
+                padding: 8px 10px;
+            }
+            
+            .logo-info h2 {
+                font-size: 13px !important;
+            }
+            
+            /* Stack all service icons to 1 per row on very small screens */
+            .col-md-4 .col-sm-6 {
+                flex: 0 0 100% !important;
+                max-width: 100% !important;
+            }
+            
+            .menu-item > a {
+                font-size: 12px !important;
+                padding: 8px 12px !important;
+            }
+            
+            h3[style*="display: inline-block"] {
+                font-size: 16px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<!-- Disclaimer Banner -->
+<div class="disclaimer-banner">
+    <strong>⚠️ IMPORTANT NOTICE:</strong>
+    This website is provided strictly for training and demonstration purposes only. 
+    It is NOT connected to the official Inland Revenue Department (IRD) of Nepal. 
+    Do not enter any real, sensitive, or confidential taxpayer information. 
+    For official tax filing, please visit the authentic IRD portal.
+</div>
+
+<!--Header Area Start-->
+<header class="header-7" id="header">
+    <!--Header Logo Start-->
+    <div class="header-7-top" style="background: linear-gradient(to right, #264f8b 0%, #264f8b 33%, #2460b9 33%, #2460b9 100%); padding: 20px 0;">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <!-- Left: Nepal Emblem and Text -->
+                <div class="col-md-3">
+                    <div class="top-logo-box">
+                        <a href="index.html">
+                            <img src="https://giwmscdnone.gov.np/static/assets/image/Emblem_of_Nepal.png" alt="Nepal Government" style="width: 80px; float: left; margin-right: 15px;">
+                        </a>
+                        <div class="logo-info" style="color: white; padding-top: 5px;">
+                            <h3 style="margin: 0; font-size: 16px; font-weight: 600; color: white;">नेपाल सरकार</h3>
+                            <h3 style="margin: 0; font-size: 14px; font-weight: 500; color: white;">अर्थ मन्त्रालय</h3>
+                            <h2 style="margin: 5px 0; font-size: 20px; font-weight: 700; color: #fff;">आन्तरिक राजस्व विभाग</h2>
+                            <h3 style="margin: 0; font-size: 13px; font-weight: 400; color: white;">लाज़िम्पाट, काठमाडौं, नेपाल</h3>
+                        </div>
+                        <div style="clear: both;"></div>
+                    </div>
+                </div>
+
+                <!-- Center: Important Notice -->
+                <div class="col-md-6">
+                    <div style="padding: 15px 20px; color: white; text-align: center;">
+                        <h3 style="margin: 0 0 10px 0; font-size: 18px; font-weight: 700; color: white;">महत्त्वपूर्ण सूचना</h3>
+                        <p style="margin: 0; font-size: 13px; line-height: 1.6; color: white;">
+                            यो प्रशिक्षण पोर्टल हो - वास्तविक डाटा प्रविष्ट नगर्नुहोस्<br>
+                            <span style="font-size: 12px; opacity: 0.9; color: white;">This is a training portal - Do not enter real data</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Right: Nepal Flag and Date -->
+                <div class="col-md-3">
+                    <div style="display: flex; align-items: center; justify-content: flex-end; color: white; gap: 15px;">
+                        <img src="https://giwmscdnone.gov.np/static/grapejs/img/Nepal-flag.gif" alt="Nepal Flag" style="width: 60px;">
+                        <div style="text-align: left;">
+                            <p style="margin: 0; font-size: 13px; font-weight: 600;">वि.सं: <span id="nepaliDateBs">२०८२ पौष २४ गते बिहीबार, १२:४७ बजे</span></p>
+                            <p style="margin: 5px 0 0 0; font-size: 12px;">नेपाल संवत: <span>११४६ पोहेलागा षष्ठी - २१</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!--Header Logo Ends-->
+
+    <!--Navigation Menu Start-->
+    <div class="header-navigation" style="background: #f8f9fa; border-bottom: 2px solid #e0e0e0; padding: 15px 0;">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <ul class="header__menu" style="list-style: none; display: flex; gap: 30px; margin: 0; padding: 0; align-items: center;">
+                        <li class="nav__list dropdown" style="position: relative;">
+                            <a href="#" class="nav__link" style="color: #333; text-decoration: none; font-size: 15px; font-weight: 500; display: flex; align-items: center; gap: 5px;">
+                                हाम्रो बारेमा
+                                <i class="fas fa-chevron-down" style="font-size: 12px;"></i>
+                            </a>
+                            <div class="dropdown__menu" style="display: none; position: absolute; top: 100%; left: 0; background: white; min-width: 200px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 1000; padding: 10px 0; margin-top: 10px;">
+                                <ul style="list-style: none; padding: 0; margin: 0;">
+                                    <li><a href="#" style="color: #333; padding: 10px 20px; display: block; text-decoration: none; font-size: 14px;">पृष्ठभूमि</a></li>
+                                    <li><a href="#" style="color: #333; padding: 10px 20px; display: block; text-decoration: none; font-size: 14px;">मिशन | भिजन | उद्देश्यहरू</a></li>
+                                    <li><a href="#" style="color: #333; padding: 10px 20px; display: block; text-decoration: none; font-size: 14px;">संगठन तालिका</a></li>
+                                    <li><a href="#" style="color: #333; padding: 10px 20px; display: block; text-decoration: none; font-size: 14px;">नागरिक बडापत्र</a></li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="nav__list dropdown" style="position: relative;">
+                            <a href="#" class="nav__link" style="color: #333; text-decoration: none; font-size: 15px; font-weight: 500; display: flex; align-items: center; gap: 5px;">
+                                कर कानून
+                                <i class="fas fa-chevron-down" style="font-size: 12px;"></i>
+                            </a>
+                            <div class="dropdown__menu" style="display: none; position: absolute; top: 100%; left: 0; background: white; min-width: 200px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 1000; padding: 10px 0; margin-top: 10px;">
+                                <ul style="list-style: none; padding: 0; margin: 0;">
+                                    <li><a href="#" style="color: #333; padding: 10px 20px; display: block; text-decoration: none; font-size: 14px;">ऐन</a></li>
+                                    <li><a href="#" style="color: #333; padding: 10px 20px; display: block; text-decoration: none; font-size: 14px;">नियम तथा नियमवाली</a></li>
+                                    <li><a href="#" style="color: #333; padding: 10px 20px; display: block; text-decoration: none; font-size: 14px;">निर्देशिका</a></li>
+                                    <li><a href="#" style="color: #333; padding: 10px 20px; display: block; text-decoration: none; font-size: 14px;">कार्यविधि</a></li>
+                                    <li><a href="#" style="color: #333; padding: 10px 20px; display: block; text-decoration: none; font-size: 14px;">फारमहरू</a></li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="nav__list dropdown" style="position: relative;">
+                            <a href="#" class="nav__link" style="color: #333; text-decoration: none; font-size: 15px; font-weight: 500; display: flex; align-items: center; gap: 5px;">
+                                प्रकाशन
+                                <i class="fas fa-chevron-down" style="font-size: 12px;"></i>
+                            </a>
+                            <div class="dropdown__menu" style="display: none; position: absolute; top: 100%; left: 0; background: white; min-width: 200px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 1000; padding: 10px 0; margin-top: 10px;">
+                                <ul style="list-style: none; padding: 0; margin: 0;">
+                                    <li><a href="#" style="color: #333; padding: 10px 20px; display: block; text-decoration: none; font-size: 14px;">बार्षिक प्रतिवेदन</a></li>
+                                    <li><a href="#" style="color: #333; padding: 10px 20px; display: block; text-decoration: none; font-size: 14px;">कर बुलेटिनहरू</a></li>
+                                    <li><a href="#" style="color: #333; padding: 10px 20px; display: block; text-decoration: none; font-size: 14px;">करदाता शिक्षा</a></li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="nav__list dropdown" style="position: relative;">
+                            <a href="#" class="nav__link" style="color: #333; text-decoration: none; font-size: 15px; font-weight: 500; display: flex; align-items: center; gap: 5px;">
+                                सूचना
+                                <i class="fas fa-chevron-down" style="font-size: 12px;"></i>
+                            </a>
+                            <div class="dropdown__menu" style="display: none; position: absolute; top: 100%; left: 0; background: white; min-width: 200px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 1000; padding: 10px 0; margin-top: 10px;">
+                                <ul style="list-style: none; padding: 0; margin: 0;">
+                                    <li><a href="#" style="color: #333; padding: 10px 20px; display: block; text-decoration: none; font-size: 14px;">सूचना संग्रह</a></li>
+                                    <li><a href="#" style="color: #333; padding: 10px 20px; display: block; text-decoration: none; font-size: 14px;">सञ्चार विज्ञप्ति</a></li>
+                                    <li><a href="#" style="color: #333; padding: 10px 20px; display: block; text-decoration: none; font-size: 14px;">फोटो ग्यालरी</a></li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="nav__list">
+                            <a href="#" class="nav__link" style="color: #333; text-decoration: none; font-size: 15px; font-weight: 500;">कार्यालयहरु</a>
+                        </li>
+
+                        <li class="nav__list dropdown" style="position: relative;">
+                            <a href="#" class="nav__link" style="color: #333; text-decoration: none; font-size: 15px; font-weight: 500; display: flex; align-items: center; gap: 5px;">
+                                ई–सर्भिस
+                                <i class="fas fa-chevron-down" style="font-size: 12px;"></i>
+                            </a>
+                            <div class="dropdown__menu" style="display: none; position: absolute; top: 100%; left: 0; background: white; min-width: 200px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 1000; padding: 10px 0; margin-top: 10px;">
+                                <ul style="list-style: none; padding: 0; margin: 0;">
+                                    <li><a href="taxpayer_portal.html" style="color: #333; padding: 10px 20px; display: block; text-decoration: none; font-size: 14px;">करदाता पोर्टल</a></li>
+                                    <li><a href="#" style="color: #333; padding: 10px 20px; display: block; text-decoration: none; font-size: 14px;">PAN नम्बर खोजी</a></li>
+                                    <li><a href="#" style="color: #333; padding: 10px 20px; display: block; text-decoration: none; font-size: 14px;">कर चुक्ता खोजी</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-md-4">
+                    <div style="display: flex; align-items: center; justify-content: flex-end; gap: 15px;">
+                        <!-- Search Box -->
+                        <form action="#" method="get" style="flex: 1; max-width: 300px;">
+                            <div style="position: relative;">
+                                <input type="text" name="q" placeholder="खोज्नुहोस्..." autocomplete="off" style="width: 100%; padding: 8px 40px 8px 15px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px;">
+                                <button type="submit" style="position: absolute; right: 5px; top: 50%; transform: translateY(-50%); background: none; border: none; padding: 5px 10px; cursor: pointer;">
+                                    <i class="fas fa-magnifying-glass" style="color: #666;"></i>
+                                </button>
+                            </div>
+                        </form>
+
+                        <!-- Language Selector -->
+                        <select name="lang" id="language-select" style="padding: 8px 15px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px; font-weight: 600; background: white; cursor: pointer;">
+                            <option value="ne">NEP</option>
+                            <option value="en">ENG</option>
+                        </select>
+
+                        <!-- Social Media Icons -->
+                        <div style="display: flex; gap: 10px;">
+                            <a href="#" style="color: #3b5998; font-size: 20px;"><i class="fab fa-facebook-square"></i></a>
+                            <a href="#" style="color: #666; font-size: 20px;"><i class="fab fa-twitter-square"></i></a>
+                            <a href="#" style="color: #666; font-size: 20px;"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Navigation Menu End-->
+
+    <!--Header Bottom Navigation Start-->
+</header>
+<!--End of Header Area-->
+
+<!--Main Slider Area Start-->
+<div class="slider-content" style="margin-top: 30px;">
+    <div class="container">
+        <!-- Main Banner -->
+        <div style="margin-bottom: 30px;">
+            <div class="grid__card">
+                <div class="card__img">
+                    <a href="#">
+                        <img src="https://giwmscdnone.gov.np/media/carousels/IRD%20NEPAL%20car_itz804c.png" alt="IRD Training" style="width: 100%; border-radius: 10px;">
+                    </a>
+                </div>
+                <div class="card__details">
+                    <h2 class="card__title">
+                        <a href="#">"कर प्रणालीको सार, लगानीको आधार"</a>
+                    </h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- Services and Officials Section -->
+        <div class="row" style="margin-top: 50px;">
+            <!-- Left Section: Our Services -->
+            <div class="col-md-8">
+                <h3 style="color: #0d47a1; font-size: 20px; font-weight: 700; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 3px solid #d32f2f; display: inline-block;">हाम्रा सेवाहरू</h3>
+                <div style="border: 1px solid #e0e0e0; border-radius: 10px; padding: 30px; background: white;">
+                    <div class="row">
+                        <!-- Row 1 -->
+                        <div class="col-md-4 col-sm-6 text-center" style="margin-bottom: 30px;">
+                            <a href="taxpayer_portal.html" style="text-decoration: none;">
+                                <div style="background: #e8f4fd; width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fa fa-users" style="font-size: 27px; color: #0d47a1;"></i>
+                                </div>
+                                <h5 style="color: #0d47a1; font-size: 14px; font-weight: 600; margin: 0;">करदाता पोर्टल</h5>
+                            </a>
+                        </div>
+
+                        <div class="col-md-4 col-sm-6 text-center" style="margin-bottom: 30px;">
+                            <a href="#" style="text-decoration: none;">
+                                <div style="background: #e8f4fd; width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fa fa-search" style="font-size: 27px; color: #0d47a1;"></i>
+                                </div>
+                                <h5 style="color: #0d47a1; font-size: 14px; font-weight: 600; margin: 0;">स्था.ले.नं खोजी</h5>
+                            </a>
+                        </div>
+
+                        <div class="col-md-4 col-sm-6 text-center" style="margin-bottom: 30px;">
+                            <a href="#" style="text-decoration: none;">
+                                <div style="background: #e8f4fd; width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fa fa-receipt" style="font-size: 27px; color: #0d47a1;"></i>
+                                </div>
+                                <h5 style="color: #0d47a1; font-size: 14px; font-weight: 600; margin: 0;">कर चुक्ता खोजी</h5>
+                            </a>
+                        </div>
+
+                        <!-- Row 2 -->
+                        <div class="col-md-4 col-sm-6 text-center" style="margin-bottom: 30px;">
+                            <a href="#" style="text-decoration: none;">
+                                <div style="background: #e8f4fd; width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fa fa-calculator" style="font-size: 27px; color: #0d47a1;"></i>
+                                </div>
+                                <h5 style="color: #0d47a1; font-size: 14px; font-weight: 600; margin: 0;">कर गणक</h5>
+                            </a>
+                        </div>
+
+                        <div class="col-md-4 col-sm-6 text-center" style="margin-bottom: 30px;">
+                            <a href="#" style="text-decoration: none;">
+                                <div style="background: #e8f4fd; width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fa fa-percent" style="font-size: 27px; color: #0d47a1;"></i>
+                                </div>
+                                <h5 style="color: #0d47a1; font-size: 14px; font-weight: 600; margin: 0;">करको दर तथा छुट</h5>
+                            </a>
+                        </div>
+
+                        <div class="col-md-4 col-sm-6 text-center" style="margin-bottom: 30px;">
+                            <a href="#" style="text-decoration: none;">
+                                <div style="background: #e8f4fd; width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fa fa-question-circle" style="font-size: 27px; color: #0d47a1;"></i>
+                                </div>
+                                <h5 style="color: #0d47a1; font-size: 14px; font-weight: 600; margin: 0;">बारम्बार सोधिने प्रश्नहरू</h5>
+                            </a>
+                        </div>
+
+                        <!-- Row 3 -->
+                        <div class="col-md-4 col-sm-6 text-center" style="margin-bottom: 30px;">
+                            <a href="#" style="text-decoration: none;">
+                                <div style="background: #e8f4fd; width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fa fa-graduation-cap" style="font-size: 27px; color: #0d47a1;"></i>
+                                </div>
+                                <h5 style="color: #0d47a1; font-size: 14px; font-weight: 600; margin: 0;">करदाता शिक्षा</h5>
+                            </a>
+                        </div>
+
+                        <div class="col-md-4 col-sm-6 text-center" style="margin-bottom: 30px;">
+                            <a href="#" style="text-decoration: none;">
+                                <div style="background: #e8f4fd; width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fa fa-globe" style="font-size: 27px; color: #0d47a1;"></i>
+                                </div>
+                                <h5 style="color: #0d47a1; font-size: 14px; font-weight: 600; margin: 0;">पुरानो वेबसाइट</h5>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Section: Officials -->
+            <div class="col-md-4" style="margin-top: 70px;">
+                <!-- Director General -->
+                <div style="border: 1px solid #e0e0e0; border-radius: 10px; padding: 20px; background: white; margin-bottom: 20px; text-align: center;">
+                    <img src="https://via.placeholder.com/120x140/cccccc/666666?text=Photo" alt="महानिर्देशक" style="width: 120px; height: 140px; border-radius: 5px; margin-bottom: 15px; object-fit: cover;">
+                    <h4 style="color: #333; font-size: 16px; font-weight: 700; margin: 10px 0 5px 0;">मदन दहाल</h4>
+                    <p style="color: #666; font-size: 13px; margin: 0;">महानिर्देशक</p>
+                </div>
+
+                <!-- Director -->
+                <div style="border: 1px solid #e0e0e0; border-radius: 10px; padding: 20px; background: white; text-align: center;">
+                    <img src="https://via.placeholder.com/120x140/cccccc/666666?text=Photo" alt="निर्देशक" style="width: 120px; height: 140px; border-radius: 5px; margin-bottom: 15px; object-fit: cover;">
+                    <h4 style="color: #333; font-size: 16px; font-weight: 700; margin: 10px 0 5px 0;">राम बहादुर के.सी.</h4>
+                    <p style="color: #666; font-size: 13px; margin: 0 0 10px 0;">निर्देशक</p>
+                    <p style="color: #0d47a1; font-size: 13px; margin: 0;">
+                        <i class="fa fa-phone"></i> 015970081 Ext 385
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End of Main Slider Area-->
+
+<div class="clearfix"></div>
+
+<!--Footer Area Start-->
+<div class="footer-area" style="font-size:14px; background: #1e3c72; color: white; padding: 30px 0; margin-top: 60px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                <span>© आन्तरिक राजस्व विभाग - प्रशिक्षण पोर्टल</span><br>
+                <span>© IRD Training Portal - All Rights Reserved</span>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12 text-center">
+                <strong style="color: #ffc107;">यो प्रशिक्षण पोर्टल हो</strong><br>
+                <span>This is for Training Purposes Only</span>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                <nav>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 10px;"><a href="taxpayer_portal.html" style="color: white; text-decoration: none;">करदाता पोर्टल</a></li>
+                        <li style="margin-bottom: 10px;"><a href="#" style="color: white; text-decoration: none;">स्था.ले.नं खोजी</a></li>
+                        <li style="margin-bottom: 10px;"><a href="#" style="color: white; text-decoration: none;">कर चुक्ता खोजी</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End of Footer Area-->
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+
+<!-- Custom Script -->
+<script src="js/script.js"></script>
+
+<script>
+    // Dropdown menu functionality
+    document.querySelectorAll('.nav__list.dropdown').forEach(function(dropdown) {
+        dropdown.addEventListener('mouseenter', function() {
+            this.querySelector('.dropdown__menu').style.display = 'block';
+        });
+        dropdown.addEventListener('mouseleave', function() {
+            this.querySelector('.dropdown__menu').style.display = 'none';
+        });
+    });
+
+    // Dropdown menu hover effects
+    document.querySelectorAll('.dropdown__menu a').forEach(function(link) {
+        link.addEventListener('mouseenter', function() {
+            this.style.background = '#f5f5f5';
+            this.style.color = '#2c5282';
+        });
+        link.addEventListener('mouseleave', function() {
+            this.style.background = 'transparent';
+            this.style.color = '#333';
+        });
+    });
+
+    // Update Nepali date
+    function updateNepaliDate() {
+        const dateElement = document.getElementById('nepaliDateBs');
+        if (dateElement) {
+            // BS Date conversion (approximate)
+            const now = new Date();
+            const adYear = now.getFullYear();
+            const adMonth = now.getMonth() + 1;
+            const adDay = now.getDate();
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            
+            // Simple BS conversion (AD + 56.7 years approximately)
+            let bsYear = adYear + 57;
+            let bsMonth = adMonth + 8;
+            let bsDay = adDay + 16;
+            
+            if (bsMonth > 12) {
+                bsMonth -= 12;
+                bsYear--;
+            }
+            
+            if (bsDay > 30) {
+                bsDay -= 30;
+                bsMonth++;
+            }
+            
+            const nepaliMonths = ['बैशाख', 'जेठ', 'असार', 'साउन', 'भदौ', 'असोज', 'कार्तिक', 'मंसिर', 'पौष', 'माघ', 'फागुन', 'चैत'];
+            const nepaliDays = ['आइतबार', 'सोमबार', 'मंगलबार', 'बुधबार', 'बिहीबार', 'शुक्रबार', 'शनिबार'];
+            const nepaliNumerals = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९'];
+            
+            function toNepaliNumber(num) {
+                return num.toString().split('').map(d => nepaliNumerals[parseInt(d)]).join('');
+            }
+            
+            const dayName = nepaliDays[now.getDay()];
+            const monthName = nepaliMonths[bsMonth - 1];
+            const bsYearNep = toNepaliNumber(bsYear);
+            const bsDayNep = toNepaliNumber(bsDay);
+            const hoursNep = toNepaliNumber(hours.toString().padStart(2, '0'));
+            const minutesNep = toNepaliNumber(minutes.toString().padStart(2, '0'));
+            
+            dateElement.textContent = `${bsYearNep} ${monthName} ${bsDayNep} गते ${dayName}, ${hoursNep}:${minutesNep} बजे`;
+        }
+    }
+    
+    updateNepaliDate();
+    setInterval(updateNepaliDate, 60000); // Update every minute
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1631 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>अनुसूची - १३ - वित्तिय तथा खरिद बिक्री विवरण</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Mukta', Arial, sans-serif;
+            background-color: #d4e4f7;
+            padding: 0;
+            font-size: 13px;
+        }
+        
+        .page-container {
+            background-color: #d4e4f7;
+            padding: 10px;
+        }
+        
+        .content-wrapper {
+            background-color: #DFE8F6;
+            border: 1px solid #999;
+            padding: 15px;
+        }
+        
+        .page-title-section {
+            background-color: #d4e4f7;
+            padding: 8px 10px;
+            margin-bottom: 15px;
+            border: 1px solid #5b9bd5;
+        }
+        
+        .page-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #000;
+            text-align: center;
+        }
+        
+        .print-btn {
+            background: linear-gradient(to bottom, #ffffff, #e0e0e0);
+            border: 1px solid #999;
+            padding: 4px 12px;
+            cursor: pointer;
+            border-radius: 3px;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+        
+        .print-btn:hover {
+            background: linear-gradient(to bottom, #f5f5f5, #d0d0d0);
+        }
+        
+        .back-link-panel {
+            background-color: #dfe9f6;
+            border: 1px solid #5b9bd5;
+            padding: 8px 10px;
+            margin-bottom: 15px;
+            font-size: 12px;
+        }
+        
+        .back-link-text {
+            color: #000;
+        }
+        
+        .back-link-click {
+            color: red;
+            text-decoration: underline;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .info-header {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 8px;
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+        }
+        
+        .info-field {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .info-field label {
+            min-width: 150px;
+            font-weight: 500;
+        }
+        
+        .info-field input {
+            width: 200px;
+            padding: 4px 8px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            font-size: 13px;
+        }
+        
+        .section-panel {
+            margin-bottom: 15px;
+            border: 1px solid #5b9bd5;
+            background-color: #fff;
+        }
+        
+        .section-header {
+            background: linear-gradient(to bottom, #D9E8FB 0%, #C5D9ED 100%);
+            border-bottom: 1px solid #5b9bd5;
+            padding: 8px 10px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .section-body {
+            padding: 15px;
+        }
+        
+        .financial-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+        }
+        
+        .financial-table tr {
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .financial-table td {
+            padding: 4px 8px;
+            vertical-align: middle;
+            line-height: 1.3;
+        }
+        
+        .financial-table td:first-child {
+            width: 60%;
+            font-size: 12px;
+        }
+        
+        .financial-table td:first-child small {
+            display: block;
+            font-size: 10px;
+            color: #666;
+            margin-top: 1px;
+        }
+        
+        .financial-table td:last-child {
+            width: 40%;
+            text-align: right;
+        }
+        
+        .financial-table input[type="text"] {
+            width: 150px;
+            padding: 4px 8px;
+            border: 1px solid #ccc;
+            text-align: right;
+            font-size: 13px;
+        }
+        
+        .financial-table input[readonly] {
+            background-color: #ddd;
+        }
+        
+        .save-btn {
+            background: linear-gradient(to bottom, #ffffff, #e0e0e0);
+            border: 1px solid #999;
+            padding: 6px 16px;
+            cursor: pointer;
+            border-radius: 3px;
+            font-size: 13px;
+            margin: 10px 0;
+        }
+        
+        .save-btn:hover {
+            background: linear-gradient(to bottom, #f5f5f5, #d0d0d0);
+        }
+        
+        .grid-section {
+            margin: 15px 0;
+        }
+        
+        .grid-header {
+            background: linear-gradient(to bottom, #D9E8FB 0%, #C5D9ED 100%);
+            padding: 8px 10px;
+            font-weight: bold;
+            border: 1px solid #5b9bd5;
+            margin-bottom: 5px;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .form-field {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .form-field label {
+            min-width: 180px;
+            font-size: 12px;
+        }
+        
+        .form-field input {
+            width: 150px;
+            padding: 4px 8px;
+            border: 1px solid #ccc;
+            font-size: 13px;
+            text-align: right;
+            background-color: #fff;
+        }
+        
+        .checkbox-field {
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .checkbox-field input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+        }
+        
+        .note-box {
+            background-color: #ffff05;
+              border: 1px solid #000;
+              padding: 12px 18px;
+              margin: 10px 0;
+            color: #000;
+              font-size: 15px;
+              max-width: 98%;
+              box-sizing: border-box;
+              font-family: inherit;
+        }
+        
+        /* Mobile Responsive Styles */
+        @media screen and (max-width: 768px) {
+            .page-container {
+                padding: 5px;
+            }
+            
+            .content-wrapper {
+                padding: 10px;
+            }
+            
+            .page-title {
+                font-size: 14px;
+            }
+            
+            .section-panel {
+                margin: 10px 0;
+            }
+            
+            .section-header {
+                font-size: 13px;
+                padding: 8px;
+            }
+            
+            .section-body {
+                padding: 10px;
+            }
+            
+            /* Make tables scrollable on mobile */
+            .section-body > div {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            table {
+                min-width: 600px;
+                font-size: 11px;
+            }
+            
+            table th, table td {
+                padding: 4px !important;
+                font-size: 11px;
+            }
+            
+            /* Adjust input fields for mobile */
+            input[type="text"], input[type="file"], select {
+                font-size: 13px;
+                padding: 6px !important;
+            }
+            
+            /* Save buttons */
+            .save-btn {
+                font-size: 12px;
+                padding: 6px 12px;
+                margin: 5px;
+            }
+            
+            /* Modal adjustments */
+            .modal-content {
+                min-width: 90% !important;
+                max-width: 95%;
+                margin: 10px;
+            }
+            
+            /* Checkbox field adjustments */
+            .checkbox-field {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+            
+            /* Adjust form rows */
+            .field-row {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            /* Load Excel section */
+            fieldset {
+                max-width: 100% !important;
+            }
+            
+            fieldset > div {
+                flex-direction: column;
+                align-items: stretch !important;
+            }
+            
+            fieldset input[type="file"] {
+                min-width: 100% !important;
+                margin-bottom: 10px;
+            }
+            
+            fieldset button {
+                width: 100%;
+                margin-bottom: 8px;
+            }
+            
+            /* Totals section */
+            .totals-section {
+                gap: 10px;
+            }
+            
+            .total-item {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .total-item label {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+            
+            .total-item input {
+                width: 100% !important;
+            }
+            
+            /* Note box */
+            .note-box {
+                font-size: 13px;
+                padding: 10px;
+            }
+            
+            /* Print button */
+            .print-btn {
+                padding: 8px 16px;
+                font-size: 12px;
+            }
+        }
+        
+        @media screen and (max-width: 480px) {
+            body {
+                font-size: 12px;
+            }
+            
+            .page-title {
+                font-size: 12px;
+            }
+            
+            .section-header {
+                font-size: 12px;
+                padding: 6px;
+            }
+            
+            table {
+                font-size: 10px;
+            }
+            
+            table th, table td {
+                padding: 3px !important;
+                font-size: 10px;
+            }
+            
+            input[type="text"], select {
+                font-size: 12px;
+            }
+            
+            .save-btn {
+                font-size: 11px;
+                padding: 5px 10px;
+            }
+            
+            .note-box {
+                font-size: 12px;
+                padding: 8px;
+            }
+        }
+        
+        /* Disclaimer Banner */
+        .disclaimer-banner {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+        
+        .disclaimer-banner h3 {
+            color: #856404;
+            margin: 0 0 10px 0;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .disclaimer-banner p {
+            color: #856404;
+            margin: 0;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <div class="content-wrapper">
+
+            <!-- Print Button -->
+            <button class="print-btn" onclick="window.print()">🖨 Print</button>
+            
+            <!-- Title -->
+            <div class="page-title-section">
+                <div class="page-title">अनुसूची - १३</div>
+            </div>
+            
+            <!-- Back Link -->
+            <div class="back-link-panel">
+                <span class="back-link-text">पछाडि गएर अनुसूची तय गर्न </span>
+                <span class="back-link-click" id="backLinkBtn">यहाँ क्लिक</span>
+                <span class="back-link-text"> गर्नुहोस् ।</span>
+            </div>
+            
+            <!-- Info Header -->
+            <div class="info-header">
+                <div class="info-field">
+                    <label>सब्मिशन नं.:</label>
+                    <input type="text" id="annex13SubmissionNo" readonly>
+                </div>
+                <div class="info-field">
+                    <label>आर्थिक वर्ष:</label>
+                    <input type="text" id="annex13FiscalYear" readonly>
+                </div>
+                <div class="info-field">
+                    <label>स्थायी लेखा नम्बर:</label>
+                    <input type="text" id="annex13PAN" readonly>
+                </div>
+            </div>
+            
+            <!-- Financial Statement Section -->
+
+                        <script>
+                        // Auto-fill submission no, fiscal year, and PAN from session/local storage
+                        window.addEventListener('DOMContentLoaded', function() {
+                            let submissionNo = '';
+                            let fiscalYear = '';
+                            let pan = '';
+                            // Try sessionStorage first
+                            const currentUser = sessionStorage.getItem('d03_current_registration');
+                            if (currentUser) {
+                                const userData = JSON.parse(currentUser);
+                                submissionNo = userData.submissionNumber || userData.submissionNo || '';
+                                fiscalYear = userData.fiscalYear || '';
+                                pan = userData.pan || '';
+                            } else {
+                                // Fallback to localStorage (d03Users or d03_return_data)
+                                const d03Users = JSON.parse(localStorage.getItem('d03Users') || '[]');
+                                if (d03Users.length > 0) {
+                                    const lastUser = d03Users[d03Users.length - 1];
+                                    submissionNo = lastUser.submissionNo || '';
+                                    fiscalYear = lastUser.fiscalYear || '';
+                                    pan = lastUser.pan || '';
+                                } else {
+                                    // Try d03_return_data
+                                    const returnData = JSON.parse(localStorage.getItem('d03_return_data') || '{}');
+                                    submissionNo = returnData.submissionNumber || '';
+                                    fiscalYear = returnData.fiscalYear || '';
+                                    pan = returnData.pan || '';
+                                }
+                            }
+                            document.getElementById('annex13SubmissionNo').value = submissionNo;
+                            document.getElementById('annex13FiscalYear').value = fiscalYear;
+                            document.getElementById('annex13PAN').value = pan;
+                        });
+                        </script>
+            <div class="section-panel">
+                <div class="section-header">वित्तीय विवरण प्रविष्ट गर्नुहोस्।</div>
+                <div class="section-body">
+                    <table class="financial-table">
+                        <tr>
+                            <td>चुक्ता पूँजि<br><small>Paid-Up capital</small></td>
+                            <td><input type="text" class="num-input"></td>
+                        </tr>
+                        <tr>
+                            <td>गत वर्षसम्मको मुनाफा<br><small>Accumulated Profit</small></td>
+                            <td><input type="text" class="num-input"></td>
+                        </tr>
+                        <tr>
+                            <td>यो वर्षको मुनाफा<br><small>Current Year Profit</small></td>
+                            <td><input type="text" class="num-input"></td>
+                        </tr>
+                        <tr>
+                            <td>वितरित मुनाफा<br><small>Distributed Profit</small></td>
+                            <td><input type="text" class="num-input"></td>
+                        </tr>
+                        <tr>
+                            <td>कोषहरु<br><small>Funds</small></td>
+                            <td><input type="text" class="num-input"></td>
+                        </tr>
+                        <tr>
+                            <td>व्यवस्था<br><small>Provisions</small></td>
+                            <td><input type="text" class="num-input"></td>
+                        </tr>
+                        <tr>
+                            <td>डेफर्ड कर दायित्व<br><small>Deferred tax Liabilities</small></td>
+                            <td><input type="text" class="num-input"></td>
+                        </tr>
+                        <tr>
+                            <td>दीर्घकालीन र मध्यकालिन ऋण सापटी<br><small>Long Term And Mid Term Loan</small></td>
+                            <td><input type="text" class="num-input"></td>
+                        </tr>
+                        <tr>
+                            <td>चालु दायित्व<br><small>Current Liabilities</small></td>
+                            <td><input type="text" class="num-input"></td>
+                        </tr>
+                        <tr>
+                            <td>स्थिर सम्पति(जग्गा)<br><small>Fixed Assets(Land)</small></td>
+                            <td><input type="text" class="num-input"></td>
+                        </tr>
+                        <tr>
+                            <td>ह्रासयोग्य सम्पति<br><small>Depreciable Assets</small></td>
+                            <td><input type="text" class="num-input"></td>
+                        </tr>
+                        <tr>
+                            <td>लगानी<br><small>Investments</small></td>
+                            <td><input type="text" class="num-input"></td>
+                        </tr>
+                        <tr>
+                            <td>व्यापारिक मौज्दात चालु सम्पति<br><small>Trading Stock Current Assets</small></td>
+                            <td><input type="text" class="num-input"></td>
+                        </tr>
+                        <tr>
+                            <td>पेश्की सापटी चालु सम्पति<br><small>Advance Current Assets</small></td>
+                            <td><input type="text" class="num-input"></td>
+                        </tr>
+                        <tr>
+                            <td>अन्य चालु सम्पति<br><small>Other Current Assets</small></td>
+                            <td><input type="text" class="num-input"></td>
+                        </tr>
+                        <tr>
+                            <td>विक्री<br><small>Sales</small></td>
+                            <td><input type="text" class="num-input" id="sales"></td>
+                        </tr>
+                        <tr>
+                            <td>विक्रीको लागत<br><small>Cost Of Goods Sold</small></td>
+                            <td><input type="text" class="num-input" id="cogs"></td>
+                        </tr>
+                        <tr>
+                            <td>कूल मुनाफा<br><small>Gross Profit</small></td>
+                            <td><input type="text" readonly id="grossProfit"></td>
+                        </tr>
+                        <tr>
+                            <td>अन्य आय<br><small>Other Income</small></td>
+                            <td><input type="text" class="num-input" id="otherIncome"></td>
+                        </tr>
+                        <tr>
+                            <td>कूल आय<br><small>Gross Revenue</small></td>
+                            <td><input type="text" readonly id="grossRevenue"></td>
+                        </tr>
+                        <tr>
+                            <td>कर्मचारी खर्च<br><small>Employee Expenses</small></td>
+                            <td><input type="text" class="num-input" id="employeeExpenses"></td>
+                        </tr>
+                        <tr>
+                            <td>कार्यालय सञ्चालन खर्च<br><small>Office Operating Expenses</small></td>
+                            <td><input type="text" class="num-input" id="officeExpenses"></td>
+                        </tr>
+                        <tr>
+                            <td>अन्य खर्च<br><small>Other Expenses</small></td>
+                            <td><input type="text" class="num-input" id="otherExpenses"></td>
+                        </tr>
+                        <tr>
+                            <td>व्यवस्था खर्च<br><small>Provision Expenses</small></td>
+                            <td><input type="text" class="num-input" id="provisionExpenses"></td>
+                        </tr>
+                        <tr>
+                            <td>ह्रास र व्याज अगाडीको मुनाफा<br><small>Profit Before Depreciation And Interest</small></td>
+                            <td><input type="text" readonly id="profitBeforeDepInt"></td>
+                        </tr>
+                        <tr>
+                            <td>ह्रास खर्च<br><small>Depreciation Expenses</small></td>
+                            <td><input type="text" class="num-input" id="depreciationExpenses"></td>
+                        </tr>
+                        <tr>
+                            <td>व्याज खर्च<br><small>Interest Expenses</small></td>
+                            <td><input type="text" class="num-input" id="interestExpenses"></td>
+                        </tr>
+                        <tr>
+                            <td>कर अघिको मुनाफा<br><small>Profit Before Tax</small></td>
+                            <td><input type="text" readonly id="profitBeforeTax"></td>
+                        </tr>
+                        <tr>
+                            <td>कर खर्च<br><small>Income Tax Expenses</small></td>
+                            <td><input type="text" readonly id="incomeTaxExpenses"></td>
+                        </tr>
+                        <tr>
+                            <td>यो वर्षको कर<br><small>Current Tax Expense</small></td>
+                            <td><input type="text" class="num-input" id="currentTaxExpense"></td>
+                        </tr>
+                        <tr>
+                            <td>विगत वर्षको कर<br><small>Prior Year Tax</small></td>
+                            <td><input type="text" class="num-input" id="priorYearTax"></td>
+                        </tr>
+                        <tr>
+                            <td>डेफर्ड कर (+/-)<br><small>Defered Tax</small></td>
+                            <td><input type="text" class="num-input" id="deferredTax"></td>
+                        </tr>
+                        <tr>
+                            <td>कर पछिको खुद मुनाफा<br><small>Profit After Tax</small></td>
+                            <td><input type="text" readonly id="profitAfterTax"></td>
+                        </tr>
+                    </table>
+                    <button class="save-btn">💾 Save</button>
+                                                        <script>
+                                                        // Auto-calculate difference and totals for आय विवरण र वित्तीय विवरण अनुसार खर्चको कट्टी विवरण
+                                                        document.addEventListener('DOMContentLoaded', function() {
+                                                            function parseNum(val) {
+                                                                var n = parseFloat((val||'').replace(/,/g, ''));
+                                                                return isNaN(n) ? 0 : n;
+                                                            }
+                                                            // Find the table for this section
+                                                            var sectionHeader = Array.from(document.querySelectorAll('.section-header')).find(h => h.textContent.includes('आय विवरण र वित्तीय विवरण अनुसार खर्चको कट्टी विवरण'));
+                                                            if (!sectionHeader) return;
+                                                            var section = sectionHeader.parentElement;
+                                                            var table = section.querySelector('table');
+                                                            if (!table) return;
+                                                            var rows = Array.from(table.querySelectorAll('tbody tr')).filter(tr => tr.querySelectorAll('input').length === 4 || tr.querySelectorAll('input').length === 3);
+                                                            var totalRow = table.querySelector('tr[style*="background-color: #f0f0f0"]');
+                                                            function recalc() {
+                                                                var sumA = 0, sumB = 0, sumDiff = 0;
+                                                                rows.forEach(function(tr) {
+                                                                    var inputs = tr.querySelectorAll('input');
+                                                                    if (inputs.length < 3) return;
+                                                                    var a = parseNum(inputs[0].value);
+                                                                    var b = parseNum(inputs[1].value);
+                                                                    var diff = a - b;
+                                                                    inputs[2].value = diff.toFixed(2);
+                                                                    sumA += a;
+                                                                    sumB += b;
+                                                                    sumDiff += diff;
+                                                                });
+                                                                if (totalRow) {
+                                                                    var totalInputs = totalRow.querySelectorAll('input');
+                                                                    if (totalInputs.length === 3) {
+                                                                        totalInputs[0].value = sumA.toFixed(2);
+                                                                        totalInputs[1].value = sumB.toFixed(2);
+                                                                        totalInputs[2].value = sumDiff.toFixed(2);
+                                                                    }
+                                                                }
+                                                            }
+                                                            // Attach event listeners
+                                                            rows.forEach(function(tr) {
+                                                                var inputs = tr.querySelectorAll('input');
+                                                                if (inputs.length < 2) return;
+                                                                inputs[0].addEventListener('input', recalc);
+                                                                inputs[1].addEventListener('input', recalc);
+                                                            });
+                                                            recalc();
+                                                        });
+                                                        </script>
+                                                        <!-- Modal for Wages Save Success -->
+                                                        <div id="wagesSaveModal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.18);z-index:9999;align-items:center;justify-content:center;">
+                                                                <div style="background:#ced9e7;border:2px solid #4a90e2;box-shadow:0 2px 12px #0002;border-radius:7px;min-width:340px;max-width:90vw;padding:0 0 18px 0;display:flex;flex-direction:column;align-items:stretch;">
+                                                                        <div style="background:#eaf3fb;border-bottom:1px solid #b5d1f3;padding:10px 18px 8px 18px;border-radius:7px 7px 0 0;display:flex;align-items:center;gap:8px;">
+                                                                                <span style="color:#2176c1;font-size:20px;line-height:1;">&#9432;</span>
+                                                                                <span style="color:#2176c1;font-weight:bold;font-size:16px;">SUCCESS</span>
+                                                                        </div>
+                                                                        <div style="padding:22px 18px 10px 18px;text-align:left;font-size:16px;color:#222;display:flex;align-items:center;gap:10px;">
+                                                                                <span style="color:#2176c1;font-size:28px;">&#8505;</span>
+                                                                                <span>Successfully Saved.</span>
+                                                                        </div>
+                                                                        <div style="text-align:center;margin-top:8px;">
+                                                                                <button id="okWagesSaveModalBtn" style="background:#eaf3fb;border:1px solid #b5d1f3;color:#2176c1;font-weight:bold;padding:4px 28px;font-size:15px;border-radius:3px;cursor:pointer;">OK</button>
+                                                                        </div>
+                                                                </div>
+                                                        </div>
+                                                        <script>
+                                                        // Attach modal logic to the Save button in the wages section
+                                                        document.addEventListener('DOMContentLoaded', function() {
+                                                            // Find the Save button in the wages section
+                                                            var wagesSection = document.querySelector('.section-header')?.textContent.includes('वार्षिक कर्मचारी खर्च')
+                                                                ? document.querySelector('.section-header').parentElement : null;
+                                                            var saveBtn = wagesSection ? wagesSection.querySelector('button.save-btn') : null;
+                                                            var modal = document.getElementById('wagesSaveModal');
+                                                            var okBtn = document.getElementById('okWagesSaveModalBtn');
+                                                            if (saveBtn && modal && okBtn) {
+                                                                saveBtn.addEventListener('click', function(e) {
+                                                                    e.preventDefault();
+                                                                    modal.style.display = 'flex';
+                                                                });
+                                                                okBtn.onclick = function() {
+                                                                    modal.style.display = 'none';
+                                                                };
+                                                            }
+                                                        });
+                                                        </script>
+                                                        <!-- Modal for Wages Save Success -->
+                                                        <div id="wagesSaveModal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.18);z-index:9999;align-items:center;justify-content:center;">
+                                                                <div style="background:#ced9e7;border:2px solid #4a90e2;box-shadow:0 2px 12px #0002;border-radius:7px;min-width:340px;max-width:90vw;padding:0 0 18px 0;display:flex;flex-direction:column;align-items:stretch;">
+                                                                        <div style="background:#eaf3fb;border-bottom:1px solid #b5d1f3;padding:10px 18px 8px 18px;border-radius:7px 7px 0 0;display:flex;align-items:center;gap:8px;">
+                                                                                <span style="color:#2176c1;font-size:20px;line-height:1;">&#9432;</span>
+                                                                                <span style="color:#2176c1;font-weight:bold;font-size:16px;">SUCCESS</span>
+                                                                        </div>
+                                                                        <div style="padding:22px 18px 10px 18px;text-align:left;font-size:16px;color:#222;display:flex;align-items:center;gap:10px;">
+                                                                                <span style="color:#2176c1;font-size:28px;">&#8505;</span>
+                                                                                <span>Successfully Saved.</span>
+                                                                        </div>
+                                                                        <div style="text-align:center;margin-top:8px;">
+                                                                                <button id="okWagesSaveModalBtn" style="background:#eaf3fb;border:1px solid #b5d1f3;color:#2176c1;font-weight:bold;padding:4px 28px;font-size:15px;border-radius:3px;cursor:pointer;">OK</button>
+                                                                        </div>
+                                                                </div>
+                                                        </div>
+                                                        <script>
+                                                        // Attach modal logic to the correct Save button
+                                                        document.addEventListener('DOMContentLoaded', function() {
+                                                            // Find the Save button in the wages section
+                                                            var section = document.querySelector('.section-header:contains("वार्षिक कर्मचारी खर्च")').parentElement;
+                                                            var saveBtn = Array.from(section.querySelectorAll('button.save-btn')).find(btn => btn.textContent.includes('Save'));
+                                                            var modal = document.getElementById('wagesSaveModal');
+                                                            var okBtn = document.getElementById('okWagesSaveModalBtn');
+                                                            if (saveBtn && modal && okBtn) {
+                                                                saveBtn.addEventListener('click', function(e) {
+                                                                    e.preventDefault();
+                                                                    modal.style.display = 'flex';
+                                                                });
+                                                                okBtn.onclick = function() {
+                                                                    modal.style.display = 'none';
+                                                                };
+                                                            }
+                                                        });
+                                                        </script>
+                                                        <!-- Modal for Wages Save Success -->
+                                                        <div id="wagesSaveModal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.18);z-index:9999;align-items:center;justify-content:center;">
+                                                                <div style="background:#ced9e7;border:2px solid #4a90e2;box-shadow:0 2px 12px #0002;border-radius:7px;min-width:340px;max-width:90vw;padding:0 0 18px 0;display:flex;flex-direction:column;align-items:stretch;">
+                                                                        <div style="background:#eaf3fb;border-bottom:1px solid #b5d1f3;padding:10px 18px 8px 18px;border-radius:7px 7px 0 0;display:flex;align-items:center;gap:8px;">
+                                                                                <span style="color:#2176c1;font-size:20px;line-height:1;">&#9432;</span>
+                                                                                <span style="color:#2176c1;font-weight:bold;font-size:16px;">SUCCESS</span>
+                                                                        </div>
+                                                                        <div style="padding:22px 18px 10px 18px;text-align:left;font-size:16px;color:#222;display:flex;align-items:center;gap:10px;">
+                                                                                <span style="color:#2176c1;font-size:28px;">&#8505;</span>
+                                                                                <span>Successfully Saved.</span>
+                                                                        </div>
+                                                                        <div style="text-align:center;margin-top:8px;">
+                                                                                <button id="okWagesSaveModalBtn" style="background:#eaf3fb;border:1px solid #b5d1f3;color:#2176c1;font-weight:bold;padding:4px 28px;font-size:15px;border-radius:3px;cursor:pointer;">OK</button>
+                                                                        </div>
+                                                                </div>
+                                                        </div>
+                                                        <script>
+                                                        // Bind Save button to show modal
+                                                        document.addEventListener('DOMContentLoaded', function() {
+                                                            // Find the Save button in the wages section
+                                                            var wagesSection = document.querySelector('.section-header:contains("वार्षिक कर्मचारी खर्च")').parentElement;
+                                                            var saveBtn = wagesSection.querySelector('.save-btn');
+                                                            var modal = document.getElementById('wagesSaveModal');
+                                                            var okBtn = document.getElementById('okWagesSaveModalBtn');
+                                                            if (saveBtn && modal && okBtn) {
+                                                                saveBtn.addEventListener('click', function(e) {
+                                                                    e.preventDefault();
+                                                                    modal.style.display = 'flex';
+                                                                });
+                                                                okBtn.onclick = function() {
+                                                                    modal.style.display = 'none';
+                                                                };
+                                                            }
+                                                        });
+                                                        </script>
+                                                        <div id="saveModal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.18);z-index:9999;align-items:center;justify-content:center;">
+                                                            <div style="background:#ced9e7;border:2px solid #4a90e2;box-shadow:0 2px 12px #0002;border-radius:7px;min-width:340px;max-width:90vw;padding:0 0 18px 0;">
+                                                                <div style="background:#eaf3fb;border-bottom:1px solid #b5d1f3;padding:10px 18px 8px 18px;border-radius:7px 7px 0 0;display:flex;align-items:center;gap:8px;">
+                                                                    <span style="color:#2176c1;font-size:20px;line-height:1;">&#9432;</span>
+                                                                    <span style="color:#2176c1;font-weight:bold;font-size:16px;">SUCCESS</span>
+                                                                </div>
+                                                                <div style="padding:22px 18px 10px 18px;text-align:left;font-size:16px;color:#222;display:flex;align-items:center;gap:10px;">
+                                                                    <span style="color:#2176c1;font-size:28px;">&#8505;</span>
+                                                                    <span>Successfully saved.</span>
+                                                                </div>
+                                                                <div style="text-align:center;margin-top:8px;">
+                                                                    <button id="okSaveModalBtn" style="background:#eaf3fb;border:1px solid #b5d1f3;color:#2176c1;font-weight:bold;padding:4px 28px;font-size:15px;border-radius:3px;cursor:pointer;">OK</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <script>
+                                                        // Save button modal and update logic
+                                                        var saveBtn = document.querySelector('.save-btn');
+                                                        var saveModal = document.getElementById('saveModal');
+                                                        saveBtn.addEventListener('click', function(e) {
+                                                            e.preventDefault();
+                                                            saveModal.style.display = 'flex';
+                                                            if(saveBtn.textContent.trim() !== 'Update') {
+                                                                saveBtn.innerHTML = 'Update';
+                                                            }
+                                                        });
+                                                        document.getElementById('okSaveModalBtn').onclick = function() {
+                                                            saveModal.style.display = 'none';
+                                                        };
+                                                        </script>
+                                    <script>
+                                    // Calculation logic for financial statement section
+                                    function parseNum(val) {
+                                        var n = parseFloat((val||'').replace(/,/g, ''));
+                                        return isNaN(n) ? 0 : n;
+                                    }
+                                    function setField(id, val) {
+                                        document.getElementById(id).value = (typeof val === 'number' && !isNaN(val)) ? val : 0;
+                                    }
+                                    function calcAnnex13() {
+                                        var sales = parseNum(document.getElementById('sales').value);
+                                        var cogs = parseNum(document.getElementById('cogs').value);
+                                        var otherIncome = parseNum(document.getElementById('otherIncome').value);
+                                        var employeeExpenses = parseNum(document.getElementById('employeeExpenses').value);
+                                        var officeExpenses = parseNum(document.getElementById('officeExpenses').value);
+                                        var otherExpenses = parseNum(document.getElementById('otherExpenses').value);
+                                        var provisionExpenses = parseNum(document.getElementById('provisionExpenses').value);
+                                        var depreciationExpenses = parseNum(document.getElementById('depreciationExpenses').value);
+                                        var interestExpenses = parseNum(document.getElementById('interestExpenses').value);
+                                        var currentTaxExpense = parseNum(document.getElementById('currentTaxExpense').value);
+                                        var priorYearTax = parseNum(document.getElementById('priorYearTax').value);
+                                        var deferredTax = parseNum(document.getElementById('deferredTax').value);
+
+                                        // Gross Profit = Sales - COGS
+                                        var grossProfit = sales - cogs;
+                                        setField('grossProfit', grossProfit);
+
+                                        // Gross Revenue = Gross Profit + Other Income
+                                        var grossRevenue = grossProfit + otherIncome;
+                                        setField('grossRevenue', grossRevenue);
+
+                                        // Profit Before Depreciation And Interest = Gross Revenue - (Employee + Office + Other + Provision)
+                                        var profitBeforeDepInt = grossRevenue - (employeeExpenses + officeExpenses + otherExpenses + provisionExpenses);
+                                        setField('profitBeforeDepInt', profitBeforeDepInt);
+
+                                        // Profit Before Tax = Profit Before Depreciation And Interest - (Depreciation + Interest)
+                                        var profitBeforeTax = profitBeforeDepInt - (depreciationExpenses + interestExpenses);
+                                        setField('profitBeforeTax', profitBeforeTax);
+
+                                        // Income Tax Expenses = Current Tax Expense + Prior Year Tax + Deferred Tax
+                                        var incomeTaxExpenses = currentTaxExpense + priorYearTax + deferredTax;
+                                        setField('incomeTaxExpenses', incomeTaxExpenses);
+
+                                        // Profit After Tax = Profit Before Tax - Income Tax Expenses
+                                        var profitAfterTax = profitBeforeTax - incomeTaxExpenses;
+                                        setField('profitAfterTax', profitAfterTax);
+                                    }
+                                    // Attach input event to all inputs in the financial table to always trigger calculation
+                                    document.querySelectorAll('.financial-table input').forEach(function(el) {
+                                        el.addEventListener('input', calcAnnex13);
+                                    });
+                                    // Run once on page load so all calculated fields show 0 by default
+                                    calcAnnex13();
+                                    </script>
+                </div>
+            </div>
+            
+            <!-- Less than 1 Lakh Section -->
+            <div class="section-panel">
+                <div class="section-header">शुरु मौज्दात, खरिद, विक्री, लिनबाँकी वा दिनबाँकी मध्ये सबै रकम रु १ लाख वा सो भन्दा कम हुनेको एकमुष्ट विवरण</div>
+                <div class="section-body" style="background-color: #dfe9f6;">
+                    <div class="form-grid">
+                        <div class="form-field">
+                            <label>वर्षको शुरुको लिन बाकी (दिन बाकी) रकम:</label>
+                            <input type="text">
+                        </div>
+                        <div class="form-field">
+                            <label>पुजिगत सेवा खरिद:</label>
+                            <input type="text">
+                        </div>
+                        <div class="form-field">
+                            <label>अन्य सेवा खरिद:</label>
+                            <input type="text">
+                        </div>
+                        <div class="form-field">
+                            <label>यो वर्ष को अन्य समान खरिद:</label>
+                            <input type="text">
+                        </div>
+                        <div class="form-field">
+                            <label>यो वर्ष को पुजिगत समान खरिद:</label>
+                            <input type="text">
+                        </div>
+                        <div class="form-field">
+                            <label>यो वर्ष को सेवा बिक्रि:</label>
+                            <input type="text">
+                        </div>
+                        <div class="form-field">
+                            <label>यो वर्षको समान बिक्रि:</label>
+                            <input type="text">
+                        </div>
+                        <div class="form-field">
+                            <label>वर्षको अन्तमा लिन बाकी (दिन बाकी) रकम:</label>
+                            <input type="text">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- TDS Section -->
+            <div class="section-panel">
+                <div class="section-header">अग्रिम कर कट्टी सम्बन्धी विवरण (अनिवार्य भर्नुपर्ने)</div>
+                <div class="section-body" style="background-color: #dfe9f6;">
+                    <div class="form-field" style="margin-bottom: 10px;">
+                        <label style="min-width: 450px;">यस आ. ब. मा दाखिला भएको अग्रिम कर कट्टी रकम रू.</label>
+                        <input type="text" id="tdsSubmitted" style="width: 150px; background-color: #fff;">
+                    </div>
+                    <div class="form-field" style="margin-bottom: 10px;">
+                        <label style="min-width: 450px;">आसाढ मसान्त सम्म अग्रिम कर कट्टी रकम दाखिला गर्न बाँकि (TDS Payable) जम्मा रू.</label>
+                        <input type="text" id="tdsPayable" style="width: 150px; background-color: #fff;">
+                    </div>
+                    <div class="form-field">
+                        <label style="min-width: 450px;">TDS Payable मध्‍य आय विवरण पेश गरेको मितिसम्म दाखिला गर्न बाँकी रकम रू.</label>
+                        <input type="text" id="tdsRemaining" style="width: 150px; background-color: #fff;">
+                    </div>
+                    <button class="save-btn" id="tdsSaveBtn" style="margin-top: 10px;">💾 Save</button>
+                    
+                    <!-- Success Modal for TDS -->
+                    <div id="tdsSuccessModal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.3);z-index:10000;align-items:center;justify-content:center;">
+                        <div style="background:#e8f0ff;border:2px solid #5b9bd5;box-shadow:0 4px 16px rgba(0,0,0,0.2);border-radius:8px;width:400px;max-width:90vw;padding:0;">
+                            <div style="background:#5b9bd5;padding:8px 15px;border-radius:6px 6px 0 0;display:flex;align-items:center;justify-content:space-between;">
+                                <span style="color:#fff;font-weight:bold;font-size:15px;">SUCCESS</span>
+                                <span onclick="closeTdsSuccess()" style="color:#fff;cursor:pointer;font-size:20px;line-height:1;">&times;</span>
+                            </div>
+                            <div style="padding:20px;display:flex;align-items:center;gap:15px;">
+                                <div style="width:50px;height:50px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                    <svg width="50" height="50" viewBox="0 0 50 50">
+                                        <circle cx="25" cy="25" r="20" fill="#5b9bd5" stroke="#4a7ba7" stroke-width="2"/>
+                                        <text x="25" y="33" text-anchor="middle" font-size="28" fill="#fff" font-family="Arial" font-weight="bold">i</text>
+                                    </svg>
+                                </div>
+                                <div style="flex:1;font-size:14px;color:#222;line-height:1.5;">Successfully Saved.</div>
+                            </div>
+                            <div style="text-align:center;padding:0 0 15px 0;">
+                                <button onclick="closeTdsSuccess()" style="padding:5px 35px;background:linear-gradient(to bottom, #f0f0f0, #d8d8d8);border:1px solid #999;cursor:pointer;font-size:13px;border-radius:3px;color:#333;font-weight:bold;">OK</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <script>
+                    // TDS Save button validation
+                    document.getElementById('tdsSaveBtn').addEventListener('click', function(e) {
+                        e.preventDefault();
+                        var tdsSubmitted = document.getElementById('tdsSubmitted').value.trim();
+                        var tdsPayable = document.getElementById('tdsPayable').value.trim();
+                        var tdsRemaining = document.getElementById('tdsRemaining').value.trim();
+                        
+                        // Check if at least one field has data
+                        if (tdsSubmitted !== '' || tdsPayable !== '' || tdsRemaining !== '') {
+                            // Show success modal
+                            document.getElementById('tdsSuccessModal').style.display = 'flex';
+                        }
+                    });
+                    
+                    function closeTdsSuccess() {
+                        document.getElementById('tdsSuccessModal').style.display = 'none';
+                    }
+                    </script>
+                </div>
+            </div>
+            
+            <!-- Employee Wages Section -->
+            <div class="section-panel">
+                <div class="section-header">वार्षिक कर्मचारी खर्च (तलब / ज्याला) भुक्तानी गर्नेले दिनुपर्ने विवरण</div>
+                <div class="section-body" style="background-color: #dfe9f6;">
+                    <div class="checkbox-field" style="background-color: #dfe9f6;">
+                        <input type="checkbox" id="wagesCheck" checked>
+                        <label for="wagesCheck">बार्षिक रु १ करोडभन्दा बढीको कर्मचारी खर्च (तलब तथा ज्याला) भुक्तानि भएको</label>
+                    </div>
+                    <div id="wagesSection">
+                        <div id="excelUploadSection" style="border: 1px solid #ccc; padding: 15px; margin: 10px 0; background-color: #e8f0fe;">
+                            <strong style="display: block; margin-bottom: 10px; color: #333;">Load From Excel File</strong>
+                            <div style="display: flex; gap: 10px; align-items: center;">
+                                <label style="margin: 0; white-space: nowrap;">Load XLS:</label>
+                                <input type="text" readonly style="flex: 1; padding: 5px; border: 1px solid #999; background: #fff;">
+                                <button class="save-btn" style="margin: 0; padding: 5px 15px; background: linear-gradient(to bottom, #f0f0f0, #d0d0d0);">Browse...</button>
+                                <button class="save-btn" style="margin: 0; padding: 5px 15px; background: linear-gradient(to bottom, #D9E8FB, #C5D9ED);">📤 Upload</button>
+                                <button class="save-btn" id="viewSampleBtn" style="margin: 0; padding: 5px 15px; background: linear-gradient(to bottom, #90EE90, #7FD87F);">📄 View Sample</button>
+                            </div>
+                            <script>
+                            // View Sample button - download sample Excel file
+                            document.getElementById('viewSampleBtn').addEventListener('click', function(e) {
+                                e.preventDefault();
+                                // Create a temporary link to download the file
+                                var link = document.createElement('a');
+                                link.href = '../../resources/samples/Annex13SalaryWages-Sample.xls';
+                                link.download = 'Annex13SalaryWages-Sample.xls';
+                                document.body.appendChild(link);
+                                link.click();
+                                document.body.removeChild(link);
+                            });
+                            </script>
+                        </div>
+                        <div id="wagesTableWrap" style="overflow-x: auto;">
+                            <table style="width: 100%; border-collapse: collapse; margin: 15px 0;">
+                                                <script>
+                                                // Hide wages section if checkbox is unchecked
+                                                var wagesCheck = document.getElementById('wagesCheck');
+                                                var wagesSection = document.getElementById('wagesSection');
+                                                function toggleWagesSection() {
+                                                    if (wagesCheck.checked) {
+                                                        wagesSection.style.display = '';
+                                                        document.getElementById('excelUploadSection').style.display = '';
+                                                        document.getElementById('wagesTableWrap').style.display = '';
+                                                    } else {
+                                                        wagesSection.style.display = '';
+                                                        document.getElementById('excelUploadSection').style.display = 'none';
+                                                        document.getElementById('wagesTableWrap').style.display = 'none';
+                                                    }
+                                                }
+                                                wagesCheck.addEventListener('change', toggleWagesSection);
+                                                // Run on load
+                                                toggleWagesSection();
+                                                </script>
+                            <thead>
+                                <tr style="background: linear-gradient(to bottom, #D9E8FB 0%, #C5D9ED 100%);">
+                                    <th style="border: 1px solid #999; padding: 8px; text-align: center;">सि.नं</th>
+                                    <th style="border: 1px solid #999; padding: 8px;">महिना</th>
+                                    <th style="border: 1px solid #999; padding: 8px;">लागत खर्चमा तलव ज्याला खर्च रु.</th>
+                                    <th style="border: 1px solid #999; padding: 8px;">प्रशासनिक तथा विक्रि वितरणमा कर्मचारी खर्च (ज्याला समेत)</th>
+                                    <th style="border: 1px solid #999; padding: 8px;">जम्मा तलव ज्याला खर्च रकम रु.</th>
+                                    <th style="border: 1px solid #999; padding: 8px;">पारिश्रमिक कर कट्टी दाखिला रकम रु.</th>
+                                    <th style="border: 1px solid #999; padding: 8px;">सबै भुक्तानींमा कुल जम्मा कर कट्टी दाखिला रकम रु.</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td style="border: 1px solid #ddd; padding: 6px; text-align: center; background-color: #fff;">1</td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;">श्रावण</td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td></tr>
+                                <tr><td style="border: 1px solid #ddd; padding: 6px; text-align: center; background-color: #fff;">2</td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;">भाद्र</td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td></tr>
+                                <tr><td style="border: 1px solid #ddd; padding: 6px; text-align: center; background-color: #fff;">3</td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;">असोज</td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td></tr>
+                                <tr><td style="border: 1px solid #ddd; padding: 6px; text-align: center; background-color: #fff;">4</td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;">कार्तिक</td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td></tr>
+                                <tr><td style="border: 1px solid #ddd; padding: 6px; text-align: center; background-color: #fff;">5</td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;">मंसिर</td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td></tr>
+                                <tr><td style="border: 1px solid #ddd; padding: 6px; text-align: center; background-color: #fff;">6</td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;">पुष</td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td></tr>
+                                <tr><td style="border: 1px solid #ddd; padding: 6px; text-align: center; background-color: #fff;">7</td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;">माघ</td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td></tr>
+                                <tr><td style="border: 1px solid #ddd; padding: 6px; text-align: center; background-color: #fff;">8</td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;">फाल्गुन</td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td></tr>
+                                <tr><td style="border: 1px solid #ddd; padding: 6px; text-align: center; background-color: #fff;">9</td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;">चैत्र</td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td></tr>
+                                <tr><td style="border: 1px solid #ddd; padding: 6px; text-align: center; background-color: #fff;">10</td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;">बैसाख</td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td></tr>
+                                <tr><td style="border: 1px solid #ddd; padding: 6px; text-align: center; background-color: #fff;">11</td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;">जेठ</td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td></tr>
+                                <tr><td style="border: 1px solid #ddd; padding: 6px; text-align: center; background-color: #fff;">12</td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;">आषाढ़</td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td><td style="border: 1px solid #ddd; padding: 6px; background-color: #fff;"><input type="text" style="width: 100%; border: none; text-align: right; background-color: #fff;"></td></tr>
+                                <tr style="background-color: #f0f0f0; font-weight: bold;">
+                                    <td colspan="2" style="border: 1px solid #999; padding: 6px;">जम्मा रकम</td>
+                                    <td style="border: 1px solid #999; padding: 6px;"><input type="text" readonly style="width: 100%; border: none; text-align: right; background: #ddd;"></td>
+                                    <td style="border: 1px solid #999; padding: 6px;"><input type="text" readonly style="width: 100%; border: none; text-align: right; background: #ddd;"></td>
+                                    <td style="border: 1px solid #999; padding: 6px;"><input type="text" readonly style="width: 100%; border: none; text-align: right; background: #ddd;"></td>
+                                    <td style="border: 1px solid #999; padding: 6px;"><input type="text" readonly style="width: 100%; border: none; text-align: right; background: #ddd;"></td>
+                                    <td style="border: 1px solid #999; padding: 6px;"><input type="text" readonly style="width: 100%; border: none; text-align: right; background: #ddd;"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <button class="save-btn" id="wagesSaveBtn">💾 Save</button>
+                    
+                    <!-- Warning Modal for Employee Wages -->
+                    <div id="wagesWarningModal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.3);z-index:10000;align-items:center;justify-content:center;">
+                        <div style="background:#e8f0ff;border:2px solid #5b9bd5;box-shadow:0 4px 16px rgba(0,0,0,0.2);border-radius:8px;width:400px;max-width:90vw;padding:0;">
+                            <div style="background:#5b9bd5;padding:8px 15px;border-radius:6px 6px 0 0;display:flex;align-items:center;justify-content:space-between;">
+                                <span style="color:#fff;font-weight:bold;font-size:15px;">WARNING</span>
+                                <span onclick="closeWagesWarning()" style="color:#fff;cursor:pointer;font-size:20px;line-height:1;">&times;</span>
+                            </div>
+                            <div style="padding:20px;display:flex;align-items:center;gap:15px;">
+                                <div style="width:50px;height:50px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                    <svg width="50" height="50" viewBox="0 0 50 50">
+                                        <polygon points="25,5 45,40 5,40" fill="#FFD700" stroke="#DAA520" stroke-width="2"/>
+                                        <text x="25" y="32" text-anchor="middle" font-size="24" fill="#333" font-family="Arial" font-weight="bold">!</text>
+                                    </svg>
+                                </div>
+                                <div style="flex:1;font-size:14px;color:#222;line-height:1.5;">कृपया अग्रिम कर कट्टी रकम भर्नुहोस।</div>
+                            </div>
+                            <div style="text-align:center;padding:0 0 15px 0;">
+                                <button onclick="closeWagesWarning()" style="padding:5px 35px;background:linear-gradient(to bottom, #f0f0f0, #d8d8d8);border:1px solid #999;cursor:pointer;font-size:13px;border-radius:3px;color:#333;font-weight:bold;">OK</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Success Modal for Employee Wages -->
+                    <div id="wagesSuccessModal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.3);z-index:10000;align-items:center;justify-content:center;">
+                        <div style="background:#e8f0ff;border:2px solid #5b9bd5;box-shadow:0 4px 16px rgba(0,0,0,0.2);border-radius:8px;width:400px;max-width:90vw;padding:0;">
+                            <div style="background:#5b9bd5;padding:8px 15px;border-radius:6px 6px 0 0;display:flex;align-items:center;justify-content:space-between;">
+                                <span style="color:#fff;font-weight:bold;font-size:15px;">SUCCESS</span>
+                                <span onclick="closeWagesSuccess()" style="color:#fff;cursor:pointer;font-size:20px;line-height:1;">&times;</span>
+                            </div>
+                            <div style="padding:20px;display:flex;align-items:center;gap:15px;">
+                                <div style="width:50px;height:50px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                    <svg width="50" height="50" viewBox="0 0 50 50">
+                                        <circle cx="25" cy="25" r="20" fill="#5b9bd5" stroke="#4a7ba7" stroke-width="2"/>
+                                        <text x="25" y="33" text-anchor="middle" font-size="28" fill="#fff" font-family="Arial" font-weight="bold">i</text>
+                                    </svg>
+                                </div>
+                                <div style="flex:1;font-size:14px;color:#222;line-height:1.5;">Successfully Saved.</div>
+                            </div>
+                            <div style="text-align:center;padding:0 0 15px 0;">
+                                <button onclick="closeWagesSuccess()" style="padding:5px 35px;background:linear-gradient(to bottom, #f0f0f0, #d8d8d8);border:1px solid #999;cursor:pointer;font-size:13px;border-radius:3px;color:#333;font-weight:bold;">OK</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <script>
+                    // Validate and show warning for employee wages save button
+                    document.getElementById('wagesSaveBtn').addEventListener('click', function(e) {
+                        e.preventDefault();
+                        // Always show success modal when save is clicked
+                        document.getElementById('wagesSuccessModal').style.display = 'flex';
+                    });
+                    
+                    function closeWagesWarning() {
+                        document.getElementById('wagesWarningModal').style.display = 'none';
+                    }
+                    
+                    function closeWagesSuccess() {
+                        document.getElementById('wagesSuccessModal').style.display = 'none';
+                    }
+                    </script>
+                </div>
+            </div>
+            
+            <!-- Income vs Financial Statement Comparison -->
+            <div class="section-panel">
+                <div class="section-header">आय विवरण र वित्तीय विवरण अनुसार खर्चको कट्टी विवरण</div>
+                <div class="section-body">
+                    <table id="incomeVsFinancialTable" style="width: 100%; border-collapse: collapse;">
+                                            <!-- Modal for Income vs Financial Save Success -->
+                                            <div id="incomeVsFinancialSaveModal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.18);z-index:9999;align-items:center;justify-content:center;">
+                                                <div style="background:#ced9e7;border:2px solid #4a90e2;box-shadow:0 2px 12px #0002;border-radius:7px;min-width:340px;max-width:90vw;padding:0 0 18px 0;display:flex;flex-direction:column;align-items:stretch;">
+                                                    <div style="background:#eaf3fb;border-bottom:1px solid #b5d1f3;padding:10px 18px 8px 18px;border-radius:7px 7px 0 0;display:flex;align-items:center;gap:8px;">
+                                                        <span style="color:#2176c1;font-size:20px;line-height:1;">&#9432;</span>
+                                                        <span style="color:#2176c1;font-weight:bold;font-size:16px;">SUCCESS</span>
+                                                    </div>
+                                                    <div style="padding:22px 18px 10px 18px;text-align:left;font-size:16px;color:#222;display:flex;align-items:center;gap:10px;">
+                                                        <span style="color:#2176c1;font-size:28px;">&#8505;</span>
+                                                        <span>Successfully Saved.</span>
+                                                    </div>
+                                                    <div style="text-align:center;margin-top:8px;">
+                                                        <button id="okIncomeVsFinancialSaveModalBtn" style="background:#eaf3fb;border:1px solid #b5d1f3;color:#2176c1;font-weight:bold;padding:4px 28px;font-size:15px;border-radius:3px;cursor:pointer;">OK</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <script>
+                                            // Attach modal logic to the Save button in the income vs financial section
+                                            document.addEventListener('DOMContentLoaded', function() {
+                                                // Find the Save button below the income vs financial table
+                                                var sectionHeader = Array.from(document.querySelectorAll('.section-header')).find(h => h.textContent.includes('आय विवरण र वित्तीय विवरण अनुसार खर्चको कट्टी विवरण'));
+                                                if (!sectionHeader) return;
+                                                var section = sectionHeader.parentElement;
+                                                var saveBtn = Array.from(section.querySelectorAll('button.save-btn')).find(btn => btn.textContent.includes('Save'));
+                                                var modal = document.getElementById('incomeVsFinancialSaveModal');
+                                                var okBtn = document.getElementById('okIncomeVsFinancialSaveModalBtn');
+                                                if (saveBtn && modal && okBtn) {
+                                                    saveBtn.addEventListener('click', function(e) {
+                                                        e.preventDefault();
+                                                        modal.style.display = 'flex';
+                                                    });
+                                                    okBtn.onclick = function() {
+                                                        modal.style.display = 'none';
+                                                    };
+                                                }
+                                            });
+                                            </script>
+                        <thead>
+                            <tr style="background: linear-gradient(to bottom, #D9E8FB 0%, #C5D9ED 100%);">
+                                <th style="border: 1px solid #999; padding: 8px; width: 50px;">सि.नं</th>
+                                <th style="border: 1px solid #999; padding: 8px;">विवरण</th>
+                                <th style="border: 1px solid #999; padding: 8px; width: 150px;">वित्तिय विवरण अनुसार दावी (क)</th>
+                                <th style="border: 1px solid #999; padding: 8px; width: 150px;">आय विवरण अनुसार दावी (ख)</th>
+                                <th style="border: 1px solid #999; padding: 8px; width: 120px;">फरक (क - ख)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td style="border: 1px solid #ddd; padding: 6px; text-align: center;">18</td><td style="border: 1px solid #ddd; padding: 6px;">दफा १४ बमोजिम कट्टी हुने व्याज खर्च</td><td style="border: 1px solid #ddd; padding: 6px;"><input type="text" style="width: 100%; border: none; text-align: right;"></td><td style="border: 1px solid #ddd; padding: 6px;"><input type="text" style="width: 100%; border: none; text-align: right;"></td><td style="border: 1px solid #ddd; padding: 6px;"><input type="text" readonly style="width: 100%; border: none; text-align: right; background: #f9f9f9;"></td></tr>
+                            <tr><td style="border: 1px solid #ddd; padding: 6px; text-align: center;">19</td><td style="border: 1px solid #ddd; padding: 6px;">दफा १५ बमोजिम कट्टी हुने व्यापार मौज्दातको लागतको खर्च</td><td style="border: 1px solid #ddd; padding: 6px;"><input type="text" style="width: 100%; border: none; text-align: right;"></td><td style="border: 1px solid #ddd; padding: 6px;"><input type="text" style="width: 100%; border: none; text-align: right;"></td><td style="border: 1px solid #ddd; padding: 6px;"><input type="text" readonly style="width: 100%; border: none; text-align: right; background: #f9f9f9;"></td></tr>
+                            <tr><td style="border: 1px solid #ddd; padding: 6px; text-align: center;">20</td><td style="border: 1px solid #ddd; padding: 6px;">दफा १६ बमोजिम कट्टी हुने मर्मत तथा सुधार खर्च</td><td style="border: 1px solid #ddd; padding: 6px;"><input type="text" style="width: 100%; border: none; text-align: right;"></td><td style="border: 1px solid #ddd; padding: 6px;"><input type="text" style="width: 100%; border: none; text-align: right;"></td><td style="border: 1px solid #ddd; padding: 6px;"><input type="text" readonly style="width: 100%; border: none; text-align: right; background: #f9f9f9;"></td></tr>
+                            <tr><td style="border: 1px solid #ddd; padding: 6px; text-align: center;">21</td><td style="border: 1px solid #ddd; padding: 6px;">दफा १७ बमोजिम कट्टी हुने प्रदूषण नियन्त्रण खर्च</td><td style="border: 1px solid #ddd; padding: 6px;"><input type="text" style="width: 100%; border: none; text-align: right;"></td><td style="border: 1px solid #ddd; padding: 6px;"><input type="text" style="width: 100%; border: none; text-align: right;"></td><td style="border: 1px solid #ddd; padding: 6px;"><input type="text" readonly style="width: 100%; border: none; text-align: right; background: #f9f9f9;"></td></tr>
+                            <tr><td style="border: 1px solid #ddd; padding: 6px; text-align: center;">22</td><td style="border: 1px solid #ddd; padding: 6px;">दफा १८ बमोजिम कट्टी हुने अनुसन्धान र विकास खर्च</td><td style="border: 1px solid #ddd; padding: 6px;"><input type="text" style="width: 100%; border: none; text-align: right;"></td><td style="border: 1px solid #ddd; padding: 6px;"><input type="text" style="width: 100%; border: none; text-align: right;"></td><td style="border: 1px solid #ddd; padding: 6px;"><input type="text" readonly style="width: 100%; border: none; text-align: right; background: #f9f9f9;"></td></tr>
+                            <tr><td style="border: 1px solid #ddd; padding: 6px; text-align: center;">23</td><td style="border: 1px solid #ddd; padding: 6px;">दफा १९ बमोजिम कट्टी हुने ह्रास कट्टी खर्च</td><td style="border: 1px solid #ddd; padding: 6px;"><input type="text" style="width: 100%; border: none; text-align: right;"></td><td style="border: 1px solid #ddd; padding: 6px;"><input type="text" style="width: 100%; border: none; text-align: right;"></td><td style="border: 1px solid #ddd; padding: 6px;"><input type="text" readonly style="width: 100%; border: none; text-align: right; background: #f9f9f9;"></td></tr>
+                            <tr><td style="border: 1px solid #ddd; padding: 6px; text-align: center;">24</td><td style="border: 1px solid #ddd; padding: 6px;">दफा ५९(१) बमोजिम कट्टी हुने जगेडा रकम</td><td style="border: 1px solid #ddd; padding: 6px;"><input type="text" style="width: 100%; border: none; text-align: right;"></td><td style="border: 1px solid #ddd; padding: 6px;"><input type="text" style="width: 100%; border: none; text-align: right;"></td><td style="border: 1px solid #ddd; padding: 6px;"><input type="text" readonly style="width: 100%; border: none; text-align: right; background: #f9f9f9;"></td></tr>
+                            <tr><td style="border: 1px solid #ddd; padding: 6px; text-align: center;">25</td><td style="border: 1px solid #ddd; padding: 6px;">उपरोक्त वाहेक आयकर ऐन २०५८ वमोजिम कट्टी हुने अन्य खर्चहरु (विवरण संलग्न गर्ने)</td><td style="border: 1px solid #ddd; padding: 6px;"><input type="text" style="width: 100%; border: none; text-align: right;"></td><td style="border: 1px solid #ddd; padding: 6px;"><input type="text" style="width: 100%; border: none; text-align: right;"></td><td style="border: 1px solid #ddd; padding: 6px;"><input type="text" readonly style="width: 100%; border: none; text-align: right; background: #f9f9f9;"></td></tr>
+                            <tr id="foreignTaxRow26"><td style="border: 1px solid #ddd; padding: 6px; text-align: center;">26</td><td style="border: 1px solid #ddd; padding: 6px;">विदेशमा तिरेको कर (दफा ७१.४) <span style="color: #2176c1; font-size: 11px;">[Auto from Annex 5]</span></td><td style="border: 1px solid #ddd; padding: 6px;"><input type="text" id="foreignTaxFinancial" readonly style="width: 100%; border: none; text-align: right; background: #e8f4f8;"></td><td style="border: 1px solid #ddd; padding: 6px;"><input type="text" id="foreignTaxIncome" readonly style="width: 100%; border: none; text-align: right; background: #e8f4f8;"></td><td style="border: 1px solid #ddd; padding: 6px;"><input type="text" id="foreignTaxDiff" readonly style="width: 100%; border: none; text-align: right; background: #f9f9f9;"></td></tr>
+                            <tr style="background-color: #f0f0f0; font-weight: bold;">
+                                <td colspan="2" style="border: 1px solid #999; padding: 6px;">जम्मा</td>
+                                <td style="border: 1px solid #999; padding: 6px;"><input type="text" readonly style="width: 100%; border: none; text-align: right; background: #ddd;"></td>
+                                <td style="border: 1px solid #999; padding: 6px;"><input type="text" readonly style="width: 100%; border: none; text-align: right; background: #ddd;"></td>
+                                <td style="border: 1px solid #999; padding: 6px;"><input type="text" readonly style="width: 100%; border: none; text-align: right; background: #ddd;"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button class="save-btn">💾 Save</button>
+                    <button class="save-btn" style="background: linear-gradient(to bottom, #ff6666, #ff4444);">🔄 Reset</button>
+                    <script>
+                    // Improved auto-calculate difference and totals for आय विवरण र वित्तीय विवरण अनुसार खर्चको कट्टी विवरण
+                    document.addEventListener('DOMContentLoaded', function() {
+                        // Load foreign tax from Annex 5
+                        function loadForeignTaxFromAnnex5() {
+                            try {
+                                var annex5Data = localStorage.getItem('d03_annex5_data');
+                                if (annex5Data) {
+                                    var data = JSON.parse(annex5Data);
+                                    var foreignTax = data.de9 || '0';
+                                    
+                                    // Populate both financial and income columns with the same value from Annex 5
+                                    var financialInput = document.getElementById('foreignTaxFinancial');
+                                    var incomeInput = document.getElementById('foreignTaxIncome');
+                                    var diffInput = document.getElementById('foreignTaxDiff');
+                                    
+                                    if (financialInput && incomeInput && diffInput) {
+                                        financialInput.value = foreignTax;
+                                        incomeInput.value = foreignTax;
+                                        // Since both are same, difference is 0
+                                        diffInput.value = '0';
+                                    }
+                                }
+                            } catch (e) {
+                                console.error('Error loading foreign tax from Annex 5:', e);
+                            }
+                        }
+                        
+                        // Load on page load
+                        loadForeignTaxFromAnnex5();
+                        
+                        function parseNum(val) {
+                            var n = parseFloat((val||'').replace(/,/g, ''));
+                            return isNaN(n) ? 0 : n;
+                        }
+                        var table = document.getElementById('incomeVsFinancialTable');
+                        if (!table) return;
+                        var tbody = table.querySelector('tbody');
+                        // Only sum the 8 data rows (18-25), not the total row or 26
+                        var dataRows = Array.from(tbody.querySelectorAll('tr')).filter(function(tr, idx) {
+                            // 8 rows: index 0 to 7 (18-25)
+                            return idx >= 0 && idx <= 7;
+                        });
+                        var row26 = document.getElementById('foreignTaxRow26');
+                        var totalRow = tbody.querySelector('tr[style*="background-color: #f0f0f0"]');
+                        function recalc() {
+                            var sumA = 0, sumB = 0, sumDiff = 0;
+                            dataRows.forEach(function(tr) {
+                                var inputs = tr.querySelectorAll('input');
+                                if (inputs.length < 3) return;
+                                var a = parseNum(inputs[0].value);
+                                var b = parseNum(inputs[1].value);
+                                var diff = a - b;
+                                inputs[2].value = diff ? diff.toFixed(2) : '';
+                                sumA += a;
+                                sumB += b;
+                                sumDiff += diff;
+                            });
+                            
+                            // Add Row 26 foreign tax to totals
+                            if (row26) {
+                                var row26Inputs = row26.querySelectorAll('input');
+                                if (row26Inputs.length === 3) {
+                                    sumA += parseNum(row26Inputs[0].value);
+                                    sumB += parseNum(row26Inputs[1].value);
+                                    sumDiff += parseNum(row26Inputs[2].value);
+                                }
+                            }
+                            
+                            if (totalRow) {
+                                var totalInputs = totalRow.querySelectorAll('input');
+                                if (totalInputs.length === 3) {
+                                    totalInputs[0].value = sumA ? sumA.toFixed(2) : '';
+                                    totalInputs[1].value = sumB ? sumB.toFixed(2) : '';
+                                    totalInputs[2].value = sumDiff ? sumDiff.toFixed(2) : '';
+                                }
+                            }
+                        }
+                        // Attach event listeners
+                        dataRows.forEach(function(tr) {
+                            var inputs = tr.querySelectorAll('input');
+                            if (inputs.length < 2) return;
+                            inputs[0].addEventListener('input', recalc);
+                            inputs[1].addEventListener('input', recalc);
+                        });
+                        recalc();
+                    });
+                    </script>
+                </div>
+            </div>
+            
+            <!-- Greater than 1 Lakh Section -->
+            <div class="section-panel">
+                <div class="section-header">शुरु मौज्दात, खरिद, बिक्री, लिन बाँकी वा दिन बाँकी मध्ये कुनै रकम रु १ लाख भन्दा बढी हुनेको विवरण</div>
+                <div class="section-body" style="background: #e8f0fe;">
+                    <!-- Checkbox for no transaction -->
+                    <div style="margin-bottom: 15px; padding: 10px; background: #dfe9f6; border: 1px solid #ccc; border-radius: 4px;">
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                            <input type="checkbox" id="noTransactionOver1Lakh" style="width: 18px; height: 18px; cursor: pointer;">
+                            <span style="font-size: 14px; color: #333;">कुनै पनि व्यक्ति / संस्था संग आर्थिक वर्ष भरिमा रु एक लाख भन्दा बढीको कारोबार छैन</span>
+                        </label>
+                    </div>
+                    
+                    <!-- PAN Notice -->
+                    <div style="margin-bottom: 15px; padding: 12px; background: #fff9c4; border: 1px solid #f9a825; border-radius: 4px; max-width: 850px;">
+                        <span style="font-size: 13px; color: #333;">स्था. ले. नं. हुनेको हकमा अनिवार्य रुपमा स्था. ले. नं. (PAN) उल्लेख गर्नुहोला ।</span>
+                    </div>
+                    
+                    <!-- Load From Excel File -->
+                    <fieldset style="border: 1px solid #999; padding: 15px; margin-bottom: 15px; background: #dfe9f6; border-radius: 4px; max-width: 850px;">
+                        <legend style="font-size: 14px; font-weight: bold; padding: 0 8px; color: #333;">Load From Excel File</legend>
+                        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                            <label style="font-weight: bold; font-size: 13px;">Load XLS:</label>
+                            <input type="file" id="xlsFileInput1Lakh" accept=".xls,.xlsx" style="flex: 1; min-width: 250px; padding: 6px; border: 1px solid #ccc; border-radius: 3px;">
+                            <button id="browseBtn1Lakh" style="padding: 6px 16px; background: linear-gradient(to bottom, #f0f0f0, #d9d9d9); border: 1px solid #999; border-radius: 3px; cursor: pointer; font-size: 13px;">
+                                📁 Browse...
+                            </button>
+                            <button id="uploadBtn1Lakh" style="padding: 6px 16px; background: linear-gradient(to bottom, #e3f2fd, #bbdefb); border: 1px solid #42a5f5; border-radius: 3px; cursor: pointer; font-size: 13px; color: #1976d2;">
+                                📤 Upload
+                            </button>
+                            <button id="viewSample1LakhBtn" style="padding: 6px 16px; background: linear-gradient(to bottom, #c8e6c9, #a5d6a7); border: 1px solid #66bb6a; border-radius: 3px; cursor: pointer; font-size: 13px; color: #2e7d32;">
+                                💾 View Sample
+                            </button>
+                        </div>
+                    </fieldset>
+                    <script>
+                    // Browse button triggers file input
+                    document.getElementById('browseBtn1Lakh').addEventListener('click', function(e) {
+                        e.preventDefault();
+                        document.getElementById('xlsFileInput1Lakh').click();
+                    });
+                    
+                    // View Sample button - download sample Excel file for 1 Lakh section
+                    document.getElementById('viewSample1LakhBtn').addEventListener('click', function(e) {
+                        e.preventDefault();
+                        // Create a temporary link to download the file
+                        var link = document.createElement('a');
+                        link.href = '../../resources/samples/Annex13New-Sample.xls';
+                        link.download = 'Annex13New-Sample.xls';
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                    });
+                    
+                    // Upload button - handle file upload
+                    document.getElementById('uploadBtn1Lakh').addEventListener('click', function(e) {
+                        e.preventDefault();
+                        var fileInput = document.getElementById('xlsFileInput1Lakh');
+                        if (fileInput.files.length === 0) {
+                            alert('कृपया पहिले एक्सेल फाइल छान्नुहोस्।\nPlease select an Excel file first.');
+                            return;
+                        }
+                        // TODO: Implement Excel file parsing and data loading
+                        alert('Excel file upload functionality will be implemented.');
+                    });
+                    
+                    // Handle checkbox state change to enable/disable Upload and Add New buttons
+                    document.addEventListener('DOMContentLoaded', function() {
+                        var checkbox = document.getElementById('noTransactionOver1Lakh');
+                        var uploadBtn = document.getElementById('uploadBtn1Lakh');
+                        var addNewBtn = document.getElementById('addRowBtn');
+                        
+                        function toggleButtons() {
+                            if (checkbox.checked) {
+                                // Dim the buttons when checkbox is checked
+                                uploadBtn.style.opacity = '0.4';
+                                uploadBtn.style.cursor = 'not-allowed';
+                                uploadBtn.disabled = true;
+                                
+                                addNewBtn.style.opacity = '0.4';
+                                addNewBtn.style.cursor = 'not-allowed';
+                                addNewBtn.disabled = true;
+                            } else {
+                                // Bright buttons when checkbox is unchecked
+                                uploadBtn.style.opacity = '1';
+                                uploadBtn.style.cursor = 'pointer';
+                                uploadBtn.disabled = false;
+                                
+                                addNewBtn.style.opacity = '1';
+                                addNewBtn.style.cursor = 'pointer';
+                                addNewBtn.disabled = false;
+                            }
+                        }
+                        
+                        // Initial state
+                        toggleButtons();
+                        
+                        // Listen for checkbox changes
+                        checkbox.addEventListener('change', toggleButtons);
+                    });
+                    </script>
+                    
+                    <div style="margin-bottom: 10px;">
+                        <button id="addRowBtn" style="border: none; background: none; color: #249c2c; font-size: 14px; display: inline-flex; align-items: center; gap: 4px; cursor: pointer; margin-right: 10px;">
+                            <span style="font-size: 16px;">&#x2795;</span> Add New
+                        </button>
+                        <button id="deleteAllBtn" style="border: none; background: none; color: #d32f2f; font-size: 14px; display: inline-flex; align-items: center; gap: 4px; cursor: pointer; margin-right: 10px;">
+                            <span style="font-size: 16px;">&#x2716;</span> Delete All
+                        </button>
+                        <button id="checkSumBtn" style="border: none; background: none; color: #003366; font-size: 13px; cursor: pointer;">Check Sum</button>
+                    </div>
+                    <div style="overflow-x: auto;">
+                        <table id="transactionTable" style="width: 100%; border-collapse: collapse; background: #fff; border: 1px solid #bbb;">
+                            <thead>
+                                <tr style="background: #f7f7f7;">
+                                    <th style="border: 1px solid #bbb; padding: 6px;">स्थायी लेखा नम्बर</th>
+                                    <th style="border: 1px solid #bbb; padding: 6px;">व्यवसायको नाम</th>
+                                    <th style="border: 1px solid #bbb; padding: 6px;">वर्षको शुरुको लिन बाकी (दिन बाकी) रकम</th>
+                                    <th style="border: 1px solid #bbb; padding: 6px;">पुजिगत सेवा खरिद</th>
+                                    <th style="border: 1px solid #bbb; padding: 6px;">अन्य सेवा खरिद</th>
+                                    <th style="border: 1px solid #bbb; padding: 6px;">पुजिगत समान खरिद</th>
+                                </tr>
+                            </thead>
+                            <tbody id="transactionGrid">
+                                <!-- Default empty rows for data entry -->
+                                <tr style="height: 35px;">
+                                    <td style="border: 1px solid #bbb; padding: 6px; background: #fff;"><input type="text" style="width: 100%; border: none; background: transparent; padding: 4px; font-size: 13px;"></td>
+                                    <td style="border: 1px solid #bbb; padding: 6px; background: #fff;"><input type="text" style="width: 100%; border: none; background: transparent; padding: 4px; font-size: 13px;"></td>
+                                    <td style="border: 1px solid #bbb; padding: 6px; background: #fff;"><input type="text" style="width: 100%; border: none; background: transparent; padding: 4px; font-size: 13px;"></td>
+                                    <td style="border: 1px solid #bbb; padding: 6px; background: #fff;"><input type="text" style="width: 100%; border: none; background: transparent; padding: 4px; font-size: 13px;"></td>
+                                    <td style="border: 1px solid #bbb; padding: 6px; background: #fff;"><input type="text" style="width: 100%; border: none; background: transparent; padding: 4px; font-size: 13px;"></td>
+                                    <td style="border: 1px solid #bbb; padding: 6px; background: #fff;"><input type="text" style="width: 100%; border: none; background: transparent; padding: 4px; font-size: 13px;"></td>
+                                </tr>
+                                <tr style="height: 35px;">
+                                    <td style="border: 1px solid #bbb; padding: 6px; background: #fff;"><input type="text" style="width: 100%; border: none; background: transparent; padding: 4px; font-size: 13px;"></td>
+                                    <td style="border: 1px solid #bbb; padding: 6px; background: #fff;"><input type="text" style="width: 100%; border: none; background: transparent; padding: 4px; font-size: 13px;"></td>
+                                    <td style="border: 1px solid #bbb; padding: 6px; background: #fff;"><input type="text" style="width: 100%; border: none; background: transparent; padding: 4px; font-size: 13px;"></td>
+                                    <td style="border: 1px solid #bbb; padding: 6px; background: #fff;"><input type="text" style="width: 100%; border: none; background: transparent; padding: 4px; font-size: 13px;"></td>
+                                    <td style="border: 1px solid #bbb; padding: 6px; background: #fff;"><input type="text" style="width: 100%; border: none; background: transparent; padding: 4px; font-size: 13px;"></td>
+                                    <td style="border: 1px solid #bbb; padding: 6px; background: #fff;"><input type="text" style="width: 100%; border: none; background: transparent; padding: 4px; font-size: 13px;"></td>
+                                </tr>
+                                <tr style="height: 35px;">
+                                    <td style="border: 1px solid #bbb; padding: 6px; background: #fff;"><input type="text" style="width: 100%; border: none; background: transparent; padding: 4px; font-size: 13px;"></td>
+                                    <td style="border: 1px solid #bbb; padding: 6px; background: #fff;"><input type="text" style="width: 100%; border: none; background: transparent; padding: 4px; font-size: 13px;"></td>
+                                    <td style="border: 1px solid #bbb; padding: 6px; background: #fff;"><input type="text" style="width: 100%; border: none; background: transparent; padding: 4px; font-size: 13px;"></td>
+                                    <td style="border: 1px solid #bbb; padding: 6px; background: #fff;"><input type="text" style="width: 100%; border: none; background: transparent; padding: 4px; font-size: 13px;"></td>
+                                    <td style="border: 1px solid #bbb; padding: 6px; background: #fff;"><input type="text" style="width: 100%; border: none; background: transparent; padding: 4px; font-size: 13px;"></td>
+                                    <td style="border: 1px solid #bbb; padding: 6px; background: #fff;"><input type="text" style="width: 100%; border: none; background: transparent; padding: 4px; font-size: 13px;"></td>
+                                </tr>
+                                <tr style="height: 35px;">
+                                    <td style="border: 1px solid #bbb; padding: 6px; background: #fff;"><input type="text" style="width: 100%; border: none; background: transparent; padding: 4px; font-size: 13px;"></td>
+                                    <td style="border: 1px solid #bbb; padding: 6px; background: #fff;"><input type="text" style="width: 100%; border: none; background: transparent; padding: 4px; font-size: 13px;"></td>
+                                    <td style="border: 1px solid #bbb; padding: 6px; background: #fff;"><input type="text" style="width: 100%; border: none; background: transparent; padding: 4px; font-size: 13px;"></td>
+                                    <td style="border: 1px solid #bbb; padding: 6px; background: #fff;"><input type="text" style="width: 100%; border: none; background: transparent; padding: 4px; font-size: 13px;"></td>
+                                    <td style="border: 1px solid #bbb; padding: 6px; background: #fff;"><input type="text" style="width: 100%; border: none; background: transparent; padding: 4px; font-size: 13px;"></td>
+                                    <td style="border: 1px solid #bbb; padding: 6px; background: #fff;"><input type="text" style="width: 100%; border: none; background: transparent; padding: 4px; font-size: 13px;"></td>
+                                </tr>
+                                <tr style="height: 35px;">
+                                    <td style="border: 1px solid #bbb; padding: 6px; background: #fff;"><input type="text" style="width: 100%; border: none; background: transparent; padding: 4px; font-size: 13px;"></td>
+                                    <td style="border: 1px solid #bbb; padding: 6px; background: #fff;"><input type="text" style="width: 100%; border: none; background: transparent; padding: 4px; font-size: 13px;"></td>
+                                    <td style="border: 1px solid #bbb; padding: 6px; background: #fff;"><input type="text" style="width: 100%; border: none; background: transparent; padding: 4px; font-size: 13px;"></td>
+                                    <td style="border: 1px solid #bbb; padding: 6px; background: #fff;"><input type="text" style="width: 100%; border: none; background: transparent; padding: 4px; font-size: 13px;"></td>
+                                    <td style="border: 1px solid #bbb; padding: 6px; background: #fff;"><input type="text" style="width: 100%; border: none; background: transparent; padding: 4px; font-size: 13px;"></td>
+                                    <td style="border: 1px solid #bbb; padding: 6px; background: #fff;"><input type="text" style="width: 100%; border: none; background: transparent; padding: 4px; font-size: 13px;"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <script>
+                        // Add row to transaction grid
+                        document.getElementById('addRowBtn').onclick = function() {
+                            const grid = document.getElementById('transactionGrid');
+                            const row = document.createElement('tr');
+                            row.innerHTML = `
+                                <td style="border: 1px solid #bbb; padding: 4px;"><input type="text" style="width: 100%; border: none; background: #fff;"></td>
+                                <td style="border: 1px solid #bbb; padding: 4px;"><input type="text" style="width: 100%; border: none; background: #fff;"></td>
+                                <td style="border: 1px solid #bbb; padding: 4px;"><input type="text" style="width: 100%; border: none; background: #fff;"></td>
+                                <td style="border: 1px solid #bbb; padding: 4px;"><input type="text" style="width: 100%; border: none; background: #fff;"></td>
+                                <td style="border: 1px solid #bbb; padding: 4px;"><input type="text" style="width: 100%; border: none; background: #fff;"></td>
+                                <td style="border: 1px solid #bbb; padding: 4px;"><input type="text" style="width: 100%; border: none; background: #fff;"></td>
+                            `;
+                            grid.appendChild(row);
+                        };
+                        document.getElementById('deleteAllBtn').onclick = function() {
+                            document.getElementById('transactionGrid').innerHTML = '';
+                        };
+                        </script>
+                    </div>
+                    
+                    <!-- Totals Section -->
+                    <div style="margin-top: 15px; padding: 15px; background: #f0f5fb; border: 1px solid #b5d1f3;">
+                        <div style="font-weight: bold; margin-bottom: 10px; font-size: 14px;">जम्मा</div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <label style="min-width: 200px;">वर्षको शुरुको लिन बाकी (दिन बाकी) रकम :</label>
+                                <input type="text" id="totalBeginning" readonly style="flex: 1; padding: 4px 8px; border: 1px solid #ccc; background: #fff;">
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <label style="min-width: 150px;">पुजिगत सेवा खरिद :</label>
+                                <input type="text" id="totalCapitalService" readonly style="flex: 1; padding: 4px 8px; border: 1px solid #ccc; background: #fff;">
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <label style="min-width: 200px;">पुजिगत समान खरिद:</label>
+                                <input type="text" id="totalCapitalGoods" readonly style="flex: 1; padding: 4px 8px; border: 1px solid #ccc; background: #fff;">
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <label style="min-width: 150px;">अन्य सेवा खरिद :</label>
+                                <input type="text" id="totalOtherService" readonly style="flex: 1; padding: 4px 8px; border: 1px solid #ccc; background: #fff;">
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <label style="min-width: 200px;">समान बिक्रि:</label>
+                                <input type="text" id="totalGoodsSales" readonly style="flex: 1; padding: 4px 8px; border: 1px solid #ccc; background: #fff;">
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <label style="min-width: 150px;">अन्य समान खरिद:</label>
+                                <input type="text" id="totalOtherGoods" readonly style="flex: 1; padding: 4px 8px; border: 1px solid #ccc; background: #fff;">
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <label style="min-width: 200px;">वर्षको अन्तमा लिन बाकी (दिन बाकी) रकम:</label>
+                                <input type="text" id="totalEnding" readonly style="flex: 1; padding: 4px 8px; border: 1px solid #ccc; background: #fff;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <!-- Save Transaction Button -->
+            <button id="saveTransactionBtn" class="save-btn">💾 Save Transaction</button>
+            <!-- Modal for Save Transaction Success -->
+            <div id="saveTransactionModal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.18);z-index:9999;align-items:center;justify-content:center;">
+                <div style="background:#ced9e7;border:2px solid #4a90e2;box-shadow:0 2px 12px #0002;border-radius:7px;min-width:340px;max-width:90vw;padding:0 0 18px 0;display:flex;flex-direction:column;align-items:stretch;">
+                    <div style="background:#eaf3fb;border-bottom:1px solid #b5d1f3;padding:10px 18px 8px 18px;border-radius:7px 7px 0 0;display:flex;align-items:center;gap:8px;">
+                        <span style="color:#2176c1;font-size:20px;line-height:1;">&#9432;</span>
+                        <span style="color:#2176c1;font-weight:bold;font-size:16px;">SUCCESS</span>
+                    </div>
+                    <div style="padding:22px 18px 10px 18px;text-align:left;font-size:16px;color:#222;display:flex;align-items:center;gap:10px;">
+                        <span style="color:#2176c1;font-size:28px;">&#8505;</span>
+                        <span>Successfully Saved.</span>
+                    </div>
+                    <div style="text-align:center;margin-top:8px;">
+                        <button id="okSaveTransactionModalBtn" style="background:#eaf3fb;border:1px solid #b5d1f3;color:#2176c1;font-weight:bold;padding:4px 28px;font-size:15px;border-radius:3px;cursor:pointer;">OK</button>
+                    </div>
+                </div>
+            </div>
+            <script>
+            // Attach modal logic to the Save Transaction button and set update flag
+            document.addEventListener('DOMContentLoaded', function() {
+                var saveBtn = document.getElementById('saveTransactionBtn');
+                var modal = document.getElementById('saveTransactionModal');
+                var okBtn = document.getElementById('okSaveTransactionModalBtn');
+                if (saveBtn && modal && okBtn) {
+                    saveBtn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        // Set update flag for Annex-13
+                        localStorage.setItem('d03_annex13_saved', '1');
+                        modal.style.display = 'flex';
+                    });
+                    okBtn.onclick = function() {
+                        modal.style.display = 'none';
+                    };
+                }
+            });
+            </script>
+            
+            <!-- Back Link Footer -->
+            <div class="back-link-panel" style="margin-top: 20px;">
+                <span class="back-link-text">पछाडि गएर अनुसूची तय गर्न </span>
+                <span class="back-link-click" id="backLinkBtnFooter">यहाँ क्लिक</span>
+                <span class="back-link-text"> गर्नुहोस् ।</span>
+            </div>
+
+            <!-- Confirm Action Modal -->
+            <div id="confirmBackModal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.18);z-index:99999;align-items:center;justify-content:center;">
+                <div style="background:#f7fafd;border:2px solid #7fa7d9;box-shadow:0 2px 12px #0002;border-radius:7px;min-width:340px;max-width:90vw;padding:0 0 18px 0;display:flex;flex-direction:column;align-items:stretch;">
+                    <div style="background:#eaf3fb;border-bottom:1px solid #b5d1f3;padding:10px 18px 8px 18px;border-radius:7px 7px 0 0;display:flex;align-items:center;gap:8px;">
+                        <span style="color:#2176c1;font-size:20px;line-height:1;">&#10068;</span>
+                        <span style="color:#2176c1;font-weight:bold;font-size:18px;">Confirm Action</span>
+                        <span style="margin-left:auto;cursor:pointer;font-size:18px;color:#888;" id="closeConfirmBackModal">&#10006;</span>
+                    </div>
+                    <div style="padding:22px 18px 10px 18px;text-align:left;font-size:18px;color:#222;display:flex;align-items:center;gap:10px;">
+                        <span style="color:#2176c1;font-size:32px;">&#63;</span>
+                        <span>के तपाईं पछाडि गएर अनुसूची तय गर्न चाहनुहुन्छ?</span>
+                    </div>
+                    <div style="text-align:center;margin-top:8px;display:flex;justify-content:center;gap:18px;">
+                        <button id="confirmBackYesBtn" style="background:#eaf3fb;border:1px solid #b5d1f3;color:#2176c1;font-weight:bold;padding:4px 38px;font-size:18px;border-radius:3px;cursor:pointer;">Yes</button>
+                        <button id="confirmBackNoBtn" style="background:#f5f5f5;border:1px solid #bbb;color:#444;font-weight:bold;padding:4px 38px;font-size:18px;border-radius:3px;cursor:pointer;">No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Toggle Excel upload section based on checkbox
+        document.getElementById('wagesCheck').addEventListener('change', function() {
+            const uploadSection = document.getElementById('excelUploadSection');
+            if (this.checked) {
+                uploadSection.style.display = 'block';
+            } else {
+                uploadSection.style.display = 'none';
+            }
+        });
+
+        // Confirm Action Modal for Back Link
+        function showConfirmBackModal() {
+            document.getElementById('confirmBackModal').style.display = 'flex';
+        }
+        function hideConfirmBackModal() {
+            document.getElementById('confirmBackModal').style.display = 'none';
+        }
+        document.getElementById('backLinkBtn').onclick = showConfirmBackModal;
+        document.getElementById('backLinkBtnFooter').onclick = showConfirmBackModal;
+        document.getElementById('closeConfirmBackModal').onclick = hideConfirmBackModal;
+        document.getElementById('confirmBackNoBtn').onclick = hideConfirmBackModal;
+        document.getElementById('confirmBackYesBtn').onclick = function() {
+            // Redirect to set annex page with iframe
+            if (window.parent && window.parent !== window) {
+                window.parent.location.href = 'd03_set_annex.html';
+            } else {
+                window.location.href = 'd03_set_annex.html';
+            }
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <title>Print Pages - D03</title>
+    <link rel="stylesheet" href="../../extjs/resources/ext-all.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html, body {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+        body {
+            background: #DFE9F6;
+            font-family: tahoma, arial, verdana, sans-serif;
+            font-size: 11px;
+        }
+        .fullscreen-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .header-section {
+            flex-shrink: 0;
+            background: #15498B;
+            padding: 10px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .header-title {
+            color: #FFF;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .close-btn {
+            background: #FFF;
+            border: none;
+            padding: 6px 20px;
+            border-radius: 3px;
+            color: #15498B;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 11px;
+        }
+        .close-btn:hover {
+            background: #F0F0F0;
+        }
+        .breadcrumb {
+            background: #DFE9F6;
+            padding: 8px 15px;
+            font-size: 11px;
+            color: #15498B;
+            flex-shrink: 0;
+        }
+        .iframe-container {
+            flex: 1;
+            width: 100%;
+            overflow: hidden;
+            background: #FFF;
+        }
+        .content-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .page-header {
+            background: linear-gradient(to bottom, #D0E1F5 0%, #BAD4F0 100%);
+            border: 1px solid #99BCE8;
+            padding: 6px 12px;
+            font-weight: bold;
+            font-size: 11px;
+            color: #15498B;
+            margin-bottom: 10px;
+        }
+        .info-panel {
+            background: #DFE9F6;
+            border: 1px solid #99BCE8;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .info-section {
+            background: #E8F0F8;
+            border: 1px solid #B5C7E3;
+            padding: 10px 15px;
+            margin-bottom: 10px;
+        }
+        .info-header {
+            font-size: 11px;
+            font-weight: bold;
+            color: #15498B;
+            margin-bottom: 8px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #B5C7E3;
+        }
+        .info-row {
+            display: flex;
+            gap: 30px;
+            margin: 6px 0;
+            font-size: 11px;
+        }
+        .info-item {
+            display: flex;
+            gap: 8px;
+        }
+        .info-label {
+            font-weight: bold;
+            color: #000;
+        }
+        .info-value {
+            color: #000;
+        }
+        .annex-section {
+            background: #DFE9F6;
+            border: 1px solid #99BCE8;
+            padding: 15px;
+        }
+        .section-header {
+            background: linear-gradient(to bottom, #D0E1F5 0%, #BAD4F0 100%);
+            border: 1px solid #99BCE8;
+            padding: 6px 12px;
+            font-weight: bold;
+            font-size: 11px;
+            color: #15498B;
+            margin-bottom: 10px;
+        }
+        .annex-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #FFF;
+        }
+        .annex-table th,
+        .annex-table td {
+            border: 1px solid #B5C7E3;
+            padding: 6px 10px;
+            font-size: 11px;
+            text-align: left;
+        }
+        .annex-table th {
+            background: #E8F0F8;
+            font-weight: bold;
+            color: #15498B;
+        }
+        .annex-table td {
+            color: #000;
+        }
+        .print-link {
+            color: #0000FF;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        .print-link:hover {
+            color: #0000CC;
+        }
+        .note-text {
+            color: red;
+            font-size: 11px;
+            margin-top: 10px;
+        }
+
+        /* Disclaimer Banner */
+        .disclaimer-banner {
+            background-color: #fff3cd;
+            border: 2px solid #ffc107;
+            color: #856404;
+            padding: 15px 20px;
+            margin: 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            line-height: 1.6;
+            text-align: left;
+        }
+
+        @media screen and (max-width: 768px) {
+            .disclaimer-banner {
+                font-size: 12px;
+                padding: 12px 15px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .disclaimer-banner {
+                font-size: 11px;
+                padding: 10px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="fullscreen-container">
+        <div class="header-section">
+            <div class="header-title">D-03 Preview</div>
+            <button class="close-btn" onclick="closePreview()">Close</button>
+        </div>
+        
+        <div class="breadcrumb">
+            Integrated Tax Menus >> Print Pages D03
+        </div>
+        
+        <div class="iframe-container">
+            <iframe id="previewFrame" class="content-iframe" srcdoc=""></iframe>
+        </div>
+    </div>
+    
+    <script>
+        function closePreview() {
+            if (window.opener) {
+                window.close();
+            } else {
+                window.history.back();
+            }
+        }
+        
+        // Generate the iframe content
+        function generateIframeContent() {
+            return `
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <meta charset="UTF-8">
+                    <style>
+                        body {
+                            margin: 0;
+                            padding: 20px;
+                            font-family: tahoma, arial, verdana, sans-serif;
+                            font-size: 11px;
+                            background: #FFF;
+                        }
+                        body {
+                            margin: 0;
+                            padding: 20px;
+                            font-family: tahoma, arial, verdana, sans-serif;
+                            font-size: 11px;
+                            background: #FFF;
+                        }
+                        .page-header {
+                            background: linear-gradient(to bottom, #D0E1F5 0%, #BAD4F0 100%);
+                            border: 1px solid #99BCE8;
+                            padding: 6px 12px;
+                            font-weight: bold;
+                            font-size: 11px;
+                            color: #15498B;
+                            margin-bottom: 10px;
+                        }
+                        .info-panel {
+                            background: #DFE9F6;
+                            border: 1px solid #99BCE8;
+                            padding: 15px;
+                            margin-bottom: 15px;
+                        }
+                        .info-section {
+                            background: #E8F0F8;
+                            border: 1px solid #B5C7E3;
+                            padding: 10px 15px;
+                            margin-bottom: 10px;
+                        }
+                        .info-header {
+                            font-size: 11px;
+                            font-weight: bold;
+                            color: #15498B;
+                            margin-bottom: 8px;
+                            padding-bottom: 5px;
+                            border-bottom: 1px solid #B5C7E3;
+                        }
+                        .info-row {
+                            display: flex;
+                            gap: 30px;
+                            margin: 6px 0;
+                            font-size: 11px;
+                        }
+                        .info-item {
+                            display: flex;
+                            gap: 8px;
+                        }
+                        .info-label {
+                            font-weight: bold;
+                            color: #000;
+                        }
+                        .info-value {
+                            color: #000;
+                        }
+                        .annex-section {
+                            background: #DFE9F6;
+                            border: 1px solid #99BCE8;
+                            padding: 15px;
+                        }
+                        .section-header {
+                            background: linear-gradient(to bottom, #D0E1F5 0%, #BAD4F0 100%);
+                            border: 1px solid #99BCE8;
+                            padding: 6px 12px;
+                            font-weight: bold;
+                            font-size: 11px;
+                            color: #15498B;
+                            margin-bottom: 10px;
+                        }
+                        .annex-table {
+                            width: 100%;
+                            border-collapse: collapse;
+                            background: #FFF;
+                        }
+                        .annex-table th,
+                        .annex-table td {
+                            border: 1px solid #B5C7E3;
+                            padding: 6px 10px;
+                            font-size: 11px;
+                            text-align: left;
+                        }
+                        .annex-table th {
+                            background: #E8F0F8;
+                            font-weight: bold;
+                            color: #15498B;
+                        }
+                        .annex-table td {
+                            color: #000;
+                        }
+                        .print-link {
+                            color: #0000FF;
+                            text-decoration: underline;
+                            cursor: pointer;
+                        }
+                        .print-link:hover {
+                            color: #0000CC;
+                        }
+                        .note-text {
+                            color: red;
+                            font-size: 11px;
+                            margin-top: 10px;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="page-header">
+                        Print Pages
+                    </div>
+                    
+    <div class="info-panel">
+        <div class="info-section">
+            <div class="info-header">करदाता गृहमा अनुरोध गरी वेवसाइट <span style="color:red;cursor:pointer;text-decoration:underline;">यहाँ क्लिक</span> गर्नुहोस् ।</div>
+            
+            <div class="info-row">
+                <div class="info-item">
+                    <span class="info-label">आर्थिक वर्ष:</span>
+                    <span class="info-value" id="fiscalYear">2081.082</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">जी.दाहिंडो:</span>
+                    <span class="info-label" style="color:#000;">अन्तरगत राजस्व कार्यालय निस्र.</span>
+                </div>
+            </div>
+            
+            <div class="info-row">
+                <div class="info-item">
+                    <span class="info-label">सब्मिशन नम्बर:</span>
+                    <span class="info-value" id="submissionNumber">820076182834</span>
+                </div>
+            </div>
+            
+            <div class="info-row">
+                <div class="info-item">
+                    <span class="info-label">स्थायी लेखा नम्बर:</span>
+                    <span class="info-value" id="panNumber">622363440</span>
+                </div>
+            </div>
+            
+            <div class="info-row">
+                <div class="info-item">
+                    <span class="info-label">नाम:</span>
+                    <span class="info-value" id="taxpayerName">नवींन इन्टरप्राइजेज प्रा.लि.</span>
+                </div>
+            </div>
+            
+            <div class="info-row">
+                <div class="info-item">
+                    <span class="info-label">कार्यालया कोड:</span>
+                    <span class="info-value" id="officeCode">17</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Annexes List -->
+    <div class="annex-section">
+        <div class="section-header">१. फारम छाप</div>
+        <div style="background:#FFF; padding:15px;">
+            <div class="note-text">कम्प्युटरबाट तयारि गर्न <span style="color:red;cursor:pointer;text-decoration:underline;">यहाँ क्लिक</span> गर्नुहोस् ।</div>
+            
+            <table class="annex-table">
+                <thead>
+                    <tr>
+                        <th style="width:80px;">विवरण</th>
+                        <th>शिर्षक</th>
+                        <th style="width:100px;">छाप्ने</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>D03</td>
+                        <td>प्रमाण-आकार ३ डी-०३ 03 ०३०४</td>
+                        <td><span class="print-link">Print</span></td>
+                    </tr>
+                    <tr>
+                        <td>अनुसूची - ५</td>
+                        <td>व्यापार आकार विवरण राख्ने</td>
+                        <td><span class="print-link">Print</span></td>
+                    </tr>
+                    <tr>
+                        <td>अनुसूची - ५</td>
+                        <td>व्यापार आकार विवरण राख्ने</td>
+                        <td><span class="print-link">Print</span></td>
+                    </tr>
+                    <tr>
+                        <td>अनुसूची - ८</td>
+                        <td>ने व्यावसायिक सम्पत्तिको निसर्गबाट प्राप्त खुद लाभ</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>अनुसूची - १</td>
+                        <td>करको गणना (व्यक्तिहरूको हकमा)</td>
+                        <td><span class="print-link">Print</span></td>
+                    </tr>
+                    <tr>
+                        <td>अनुसूची - १०</td>
+                        <td>कर मिलान सम्बन्धी विवरण राख्ने</td>
+                        <td><span class="print-link">Print</span></td>
+                    </tr>
+                    <tr>
+                        <td>अनुसूची - १२</td>
+                        <td>विदेशमा तिरेको कर मिलान दावीको विवरण राख्ने</td>
+                        <td><span class="print-link">Print</span></td>
+                    </tr>
+                    <tr>
+                        <td>अनुसूची - १३</td>
+                        <td>वित्तिय तथा खरिद बिक्री विवरण</td>
+                        <td><span class="print-link">Print</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+                </body>
+                </html>
+            `;
+        }
+        
+        // Load user data from localStorage/sessionStorage
+        
+        // Load user data and populate iframe
+        window.addEventListener('DOMContentLoaded', function() {
+            // Set the iframe content
+            const iframe = document.getElementById('previewFrame');
+            iframe.srcdoc = generateIframeContent();
+            
+            // Wait for iframe to load then update data
+            iframe.onload = function() {
+                try {
+                    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                    
+                    // Get data from sessionStorage or localStorage
+                    let userData = null;
+                    const currentUser = sessionStorage.getItem('d03_current_registration');
+                    if (currentUser) {
+                        userData = JSON.parse(currentUser);
+                    } else {
+                        const returnData = localStorage.getItem('d03_return_data');
+                        if (returnData) {
+                            userData = JSON.parse(returnData);
+                        }
+                    }
+                    
+                    if (userData) {
+                        // Update submission number
+                        const submissionNo = userData.submissionNumber || userData.submissionNo || '';
+                        if (submissionNo) {
+                            const submissionEl = iframeDoc.getElementById('submissionNumber');
+                            if (submissionEl) submissionEl.textContent = submissionNo;
+                        }
+                        
+                        // Update PAN
+                        if (userData.pan) {
+                            const panEl = iframeDoc.getElementById('panNumber');
+                            if (panEl) panEl.textContent = userData.pan;
+                        }
+                        
+                        // Update fiscal year
+                        if (userData.fiscalYear) {
+                            const fiscalEl = iframeDoc.getElementById('fiscalYear');
+                            if (fiscalEl) fiscalEl.textContent = userData.fiscalYear;
+                        }
+                        
+                        // Update taxpayer name
+                        if (userData.firmName) {
+                            const nameEl = iframeDoc.getElementById('taxpayerName');
+                            if (nameEl) nameEl.textContent = userData.firmName;
+                        } else if (userData.name) {
+                            const nameEl = iframeDoc.getElementById('taxpayerName');
+                            if (nameEl) nameEl.textContent = userData.name;
+                        }
+                        
+                        // Update office code if available
+                        if (userData.officeCode) {
+                            const officeEl = iframeDoc.getElementById('officeCode');
+                            if (officeEl) officeEl.textContent = userData.officeCode;
+                        }
+                    }
+                } catch(e) {
+                    console.error('Error loading user data:', e);
+                }
+            };
+        });
+    </script>
+</body>
+</html>

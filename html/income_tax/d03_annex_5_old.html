@@ -1,0 +1,1846 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>अनुसूची -५</title>
+    <style>
+        body {
+            font-family: 'Kalimati', 'Noto Sans Devanagari', Arial, sans-serif;
+            margin: 0;
+            padding: 15px;
+            background: #D6E4F5;
+            font-size: 13px;
+        }
+        
+        .annex-container {
+            background: #D6E4F5;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0;
+            border: 1px solid #2c5aa0;
+        }
+        
+        .annex-header {
+            background: #c7ddf5;
+            padding: 8px 12px;
+            font-weight: bold;
+            font-size: 13px;
+            border: 1px solid #a0c0e0;
+        }
+        
+        .print-section {
+            padding: 8px 12px;
+            background: #D6E4F5;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .print-btn {
+            background: #f0f0f0;
+            border: 1px solid #999;
+            padding: 4px 8px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        
+        .main-title {
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 12px;
+            background: #D6E4F5;
+        }
+        
+        .back-link-section {
+            padding: 8px 12px;
+            background: #bed4f0;
+            border: 1px solid #a0c0e0;
+            margin: 10px;
+            font-size: 12px;
+        }
+        
+        .back-link-section a {
+            color: red;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        
+        .info-section {
+            padding: 10px;
+            background: #D6E4F5;
+        }
+        
+        .info-row {
+            display: flex;
+            margin-bottom: 8px;
+            align-items: center;
+        }
+        
+        .info-label {
+            width: 180px;
+            font-weight: normal;
+            font-size: 12px;
+        }
+        
+        .info-input {
+            flex: 1;
+            padding: 4px 6px;
+            border: 1px solid #00000000;
+            font-size: 12px;
+            max-width: 200px;
+        }
+        
+        .info-input:disabled {
+            background: #f5f5f5;
+        }
+        
+        .required-marker {
+            color: red;
+            margin-left: 3px;
+        }
+        
+        .section-header {
+            background: #c7ddf5;
+            padding: 6px 10px;
+            font-weight: bold;
+            margin: 15px 10px 0 10px;
+            border: 1px solid #a0c0e0;
+            font-size: 12px;
+        }
+        
+        .data-table {
+            width: calc(100% - 20px);
+            margin: 0 10px 15px 10px;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+        
+        .data-table th,
+        .data-table td {
+            border: 1px solid #ccc;
+            padding: 5px 8px;
+            text-align: left;
+            background: white;
+        }
+        
+        .data-table th {
+            background: #f0f0f0;
+            font-weight: normal;
+        }
+        
+        .data-table .row-num {
+            text-align: center;
+            width: 30px;
+            background: #f9f9f9;
+        }
+        
+        .data-table .desc-col {
+            width: 60%;
+        }
+        
+        .data-table .value-col {
+            width: 150px;
+        }
+        
+        .data-table .action-col {
+            width: 100px;
+            text-align: center;
+        }
+        
+        .data-table input[type="text"] {
+            width: calc(100% - 12px);
+            padding: 3px 5px;
+            border: 1px solid #ccc;
+            font-size: 12px;
+            text-align: right;
+            box-sizing: border-box;
+        }
+        
+        .data-table select {
+            width: calc(100% - 12px);
+            padding: 3px 5px;
+            border: 1px solid #ccc;
+            font-size: 12px;
+            box-sizing: border-box;
+        }
+        
+        .data-table .total-row {
+            background: #f0f0f0;
+            font-weight: bold;
+        }
+        
+        .data-table .total-row input {
+            background: #e8e8e8;
+            font-weight: bold;
+        }
+        
+        .add-details-btn {
+            background: #f0f0f0;
+            border: 1px solid #999;
+            padding: 3px 10px;
+            cursor: pointer;
+            font-size: 11px;
+            border-radius: 3px;
+        }
+        
+        .add-details-btn:hover {
+            background: #e0e0e0;
+        }
+        
+        .nepali-text {
+            color: #000;
+        }
+        
+        .english-text {
+            color: #555;
+            font-size: 11px;
+        }
+        
+        .action-buttons {
+            padding: 15px;
+            text-align: left;
+        }
+        
+        .btn-save {
+            background: #4a90e2;
+            color: white;
+            border: 1px solid #2c5aa0;
+            padding: 6px 20px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-right: 10px;
+        }
+        
+        .btn-save:hover {
+            background: #357abd;
+        }
+        
+        .btn-delete {
+            background: #e74c3c;
+            color: white;
+            border: 1px solid #c0392b;
+            padding: 6px 20px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-right: 10px;
+        }
+        
+        .btn-delete:hover {
+            background: #c0392b;
+        }
+        
+        .btn-update {
+            background: #27ae60;
+            color: white;
+            border: 1px solid #229954;
+            padding: 6px 20px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-right: 10px;
+        }
+        
+        .btn-update:hover {
+            background: #229954;
+        }
+        
+        /* Modal Styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 20px;
+            overflow-y: auto;
+        }
+        
+        .modal-overlay.modal-center {
+            align-items: center;
+            padding-top: 0;
+        }
+        
+        .modal-overlay.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: #dfe8f6;
+            width: 90%;
+            max-width: 1100px;
+            border: 2px solid #8b9dc3;
+            border-radius: 4px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+        
+        .modal-header {
+            background: linear-gradient(to bottom, #e8f0fa, #d0dce8);
+            padding: 8px 12px;
+            border-bottom: 1px solid #8b9dc3;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-title {
+            font-size: 13px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: #666;
+            cursor: pointer;
+            padding: 0;
+            width: 24px;
+            height: 24px;
+            line-height: 20px;
+        }
+        
+        .modal-close:hover {
+            color: #000;
+        }
+        
+        .modal-body {
+            padding: 15px;
+        }
+        
+        .modal-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border: 1px solid #ccc;
+            font-size: 12px;
+        }
+        
+        .modal-table th,
+        .modal-table td {
+            border: 1px solid #ccc;
+            padding: 6px 8px;
+            text-align: left;
+        }
+        
+        .modal-table th {
+            background: #f0f0f0;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .modal-table td input[type="text"] {
+            width: 100%;
+            padding: 3px 5px;
+            border: 1px solid #999;
+            font-size: 12px;
+            text-align: right;
+            box-sizing: border-box;
+        }
+        
+        .modal-table .row-num {
+            text-align: center;
+            width: 60px;
+            background: #f5f5f5;
+        }
+        
+        .modal-table .desc-col {
+            min-width: 200px;
+        }
+        
+        .modal-table .value-col {
+            width: 100px;
+            min-width: 100px;
+            max-width: 120px;
+        }
+        
+        .modal-footer {
+            padding: 12px 15px;
+            background: #dfe8f6;
+            border-top: 1px solid #8b9dc3;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-total-label {
+            font-size: 13px;
+            font-weight: normal;
+        }
+        
+        .modal-total-input {
+            padding: 4px 8px;
+            border: 1px solid #999;
+            font-size: 12px;
+            text-align: right;
+            width: 150px;
+            margin-left: 10px;
+            margin-right: 15px;
+        }
+        
+        .modal-btn {
+            padding: 5px 20px;
+            border: 1px solid #999;
+            background: linear-gradient(to bottom, #f0f0f0, #d8d8d8);
+            cursor: pointer;
+            font-size: 12px;
+            border-radius: 3px;
+            margin-left: 8px;
+        }
+        
+        .modal-btn:hover {
+            background: linear-gradient(to bottom, #e8e8e8, #d0d0d0);
+        }
+        
+        /* Confirmation Modal */
+        .confirm-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .confirm-overlay.active {
+            display: flex;
+        }
+        
+        .confirm-dialog {
+            background: linear-gradient(to bottom, #e8f0fa, #d0dce8);
+            width: 400px;
+            border: 2px solid #4a7cc4;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .confirm-header {
+            background: linear-gradient(to bottom, #5a8dd4, #4a7cc4);
+            padding: 10px 15px;
+            border-bottom: 1px solid #3a6cb4;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 6px 6px 0 0;
+        }
+        
+        .confirm-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #002060;
+        }
+        
+        .confirm-close-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #003080;
+            cursor: pointer;
+            padding: 0;
+            width: 28px;
+            height: 28px;
+            line-height: 24px;
+            font-weight: bold;
+        }
+        
+        .confirm-close-btn:hover {
+            color: #000;
+        }
+        
+        .confirm-body {
+            padding: 30px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .confirm-icon {
+            font-size: 48px;
+            color: #4a7cc4;
+        }
+        
+        .confirm-message {
+            font-size: 14px;
+            color: #333;
+            line-height: 1.5;
+        }
+        
+        .confirm-footer {
+            padding: 15px 20px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            border-top: 1px solid #b0c0d0;
+        }
+        
+        .confirm-btn {
+            padding: 8px 30px;
+            border: 1px solid #999;
+            background: linear-gradient(to bottom, #f0f0f0, #d8d8d8);
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 4px;
+            min-width: 80px;
+        }
+        
+        .confirm-btn.yes {
+            background: linear-gradient(to bottom, #d0e0f0, #b0c8e0);
+            border-color: #4a7cc4;
+        }
+        
+        .confirm-btn:hover {
+            background: linear-gradient(to bottom, #e8e8e8, #d0d0d0);
+        }
+        
+        .confirm-btn.yes:hover {
+            background: linear-gradient(to bottom, #c0d0e0, #a0b8d0);
+        }
+        
+        /* Success Modal Styles */
+        .success-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .success-modal {
+            background: #d9e8f5;
+            border: 2px solid #5b9bd5;
+            border-radius: 8px;
+            width: 400px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .success-modal-header {
+            background: linear-gradient(to bottom, #d9e8f5, #b8d4e8);
+            padding: 10px 15px;
+            border-bottom: 1px solid #5b9bd5;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 6px 6px 0 0;
+        }
+        
+        .success-modal-title {
+            font-weight: bold;
+            color: #2c5aa0;
+            font-size: 14px;
+        }
+        
+        .success-modal-close {
+            background: transparent;
+            border: none;
+            color: #2c5aa0;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 0;
+            width: 25px;
+            height: 25px;
+            line-height: 25px;
+            text-align: center;
+        }
+        
+        .success-modal-close:hover {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 3px;
+        }
+        
+        .success-modal-body {
+            padding: 30px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .success-icon {
+            width: 48px;
+            height: 48px;
+            background: #5b9bd5;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        .success-message {
+            font-size: 14px;
+            color: #333;
+        }
+        
+        .success-modal-footer {
+            padding: 15px;
+            text-align: center;
+            border-top: 1px solid #b8d4e8;
+        }
+        
+        .success-ok-btn {
+            background: linear-gradient(to bottom, #e8f0f8, #d0e0f0);
+            border: 1px solid #5b9bd5;
+            padding: 6px 30px;
+            cursor: pointer;
+            font-size: 13px;
+            border-radius: 3px;
+            min-width: 80px;
+        }
+        
+        .success-ok-btn:hover {
+            background: linear-gradient(to bottom, #d0e0f0, #b8d0e8);
+        }
+
+        /* Disclaimer Banner */
+        .disclaimer-banner {
+            background-color: #fff3cd;
+            border: 2px solid #ffc107;
+            color: #856404;
+            padding: 15px 20px;
+            margin: 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            line-height: 1.6;
+            text-align: left;
+        }
+
+        @media screen and (max-width: 768px) {
+            .disclaimer-banner {
+                font-size: 12px;
+                padding: 12px 15px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .disclaimer-banner {
+                font-size: 11px;
+                padding: 10px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="annex-container">
+
+        <!-- Header -->
+        <div class="annex-header">
+            Annex-5
+        </div>
+        
+        <!-- Print Button -->
+        <div class="print-section">
+            <button class="print-btn" onclick="window.print()">🖨️ Print</button>
+        </div>
+        
+        <!-- Main Title -->
+        <div class="main-title">
+            अनुसूची -५
+        </div>
+        
+        <!-- Back Link -->
+        <div class="back-link-section">
+            पछाडि गएर अनुसूची तय गर्न <a onclick="goBackToSetAnnex()">यहाँ कि्लक</a> गर्नुहोस् ।
+        </div>
+        
+        <!-- Info Section -->
+        <div class="info-section">
+            <div class="info-row">
+                <div class="info-label">आर्थिक वर्ष:</div>
+                <input type="text" id="fiscalYear" class="info-input" disabled>
+                
+                <div class="info-label" style="margin-left: 20px;">आ.रा.को:</div>
+                <input type="text" id="iro" class="info-input" disabled style="width: 200px;">
+            </div>
+            
+            <div class="info-row">
+                <div class="info-label">स्थायी लेखा नम्बर:</div>
+                <input type="text" id="pan" class="info-input" disabled>
+            </div>
+            
+            <div class="info-row">
+                <div class="info-label">नाम:</div>
+                <input type="text" id="taxpayerName" class="info-input" disabled>
+            </div>
+            
+            <div class="info-row">
+                <div class="info-label">करको किसिम:<span class="required-marker">*</span></div>
+                <select id="taxType" class="info-input" required>
+                    <option value="">Select ...</option>
+                    <option value="1">बचत तथा ऋणको कारोबार गर्ने सहकारी संस्था नगरपालिकाका क्षेत्रभित्र सञ्चालन भएकोमा</option>
+                    <option value="2">बचत तथा ऋणको कारोबार गर्ने सहकारी संस्था उपमहानगरपालिकाका क्षेत्रभित्र सञ्चालन भएकोमा</option>
+                    <option value="3">सहकारी ऐन ७४ बमोजिम दर्ता भएको उपमहानगरपालिका क्षेत्रका सहकारी संस्था (बचत तथा ऋण बाहेक)</option>
+                    <option value="4">सहकारी ऐन ७४ बमोजिम दर्ता भएको नगरपालिका क्षेत्रका सहकारी संस्था (बचत तथा ऋण बाहेक)</option>
+                    <option value="5">बचत तथा ऋणको कारोबार गर्ने सहकारी संस्था महानगरपालिका क्षेत्रभित्र सञ्चालन भएकोमा</option>
+                    <option value="6">सहकारी ऐन ७४ बमोजिम दर्ता भएको महानगरपालिका क्षेत्रका सहकारी संस्था (बचत तथा ऋण बाहेक)</option>
+                    <option value="7">बैंक, वित्तीय संस्था, सामान्य बीमा व्यवसाय, वित्तीय कारोबार गर्ने निकाय वा दूरसञ्चार र इन्टरनेट सेवा, मुद्रा हस्तान्तरण (मनि ट्रान्सफर), पूँजी बजार व्यवसाय, धितोपत्र व्यवसाय, मर्चेन्ट बैंकिङ्ग व्यवसाय, कमोडिटी फ्यूचर मार्केट, धितोपत्र र कमोडिटी दलाल व्यवसाय, चुरोट, बिङ्गो, सिगार, खानीस्रोत, खैनी, गुट्खा, पानमसला, मदिरा, बीयरको कारोबार गर्ने वा नेपाल पेट्रोलियम ऐन, 2040 बमोजिम पेट्रोलियम कार्य गर्ने निकाय</option>
+                    <option value="8">नेपालस्थित विदेशी स्थायी संस्थामाथि विदेशमा पठाएको आय</option>
+                    <option value="9">दफा ७० अन्तर्गतका गैर बासिन्दा व्यक्ति</option>
+                    <option value="10">साधारण व्यवसाय (निकाय)</option>
+                    <option value="11">ट्रस्ट (अनुसूची १ को २(५))</option>
+                    <option value="12">दफा ७० अन्तर्गतका तर जल तथा हवाई यातायात वा दूर सञ्चार सेवा उपलब्ध गराउने गैर बासिन्दा व्यक्ति</option>
+                    <option value="13">सार्वजनिक गुठी अन्तर्गत दर्ता भई सञ्चालित विद्यालय महाविद्यालय</option>
+                    <option value="14">ऐक्यका दफा ९२ मा उल्लिखित विशेष उद्योग संचालनमा वर्ष भरी संलग्न</option>
+                </select>
+            </div>
+            
+            <div class="info-row">
+                <div class="info-label">करको दर:</div>
+                <input type="text" id="taxRate" class="info-input">
+            </div>
+            
+            <div class="info-row">
+                <div class="info-label">विदेशीस्रोत भए मुलुकको नाम:</div>
+                <select id="foreignCountry" class="info-input">
+                    <option value="">Select Country</option>
+                    <option value="NEPAL" selected>NEPAL</option>
+                    <option value="AFGHANISTAN">AFGHANISTAN</option>
+                    <option value="ALBANIA">ALBANIA</option>
+                    <option value="ALGERIA">ALGERIA</option>
+                    <option value="AMERICAN SAMOA">AMERICAN SAMOA</option>
+                    <option value="ANDORRA">ANDORRA</option>
+                    <option value="ANGOLA">ANGOLA</option>
+                    <option value="ANGUILLA">ANGUILLA</option>
+                    <option value="ANTARCTICA">ANTARCTICA</option>
+                    <option value="ANTIGUA AND BARBUDA">ANTIGUA AND BARBUDA</option>
+                    <option value="ARGENTINA">ARGENTINA</option>
+                    <option value="ARMENIA">ARMENIA</option>
+                    <option value="ARUBA">ARUBA</option>
+                    <option value="ASCENSION ISLAND">ASCENSION ISLAND</option>
+                    <option value="AUSTRIA">AUSTRIA</option>
+                    <option value="AUSTRILIA">AUSTRILIA</option>
+                    <option value="AZERBAIJAN">AZERBAIJAN</option>
+                    <option value="BAHAMAS">BAHAMAS</option>
+                    <option value="BAHRAIN">BAHRAIN</option>
+                    <option value="BANGLADESH">BANGLADESH</option>
+                    <option value="BARBADOS">BARBADOS</option>
+                    <option value="BELARUS">BELARUS</option>
+                    <option value="BELGIUM">BELGIUM</option>
+                    <option value="BELIZE">BELIZE</option>
+                    <option value="BENIN">BENIN</option>
+                    <option value="BERMUDA">BERMUDA</option>
+                    <option value="BHUTAN">BHUTAN</option>
+                    <option value="BOLIVIA">BOLIVIA</option>
+                    <option value="BOSNIA AND HERZEGOWINA">BOSNIA AND HERZEGOWINA</option>
+                    <option value="BOTSWANA">BOTSWANA</option>
+                    <option value="BOUVET ISLAND">BOUVET ISLAND</option>
+                    <option value="BRAZIL">BRAZIL</option>
+                    <option value="BRITISH INDIAN OCEAN TERRITORY">BRITISH INDIAN OCEAN TERRITORY</option>
+                    <option value="BRUNEI DARUSSALAM">BRUNEI DARUSSALAM</option>
+                    <option value="BULGARIA">BULGARIA</option>
+                    <option value="BURKINA FASO">BURKINA FASO</option>
+                    <option value="BURUNDI">BURUNDI</option>
+                    <option value="CAMBODIA">CAMBODIA</option>
+                    <option value="CAMEROON">CAMEROON</option>
+                    <option value="CANADA">CANADA</option>
+                    <option value="CAPE VERDE">CAPE VERDE</option>
+                    <option value="CAYMAN ISLANDS">CAYMAN ISLANDS</option>
+                    <option value="CENTRAL AFRICAN REPUBLIC">CENTRAL AFRICAN REPUBLIC</option>
+                    <option value="CHAD">CHAD</option>
+                    <option value="CHILE">CHILE</option>
+                    <option value="CHINA">CHINA</option>
+                    <option value="CHRISTMAS ISLAND">CHRISTMAS ISLAND</option>
+                    <option value="COCOS (KEELING) ISLANDS">COCOS (KEELING) ISLANDS</option>
+                    <option value="COLOMBIA">COLOMBIA</option>
+                    <option value="COMOROS">COMOROS</option>
+                    <option value="CONGO">CONGO</option>
+                    <option value="COOK ISLANDS">COOK ISLANDS</option>
+                    <option value="COSTA RICA">COSTA RICA</option>
+                    <option value="COTE D'IVOIRE">COTE D'IVOIRE</option>
+                    <option value="CROATIA">CROATIA</option>
+                    <option value="EL SALVADOR">EL SALVADOR</option>
+                    <option value="EQUATORIAL GUINEA">EQUATORIAL GUINEA</option>
+                    <option value="ERITREA">ERITREA</option>
+                    <option value="ESTONIA">ESTONIA</option>
+                    <option value="ETHIOPIA">ETHIOPIA</option>
+                    <option value="FALKLAND ISLANDS">FALKLAND ISLANDS</option>
+                    <option value="FAROE ISLANDS">FAROE ISLANDS</option>
+                    <option value="FIJI">FIJI</option>
+                    <option value="FINLAND">FINLAND</option>
+                    <option value="FRANCE">FRANCE</option>
+                    <option value="FRENCH GUIANA">FRENCH GUIANA</option>
+                    <option value="FRENCH POLYNESIA">FRENCH POLYNESIA</option>
+                    <option value="FRENCH SOUTHERN TERRITORIES">FRENCH SOUTHERN TERRITORIES</option>
+                    <option value="GABON">GABON</option>
+                    <option value="GAMBIA">GAMBIA</option>
+                    <option value="GEORGIA">GEORGIA</option>
+                    <option value="GERMANY">GERMANY</option>
+                    <option value="GHANA">GHANA</option>
+                    <option value="GIBRALTAR">GIBRALTAR</option>
+                    <option value="GREECE">GREECE</option>
+                    <option value="GREENLAND">GREENLAND</option>
+                    <option value="GRENADA">GRENADA</option>
+                    <option value="GUADELOUPE">GUADELOUPE</option>
+                    <option value="GUAM">GUAM</option>
+                    <option value="GUATEMALA">GUATEMALA</option>
+                    <option value="GUERNSEY">GUERNSEY</option>
+                    <option value="GUINEA">GUINEA</option>
+                    <option value="GUINEA-BISSAU">GUINEA-BISSAU</option>
+                    <option value="GUYANA">GUYANA</option>
+                    <option value="HAITI">HAITI</option>
+                    <option value="HEARD AND McDONALD ISLANDS">HEARD AND McDONALD ISLANDS</option>
+                    <option value="HOLY SEE (VATICAN CITY STATE)">HOLY SEE (VATICAN CITY STATE)</option>
+                    <option value="HONDURAS">HONDURAS</option>
+                    <option value="HONG KONG">HONG KONG</option>
+                    <option value="HUNGARY">HUNGARY</option>
+                    <option value="ICELAND">ICELAND</option>
+                    <option value="INDIA">INDIA</option>
+                    <option value="INDONESIA">INDONESIA</option>
+                    <option value="IRAN">IRAN</option>
+                    <option value="IRAQ">IRAQ</option>
+                    <option value="IRELAND">IRELAND</option>
+                    <option value="ISLE OF MAN">ISLE OF MAN</option>
+                    <option value="ISRAEL">ISRAEL</option>
+                    <option value="ITALY">ITALY</option>
+                    <option value="JAMAICA">JAMAICA</option>
+                    <option value="JAPAN">JAPAN</option>
+                    <option value="JERSEY">JERSEY</option>
+                    <option value="JORDAN">JORDAN</option>
+                    <option value="MAYOTTE">MAYOTTE</option>
+                    <option value="MEXICO">MEXICO</option>
+                    <option value="MICRONESIA">MICRONESIA</option>
+                    <option value="MOLDOVA">MOLDOVA</option>
+                    <option value="MONACO">MONACO</option>
+                    <option value="MONGOLIA">MONGOLIA</option>
+                    <option value="MONTSERRAT">MONTSERRAT</option>
+                    <option value="MOROCCO">MOROCCO</option>
+                    <option value="MOZAMBIQUE">MOZAMBIQUE</option>
+                    <option value="MYANMAR">MYANMAR</option>
+                    <option value="NAURU">NAURU</option>
+                    <option value="NETHERLANDS">NETHERLANDS</option>
+                    <option value="NEUTRAL ZONE">NEUTRAL ZONE</option>
+                    <option value="NEW CALEDONIA">NEW CALEDONIA</option>
+                    <option value="NEW ZEALAND">NEW ZEALAND</option>
+                    <option value="NICARAGUA">NICARAGUA</option>
+                    <option value="NIGER">NIGER</option>
+                    <option value="NIGERIA">NIGERIA</option>
+                    <option value="NIUE">NIUE</option>
+                    <option value="NORFOLK ISLAND">NORFOLK ISLAND</option>
+                    <option value="NORTHERN MARIANA ISLANDS">NORTHERN MARIANA ISLANDS</option>
+                    <option value="NORWAY">NORWAY</option>
+                    <option value="NR">NR</option>
+                    <option value="PAKISTAN">PAKISTAN</option>
+                    <option value="PALAU">PALAU</option>
+                    <option value="PALESTINE">PALESTINE</option>
+                    <option value="PANAMA">PANAMA</option>
+                </select>
+            </div>
+        </div>
+        
+        <!-- Inclusion (IN) Section -->
+        <div class="section-header">Inclusion (IN)</div>
+        <table class="data-table">
+            <tbody>
+                <tr>
+                    <td class="row-num">1</td>
+                    <td class="desc-col">
+                        <div class="nepali-text">सेवा शुल्क (दफा ७.२.क)</div>
+                        <div class="english-text">Services Fees</div>
+                    </td>
+                    <td class="value-col"><input type="text" id="in1" oninput="calculateInTotal()"></td>
+                    <td class="action-col"></td>
+                </tr>
+                <tr>
+                    <td class="row-num">2</td>
+                    <td class="desc-col">
+                        <div class="nepali-text">व्‍यापारिक मौज्‍दातको निसर्गबाट प्राप्त रकम (दफा ७.२.ख)</div>
+                        <div class="english-text">Amounts derived from the Disposal of Trading Stock</div>
+                    </td>
+                    <td class="value-col"><input type="text" id="in2" oninput="calculateInTotal()"></td>
+                    <td class="action-col"></td>
+                </tr>
+                <tr>
+                    <td class="row-num">3</td>
+                    <td class="desc-col">
+                        <div class="nepali-text">व्‍यावसायिक सम्‍पत्‍ति वा व्‍यावसायिक दायित्‍वको निसर्गबाट प्राप्त खूद लाभ (दफा ७.२.ग)</div>
+                        <div class="english-text">Net Gains from the Disposal of the Person's Business Assets or Liabilities</div>
+                    </td>
+                    <td class="value-col"><input type="text" id="in3" oninput="calculateInTotal()"></td>
+                    <td class="action-col"></td>
+                </tr>
+                <tr>
+                    <td class="row-num">4</td>
+                    <td class="desc-col">
+                        <div class="nepali-text">ह्रास योग्‍य सम्पतिको निसर्गबाट प्राप्त गरेको मानिने रकम (दफा ७.२. घ)</div>
+                        <div class="english-text">Amounts treated as derived from the Disposal of depreciable Assets</div>
+                    </td>
+                    <td class="value-col"><input type="text" id="in4" oninput="calculateInTotal()"></td>
+                    <td class="action-col"></td>
+                </tr>
+                <tr>
+                    <td class="row-num">5</td>
+                    <td class="desc-col">
+                        <div class="nepali-text">व्‍यवसायका सम्बन्धमा कुनै व्‍यक्‍तिबाट प्राप्त गरेको उपहार (दफा ७.२.ङ)</div>
+                        <div class="english-text">Gifts received by the Person in Respect to the Business</div>
+                    </td>
+                    <td class="value-col"><input type="text" id="in5" oninput="calculateInTotal()"></td>
+                    <td class="action-col"></td>
+                </tr>
+                <tr>
+                    <td class="row-num">6</td>
+                    <td class="desc-col">
+                        <div class="nepali-text">व्यवसाय सञ्चालन गर्ने क्षमतामा प्रतिबन्ध स्वीकार गरे बापत प्राप्त रकम (दफा ७.२.च)</div>
+                        <div class="english-text">Amounts derived as Consideration for accepting a Restriction on the capacity to conduct the Business</div>
+                    </td>
+                    <td class="value-col"><input type="text" id="in6" oninput="calculateInTotal()"></td>
+                    <td class="action-col"></td>
+                </tr>
+                <tr>
+                    <td class="row-num">7</td>
+                    <td class="desc-col">
+                        <div class="nepali-text">व्‍यवसायसँग प्रत्यक्षरुपमा सम्बन्धित लगानीबाट प्राप्त पैठारी (दफा ७.२.छ)</div>
+                        <div class="english-text">Amounts derived from Investments that are effectively connected with the Business</div>
+                    </td>
+                    <td class="value-col"><input type="text" id="in7" oninput="calculateInTotal()"></td>
+                    <td class="action-col"></td>
+                </tr>
+                <tr>
+                    <td class="row-num">8</td>
+                    <td class="desc-col">
+                        <div class="nepali-text">लेखांकनको परिवर्तन गर्दा समावेश गर्नु पर्ने कारोवारको रकम (दफा ७.२.ज)</div>
+                        <div class="english-text">Amounts to be Included by Reason of Change in the Accounting System</div>
+                    </td>
+                    <td class="value-col"><input type="text" id="in8" oninput="calculateInTotal()"></td>
+                    <td class="action-col"></td>
+                </tr>
+                <tr>
+                    <td class="row-num">9</td>
+                    <td class="desc-col">
+                        <div class="nepali-text">लेखाको तरिका अनुसार समावेश गर्नु पर्ने रकम (दफा ७.२.झ)</div>
+                        <div class="english-text">Amounts to be Included by Reason of Timing</div>
+                    </td>
+                    <td class="value-col"><input type="text" id="in9" oninput="calculateInTotal()"></td>
+                    <td class="action-col"></td>
+                </tr>
+                <tr>
+                    <td class="row-num">10</td>
+                    <td class="desc-col">
+                        <div class="nepali-text">मुद्रास्फिती मूल्यअन्तरको फरकको आधारमा बढी प्रमाणित पाएको रकम (दफा ७.२.ञ)</div>
+                        <div class="english-text">Excess Amount received by Reason of Exchange Rate</div>
+                    </td>
+                    <td class="value-col"><input type="text" id="in10" oninput="calculateInTotal()"></td>
+                    <td class="action-col"></td>
+                </tr>
+                <tr>
+                    <td class="row-num">11</td>
+                    <td class="desc-col">
+                        <div class="nepali-text">डुबेको ऋण आम्दानीको रुपमा निश्चित भएको रकम (दफा ७.२.ट)</div>
+                        <div class="english-text">Recovered Amount of bad Debts deducted earlier</div>
+                    </td>
+                    <td class="value-col"><input type="text" id="in11" oninput="calculateInTotal()"></td>
+                    <td class="action-col"></td>
+                </tr>
+                <tr>
+                    <td class="row-num">12</td>
+                    <td class="desc-col">
+                        <div class="nepali-text">दीर्घकालीन करारको कार्यान्वयन आधारमा समावेश गर्नु पर्ने रकम (दफा ७.२.ठ)</div>
+                        <div class="english-text">Amounts to be Included on Completion Basis in the Case of a long term Contract</div>
+                    </td>
+                    <td class="value-col"><input type="text" id="in12" oninput="calculateInTotal()"></td>
+                    <td class="action-col"></td>
+                </tr>
+                <tr>
+                    <td class="row-num">13</td>
+                    <td class="desc-col">
+                        <div class="nepali-text">प्रचलित व्याज दरको हिसाबले बढी बजार मूल्य परेको रकम (७.२.ड)</div>
+                        <div class="english-text">Difference of actual Interest and Interest as per Market Rate in the Case of a long term Contract</div>
+                    </td>
+                    <td class="value-col"><input type="text" id="in13" oninput="calculateInTotal()"></td>
+                    <td class="action-col"></td>
+                </tr>
+                <tr>
+                    <td class="row-num">14</td>
+                    <td class="desc-col">
+                        <div class="nepali-text">भुक्तानी पाउने व्यक्तिको सट्टा अन्य व्यक्तिलाई भुक्तानी गरिएको रकम (दफा ७.२.ढ)</div>
+                        <div class="english-text">Amounts paid to third Person Instead of actual Payee</div>
+                    </td>
+                    <td class="value-col"><input type="text" id="in14" oninput="calculateInTotal()"></td>
+                    <td class="action-col"></td>
+                </tr>
+                <tr>
+                    <td class="row-num">15</td>
+                    <td class="desc-col">
+                        <div class="nepali-text">अनिवार्य खर्च गरेर प्राप्त रकम (दफा ७.२.ण)</div>
+                        <div class="english-text">Amounts derived as Compensation</div>
+                    </td>
+                    <td class="value-col"><input type="text" id="in15" oninput="calculateInTotal()"></td>
+                    <td class="action-col"></td>
+                </tr>
+                <tr>
+                    <td class="row-num">16</td>
+                    <td class="desc-col">
+                        <div class="nepali-text">आम्दानी समावेश गर्नु पर्ने अन्य रकम ( विवरण संलग्न गर्ने )</div>
+                        <div class="english-text">Other Amounts to be Included in Profit and Gains</div>
+                    </td>
+                    <td class="value-col"><input type="text" id="in16" oninput="calculateInTotal()"></td>
+                    <td class="action-col"></td>
+                </tr>
+                <tr class="total-row">
+                    <td class="row-num">17</td>
+                    <td class="desc-col">
+                        <div class="nepali-text">जम्मा:(१ देखि १६)</div>
+                        <div class="english-text">Total:(1 to 16)</div>
+                    </td>
+                    <td class="value-col"><input type="text" id="inTotal" readonly></td>
+                    <td class="action-col"></td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- Deduction (DE) Section -->
+        <div class="section-header">Deduction (DE)</div>
+        <table class="data-table">
+            <tbody>
+                <tr>
+                    <td class="row-num">18</td>
+                    <td class="desc-col">
+                        <div class="nepali-text">ब्याज (दफा ७.३.क)</div>
+                        <div class="english-text">Interest</div>
+                    </td>
+                    <td class="value-col"><input type="text" id="de1" oninput="calculateDeTotal()"></td>
+                    <td class="action-col"><button class="add-details-btn" onclick="addInterestDetails()">Add Details</button></td>
+                </tr>
+                <tr>
+                    <td class="row-num">19</td>
+                    <td class="desc-col">
+                        <div class="nepali-text">व्यापारिक मौज्दातको लागत (दफा ७.३.ख)</div>
+                        <div class="english-text">Cost of Trading Stock</div>
+                    </td>
+                    <td class="value-col"><input type="text" id="de2" oninput="calculateDeTotal()"></td>
+                    <td class="action-col"><button class="add-details-btn" onclick="addTradingStockDetails()">Add Details</button></td>
+                </tr>
+                <tr>
+                    <td class="row-num">20</td>
+                    <td class="desc-col">
+                        <div class="nepali-text">मर्मत तथा सुधार खर्च (दफा ७.३.ग)</div>
+                        <div class="english-text">Repairs and Improvements</div>
+                    </td>
+                    <td class="value-col"><input type="text" id="de3" oninput="calculateDeTotal()"></td>
+                    <td class="action-col"><button class="add-details-btn" onclick="addRepairDetails()">Add Details</button></td>
+                </tr>
+                <tr>
+                    <td class="row-num">21</td>
+                    <td class="desc-col">
+                        <div class="nepali-text">प्रदुषण नियन्त्रण खर्च (दफा ७.३.घ)</div>
+                        <div class="english-text">Pollution Control</div>
+                    </td>
+                    <td class="value-col"><input type="text" id="de4" oninput="calculateDeTotal()"></td>
+                    <td class="action-col"></td>
+                </tr>
+                <tr>
+                    <td class="row-num">22</td>
+                    <td class="desc-col">
+                        <div class="nepali-text">अनुसन्धान र विकाश खर्च (दफा ७.३.ङ)</div>
+                        <div class="english-text">Research and Development</div>
+                    </td>
+                    <td class="value-col"><input type="text" id="de5" oninput="calculateDeTotal()"></td>
+                    <td class="action-col"></td>
+                </tr>
+                <tr>
+                    <td class="row-num">23</td>
+                    <td class="desc-col">
+                        <div class="nepali-text">ह्रास (दफा ७.३.च)</div>
+                        <div class="english-text">Depreciation</div>
+                    </td>
+                    <td class="value-col"><input type="text" id="de6" oninput="calculateDeTotal()"></td>
+                    <td class="action-col"><button class="add-details-btn" onclick="addDepreciationDetails()">Add Details</button></td>
+                </tr>
+                <tr>
+                    <td class="row-num">24</td>
+                    <td class="desc-col">
+                        <div class="nepali-text">कटाउन सक्ने संचिती (दफा ७.३.छ)</div>
+                        <div class="english-text">Deductible Reserve</div>
+                    </td>
+                    <td class="value-col"><input type="text" id="de7" oninput="calculateDeTotal()"></td>
+                    <td class="action-col"></td>
+                </tr>
+                <tr>
+                    <td class="row-num">25</td>
+                    <td class="desc-col">
+                        <div class="nepali-text">उपरोक्त बाहेक अन्य खर्च (दफा ७.३.ज र ७.३.झ)</div>
+                        <div class="english-text">Others than mentioned</div>
+                    </td>
+                    <td class="value-col"><input type="text" id="de8" oninput="calculateDeTotal()"></td>
+                    <td class="action-col"><button class="add-details-btn" onclick="addOtherExpenseDetails()">Add Details</button></td>
+                </tr>
+                <tr>
+                    <td class="row-num">26</td>
+                    <td class="desc-col">
+                        <div class="nepali-text">विदेशमा तिरेको कर (दफा ७.३.ञ)</div>
+                        <div class="english-text">Foreign Tax Expenses ( Section 71.4)</div>
+                    </td>
+                    <td class="value-col"><input type="text" id="de9" oninput="calculateDeTotal()"></td>
+                    <td class="action-col"></td>
+                </tr>
+                <tr class="total-row">
+                    <td class="row-num">27</td>
+                    <td class="desc-col">
+                        <div class="nepali-text">जम्मा:(१८ देखि २६)</div>
+                        <div class="english-text">Total:(18 to 26)</div>
+                    </td>
+                    <td class="value-col"><input type="text" id="deTotal" readonly></td>
+                    <td class="action-col"></td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- Deductible Loss (DL) Section -->
+        <div class="section-header">Deductible Loss (DL)</div>
+        <table class="data-table">
+            <tbody>
+                <tr>
+                    <td class="row-num">28</td>
+                    <td class="desc-col">
+                        <div class="nepali-text">यस आ.व.को अन्य व्यवसायको नोक्सानी (दफा २०.१)</div>
+                        <div class="english-text">Losses transferred from other Business in this Year</div>
+                    </td>
+                    <td class="value-col"><input type="text" id="dl1" oninput="calculateDlTotal()"></td>
+                    <td class="action-col"></td>
+                </tr>
+                <tr>
+                    <td class="row-num">29</td>
+                    <td class="desc-col">
+                        <div class="nepali-text">गत आ. व. बाट निश्चित हैसियतको प्रमाणित नोक्सानी (दफा २०.१ ख)</div>
+                        <div class="english-text">Carried forward of unrelieved Losses from previous Years</div>
+                    </td>
+                    <td class="value-col"><input type="text" id="dl2" oninput="calculateDlTotal()"></td>
+                    <td class="action-col"><button class="add-details-btn" onclick="addCarriedForwardLoss()">Add Details</button></td>
+                </tr>
+                <tr class="total-row">
+                    <td class="row-num">30</td>
+                    <td class="desc-col">
+                        <div class="nepali-text">जम्मा:(२८ देखि २९)</div>
+                        <div class="english-text">Total:(28to29)</div>
+                    </td>
+                    <td class="value-col"><input type="text" id="dlSubTotal" readonly></td>
+                    <td class="action-col"></td>
+                </tr>
+                <tr class="total-row">
+                    <td class="row-num">31</td>
+                    <td class="desc-col">
+                        <div class="nepali-text">जम्मा कटाइ:(२७+३०):</div>
+                        <div class="english-text">Total Deduction (27+30):</div>
+                    </td>
+                    <td class="value-col"><input type="text" id="totalDeduction" readonly></td>
+                    <td class="action-col"></td>
+                </tr>
+                <tr class="total-row">
+                    <td class="row-num">32</td>
+                    <td class="desc-col">
+                        <div class="nepali-text">व्यवसायको आय र नोक्सानी (१७-३१):</div>
+                        <div class="english-text">Business Income and Loss (17-31):</div>
+                    </td>
+                    <td class="value-col"><input type="text" id="businessIncome" readonly></td>
+                    <td class="action-col"></td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- Miscellaneous Inclusion (MI) Section -->
+        <div class="section-header">Miscellaneous Inclusion (MI)</div>
+        <table class="data-table">
+            <tbody>
+                <tr>
+                    <td class="row-num">33</td>
+                    <td class="desc-col">
+                        <div class="nepali-text">अन्य व्यवसायको आयमा काट्ने गरी खेसेको नोक्सानी (दफा २० र ग नोक्सानी भए ऋणात्मक)</div>
+                        <div class="english-text">LOSS TRANSFERRED TO OTHER BUSINESSES</div>
+                    </td>
+                    <td class="value-col"><input type="text" id="mi1" oninput="calculateMiTotal()"></td>
+                    <td class="action-col"></td>
+                </tr>
+                <tr class="total-row">
+                    <td class="row-num">34</td>
+                    <td class="desc-col">
+                        <div class="nepali-text">जम्मा (३२+३३):</div>
+                        <div class="english-text">Total (32+33):</div>
+                    </td>
+                    <td class="value-col"><input type="text" id="miTotal" readonly></td>
+                    <td class="action-col"></td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- Discount (DIS) Section -->
+        <div class="section-header">Discount (DIS)</div>
+        <table class="data-table">
+            <tbody>
+                <tr>
+                    <td class="row-num">35</td>
+                    <td class="desc-col">
+                        <div class="nepali-text">छुट हुनु पर्ने कारण :</div>
+                    </td>
+                    <td class="value-col">
+                        <select id="discountReason">
+                            <option value="">Select ...</option>
+                            <option value="11.1.1">11.1.1 – कृषि व्यवसाय</option>
+                            <option value="11.1.1.1">11.1.1.1 – तरकारीलाई डिहाइड्रेट गर्ने व्यवसाय र कोल्ड स्टोर व्यवसाय</option>
+                            <option value="11.2">11.2 – सहकारी ऐन, २०७४ बमोजिम दर्ता, दफा ११(२) मा उल्लिखित कृषि तथा वन पैदावारमा आधारित सहकारी संस्था तथा गाउँपालिकाको क्षेत्रमा सञ्चालन हुने सहकारी संस्था</option>
+                            <option value="11.3(Ga)1">11.3(Ga)1 – (शुरुको ५ वर्ष) ३ अर्ब भन्दा बढी पुँजी र ५ सय भन्दा बढीलाै वर्ष भरी प्रत्यक्ष रोजगारी प्रदान गर्ने विशेष उद्योग र पर्यटन उद्योग (स्यामसिनो बाहेक)</option>
+                            <option value="11.3(Ga)2">11.3(Ga)2 – (शुरुको ५ वर्ष पछिको ३ वर्ष) ३ अर्ब भन्दा बढी पुँजी र ५ सय भन्दा बढीलाै वर्ष भरी प्रत्यक्ष रोजगारी प्रदान गर्ने विशेष उद्योग र पर्यटन उद्योग (स्यामसिनो बाहेक)</option>
+                            <option value="11.3(Ga)3">11.3(Ga)3 – (शुरुको ५ वर्ष) सञ्चालनमा रहेको २५% क्षमता वृद्धि गरी ३ अर्ब भन्दा बढी पुँजी र ३ सय भन्दा बढीलाै वर्ष भरी प्रत्यक्ष रोजगारी प्रदान गर्ने विशेष उद्योग र पर्यटन उद्योग (स्यामसिनो बाहेक)</option>
+                            <option value="11.3(Ga)4">11.3(Ga)4 – (शुरुको ५ वर्ष पछिको ३ वर्ष) सञ्चालनमा रहेको २५% क्षमता वृद्धि गरी ३ अर्ब भन्दा बढी पुँजी र ३ सय भन्दा बढीलाै वर्ष भरी प्रत्यक्ष रोजगारी प्रदान गर्ने विशेष उद्योग र पर्यटन उद्योग (स्यामसिनो बाहेक)</option>
+                            <option value="11.3(KA)1">11.3(KA)1 – एक सय वा सो भन्दा बढी नेपाली नागरिकलाई वर्षभरी नै प्रत्यक्ष रोजगारी दिने विशेष उद्योग र सूचना प्रविधि उद्योग</option>
+                            <option value="11.3(KA)2">11.3(KA)2 – तीन सय वा सो भन्दा बढी नेपाली नागरिकलाई वर्षभरी नै प्रत्यक्ष रोजगारी दिने विशेष उद्योग र सूचना प्रविधि उद्योग</option>
+                            <option value="11.3(KA)3">11.3(KA)3 – पाँच सय वा सो भन्दा बढी नेपाली नागरिकलाई वर्षभरी नै प्रत्यक्ष रोजगारी दिने विशेष उद्योग र सूचना प्रविधि उद्योग</option>
+                            <option value="11.3(KA)4">11.3(KA)4 – एक हजार वा सोभन्दा बढी नेपाली नागरिकलाई वर्षभरी नै प्रत्यक्ष रोजगारी दिने विशेष उद्योग र सूचना प्रविधि उद्योग</option>
+                            <option value="11.3(KHA)1">11.3(KHA)1 – अतिविकसित क्षेत्रमा विशेष उद्योगले व्यावसायिक उत्पादन वा कारोबार सुरु गरेको मितिले दर वर्षसम्म</option>
+                            <option value="11.3(KHA)2">11.3(KHA)2 – अविकसित क्षेत्रमा विशेष उद्योगले व्यावसायिक उत्पादन वा कारोबार सुरु गरेको मितिले दश वर्षसम्म</option>
+                            <option value="11.3(KHA)3">11.3(KHA)3 – कम विकसित क्षेत्रमा विशेष उद्योगले व्यावसायिक उत्पादन वा कारोबार सुरु गरेको मितिले दश वर्षसम्म</option>
+                            <option value="11.3(KHA)4">11.3(KHA)4 – कर्णाली प्रदेश र सुदूर पश्चिम प्रदेशका पहाडी जिल्लाहरूमा स्थापित सय भन्दा बढी नेपाली नागरिकलाई प्रत्यक्ष रोजगारी दिने विशेष उद्योगलाई कारोबार सुरु गरेको मितिले पन्ध्र वर्षसम्म</option>
+                            <option value="11.3ANA">11.3ANA – सामुदायिक संस्थाबाट सञ्चालित स्वास्थ्य संस्था</option>
+                            <option value="11.3BA1">11.3BA1 – (शुरुको ५ वर्ष) स्वास्थ्य खोप्र, अक्सिजन ग्याँस तथा स्यानिटरी प्याड उत्पादन गर्ने उद्योग</option>
+                            <option value="11.3BA2">11.3BA2 – (शुरुको ५ वर्ष पछिको २ वर्ष) स्वास्थ्य खोप्र, अक्सिजन ग्याँस तथा स्यानिटरी प्याड उत्पादन गर्ने उद्योग</option>
+                            <option value="11.3BHA1">11.3BHA1 – (शुरुको ५ वर्ष) विद्युतिय सवारी उत्पादन तथा असेम्बल गर्ने उद्देश्यले २०८२ साल असार महिनासम्म स्थापन हुने उद्योग</option>
+                            <option value="11.3CHA(GA)">11.3CHA(GA) – सडक, पुल, सुरुङ मार्ग, टोल रेल्वे, विमानस्थल निर्माण गरी सञ्चालन गर्ने निकाय (शुरुको १० वर्ष सम्म)</option>
+                            <option value="11.3CHA(KA)">11.3CHA(KA) – ट्राम वा ट्रली बस सञ्चालन गर्ने निकाय (शुरुको १० वर्षसम्म)</option>
+                            <option value="11.3CHA(KHA)">11.3CHA(KHA) – रोपवे, केबलकार, आकाशे पुल निर्माण गरी सञ्चालन गर्ने निकाय (शुरुको १० वर्षसम्म)</option>
+                            <option value="11.3CHHA">11.3CHHA – धितो पत्र बजारमा सूचीकृत भएका निकायहरू</option>
+                            <option value="11.3DA">11.3DA – (शुरुको ३ वर्ष) ५० करोड भन्दा बढी चुक्ता पुँजी भएको प्राईभेट कम्पनी पब्लिक कम्पनीको रूपमा सञ्चालन गरेको (कम्पनी ऐन, २०६३ को दफा १२ बाहेक)</option>
+                            <option value="11.3DDA1">11.3DDA1 – (शुरुको ३ वर्ष) औद्योगिक क्षेत्र वा औद्योगिक ग्राममा सञ्चालन भएको विशेष उद्योग</option>
+                            <option value="11.3DDA2">11.3DDA2 – (शुरुको ३ वर्ष पछिको ५ वर्ष) औद्योगिक क्षेत्र वा औद्योगिक ग्राममा सञ्चालन भएको विशेष उद्योग</option>
+                            <option value="11.3DDHA">11.3DDHA – स्वदेशी चिया उत्पादन र प्रशोधन गर्ने उद्योग, दूध पदार्थको कारोबार गर्ने डेरी उद्योग र कपडा उत्पादन गर्ने उद्योग</option>
+                            <option value="11.3DHA">11.3DHA – स्वदेशमा उत्पादन गरेको कच्चा पदार्थ वा सहायक कच्चा पदार्थ विशेष उद्योगलाई बिक्री गरी प्राप्त गरेको आय</option>
+                            <option value="11.3GHA3">11.3GHA3 – जलविद्युत्, सौर्य, वायु तथा जैविक पदार्थबाट विद्युत् उत्पादन, प्रसारण वा वितरण गर्न अनुमति प्राप्त व्यक्तिले व्यावसायिक कारोबार शुरू गरेको मितिले पहिलो दस वर्ष (२०७८ चैत्रसम्मको हकमा)</option>
+                            <option value="11.3GHA4">11.3GHA4 – जलविद्युत्, सौर्य, वायु तथा जैविक पदार्थबाट विद्युत् उत्पादन, प्रसारण वा वितरण गर्न अनुमति प्राप्त व्यक्तिले व्यावसायिक कारोबार शुरू गरेको मितिले पहिलो दस वर्ष पछिको पाँच वर्ष (२०७८ चैत्रसम्मको हकमा)</option>
+                            <option value="11.3GHA5">11.3GHA5 – २०५८ साल चैत्र महिनासम्म वित्तीय व्यवस्थापन (फाइनान्सियल क्लोजर) सम्पन्न भइसकेका ४० मेगावाट भन्दा माथिका जलाशय तथा अर्धजलाशययुक्त जलविद्युत् आयोजना र ती आयोजनासँग सम्बन्धित टनेल अपरेसन गरी सञ्चालन गर्ने तल्लो तटीय जलविद्युत् आयोजनाको हकमा पहिलो पाँच वर्षसम्म</option>
+                            <option value="11.3GHA6">11.3GHA6 – २०५८ साल चैत्र महिनासम्म वित्तीय व्यवस्थापन (फाइनान्सियल क्लोजर) सम्पन्न भइसकेका ४० मेगावाट भन्दा माथिका जलाशय तथा अर्धजलाशययुक्त जलविद्युत् आयोजना र ती आयोजनासँग सम्बन्धित टनेल अपरेसन गरी सञ्चालन गर्ने तल्लो तटीय जलविद्युत् आयोजनाको हकमा पहिलो पाँच वर्ष पछिको वर्षसम्म</option>
+                            <option value="11.3Ga">11.3Ga – नेपाल सरकारले तोकेको प्राणीशास्त्र सम्बन्धी (जुलोजिकल), भूशास्त्र सम्बन्धी (जियोलोजिकल), जीवविज्ञान (बायोटेक) सम्बन्धी पार्क सञ्चालन, प्रविधि पार्क र सूचना प्रविधि पार्कमा स्थापित सफ्टवेयर विकास, तथा इन्क्युबेशन, साइबर सेक्युरिटी, डिजिटल म्यापिङ सम्बन्धी</option>
+                            <option value="11.3KA(KA)2">11.3KA(KA)2 – (शुरुको १० वर्ष पछिको) हिमाली जिल्ला र तोकिएको पहाडी जिल्लामा रहेको विशेष आर्थिक क्षेत्रमा स्थापित उद्योग</option>
+                            <option value="11.3KA(KHA)1">11.3KA(KHA)1 – (शुरुको ५ वर्ष) हिमाली जिल्ला र तोकिएको पहाडी जिल्ला बाहेकमा रहेको विशेष आर्थिक क्षेत्रमा स्थापित उद्योग</option>
+                            <option value="11.3KA(KHA)2">11.3KA(KHA)2 – (शुरुको ५ वर्ष पछिको) हिमाली जिल्ला र तोकिएको पहाडी जिल्ला बाहेकमा रहेको विशेष आर्थिक क्षेत्रमा स्थापित उद्योग</option>
+                            <option value="11.3KHA1">11.3KHA1 – (शुरुको ७ वर्ष) खनिज पेट्रोलियम तथा प्राकृतिक ग्याँस तथा इन्धन अन्वेषण तथा उत्खनन (२०८० साल चैत्र सम्म कारोबार शुरू गरेको)</option>
+                            <option value="11.3KHA2">11.3KHA2 – (शुरुको १ वर्ष पछिको ३ वर्ष) खनिज पेट्रोलियम तथा प्राकृतिक ग्याँस अन्वेषण तथा उत्खनन (२०८० साल चैत्र सम्म कारोबार शुरू गरेको)</option>
+                            <option value="11.3MA1">11.3MA1 – (शुरुको ५ वर्ष) कृषि औजार उत्पादन गर्ने उद्देश्यले २०८२ साल असार महिनासम्म स्थापना हुने उद्योग</option>
+                            <option value="11.3NA">11.3NA – (शुरुको ५ वर्ष) नवप्रवर्तनकारी ज्ञान, सोच, सीप, प्रविधि, व्यवहार र तरिका प्रयोग गरी वार्षिक एक करोडसम्म कारोबार गर्ने विभागले तोकेको स्टार्टअप व्यवसाय</option>
+                            <option value="11.3NGA(GA)">11.3NGA(GA) – (आर्थिक वर्ष २०७८/७९ सम्म) बिजनेस प्रोसेस आउटसोर्सिङ, सफ्टवेयर प्रोग्रामिङ, क्लाउड कम्प्युटिङलगायतका सूचना प्रविधिमा आधारित सेवा निर्यात गरी सोबाट प्राप्त विदेशी मुद्रा आर्जन गरेको व्यक्तिलाई विदेशी मुद्रामा प्राप्त गरेको आयको हकमा करमुक्त</option>
+                            <option value="11.3NGA(KHA)">11.3NGA(KHA) – निकासीबाट भएको आय (निकास)</option>
+                            <option value="11.3PA1">11.3PA1 – (शुरुको ३ वर्ष) काठमाण्डौ उपत्यकामा सञ्चालनमा रहेको कुनै विशेष उद्योग काठमाण्डौ उपत्यका बाहिर स्थानान्तरण भई सञ्चालन भएको</option>
+                            <option value="11.3PA2">11.3PA2 – (शुरुको ३ वर्ष पछिको २ वर्ष) काठमाण्डौ उपत्यकामा सञ्चालनमा रहेको कुनै विशेष उद्योग काठमाण्डौ उपत्यका बाहिर स्थानान्तरण भई सञ्चालन भएको</option>
+                            <option value="11.3PHA1">11.3PHA1 – (शुरुको ३ वर्ष) वातावरणमा प्रत्यक्ष असर पार्ने प्रयोग भइसेकका वस्तु मात्र कच्चा पदार्थको रूपमा प्रयोग गरी नयाँ वस्तु उत्पादन गर्ने उद्योग</option>
+                            <option value="11.3PHA2">11.3PHA2 – (शुरुको ३ वर्ष पछिको २ वर्ष) वातावरणमा प्रत्यक्ष असर पार्ने प्रयोग भइसेकका वस्तु मात्र कच्चा पदार्थको रूपमा प्रयोग गरी नयाँ वस्तु उत्पादन गर्ने उद्योग</option>
+                            <option value="11.3TA.1">11.3TA.1 – (शुरुको ५ वर्ष) १ अर्ब भन्दा बढी पुँजी लगानीमा स्थापना हुने पर्यटन उद्योग वा अन्तर्राष्ट्रिय उडान गर्ने एयरलाइन्स कम्पनी</option>
+                            <option value="11.3TA.2">11.3TA.2 – (शुरुको ५ वर्ष पछिको ३ वर्ष) ३ अर्ब भन्दा बढी पुँजी लगानीमा स्थापना हुने पर्यटन उद्योग वा अन्तर्राष्ट्रिय उडान गर्ने एयरलाइन्स कम्पनी</option>
+                            <option value="11.3TA.3">11.3TA.3 – (शुरुको १० वर्ष) ३ अर्ब भन्दा बढी पुँजी लगानीमा स्थापना हुने पर्यटन उद्योग वा अन्तर्राष्ट्रिय उडान गर्ने एयरलाइन्स कम्पनी</option>
+                            <option value="11.3TA.4">11.3TA.4 – (शुरुको १० वर्ष पछिको ४ वर्ष) ३ अर्ब भन्दा बढी पुँजी लगानीमा स्थापना हुने पर्यटन उद्योग वा अन्तर्राष्ट्रिय उडान गर्ने एयरलाइन्स कम्पनी</option>
+                            <option value="11.3TA.5">11.3TA.5 – (शुरुको १५ वर्ष) ५ अर्ब भन्दा बढी पुँजी लगानीमा स्थापना हुने पर्यटन उद्योग वा अन्तर्राष्ट्रिय उडान गर्ने एयरलाइन्स कम्पनी</option>
+                            <option value="11.3THA">11.3THA – सार्वजनिक पूर्वाधार संरचना निर्माण तथा सञ्चालन र नेपाल सरकारलाई हस्तान्तरण र विद्युतीय गृह निर्माण, उत्पादन र प्रसारण गर्ने निकाय</option>
+                            <option value="11.3TTA.1">11.3TTA.1 – (शुरुको ७ वर्ष) लघु उद्यम व्यवसाय वा कारोबार</option>
+                            <option value="11.3TTA.2">11.3TTA.2 – (शुरुको १० वर्ष) महिला उद्यमीबाट सञ्चालित लघु उद्यम व्यवसाय वा कारोबार</option>
+                            <option value="11.3TTHA">11.3TTHA – विशेष उद्योग, सूचना प्रविधि उद्योग र पर्यटन क्षेत्रसँग सम्बन्धित उद्योगले सञ्चित मुनाफालाई शेयर पूँजीकरण गरी प्राप्त लाभांशमा</option>
+                            <option value="11.3YAN">11.3YAN – बौद्धिक सम्पत्तीको निर्यात हस्तान्तरणद्वारा बिक्री गरी प्राप्त आय</option>
+                            <option value="64.2">64.2 – दफा ६३ बमोजिम स्वीकृत अवकाश कोषको आय</option>
+                            <option value="DTAA">DTAA – DTAA बमोजिम करछूट हुने</option>
+                        </select>
+                    </td>
+                    <td class="action-col"></td>
+                </tr>
+                <tr>
+                    <td class="row-num">36</td>
+                    <td class="desc-col">
+                        <div class="nepali-text">छुट प्रतिशत</div>
+                    </td>
+                    <td class="value-col"><input type="text" id="discountPercent" readonly></td>
+                    <td class="action-col"></td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- Save Button -->
+        <div class="action-buttons">
+            <button id="saveBtn" class="btn-save" onclick="saveAnnex5()">💾 Save</button>
+            <button id="deleteBtn" class="btn-delete" onclick="deleteAnnex5()" style="display: none;">🗑️ Delete</button>
+            <button id="updateBtn" class="btn-update" onclick="updateAnnex5()" style="display: none;">✏️ Update</button>
+        </div>
+        
+        <div class="back-link-section">
+            पछाडि गएर अनुसूची तय गर्न <a onclick="goBackToSetAnnex()">यहाँ कि्लक</a> गर्नुहोस् ।
+        </div>
+    </div>
+    
+    <!-- Interest Details Modal -->
+    <div id="interestModal" class="modal-overlay modal-center">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="modal-title">ब्याज विवरण / Interest Details</span>
+                <button class="modal-close" onclick="closeInterestModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <table class="modal-table">
+                    <thead>
+                        <tr>
+                            <th>क्र.सं</th>
+                            <th>विवरण</th>
+                            <th>रकम</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="row-num">18.1</td>
+                            <td class="desc-col">चालु ऋणको ब्याज</td>
+                            <td class="value-col"><input type="text" id="interest1" oninput="calculateInterestTotal()"></td>
+                        </tr>
+                        <tr>
+                            <td class="row-num">18.2</td>
+                            <td class="desc-col">प्रयोगमा रहेको सम्पतिको ब्याज</td>
+                            <td class="value-col"><input type="text" id="interest2" oninput="calculateInterestTotal()"></td>
+                        </tr>
+                        <tr>
+                            <td class="row-num">18.3</td>
+                            <td class="desc-col">अन्य ऋणको ब्याज</td>
+                            <td class="value-col"><input type="text" id="interest3" oninput="calculateInterestTotal()"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <div>
+                    <span class="modal-total-label">जम्मा रकम</span>
+                    <input type="text" id="interestTotal" class="modal-total-input" readonly>
+                    <button class="modal-btn" onclick="checkInterestTotal()">Check Total</button>
+                </div>
+                <div>
+                    <button class="modal-btn" onclick="saveInterestDetails()">Ok</button>
+                    <button class="modal-btn" onclick="closeInterestModal()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Trading Stock Modal -->
+    <div id="tradingStockModal" class="modal-overlay modal-center">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="modal-title">व्यापारिक मौज्दातको लागत विवरण / Cost of Trading Stock Details</span>
+                <button class="modal-close" onclick="closeTradingStockModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <table class="modal-table">
+                    <thead>
+                        <tr>
+                            <th>क्र.सं</th>
+                            <th>विवरण</th>
+                            <th>रकम</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="row-num">19.1</td>
+                            <td class="desc-col">शुरु मौज्दात जम्मा</td>
+                            <td class="value-col"><input type="text" id="tradingStock1" oninput="calculateTradingStockTotal()"></td>
+                        </tr>
+                        <tr>
+                            <td class="row-num">19.2</td>
+                            <td class="desc-col">प्रत्यक्ष सामाग्री खर्च</td>
+                            <td class="value-col"><input type="text" id="tradingStock2" oninput="calculateTradingStockTotal()"></td>
+                        </tr>
+                        <tr>
+                            <td class="row-num">19.3</td>
+                            <td class="desc-col">प्रत्यक्ष लागत (तलब / ज्याला आदि) खर्च</td>
+                            <td class="value-col"><input type="text" id="tradingStock3" oninput="calculateTradingStockTotal()"></td>
+                        </tr>
+                        <tr>
+                            <td class="row-num">19.4</td>
+                            <td class="desc-col">प्रत्यक्ष शिरोपार लागत खर्च</td>
+                            <td class="value-col"><input type="text" id="tradingStock4" oninput="calculateTradingStockTotal()"></td>
+                        </tr>
+                        <tr>
+                            <td class="row-num">19.5</td>
+                            <td class="desc-col">अन्य प्रत्यक्ष खर्च</td>
+                            <td class="value-col"><input type="text" id="tradingStock5" oninput="calculateTradingStockTotal()"></td>
+                        </tr>
+                        <tr>
+                            <td class="row-num">19.6</td>
+                            <td class="desc-col">जम्मा खर्च</td>
+                            <td class="value-col"><input type="text" id="tradingStock6" readonly></td>
+                        </tr>
+                        <tr>
+                            <td class="row-num">19.7</td>
+                            <td class="desc-col">घटाउने - अन्तिम मौज्दात</td>
+                            <td class="value-col"><input type="text" id="tradingStock7" oninput="calculateTradingStockTotal()"></td>
+                        </tr>
+                        <tr>
+                            <td class="row-num">19.8</td>
+                            <td class="desc-col">कुल लागत खर्च</td>
+                            <td class="value-col"><input type="text" id="tradingStock8" readonly></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <div>
+                    <button class="modal-btn" onclick="saveTradingStockDetails()">Ok</button>
+                    <button class="modal-btn" onclick="closeTradingStockModal()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Repairs and Improvements Modal -->
+    <div id="repairModal" class="modal-overlay modal-center">
+        <div class="modal-content" style="max-width: 950px;">
+            <div class="modal-header">
+                <span class="modal-title" style="font-size: 12px;">मर्मत तथा सुधार खर्च विवरण / Repairs and Improvements Details</span>
+                <button class="modal-close" onclick="closeRepairModal()">×</button>
+            </div>
+            <div class="modal-body" style="padding: 10px;">
+                <table class="modal-table" style="table-layout: fixed; font-size: 11px;">
+                    <thead>
+                        <tr>
+                            <th style="width: 50px; padding: 4px;">क्र.सं</th>
+                            <th style="width: 180px; padding: 4px;">विवरण</th>
+                            <th style="width: 95px; padding: 4px;">समूह क</th>
+                            <th style="width: 95px; padding: 4px;">समूह ख</th>
+                            <th style="width: 95px; padding: 4px;">समूह ग</th>
+                            <th style="width: 95px; padding: 4px;">समूह घ</th>
+                            <th style="width: 95px; padding: 4px;">समूह ङ</th>
+                            <th style="width: 95px; padding: 4px;">जम्मा</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="row-num" style="padding: 3px;">20.1</td>
+                            <td style="text-align: left; padding: 3px; font-size: 11px;">वास्तविक मर्मत सुधार खर्च</td>
+                            <td style="padding: 2px;"><input type="text" id="repair1_1" oninput="calculateRepairRow(1)" style="width: 100%; text-align: right; padding: 2px; font-size: 11px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="repair1_2" oninput="calculateRepairRow(1)" style="width: 100%; text-align: right; padding: 2px; font-size: 11px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="repair1_3" oninput="calculateRepairRow(1)" style="width: 100%; text-align: right; padding: 2px; font-size: 11px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="repair1_4" oninput="calculateRepairRow(1)" style="width: 100%; text-align: right; padding: 2px; font-size: 11px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="repair1_5" oninput="calculateRepairRow(1)" style="width: 100%; text-align: right; padding: 2px; font-size: 11px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="repair1_total" readonly style="width: 100%; text-align: right; background: #f0f0f0; padding: 2px; font-size: 11px;"></td>
+                        </tr>
+                        <tr>
+                            <td class="row-num" style="padding: 3px;">20.2</td>
+                            <td style="text-align: left; padding: 3px; font-size: 11px;">सिमा क्तोकिएको मर्मत सुधार खर्च</td>
+                            <td style="padding: 2px;"><input type="text" id="repair2_1" oninput="calculateRepairRow(2)" style="width: 100%; text-align: right; padding: 2px; font-size: 11px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="repair2_2" oninput="calculateRepairRow(2)" style="width: 100%; text-align: right; padding: 2px; font-size: 11px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="repair2_3" oninput="calculateRepairRow(2)" style="width: 100%; text-align: right; padding: 2px; font-size: 11px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="repair2_4" oninput="calculateRepairRow(2)" style="width: 100%; text-align: right; padding: 2px; font-size: 11px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="repair2_5" oninput="calculateRepairRow(2)" style="width: 100%; text-align: right; padding: 2px; font-size: 11px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="repair2_total" readonly style="width: 100%; text-align: right; background: #f0f0f0; padding: 2px; font-size: 11px;"></td>
+                        </tr>
+                        <tr>
+                            <td class="row-num" style="padding: 3px;">20.3</td>
+                            <td style="text-align: left; padding: 3px; font-size: 11px;">जम्मा मर्मत खर्च</td>
+                            <td style="padding: 2px;"><input type="text" id="repair3_1" readonly style="width: 100%; text-align: right; background: #f0f0f0; padding: 2px; font-size: 11px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="repair3_2" readonly style="width: 100%; text-align: right; background: #f0f0f0; padding: 2px; font-size: 11px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="repair3_3" readonly style="width: 100%; text-align: right; background: #f0f0f0; padding: 2px; font-size: 11px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="repair3_4" readonly style="width: 100%; text-align: right; background: #f0f0f0; padding: 2px; font-size: 11px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="repair3_5" readonly style="width: 100%; text-align: right; background: #f0f0f0; padding: 2px; font-size: 11px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="repair3_total" readonly style="width: 100%; text-align: right; background: #f0f0f0; padding: 2px; font-size: 11px;"></td>
+                        </tr>
+                        <tr>
+                            <td class="row-num" style="padding: 3px;">20.4</td>
+                            <td style="text-align: left; padding: 3px; font-size: 11px;">निलान नभएको मर्मत खर्च</td>
+                            <td style="padding: 2px;"><input type="text" id="repair4_1" oninput="calculateRepairRow(4)" style="width: 100%; text-align: right; padding: 2px; font-size: 11px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="repair4_2" oninput="calculateRepairRow(4)" style="width: 100%; text-align: right; padding: 2px; font-size: 11px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="repair4_3" oninput="calculateRepairRow(4)" style="width: 100%; text-align: right; padding: 2px; font-size: 11px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="repair4_4" oninput="calculateRepairRow(4)" style="width: 100%; text-align: right; padding: 2px; font-size: 11px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="repair4_5" oninput="calculateRepairRow(4)" style="width: 100%; text-align: right; padding: 2px; font-size: 11px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="repair4_total" readonly style="width: 100%; text-align: right; background: #f0f0f0; padding: 2px; font-size: 11px;"></td>
+                        </tr>
+                        <tr>
+                            <td class="row-num" style="padding: 3px;">20.5</td>
+                            <td style="text-align: left; padding: 3px; font-size: 11px;">समूह ङ को मर्मत खर्च</td>
+                            <td style="padding: 2px;"></td>
+                            <td style="padding: 2px;"></td>
+                            <td style="padding: 2px;"></td>
+                            <td style="padding: 2px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="repair5_5" oninput="calculateRepairRow(5)" style="width: 100%; text-align: right; padding: 2px; font-size: 11px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="repair5_total" readonly style="width: 100%; text-align: right; background: #f0f0f0; padding: 2px; font-size: 11px;"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer" style="padding: 8px 10px;">
+                <div>
+                    <button class="modal-btn" onclick="saveRepairDetails()">Ok</button>
+                    <button class="modal-btn" onclick="closeRepairModal()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Depreciation Modal -->
+    <div id="depreciationModal" class="modal-overlay modal-center">
+        <div class="modal-content" style="max-width: 1100px;">
+            <div class="modal-header">
+                <span class="modal-title" style="font-size: 12px;">ह्रास विवरण / Depreciation Details</span>
+                <button class="modal-close" onclick="closeDepreciationModal()">×</button>
+            </div>
+            <div class="modal-body" style="padding: 10px; max-height: 70vh; overflow-y: auto;">
+                <table class="modal-table" style="table-layout: fixed; font-size: 10px;">
+                    <thead>
+                        <tr>
+                            <th style="width: 55px; padding: 4px;">क्र.सं</th>
+                            <th style="width: 200px; padding: 4px;">विवरण</th>
+                            <th style="width: 85px; padding: 4px;">समूह क</th>
+                            <th style="width: 85px; padding: 4px;">समूह ख</th>
+                            <th style="width: 85px; padding: 4px;">समूह ग</th>
+                            <th style="width: 85px; padding: 4px;">समूह घ</th>
+                            <th style="width: 85px; padding: 4px;">समूह ङ</th>
+                            <th style="width: 95px; padding: 4px;">जम्मा</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="row-num" style="padding: 3px; font-size: 10px;">23.01</td>
+                            <td style="text-align: left; padding: 3px; font-size: 10px;">यो वर्षको शुरुको हासआधार</td>
+                            <td style="padding: 2px;"><input type="text" id="dep1_1" readonly style="width: 100%; text-align: right; background: #f0f0f0; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep1_2" readonly style="width: 100%; text-align: right; background: #f0f0f0; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep1_3" readonly style="width: 100%; text-align: right; background: #f0f0f0; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep1_4" readonly style="width: 100%; text-align: right; background: #f0f0f0; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep1_5" readonly style="width: 100%; text-align: right; background: #f0f0f0; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep1_total" readonly style="width: 100%; text-align: right; background: #f0f0f0; padding: 2px; font-size: 10px;"></td>
+                        </tr>
+                        <tr>
+                            <td class="row-num" style="padding: 3px; font-size: 10px;">23.01.1</td>
+                            <td style="text-align: left; padding: 3px; font-size: 10px;">हास आधारमा थपघट</td>
+                            <td style="padding: 2px;"><input type="text" id="dep1_1_1" oninput="calculateDepreciation()" style="width: 100%; text-align: right; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep1_1_2" oninput="calculateDepreciation()" style="width: 100%; text-align: right; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep1_1_3" oninput="calculateDepreciation()" style="width: 100%; text-align: right; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep1_1_4" oninput="calculateDepreciation()" style="width: 100%; text-align: right; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep1_1_5" oninput="calculateDepreciation()" style="width: 100%; text-align: right; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep1_1_total" readonly style="width: 100%; text-align: right; background: #f0f0f0; padding: 2px; font-size: 10px;"></td>
+                        </tr>
+                        <tr>
+                            <td class="row-num" style="padding: 3px; font-size: 10px;">23.01.2</td>
+                            <td style="text-align: left; padding: 3px; font-size: 10px;">यो वर्ष कायम हुने शुरु हास आधार</td>
+                            <td style="padding: 2px;"><input type="text" id="dep1_2_1" readonly style="width: 100%; text-align: right; background: #f0f0f0; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep1_2_2" readonly style="width: 100%; text-align: right; background: #f0f0f0; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep1_2_3" readonly style="width: 100%; text-align: right; background: #f0f0f0; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep1_2_4" readonly style="width: 100%; text-align: right; background: #f0f0f0; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep1_2_5" readonly style="width: 100%; text-align: right; background: #f0f0f0; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep1_2_total" readonly style="width: 100%; text-align: right; background: #f0f0f0; padding: 2px; font-size: 10px;"></td>
+                        </tr>
+                        <tr>
+                            <td class="row-num" style="padding: 3px; font-size: 10px;">23.02</td>
+                            <td style="text-align: left; padding: 3px; font-size: 10px;">साउन देखि पुष सम्म</td>
+                            <td style="padding: 2px;"><input type="text" id="dep2_1" oninput="calculateDepreciation()" style="width: 100%; text-align: right; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep2_2" oninput="calculateDepreciation()" style="width: 100%; text-align: right; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep2_3" oninput="calculateDepreciation()" style="width: 100%; text-align: right; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep2_4" oninput="calculateDepreciation()" style="width: 100%; text-align: right; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep2_5" oninput="calculateDepreciation()" style="width: 100%; text-align: right; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep2_total" readonly style="width: 100%; text-align: right; background: #f0f0f0; padding: 2px; font-size: 10px;"></td>
+                        </tr>
+                        <tr>
+                            <td class="row-num" style="padding: 3px; font-size: 10px;">23.03</td>
+                            <td style="text-align: left; padding: 3px; font-size: 10px;">माघ देखि चैत्र सम्म</td>
+                            <td style="padding: 2px;"><input type="text" id="dep3_1" oninput="calculateDepreciation()" style="width: 100%; text-align: right; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep3_2" oninput="calculateDepreciation()" style="width: 100%; text-align: right; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep3_3" oninput="calculateDepreciation()" style="width: 100%; text-align: right; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep3_4" oninput="calculateDepreciation()" style="width: 100%; text-align: right; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep3_5" oninput="calculateDepreciation()" style="width: 100%; text-align: right; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep3_total" readonly style="width: 100%; text-align: right; background: #f0f0f0; padding: 2px; font-size: 10px;"></td>
+                        </tr>
+                        <tr>
+                            <td class="row-num" style="padding: 3px; font-size: 10px;">23.04</td>
+                            <td style="text-align: left; padding: 3px; font-size: 10px;">बैशाख देखि असार सम्म</td>
+                            <td style="padding: 2px;"><input type="text" id="dep4_1" oninput="calculateDepreciation()" style="width: 100%; text-align: right; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep4_2" oninput="calculateDepreciation()" style="width: 100%; text-align: right; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep4_3" oninput="calculateDepreciation()" style="width: 100%; text-align: right; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep4_4" oninput="calculateDepreciation()" style="width: 100%; text-align: right; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep4_5" oninput="calculateDepreciation()" style="width: 100%; text-align: right; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep4_total" readonly style="width: 100%; text-align: right; background: #f0f0f0; padding: 2px; font-size: 10px;"></td>
+                        </tr>
+                        <tr>
+                            <td class="row-num" style="padding: 3px; font-size: 10px;">23.05</td>
+                            <td style="text-align: left; padding: 3px; font-size: 10px;">अन्य (भएमा समावेश गर्ने)</td>
+                            <td style="padding: 2px;"><input type="text" id="dep5_1" oninput="calculateDepreciation()" style="width: 100%; text-align: right; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep5_2" oninput="calculateDepreciation()" style="width: 100%; text-align: right; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep5_3" oninput="calculateDepreciation()" style="width: 100%; text-align: right; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep5_4" oninput="calculateDepreciation()" style="width: 100%; text-align: right; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep5_total" readonly style="width: 100%; text-align: right; background: #f0f0f0; padding: 2px; font-size: 10px;"></td>
+                        </tr>
+                        <tr>
+                            <td class="row-num" style="padding: 3px; font-size: 10px;">23.06</td>
+                            <td style="text-align: left; padding: 3px; font-size: 10px;">या वर्षको निसर्ग भएको हास योग्य सम्पत्ति</td>
+                            <td style="padding: 2px;"><input type="text" id="dep6_1" oninput="calculateDepreciation()" style="width: 100%; text-align: right; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep6_2" oninput="calculateDepreciation()" style="width: 100%; text-align: right; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep6_3" oninput="calculateDepreciation()" style="width: 100%; text-align: right; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep6_4" oninput="calculateDepreciation()" style="width: 100%; text-align: right; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep6_total" readonly style="width: 100%; text-align: right; background: #f0f0f0; padding: 2px; font-size: 10px;"></td>
+                        </tr>
+                        <tr>
+                            <td class="row-num" style="padding: 3px; font-size: 10px;">23.06.1</td>
+                            <td style="text-align: left; padding: 3px; font-size: 10px;">समूहको सबै सम्पत्ति निसर्ग (भएमा टिक लगाउने)</td>
+                            <td style="padding: 2px; text-align: center;"><input type="checkbox" id="dep6_1_1"></td>
+                            <td style="padding: 2px; text-align: center;"><input type="checkbox" id="dep6_1_2"></td>
+                            <td style="padding: 2px; text-align: center;"><input type="checkbox" id="dep6_1_3"></td>
+                            <td style="padding: 2px; text-align: center;"><input type="checkbox" id="dep6_1_4"></td>
+                            <td style="padding: 2px;"></td>
+                            <td style="padding: 2px;"></td>
+                        </tr>
+                        <tr>
+                            <td class="row-num" style="padding: 3px; font-size: 10px;">23.07</td>
+                            <td style="text-align: left; padding: 3px; font-size: 10px;">हास दर (१/३ थप पाउने भए थप % समेत)</td>
+                            <td style="padding: 2px;"><input type="text" id="dep7_1" oninput="calculateDepreciation()" style="width: 100%; text-align: right; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep7_2" oninput="calculateDepreciation()" style="width: 100%; text-align: right; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep7_3" oninput="calculateDepreciation()" style="width: 100%; text-align: right; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep7_4" oninput="calculateDepreciation()" style="width: 100%; text-align: right; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"></td>
+                            <td style="padding: 2px;"></td>
+                        </tr>
+                        <tr>
+                            <td class="row-num" style="padding: 3px; font-size: 10px;">23.08</td>
+                            <td style="text-align: left; padding: 3px; font-size: 10px;">अन्य भए समावेश गर्ने</td>
+                            <td style="padding: 2px;"><input type="text" id="dep8_1" oninput="calculateDepreciation()" style="width: 100%; text-align: right; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep8_2" oninput="calculateDepreciation()" style="width: 100%; text-align: right; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep8_3" oninput="calculateDepreciation()" style="width: 100%; text-align: right; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep8_4" oninput="calculateDepreciation()" style="width: 100%; text-align: right; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep8_total" readonly style="width: 100%; text-align: right; background: #f0f0f0; padding: 2px; font-size: 10px;"></td>
+                        </tr>
+                        <tr>
+                            <td class="row-num" style="padding: 3px; font-size: 10px;">23.09</td>
+                            <td style="text-align: left; padding: 3px; font-size: 10px;">मिलान नभएको मर्मत सुधार खर्च</td>
+                            <td style="padding: 2px;"><input type="text" id="dep9_1" oninput="calculateDepreciation()" style="width: 100%; text-align: right; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep9_2" oninput="calculateDepreciation()" style="width: 100%; text-align: right; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep9_3" oninput="calculateDepreciation()" style="width: 100%; text-align: right; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep9_4" oninput="calculateDepreciation()" style="width: 100%; text-align: right; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep9_total" readonly style="width: 100%; text-align: right; background: #f0f0f0; padding: 2px; font-size: 10px;"></td>
+                        </tr>
+                        <tr>
+                            <td class="row-num" style="padding: 3px; font-size: 10px;">23.10</td>
+                            <td style="text-align: left; padding: 3px; font-size: 10px;">आगामी आ. व. को लागि जिम्मेवारी सरेको ज...</td>
+                            <td style="padding: 2px;"><input type="text" id="dep10_1" oninput="calculateDepreciation()" style="width: 100%; text-align: right; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep10_2" oninput="calculateDepreciation()" style="width: 100%; text-align: right; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep10_3" oninput="calculateDepreciation()" style="width: 100%; text-align: right; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep10_4" oninput="calculateDepreciation()" style="width: 100%; text-align: right; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep10_5" oninput="calculateDepreciation()" style="width: 100%; text-align: right; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep10_total" readonly style="width: 100%; text-align: right; background: #f0f0f0; padding: 2px; font-size: 10px;"></td>
+                        </tr>
+                        <tr>
+                            <td class="row-num" style="padding: 3px; font-size: 10px;">23.11</td>
+                            <td style="text-align: left; padding: 3px; font-size: 10px;">समूह 'ड' को कुल जम्मा (हास खर्च)</td>
+                            <td style="padding: 2px;"></td>
+                            <td style="padding: 2px;"></td>
+                            <td style="padding: 2px;"></td>
+                            <td style="padding: 2px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep11_5" readonly style="width: 100%; text-align: right; background: #f0f0f0; padding: 2px; font-size: 10px;"></td>
+                            <td style="padding: 2px;"><input type="text" id="dep11_total" readonly style="width: 100%; text-align: right; background: #f0f0f0; padding: 2px; font-size: 10px;"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="background: #fffacd; padding: 6px; margin-top: 10px; border: 1px solid #ddd; font-size: 10px;">
+                    नोट:- करदाताले कोषबाट को प्रकृति अनुसार आ. व. २०७९/८० को शुरु ह्रास आधार मुल्यमा थप/घट गरी कोइै संसोधन गर्नुपर्ने क. सं. २३.०१ पछि क. सं. २३.०१.१ मा ह्रास आधारमा थप/घट वापतको रकम प्रविष्टि गर्न सक्नु।
+                </div>
+            </div>
+            <div class="modal-footer" style="padding: 8px 10px;">
+                <div>
+                    <button class="modal-btn" onclick="saveDepreciationDetails()">Ok</button>
+                    <button class="modal-btn" onclick="closeDepreciationModal()">Cancel</button>
+                    <button class="modal-btn" onclick="printDepreciationReport()">Print Report</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Others than mentioned Modal -->
+    <div id="otherExpenseModal" class="modal-overlay modal-center">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="modal-title">उपरोक्त बाहेक अन्य खर्च विवरण / Others than mentioned Details</span>
+                <button class="modal-close" onclick="closeOtherExpenseModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <table class="modal-table">
+                    <thead>
+                        <tr>
+                            <th>क्र.सं</th>
+                            <th>विवरण</th>
+                            <th>रकम</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="row-num">25.1</td>
+                            <td class="desc-col">कर्मचारी खर्च</td>
+                            <td class="value-col"><input type="text" id="other1" oninput="calculateOtherExpenseTotal()"></td>
+                        </tr>
+                        <tr>
+                            <td class="row-num">25.2</td>
+                            <td class="desc-col">कार्यालय सञ्चालन खर्च</td>
+                            <td class="value-col"><input type="text" id="other2" oninput="calculateOtherExpenseTotal()"></td>
+                        </tr>
+                        <tr>
+                            <td class="row-num">25.3</td>
+                            <td class="desc-col">बिक्री प्रवर्द्धन खर्च</td>
+                            <td class="value-col"><input type="text" id="other3" oninput="calculateOtherExpenseTotal()"></td>
+                        </tr>
+                        <tr>
+                            <td class="row-num">25.4</td>
+                            <td class="desc-col">अन्य खर्च</td>
+                            <td class="value-col"><input type="text" id="other4" oninput="calculateOtherExpenseTotal()"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <div>
+                    <span class="modal-total-label">जम्मा रकम</span>
+                    <input type="text" id="otherExpenseTotal" class="modal-total-input" readonly>
+                    <button class="modal-btn" onclick="checkOtherExpenseTotal()">Check Total</button>
+                </div>
+                <div>
+                    <button class="modal-btn" onclick="saveOtherExpenseDetails()">Ok</button>
+                    <button class="modal-btn" onclick="closeOtherExpenseModal()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Carried Forward Loss Modal -->
+    <div id="carriedForwardLossModal" class="modal-overlay modal-center">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="modal-title">गत आ. व. बाट निश्चित हैसियतको प्रमाणित नोक्सानी विवरण / Carried forward of unrelieved Losses Details</span>
+                <button class="modal-close" onclick="closeCarriedForwardLossModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <table class="modal-table">
+                    <thead>
+                        <tr>
+                            <th>क्र.सं</th>
+                            <th>विवरण</th>
+                            <th>रकम</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="row-num">29.02</td>
+                            <td class="desc-col">आ.व २०७१.०७२ सम्म</td>
+                            <td class="value-col"><input type="text" id="loss1" oninput="calculateCarriedForwardLossTotal()"></td>
+                        </tr>
+                        <tr>
+                            <td class="row-num">29.03</td>
+                            <td class="desc-col">आ.व २०७२.०७३</td>
+                            <td class="value-col"><input type="text" id="loss2" oninput="calculateCarriedForwardLossTotal()"></td>
+                        </tr>
+                        <tr>
+                            <td class="row-num">29.04</td>
+                            <td class="desc-col">आ.व २०७३.०७४</td>
+                            <td class="value-col"><input type="text" id="loss3" oninput="calculateCarriedForwardLossTotal()"></td>
+                        </tr>
+                        <tr>
+                            <td class="row-num">29.05</td>
+                            <td class="desc-col">आ.व २०७४.०७५</td>
+                            <td class="value-col"><input type="text" id="loss4" oninput="calculateCarriedForwardLossTotal()"></td>
+                        </tr>
+                        <tr>
+                            <td class="row-num">29.06</td>
+                            <td class="desc-col">आ.व २०७५.०७६</td>
+                            <td class="value-col"><input type="text" id="loss5" oninput="calculateCarriedForwardLossTotal()"></td>
+                        </tr>
+                        <tr>
+                            <td class="row-num">29.07</td>
+                            <td class="desc-col">आ.व २०७६ .०७७</td>
+                            <td class="value-col"><input type="text" id="loss6" oninput="calculateCarriedForwardLossTotal()"></td>
+                        </tr>
+                        <tr>
+                            <td class="row-num">29.08</td>
+                            <td class="desc-col">आ.व २०७७.०७८</td>
+                            <td class="value-col"><input type="text" id="loss7" oninput="calculateCarriedForwardLossTotal()"></td>
+                        </tr>
+                        <tr>
+                            <td class="row-num">29.09</td>
+                            <td class="desc-col">आ.व २०७८.०७९</td>
+                            <td class="value-col"><input type="text" id="loss8" oninput="calculateCarriedForwardLossTotal()"></td>
+                        </tr>
+                        <tr>
+                            <td class="row-num">29.10</td>
+                            <td class="desc-col">आ.व २०७९.०८०</td>
+                            <td class="value-col"><input type="text" id="loss9" oninput="calculateCarriedForwardLossTotal()"></td>
+                        </tr>
+                        <tr>
+                            <td class="row-num">29.11</td>
+                            <td class="desc-col">आ.व २०८०.०८१</td>
+                            <td class="value-col"><input type="text" id="loss10" oninput="calculateCarriedForwardLossTotal()"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <div>
+                    <span class="modal-total-label">जम्मा रकम</span>
+                    <input type="text" id="carriedForwardLossTotal" class="modal-total-input" readonly>
+                    <button class="modal-btn" onclick="checkCarriedForwardLossTotal()">Check Total</button>
+                </div>
+                <div>
+                    <button class="modal-btn" onclick="saveCarriedForwardLossDetails()">Ok</button>
+                    <button class="modal-btn" onclick="closeCarriedForwardLossModal()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Confirmation Modal -->
+    <div id="confirmModal" class="confirm-overlay">
+        <div class="confirm-dialog">
+            <div class="confirm-header">
+                <span class="confirm-title">Confirm Action</span>
+                <button class="confirm-close-btn" onclick="closeConfirmModal()">×</button>
+            </div>
+            <div class="confirm-body">
+                <div class="confirm-icon">❓</div>
+                <div class="confirm-message">के तपाईं पछाडि गएर अनुसूची तय गर्न चाहनुहुन्छ?</div>
+            </div>
+            <div class="confirm-footer">
+                <button class="confirm-btn yes" onclick="confirmGoBack()">Yes</button>
+                <button class="confirm-btn" onclick="closeConfirmModal()">No</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Alert Modal -->
+    <div id="alertModal" class="confirm-overlay">
+        <div class="confirm-dialog" style="background: #dfe8f6;">
+            <div class="confirm-header">
+                <span class="confirm-title">Alert</span>
+                <button class="confirm-close-btn" onclick="closeAlertModal()">×</button>
+            </div>
+            <div class="confirm-body">
+                <div class="confirm-icon">⚠️</div>
+                <div class="confirm-message" id="alertMessage"></div>
+            </div>
+            <div class="confirm-footer">
+                <button class="confirm-btn yes" onclick="closeAlertModal()">OK</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Success Modal -->
+    <div class="success-modal-overlay" id="successModal">
+        <div class="success-modal">
+            <div class="success-modal-header">
+                <div class="success-modal-title">SUCCESS</div>
+                <button class="success-modal-close" onclick="closeSuccessModal()">✕</button>
+            </div>
+            <div class="success-modal-body">
+                <div class="success-icon">ℹ️</div>
+                <div class="success-message">Successfully saved.</div>
+            </div>
+            <div class="success-modal-footer">
+                <button class="success-ok-btn" onclick="closeSuccessModal()">OK</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="../../js/income_tax/d03_annex_5.js?v=1.7"></script>
+</body>
+</html>

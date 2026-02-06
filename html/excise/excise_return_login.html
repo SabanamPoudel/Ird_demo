@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excise Return Login - IRD</title>
+    <link rel="stylesheet" href="../../css/income_tax/d01_return_entry.css">
+    <link rel="stylesheet" href="../../css/excise/excise_return_login.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <nav class="navbar shadow-sm mb-2">
+        <div class="container-fluid">
+            <div class="collapse show navbar-collapse">
+                <div class="header-section">
+                    <div class="header-left">
+                        <img src="../../media/resources/logo.gif" alt="IRD Logo">
+                    </div>
+                    
+                    <div class="header-center">
+                        <img src="../../media/resources/flag.gif" alt="Nepal Flag">
+                        <img src="../../media/resources/slogan.jpg" alt="Slogan" style="height: 75px; width: auto; margin-left: 150px;">
+                    </div>
+                    
+                    <div class="header-right">
+                        <label class="dt" id="currentDate">Date: 2082.07.23</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-layout">
+        <!-- Sidebar -->
+        <div class="sidebar is-open">
+            <div class="side-menu">
+                <ul class="list-unstyled pb-3 nav flex-column">
+                    <!-- General -->
+                    <li class="nav-item">
+                        <a class="dropdown-toggle nav-link" href="#" onclick="toggleMenu(this)">General</a>
+                        <ul class="submenu">
+                            <li><a href="../general/taxpayer_login.html">Taxpayer Login</a></li>
+                            <li><a href="../general/create_taxpayer_login.html">Create Taxpayer Login</a></li>
+                            <li><a href="#">Forgot Password</a></li>
+                            <li><a href="#">Drug Manufacturer's Login</a></li>
+                            <li><a href="#">Payment Voucher Search</a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Registration -->
+                    <li class="nav-item">
+                        <a class="dropdown-toggle nav-link" href="#" onclick="toggleMenu(this)">Registration(PAN, VAT, EXCISE)</a>
+                        <ul class="submenu">
+                            <li><a href="#">Application For Registration</a></li>
+                            <li><a href="#">Registration Log In</a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- VAT -->
+                    <li class="nav-item">
+                        <a class="dropdown-toggle nav-link" href="#" onclick="toggleMenu(this)">VAT</a>
+                        <ul class="submenu">
+                            <li><a href="../vat/vat_return_entry.html">VAT Return Entry</a></li>
+                            <li><a href="../vat/vat_return_login.html">VAT Return Login</a></li>
+                            <li><a href="#">VAT Close Of Business Entry</a></li>
+                            <li><a href="#">VAT Close Of Business Login</a></li>
+                            <li><a href="#">Help</a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Estimated Return -->
+                    <li class="nav-item">
+                        <a class="dropdown-toggle nav-link" href="#" onclick="toggleMenu(this)">Estimated Return</a>
+                        <ul class="submenu">
+                            <li><a href="../estimated_return/estimated_return_entry.html">Estimated Return Entry</a></li>
+                            <li><a href="../estimated_return/estimated_return_login.html">Estimated Return Login</a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Income Tax -->
+                    <li class="nav-item">
+                        <a class="dropdown-toggle nav-link" href="#" onclick="toggleMenu(this)">Income Tax</a>
+                        <ul class="submenu">
+                            <li><a href="../income_tax/d01_return_entry.html">D-01 Return Entry</a></li>
+                            <li><a href="../income_tax/d02_return_entry.html">D-02 Return Entry</a></li>
+                            <li><a href="../income_tax/d03_return_entry.html">D-03 Return Entry</a></li>
+                            <li><a href="../income_tax/d04_return_entry.html">D-04 Return Entry</a></li>
+                            <li><a href="../income_tax/tax_return_login.html">Tax Return Login</a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Excise -->
+                    <li class="nav-item">
+                        <a class="dropdown-toggle nav-link active" href="#" onclick="toggleMenu(this)">Excise</a>
+                        <ul class="submenu">
+                            <li><a href="excise_return_entry_login.html">Return Entry</a></li>
+                            <li><a href="excise_return_login.html">Excise Return Login</a></li>
+                            <li><a href="#">Close Of Business Entry</a></li>
+                            <li><a href="#">Excise Close Of Business Login</a></li>
+                            <li><a href="#">Self Renew Permit</a></li>
+                            <li><a href="#">New Permit</a></li>
+                            <li><a href="#">Manufacturer's Login</a></li>
+                            <li><a href="#">Brand Registration</a></li>
+                            <li><a href="#">Brand Registration Login</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- e-TDS -->
+                    <li class="nav-item">
+                        <a class="dropdown-toggle nav-link" href="#" onclick="toggleMenu(this)">e-TDS</a>
+                        <ul class="submenu">
+                            <li><a href="../e_tds/etds_home.html">e-TDS Home</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <div class="content-wrapper">
+                <h2 class="page-title">सचिवालय लगइन फाराम ( Excise Returns Login )</h2>
+                <div class="login-form-container">
+                    <table class="login-table">
+                        <tr>
+                            <td class="label-cell">सचिवालय नं. :</td>
+                            <td class="input-cell">
+                                <input type="text" id="submissionNoInput" class="login-input">
+                            </td>
+                            <td rowspan="4" class="info-cell">
+                                यदि तपाईले सचिवालय नं. लिइ सक्नु भएको छ भने सो प्रयोगकर्ताको नाम र पासवर्ड राखेर लगइन भई प्रविष्टि र रुजु गर्न सक्नु हुन्छ ।
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label-cell">प्रयोगकर्ताको नाम :</td>
+                            <td class="input-cell">
+                                <input type="text" id="usernameInput" class="login-input">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label-cell">पासवर्ड :</td>
+                            <td class="input-cell">
+                                <input type="password" id="passwordInput" class="login-input" autocomplete="off">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="button-cell">
+                                <button type="button" class="login-btn" onclick="loginExciseReturn()">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="white" class="btn-icon">
+                                        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                                    </svg>
+                                    Login
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../js/excise/excise_return_login.js"></script>
+</body>
+</html>

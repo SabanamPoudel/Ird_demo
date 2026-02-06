@@ -1,0 +1,145 @@
+/* Excise Return Login Styles */
+
+.page-title {
+    padding: 15px 30px;
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    border-bottom: 1px solid #e0e0e0;
+    background-color: #f8f9fa;
+}
+
+.login-form-container {
+    padding: 40px 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.login-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.login-table tr {
+    height: 50px;
+}
+
+.label-cell {
+    text-align: right;
+    padding-right: 15px;
+    font-weight: 400;
+    color: #333;
+    width: 150px;
+    font-size: 14px;
+}
+
+.input-cell {
+    padding: 5px 10px;
+    width: 250px;
+}
+
+.login-input {
+    width: 240px;
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+.login-input:focus {
+    outline: none;
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+}
+
+.info-cell {
+    padding: 30px 40px;
+    background: linear-gradient(135deg, #4a8fda 0%, #5b9de8 100%);
+    color: white;
+    font-size: 15px;
+    line-height: 1.8;
+    vertical-align: middle;
+    width: 600px;
+    border-radius: 0 20px 20px 0;
+    box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+}
+
+.button-cell {
+    padding-top: 30px;
+    text-align: left;
+    padding-left: 0;
+}
+
+.login-btn {
+    background: linear-gradient(135deg, #4a8fda 0%, #5b9de8 100%);
+    color: white;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s;
+    box-shadow: 0 3px 8px rgba(74, 144, 226, 0.4);
+}
+
+.login-btn:hover {
+    background: linear-gradient(135deg, #3a7fca 0%, #4b8dd8 100%);
+    box-shadow: 0 4px 12px rgba(74, 144, 226, 0.5);
+    transform: translateY(-1px);
+}
+
+.login-btn:active {
+    transform: translateY(0);
+}
+
+.btn-icon {
+    width: 16px;
+    height: 16px;
+}
+
+@media screen and (max-width: 768px) {
+    .login-form-container {
+        padding: 20px;
+    }
+
+    .login-table {
+        display: block;
+    }
+
+    .login-table tr {
+        display: block;
+        margin-bottom: 15px;
+    }
+
+    .login-table td {
+        display: block;
+        width: 100% !important;
+        text-align: left !important;
+        padding: 5px 0;
+    }
+
+    .label-cell {
+        padding-right: 0;
+    }
+
+    .login-input {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .info-cell {
+        margin-top: 20px;
+        border-radius: 10px;
+    }
+
+    .button-cell {
+        text-align: center;
+        padding-left: 0;
+    }
+}

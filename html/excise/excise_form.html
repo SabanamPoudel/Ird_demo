@@ -1,0 +1,2268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excise Return Form - IRD</title>
+    <link rel="stylesheet" href="../../css/income_tax/d01_return_entry.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .form.card { border: 1px solid gray; margin-top: 10px; }
+        .card-header { background: #e9ecef; padding: 10px; font-weight: bold; }
+        .card-body { padding: 15px; }
+        .white-bg { background: white; }
+        .table { width: 100%; border-collapse: collapse; }
+        .table-bordered { border: 1px solid gray; }
+        .table-bordered td, .table-bordered th { border: 1px solid gray; padding: 5px; }
+        .form-control { padding: 3px; font-size: 12px; }
+        .btn { padding: 5px 10px; cursor: pointer; }
+        .text-center { text-align: center; }
+        .mt-1 { margin-top: 5px; }
+        .mt-2 { margin-top: 10px; }
+        .mb-2 { margin-bottom: 10px; }
+        .mb-4 { margin-bottom: 20px; }
+        .col { width: 100%; }
+        .row { display: flex; margin-bottom: 5px; }
+        .col-sm-1 { width: 8.33%; }
+        .col-sm-2 { width: 16.66%; }
+        .col-sm-3 { width: 25%; }
+        .col-sm-5 { width: 41.66%; }
+        .col-sm-6 { width: 50%; }
+        .col-sm-8 { width: 66.66%; }
+        .col-sm-12 { width: 100%; }
+        .p-0 { padding: 0; }
+        .pl-0 { padding-left: 0; }
+        .pr-0 { padding-right: 0; }
+        .form-label { display: inline-block; margin-bottom: 5px; font-size: 12px; }
+        .red { color: red; }
+        .table-responsive { overflow-x: auto; }
+    </style>
+</head>
+<body>
+    <nav class="navbar shadow-sm mb-2">
+        <div class="container-fluid">
+            <div class="collapse show navbar-collapse">
+                <div class="header-section">
+                    <div class="header-left">
+                        <img src="../../media/resources/logo.gif" alt="IRD Logo">
+                    </div>
+                    <div class="header-center">
+                        <img src="../../media/resources/flag.gif" alt="Nepal Flag">
+                        <img src="../../media/resources/slogan.jpg" alt="Slogan" style="height: 75px; width: auto; margin-left: 150px;">
+                    </div>
+                    <div class="header-right">
+                        <label class="dt" id="currentDate">Date: 2082.07.23</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-layout">
+        <!-- Sidebar -->
+        <div class="sidebar is-open">
+            <div class="side-menu">
+                <ul class="list-unstyled pb-3 nav flex-column">
+                    <!-- General -->
+                    <li class="nav-item">
+                        <a class="dropdown-toggle nav-link" href="#" onclick="toggleMenu(this)">General</a>
+                        <ul class="submenu">
+                            <li><a href="#">Taxpayer Login</a></li>
+                            <li><a href="#">Create Taxpayer Login</a></li>
+                            <li><a href="#">Forgot Password</a></li>
+                            <li><a href="#">Drug Manufacturer's Login</a></li>
+                            <li><a href="#">Payment Voucher Search</a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Registration -->
+                    <li class="nav-item">
+                        <a class="dropdown-toggle nav-link" href="#" onclick="toggleMenu(this)">Registration(PAN, VAT, EXCISE)</a>
+                        <ul class="submenu">
+                            <li><a href="#">Application For Registration</a></li>
+                            <li><a href="#">Registration Log In</a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- VAT -->
+                    <li class="nav-item">
+                        <a class="dropdown-toggle nav-link" href="#" onclick="toggleMenu(this)">VAT</a>
+                        <ul class="submenu">
+                            <li><a href="#">VAT Return Entry</a></li>
+                            <li><a href="#">VAT Return Login</a></li>
+                            <li><a href="#">VAT Close Of Business Entry</a></li>
+                            <li><a href="#">VAT Close Of Business Login</a></li>
+                            <li><a href="#">Help</a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Non-Resident Person -->
+                    <li class="nav-item">
+                        <a class="dropdown-toggle nav-link" href="#" onclick="toggleMenu(this)">Non-Resident Person (DST/VAT)</a>
+                        <ul class="submenu">
+                            <li><a href="#">Application For DST Registration</a></li>
+                            <li><a href="#">Registration Log In</a></li>
+                            <li><a href="#">VAT Return Entry</a></li>
+                            <li><a href="#">VAT Return Login</a></li>
+                            <li><a href="#">DST Return Entry</a></li>
+                            <li><a href="#">DST VAT Return Entry</a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Non-Resident Airlines -->
+                    <li class="nav-item">
+                        <a class="dropdown-toggle nav-link" href="#" onclick="toggleMenu(this)">Non-Resident Airlines</a>
+                        <ul class="submenu">
+                            <li><a href="#">Application For Registration</a></li>
+                            <li><a href="#">Registration Log In</a></li>
+                            <li><a href="#">NRA VAT Return Entry</a></li>
+                            <li><a href="#">NRA VAT Return Login</a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Estimated Return -->
+                    <li class="nav-item">
+                        <a class="dropdown-toggle nav-link" href="#" onclick="toggleMenu(this)">Estimated Return</a>
+                        <ul class="submenu">
+                            <li><a href="#">Estimated Return Entry</a></li>
+                            <li><a href="#">Estimated Return D02 Entry</a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Income Tax -->
+                    <li class="nav-item">
+                        <a class="dropdown-toggle nav-link" href="#" onclick="toggleMenu(this)">Income Tax</a>
+                        <ul class="submenu">
+                            <li><a href="#">D-01 Return Entry</a></li>
+                            <li><a href="#">D-02 Return Entry</a></li>
+                            <li><a href="#">D-03 Return Entry</a></li>
+                            <li><a href="#">D-04 Return Entry</a></li>
+                            <li><a href="#">Jeopardy Assessment</a></li>
+                            <li><a href="#">Change of Control</a></li>
+                            <li><a href="#">Close of Business D-01</a></li>
+                            <li><a href="#">Close of Business D-02</a></li>
+                            <li><a href="#">Close of Business D-03</a></li>
+                            <li><a href="#">Tax Return Login</a></li>
+                            <li><a href="#">Help</a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Excise -->
+                    <li class="nav-item">
+                        <a class="dropdown-toggle nav-link active" href="#" onclick="toggleMenu(this)">Excise</a>
+                        <ul class="submenu" style="display: block;">
+                            <li><a href="excise_return_entry_login.html">Return Entry</a></li>
+                            <li><a href="#">Excise Return Login</a></li>
+                            <li><a href="#">Close Of Business Entry</a></li>
+                            <li><a href="#">Excise Close Of Business Login</a></li>
+                            <li><a href="#">Self Renew Permit</a></li>
+                            <li><a href="#">New Permit</a></li>
+                            <li><a href="#">Manufacturer's Login</a></li>
+                            <li><a href="#">Brand Registration</a></li>
+                            <li><a href="#">Brand Registration Login</a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- E-TDS -->
+                    <li class="nav-item">
+                        <a class="dropdown-toggle nav-link" href="#" onclick="toggleMenu(this)">E-TDS</a>
+                        <ul class="submenu">
+                            <li><a href="#">E-TDS</a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Diplomatic Refund -->
+                    <li class="nav-item">
+                        <a class="dropdown-toggle nav-link" href="#" onclick="toggleMenu(this)">Diplomatic Refund</a>
+                        <ul class="submenu">
+                            <li><a href="#">Diplomatic Refund Login</a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Health Tax -->
+                    <li class="nav-item">
+                        <a class="dropdown-toggle nav-link" href="#" onclick="toggleMenu(this)">Health Tax</a>
+                        <ul class="submenu">
+                            <li><a href="#">Returns Entry</a></li>
+                            <li><a href="#">Returns Login</a></li>
+                            <li><a href="#">Close of Business Entry</a></li>
+                            <li><a href="#">Close of Business Login</a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Education Tax -->
+                    <li class="nav-item">
+                        <a class="dropdown-toggle nav-link" href="#" onclick="toggleMenu(this)">Education Tax</a>
+                        <ul class="submenu">
+                            <li><a href="#">Returns Entry</a></li>
+                            <li><a href="#">Returns Login</a></li>
+                            <li><a href="#">Close Of Business Entry</a></li>
+                            <li><a href="#">Close Of Business Login</a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Electronic Billing -->
+                    <li class="nav-item">
+                        <a class="dropdown-toggle nav-link" href="#" onclick="toggleMenu(this)">Electronic Billing</a>
+                        <ul class="submenu">
+                            <li><a href="#">Electronic Billing Software Listing</a></li>
+                            <li><a href="#">Software Listing Login</a></li>
+                            <li><a href="#">Electronic Billing User Permission</a></li>
+                            <li><a href="#">User Permission Login</a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Education Service Fee -->
+                    <li class="nav-item">
+                        <a class="dropdown-toggle nav-link" href="#" onclick="toggleMenu(this)">Education Service Fee</a>
+                        <ul class="submenu">
+                            <li><a href="#">Education Service Fee Entry</a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Foreign Employment Service Fee -->
+                    <li class="nav-item">
+                        <a class="dropdown-toggle nav-link" href="#" onclick="toggleMenu(this)">Foreign Employment Service Fee</a>
+                        <ul class="submenu">
+                            <li><a href="#">Foreign Employment Service Fee Entry</a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Foreign Tourism Fee -->
+                    <li class="nav-item">
+                        <a class="dropdown-toggle nav-link" href="#" onclick="toggleMenu(this)">Foreign Tourism Fee</a>
+                        <ul class="submenu">
+                            <li><a href="#">Foreign Tourism Fee Entry</a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Luxury Fee -->
+                    <li class="nav-item">
+                        <a class="dropdown-toggle nav-link" href="#" onclick="toggleMenu(this)">Luxury Fee</a>
+                        <ul class="submenu">
+                            <li><a href="#">Luxury Fee Entry</a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Other Offices -->
+                    <li class="nav-item">
+                        <a class="dropdown-toggle nav-link" href="#" onclick="toggleMenu(this)">Other Offices</a>
+                        <ul class="submenu">
+                            <li><a href="#">Log In/Out</a></li>
+                            <li><a href="#">Bank Login</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Content Area with the Excise Form -->
+        <div class="content-area">
+            <div class="container-fluid" style="padding: 20px;">
+                
+                <!-- START OF EXCISE FORM FROM IRD -->
+                <div class="form card" style="border: 1px solid gray; margin-top: 10px;">
+                    <div class="card-header col" style="background-color: #e9ecef; color: black; font-size: 13px;">E-Excise Return Entry ( Excise Returns)</div>
+                    <div class="card-body white-bg col">
+                        <div>
+                            <div class="text-center mb-4">
+                                <p><span style="font-size: 14px;">अनुसुची - ४(ङ)</span></p>
+                                <p><span style="font-size: 14px;">( नियम ४३ ग आंग सम्बन्धित )</span></p>
+                                <p><span style="font-size: 14px;">अन्त: शुल्क कर विवरण फाराम</span></p>
+                                <p><span style="font-size: 10px;">Your submission No:: 820076613090</span></p>
+                            </div>
+
+                            <!-- Year/Month Section -->
+                            <div class="card mt-2" style="border: 1px solid gray;">
+                                <div class="card-header col" style="background-color: #e9ecef; color: black; font-size: 13px;">वर्ष / महिना सम्बन्धी विवरण</div>
+                                <div class="card-body white-bg">
+                                    <!-- ROW 1: प्यान and खाताको किसिम -->
+                                    <div class="row mb-3">
+                                        <div class="col-sm-6">
+                                            <label class="form-label" style="display: inline-block; width: 100px;">प्यान:</label>
+                                            <input id="pan" value="601563148" readonly type="text" class="form-control" style="display: inline-block; width: calc(100% - 110px);">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label class="form-label" style="display: inline-block; width: 120px;">खाताको किसिम:</label>
+                                            <input id="accountType" value="20" readonly type="text" class="form-control" style="display: inline-block; width: calc(100% - 130px);">
+                                        </div>
+                                    </div>
+                                    <!-- ROW 2: वर्ष and महिना -->
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <label class="form-label" style="display: inline-block; width: 100px;">वर्ष:</label>
+                                            <input id="fiscalYear" type="text" class="form-control" style="display: inline-block; width: calc(100% - 110px);">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label class="form-label" style="display: inline-block; width: 120px;">महिना:</label>
+                                            <select id="month" class="form-control" style="display: inline-block; width: calc(100% - 130px);">
+                                                <option value="DEFAULT" disabled selected>---छान्नुहोस्---</option>
+                                                <option value="1">वैशाख</option>
+                                                <option value="2">जेष्ठ</option>
+                                                <option value="3">असार</option>
+                                                <option value="4">श्रावण</option>
+                                                <option value="5">भाद्र</option>
+                                                <option value="6">आश्विन</option>
+                                                <option value="7">कार्तिक</option>
+                                                <option value="8">मंसिर</option>
+                                                <option value="9">पुष</option>
+                                                <option value="10">माघ</option>
+                                                <option value="11">फाल्गुन</option>
+                                                <option value="12">चैत्र</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Taxpayer Details -->
+                            <div class="card mt-2" style="border: 1px solid gray;">
+                                <div class="card-header col" style="background-color: #e9ecef; color: black; font-size: 13px;">करदाताको विवरण</div>
+                                <div class="card-body white-bg" style="padding: 20px;">
+                                    <div class="row">
+                                        <div class="col-auto">
+                                            <span style="font-size: 13px;">नाम:</span>
+                                            <span id="companyName" style="font-size: 13px; margin-left: 5px;">एप्पल सोप एण्ड केमिकल इण्डष्ट्रिज प्रा.लि.</span>
+                                        </div>
+                                        <div class="col-auto" style="margin-left: 30px;">
+                                            <span style="font-size: 13px;">ठेगाना:</span>
+                                            <span id="address" style="font-size: 13px; margin-left: 5px;">शरदपुर-8,भरतपुर</span>
+                                        </div>
+                                        <div class="col-auto" style="margin-left: 30px;">
+                                            <span style="font-size: 13px;">फोन नं:</span>
+                                            <span id="phoneNumber" style="font-size: 13px; margin-left: 5px;">9855054550,</span>
+                                        </div>
+                                        <div class="col-auto" style="margin-left: 30px;">
+                                            <span style="font-size: 13px;">फ्याक्स नं:</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Transaction Details -->
+                            <div class="card mt-2" style="border: 1px solid gray;">
+                                <div class="card-header col" style="background-color: #e9ecef; color: black; font-size: 13px;">करदाताको कारोवार विवरण</div>
+                                <div class="card-body white-bg col"><div><label for="name" class="pl-0 pr-0 form-label">यदि यस अवधिमा कारोवार नगरेको भए तलको महलमा शुन्य राखेर विवरणमा हस्ताक्षर गर्नुहोस्। रू १ भन्दा घटि भएमा पैसालाई रू. १ मा मिलान गरि विवरण भर्नुहोला।</label><table class="table table-sm table-bordered" style="border: 1px solid gray; font-size: 12px;"><tbody><tr><td colspan="4"><label for="name" class="form-label"></label></td></tr><tr style="height: 50px;"><td style="width: 20%;"></td><td style="width: 20%;"><label for="name" class="form-label" style="text-align: center; padding: 10px;">कारोबार मूल्य</label></td><td style="width: 20%;"><label for="name" class="form-label" style="text-align: center; padding: 10px;">खरिदमा तिरेको अन्त:शुल्क</label></td><td style="width: 20%;"><label for="name" class="form-label" style="text-align: center; padding: 10px;">खरिदमा तिरेको कर क्रेडिट</label></td><td style="width: 20%;"><label for="name" class="form-label" style="text-align: center; padding: 10px;">विक्रिमा तिरेको कर डेविट</label></td></tr><tr><td colspan="5"><label for="name" class="form-label">१. विक्री / निष्कासन</label></td></tr><tr><td><label for="name" class="form-label" style="margin-left: 20px;">१.१. अन्त: शुल्क योग्य विक्री</label></td><td colspan="2"><input name="txtTaxableSale" id="txtTaxableSale" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td><td></td><td><input name="txtVatOnSale" id="txtVatOnSale" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td></tr><tr><td><label for="name" class="form-label" style="margin-left: 20px;">१.२. निकासी</label></td><td colspan="4"><input name="txtExport" id="txtExport" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td></tr><tr><td><label for="name" class="form-label">२. खरिद पैठारी</label></td><td colspan="4"><input name="txtTaxablePur" id="txtTaxablePur" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td></tr><tr><td><label for="name" class="form-label" style="margin-left: 20px;">२.१. अन्त: शुल्क योग्य कच्चा पदार्थ खरीद</label></td><td><input name="txtTaxablePurchase" id="txtTaxablePurchase" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td><td><input name="txtExciseOnPurchase" id="txtExciseOnPurchase" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td><td colspan="2"><input name="txtVatOnPurchase" id="txtVatOnPurchase" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td></tr><tr><td><label for="name" class="form-label" style="margin-left: 20px;">२.२ . अन्त: शुल्क योग्य अन्य पदार्थ खरीद</label></td><td><input name="txtTaxablePurchaseOther" id="txtTaxablePurchaseOther" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td><td><input name="txtExciseOnPurchaseOther" id="txtExciseOnPurchaseOther" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td><td colspan="2"></td></tr><tr><td><label for="name" class="form-label" style="margin-left: 20px;">२.३ . अन्त: शुल्क योग्य कच्चा पदार्थ पैठारी</label></td><td><input name="txtTaxablePurI" id="txtTaxablePurI" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td><td><input name="txtExciseOnPur" id="txtExciseOnPur" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td><td colspan="2"><input name="txtVatOnPurI" id="txtVatOnPurI" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td></tr><tr><td><label for="name" class="form-label" style="margin-left: 20px;">२.४ . अन्त: शुल्क योग्य अन्य पदार्थ पैठारी</label></td><td><input name="txtTaxablePurIOther" id="txtTaxablePurIOther" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td><td><input name="txtExciseOnPurI" id="txtExciseOnPurI" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td><td colspan="2"></td></tr><tr><td><label for="name" class="form-label" style="margin-left: 20px;">२.५ . छुट खरिद</label></td><td colspan="4"><input name="txtExemptPurchase" id="txtExemptPurchase" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td></tr><tr><td><label for="name" class="form-label" style="margin-left: 20px;">२.६. छुट पैठारी</label></td><td colspan="4"><input name="txtExemptPurI" id="txtExemptPurI" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td></tr><tr><td><label for="name" class="form-label">३. अन्य</label></td><td colspan="4"></td></tr><tr><td><label for="name" class="form-label" style="margin-left: 20px;">३.१. अन्य थपघट</label></td><td></td><td></td><td><table class="table table-sm table-bordered" style="border: 1px solid gray; font-size: 12px;"><tbody><tr><td><input name="txtAdjCredit" id="txtAdjCredit" readonly="" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 85px; text-align: right;"></td><td><button onclick="openCreditModal()" class="btn pl-1 pr-1" style="background-color: rgb(48, 102, 190); font-size: 12px; height: 32px; color: white;"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" style="color: white; font-size: 20px; padding-right: 7px;"><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm144 276c0 6.6-5.4 12-12 12h-92v92c0 6.6-5.4 12-12 12h-56c-6.6 0-12-5.4-12-12v-92h-92c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12h92v-92c0-6.6 5.4-12 12-12h56c6.6 0 12 5.4 12 12v92h92c6.6 0 12 5.4 12 12v56z"></path></svg> अन्य थपघट क्रेडिट छ ?</button></td></tr></tbody></table></td><td><table class="table table-sm table-bordered" style="border: 1px solid gray; font-size: 12px;"><tbody><tr><td><input name="txtAdjDebit" id="txtAdjDebit" readonly="" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 85px; text-align: right;"></td><td><button onclick="openDebitModal()" class="btn pl-1 pr-1" style="background-color: rgb(48, 102, 190); font-size: 12px; height: 32px; color: white;"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" style="color: white; font-size: 20px; padding-right: 7px;"><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm144 276c0 6.6-5.4 12-12 12h-92v92c0 6.6-5.4 12-12 12h-56c-6.6 0-12-5.4-12-12v-92h-92c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12h92v-92c0-6.6 5.4-12 12-12h56c6.6 0 12 5.4 12 12v92h92c6.6 0 12 5.4 12 12v56z"></path></svg>अन्य थपघट डेविट छ ?</button></td></tr></tbody></table></td></tr><tr hidden=""><td><label for="name" class="form-label" style="margin-left: 20px;">३.२. खपत भएको कच्चा पदार्थमा तिरेको अन्त: शुल्क क्रेडिट</label></td><td><input name="txtAdjRawExOnPurchase" id="txtAdjRawExOnPurchase" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td><td></td><td><input name="txtAdjRawExVATOnPur" id="txtAdjRawExVATOnPur" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td></tr><tr hidden=""><td><label for="name" class="form-label" style="margin-left: 20px;">३.३. कर कट्टी दाबी गरिसकेको स्टक</label></td><td><input name="txtStockAmount" id="txtStockAmount" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td><td></td><td></td><td><input name="txtStockTax" id="txtStockTax" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td></tr><tr><td colspan="2"><label for="name" class="form-label">४.जम्मा</label></td><td><input name="txtTotalExcise" id="txtTotalExcise" readonly="" type="text" class="form-control" value="0" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td><td><input name="txtTotalCredit" id="txtTotalCredit" readonly="" type="text" class="form-control" value="0" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td><td><input name="txtTotalDebit" id="txtTotalDebit" readonly="" type="text" class="form-control" value="0" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td></tr><tr><td colspan="4"><label for="name" class="form-label">५. डेविट-क्रेडिट (‌‌+ वा -)</label></td><td><input name="txtVatDueTM" id="txtVatDueTM" readonly="" type="text" class="form-control" value="0" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td></tr><tr><td colspan="4"><label for="name" class="form-label">६. गत महिनाको मिलान गर्न बांकी क्रेडिट</label></td><td><input name="txtCreditBF" id="txtCreditBF" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td></tr><tr><td colspan="4"><label for="name" class="form-label">७. तिर्नु पर्ने कर रू.(५-६) (‌‌+ वा -)</label></td><td><input name="txtVatDue" id="txtVatDue" readonly="" type="text" class="form-control" value="0" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td></tr><tr><td colspan="4"><label for="name" class="form-label">८. कर फिर्ता माग गरिएको रकम</label></td><td><input name="txtRefClaimAmt" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td></tr><tr><td colspan="4"><div class="row"><div class="col-sm-8"><label for="name" class="form-label" style="margin-left: 15px;">कर फिर्ता माग गरेको अधार</label></div><div class="p-0 col-sm-4"></div></div></td><td></td></tr><tr hidden=""><td colspan="4"><div class="row"><div class="col-sm-8"><label for="name" class="form-label">९. स्वास्थ्य जोखिम कर बापत दाखिला गर्नु पर्ने रकम</label></div><div class="p-0 col-sm-4"></div></div></td><td><input name="txtHhTax" id="txtHhTax" type="text" class="text-end undefined form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td></tr></tbody></table><table class="table table-sm table-bordered" style="border: 1px solid gray; font-size: 12px; width: 50%;"><tbody><tr><td><label for="name" class="form-label" style="margin-left: 10px;">प्राप्त विजक संख्या :</label></td><td><input name="txtRecptBillCount" id="txtRecptBillCount" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td><td><label for="name" class="form-label" style="margin-left: 10px;">जारी गरेको विजक संख्या :</label></td><td><input name="txtIssueByBillCount" id="txtIssueByBillCount" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td></tr><tr><td><label for="name" class="form-label" style="margin-left: 10px;">डेबिट नोट संख्या :</label></td><td><input name="txtDebitNoteCount" id="txtDebitNoteCount" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td><td><label for="name" class="form-label" style="margin-left: 10px;">क्रेडिट नोट संख्या :</label></td><td><input name="txtCreditNoteCount" id="txtCreditNoteCount" type="text" class="form-control" value="" style="background-color: rgb(255, 255, 255); font-size: 12px; margin: 2px; width: 118px; text-align: right;"></td></tr></tbody></table></div></div>
+
+                            <!-- Raw Material Details Section -->
+                            <div class="card mt-2" style="border: 1px solid gray;"><div class="card-header col" style="background-color: #e9ecef; color: black; font-size: 13px;">कच्चा पदार्थको विवरण</div><div class="card-body white-bg" style="padding: 15px;"><div class="card mt-1 mb-2" style="border: 1px solid gray;"><div class="mt-1 col" style="padding: 15px;"><div class="row" style="gap: 15px;"><div class="col-sm-3"><label for="name" class="pl-0 pr-0 form-label" style="margin-left: 20px; font-size: 10px;"><input type="checkbox" class="form-check-input" id="excelLoadCheckbox" onchange="toggleExcelLoad()"> Load Records From Excel</label></div><div class="col-sm-3"><input accept=".xlsx" disabled="" type="file" class="form-control" id="excelFileInput" style="font-size: 10px;"></div><div class="p-0 m-0 col-sm-5" style="display: flex; gap: 10px;"><button disabled="" id="excelLoadBtn" onclick="loadExcelData()" class="btn pl-1 pr-1" style="font-size: 10px; background-color: rgb(169, 169, 169); height: 27px; padding: 0px 10px; color: white;"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 384 512" class="mr-1" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" style="font-size: 10px;"><path d="M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm65.18 216.01H224v80c0 8.84-7.16 16-16 16h-32c-8.84 0-16-7.16-16-16v-80H94.82c-14.28 0-21.41-17.29-11.27-27.36l96.42-95.7c6.65-6.61 17.39-6.61 24.04 0l96.42 95.7c10.15 10.07 3.03 27.36-11.25 27.36zM377 105L279.1 7c-4.5-4.5-10.6-7-17-7H256v128h128v-6.1c0-6.3-2.5-12.4-7-16.9z"></path></svg> load</button><a href="../../resources/EXCISE_RAW_MATERIAL_REPORT_DETAIL_SAMPLE.xlsx" download="EXCISE_RAW_MATERIAL_REPORT_DETAIL_SAMPLE.xlsx"><button class="btn pl-1 pr-1" style="font-size: 10px; background-color: rgb(48, 102, 190); height: 27px; padding: 0px 10px; color: white;"> <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 576 512" class="mr-1" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" style="font-size: 10px;"><path d="M288 144a110.94 110.94 0 0 0-31.24 5 55.4 55.4 0 0 1 7.24 27 56 56 0 0 1-56 56 55.4 55.4 0 0 1-27-7.24A111.71 111.71 0 1 0 288 144zm284.52 97.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400c-98.65 0-189.09-55-237.93-144C98.91 167 189.34 112 288 112s189.09 55 237.93 144C477.1 345 386.66 400 288 400z"></path></svg> Download Sample Excel File Here</button></a><button onclick="openBaseUnitModal()" class="btn pl-1 pr-1" style="background-color: rgb(48, 102, 190); font-size: 10px; height: 27px; padding: 0px 10px; color: white;"> Base Unit Sample</button></div></div></div></div><div class="card mt-2" style="background-color: rgb(223, 233, 245); border: 1px solid gray;"></div></div></div>
+
+                            <!-- Transaction Details Section -->
+                            <div class="card mt-2" style="border: 1px solid gray; border-radius: 6px;">
+                                <div class="card-header" style="background-color: #e9ecef; color: black; font-size: 13px; font-weight: bold; padding: 10px 15px;">
+                                    Transaction Details
+                                </div>
+                                <div style="background-color: #e9ecef; border-bottom: 1px solid #dee2e6; padding: 10px 15px;">
+                                    <!-- Toolbar Buttons -->
+                                    <div style="display: flex; align-items: center; gap: 10px;">
+                                        <button onclick="addTransactionRow()" class="btn" style="background-color: rgb(48, 102, 190); color: white; border-radius: 5px; padding: 6px 12px; font-size: 10px; display: inline-flex; align-items: center; gap: 6px; border: none; white-space: nowrap; height: 30px;">
+                                            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm144 276c0 6.6-5.4 12-12 12h-92v92c0 6.6-5.4 12-12 12h-56c-6.6 0-12-5.4-12-12v-92h-92c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12h92v-92c0-6.6 5.4-12 12-12h56c6.6 0 12 5.4 12 12v92h92c6.6 0 12 5.4 12 12v56z"></path></svg>
+                                            Add
+                                        </button>
+                                        <button class="btn" style="background-color: rgb(48, 102, 190); color: white; border-radius: 5px; padding: 6px 12px; font-size: 10px; border: none; white-space: nowrap; height: 30px;">
+                                            Show All
+                                        </button>
+                                        <button class="btn" style="background-color: rgb(48, 102, 190); color: white; border-radius: 5px; padding: 6px 12px; font-size: 10px; display: inline-flex; align-items: center; gap: 6px; border: none; white-space: nowrap; height: 30px;">
+                                            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"></path></svg>
+                                            Check Transactions
+                                        </button>
+                                        <button onclick="deleteAllTransactions()" class="btn" style="background-color: rgb(48, 102, 190); color: white; border-radius: 5px; padding: 6px 12px; font-size: 10px; display: inline-flex; align-items: center; gap: 6px; border: none; white-space: nowrap; height: 30px;">
+                                            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"></path></svg>
+                                            Delete All
+                                        </button>
+                                        <button class="btn" style="background-color: rgb(48, 102, 190); color: white; border-radius: 5px; padding: 6px 12px; font-size: 10px; border: none; white-space: nowrap; height: 30px;">
+                                            Export To Excel
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card-body" style="background-color: #fff; padding: 15px;">
+                                    
+                                    <!-- Transaction Table -->
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered" style="font-size: 10px; margin-bottom: 0; width: 100%;">
+                                            <thead style="background-color: #f8f9fa;">
+                                                <tr>
+                                                    <th style="padding: 8px; text-align: center; vertical-align: middle;">Item Name</th>
+                                                    <th style="padding: 8px; text-align: center; vertical-align: middle;">Base Unit</th>
+                                                    <th style="padding: 8px; text-align: center; vertical-align: middle;">Strength</th>
+                                                    <th style="padding: 8px; text-align: center; vertical-align: middle;">Opening Stock(Qty)</th>
+                                                    <th style="padding: 8px; text-align: center; vertical-align: middle;">Purchase Quantity</th>
+                                                    <th style="padding: 8px; text-align: center; vertical-align: middle;">Consumption Quantity</th>
+                                                    <th style="padding: 8px; text-align: center; vertical-align: middle;">Sales Quantity</th>
+                                                    <th style="padding: 8px; text-align: center; vertical-align: middle;">Closing Stock(Qty)</th>
+                                                    <th style="padding: 8px; text-align: center; vertical-align: middle;">Remarks</th>
+                                                    <th style="padding: 8px; text-align: center; vertical-align: middle; width: 80px;">Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="transactionTableBody">
+                                                <!-- Transaction rows will be dynamically inserted here -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <!-- Transaction Cards Grid (Hidden by default, populated dynamically) -->
+                                    <div id="transactionCardsContainer" class="row d-none">
+                                        <!-- Transaction cards will be dynamically inserted here -->
+                                        <!-- Example card structure (for reference):
+                                        <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
+                                            <div class="card" style="border: 1px solid #dee2e6; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.08);">
+                                                <div class="card-body" style="padding: 12px;">
+                                                    <div class="mb-2"><span style="font-size: 10px; color: #6c757d; font-weight: 600;">Item Name:</span> <span style="font-size: 12px; color: #333;">Product Name</span></div>
+                                                    <div class="mb-2"><span style="font-size: 10px; color: #6c757d; font-weight: 600;">Base Unit:</span> <span style="font-size: 12px; color: #333;">KG</span></div>
+                                                    <div class="mb-2"><span style="font-size: 10px; color: #6c757d; font-weight: 600;">Strength:</span> <span style="font-size: 12px; color: #333;">100</span></div>
+                                                    <div class="mb-2"><span style="font-size: 10px; color: #6c757d; font-weight: 600;">Opening Stock (Qty):</span> <span style="font-size: 12px; color: #333;">50</span></div>
+                                                    <div class="mb-2"><span style="font-size: 10px; color: #6c757d; font-weight: 600;">Purchase Quantity:</span> <span style="font-size: 12px; color: #333;">200</span></div>
+                                                    <div class="mb-2"><span style="font-size: 10px; color: #6c757d; font-weight: 600;">Consumption Quantity:</span> <span style="font-size: 12px; color: #333;">150</span></div>
+                                                    <div class="mb-2"><span style="font-size: 10px; color: #6c757d; font-weight: 600;">Sales Quantity:</span> <span style="font-size: 12px; color: #333;">80</span></div>
+                                                    <div class="mb-2"><span style="font-size: 10px; color: #6c757d; font-weight: 600;">Closing Stock (Qty):</span> <span style="font-size: 12px; color: #333;">20</span></div>
+                                                    <div class="mb-1"><span style="font-size: 10px; color: #6c757d; font-weight: 600;">Remarks:</span> <span style="font-size: 12px; color: #333;">N/A</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Semi-finished Product Details Section -->
+                            <div class="card mt-2" style="border: 1px solid gray;"><div class="card-header col" style="background-color: #e9ecef; color: black; font-size: 13px;">अर्धतयारी पदार्थको विवरण</div><div class="card-body white-bg" style="padding: 15px;"><div class="card mt-1 mb-2" style="border: 1px solid gray;"><div class="mt-1 col" style="padding: 15px;"><div class="row" style="gap: 15px;"><div class="col-sm-3"><label for="name" class="pl-0 pr-0 form-label" style="margin-left: 20px; font-size: 10px;"><input type="checkbox" class="form-check-input" id="excelLoadCheckbox2" onchange="toggleExcelLoad2()"> Load Records From Excel</label></div><div class="col-sm-3"><input accept=".xlsx" disabled="" type="file" class="form-control" id="excelFileInput2" style="font-size: 10px;"></div><div class="p-0 m-0 col-sm-5" style="display: flex; gap: 10px;"><button disabled="" id="excelLoadBtn2" onclick="loadExcelData2()" class="btn pl-1 pr-1" style="font-size: 10px; background-color: rgb(169, 169, 169); height: 27px; padding: 0px 10px; color: white;"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 384 512" class="mr-1" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" style="font-size: 10px;"><path d="M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm65.18 216.01H224v80c0 8.84-7.16 16-16 16h-32c-8.84 0-16-7.16-16-16v-80H94.82c-14.28 0-21.41-17.29-11.27-27.36l96.42-95.7c6.65-6.61 17.39-6.61 24.04 0l96.42 95.7c10.15 10.07 3.03 27.36-11.25 27.36zM377 105L279.1 7c-4.5-4.5-10.6-7-17-7H256v128h128v-6.1c0-6.3-2.5-12.4-7-16.9z"></path></svg> load</button><a href="../../resources/EXCISE_RAW_MATERIAL_REPORT_DETAIL_SAMPLE.xlsx" download="EXCISE_RAW_MATERIAL_REPORT_DETAIL_SAMPLE.xlsx"><button class="btn pl-1 pr-1" style="font-size: 10px; background-color: rgb(48, 102, 190); height: 27px; padding: 0px 10px; color: white;"> <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 576 512" class="mr-1" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" style="font-size: 10px;"><path d="M288 144a110.94 110.94 0 0 0-31.24 5 55.4 55.4 0 0 1 7.24 27 56 56 0 0 1-56 56 55.4 55.4 0 0 1-27-7.24A111.71 111.71 0 1 0 288 144zm284.52 97.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400c-98.65 0-189.09-55-237.93-144C98.91 167 189.34 112 288 112s189.09 55 237.93 144C477.1 345 386.66 400 288 400z"></path></svg> Download Sample Excel File Here</button></a><button onclick="openBaseUnitModal()" class="btn pl-1 pr-1" style="background-color: rgb(48, 102, 190); font-size: 10px; height: 27px; padding: 0px 10px; color: white;"> Base Unit Sample</button></div></div></div></div><div class="card mt-2" style="background-color: rgb(223, 233, 245); border: 1px solid gray;"></div></div></div>
+
+                            <!-- Transaction Details Section 2 (Semi-finished Products) -->
+                            <div class="card mt-2" style="border: 1px solid gray; border-radius: 6px;">
+                                <div class="card-header" style="background-color: #e9ecef; color: black; font-size: 13px; font-weight: bold; padding: 10px 15px;">
+                                    Transaction Details
+                                </div>
+                                <div style="background-color: #e9ecef; border-bottom: 1px solid #dee2e6; padding: 10px 15px;">
+                                    <!-- Toolbar Buttons -->
+                                    <div style="display: flex; align-items: center; gap: 10px;">
+                                        <button onclick="addTransactionRow2()" class="btn" style="background-color: rgb(48, 102, 190); color: white; border-radius: 5px; padding: 6px 12px; font-size: 10px; display: inline-flex; align-items: center; gap: 6px; border: none; white-space: nowrap; height: 30px;">
+                                            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm144 276c0 6.6-5.4 12-12 12h-92v92c0 6.6-5.4 12-12 12h-56c-6.6 0-12-5.4-12-12v-92h-92c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12h92v-92c0-6.6 5.4-12 12-12h56c6.6 0 12 5.4 12 12v92h92c6.6 0 12 5.4 12 12v56z"></path></svg>
+                                            Add
+                                        </button>
+                                        <button class="btn" style="background-color: rgb(48, 102, 190); color: white; border-radius: 5px; padding: 6px 12px; font-size: 10px; border: none; white-space: nowrap; height: 30px;">
+                                            Show All
+                                        </button>
+                                        <button class="btn" style="background-color: rgb(48, 102, 190); color: white; border-radius: 5px; padding: 6px 12px; font-size: 10px; display: inline-flex; align-items: center; gap: 6px; border: none; white-space: nowrap; height: 30px;">
+                                            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"></path></svg>
+                                            Check Transactions
+                                        </button>
+                                        <button onclick="deleteAllTransactions2()" class="btn" style="background-color: rgb(48, 102, 190); color: white; border-radius: 5px; padding: 6px 12px; font-size: 10px; display: inline-flex; align-items: center; gap: 6px; border: none; white-space: nowrap; height: 30px;">
+                                            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"></path></svg>
+                                            Delete All
+                                        </button>
+                                        <button class="btn" style="background-color: rgb(48, 102, 190); color: white; border-radius: 5px; padding: 6px 12px; font-size: 10px; border: none; white-space: nowrap; height: 30px;">
+                                            Export To Excel
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card-body" style="background-color: #fff; padding: 15px;">
+                                    
+                                    <!-- Transaction Table -->
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered" style="font-size: 10px; margin-bottom: 0; width: 100%;">
+                                            <thead style="background-color: #f8f9fa;">
+                                                <tr>
+                                                    <th style="padding: 8px; text-align: center; vertical-align: middle;">Item Name</th>
+                                                    <th style="padding: 8px; text-align: center; vertical-align: middle;">Base Unit</th>
+                                                    <th style="padding: 8px; text-align: center; vertical-align: middle;">Strength</th>
+                                                    <th style="padding: 8px; text-align: center; vertical-align: middle;">Opening Stock(Qty)</th>
+                                                    <th style="padding: 8px; text-align: center; vertical-align: middle;">Purchase Quantity</th>
+                                                    <th style="padding: 8px; text-align: center; vertical-align: middle;">Consumption Quantity</th>
+                                                    <th style="padding: 8px; text-align: center; vertical-align: middle;">Sales Quantity</th>
+                                                    <th style="padding: 8px; text-align: center; vertical-align: middle;">Closing Stock(Qty)</th>
+                                                    <th style="padding: 8px; text-align: center; vertical-align: middle;">Remarks</th>
+                                                    <th style="padding: 8px; text-align: center; vertical-align: middle; width: 80px;">Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="transactionTableBody2">
+                                                <!-- Transaction rows will be dynamically inserted here -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Finished Product Details Section -->
+                            <div class="card mt-2" style="border: 1px solid gray;"><div class="card-header col" style="background-color: #e9ecef; color: black; font-size: 13px;">तयारी वस्तुको विवरण</div><div class="card-body white-bg" style="padding: 15px;"><div class="card mt-1 mb-2" style="border: 1px solid gray;"><div class="mt-1 col" style="padding: 15px;"><div class="row" style="gap: 15px;"><div class="col-sm-3"><label for="name" class="pl-0 pr-0 form-label" style="margin-left: 20px; font-size: 10px;"><input type="checkbox" class="form-check-input" id="excelLoadCheckbox3" onchange="toggleExcelLoad3()"> Load Records From Excel</label></div><div class="col-sm-3"><input accept=".xlsx" disabled="" type="file" class="form-control" id="excelFileInput3" style="font-size: 10px;"></div><div class="p-0 m-0 col-sm-5" style="display: flex; gap: 10px;"><button disabled="" id="excelLoadBtn3" onclick="loadExcelData3()" class="btn pl-1 pr-1" style="font-size: 10px; background-color: rgb(169, 169, 169); height: 27px; padding: 0px 10px; color: white;"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 384 512" class="mr-1" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" style="font-size: 10px;"><path d="M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm65.18 216.01H224v80c0 8.84-7.16 16-16 16h-32c-8.84 0-16-7.16-16-16v-80H94.82c-14.28 0-21.41-17.29-11.27-27.36l96.42-95.7c6.65-6.61 17.39-6.61 24.04 0l96.42 95.7c10.15 10.07 3.03 27.36-11.25 27.36zM377 105L279.1 7c-4.5-4.5-10.6-7-17-7H256v128h128v-6.1c0-6.3-2.5-12.4-7-16.9z"></path></svg> load</button><a href="../../resources/EXCISE_RAW_MATERIAL_REPORT_DETAIL_SAMPLE.xlsx" download="EXCISE_RAW_MATERIAL_REPORT_DETAIL_SAMPLE.xlsx"><button class="btn pl-1 pr-1" style="font-size: 10px; background-color: rgb(48, 102, 190); height: 27px; padding: 0px 10px; color: white;"> <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 576 512" class="mr-1" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" style="font-size: 10px;"><path d="M288 144a110.94 110.94 0 0 0-31.24 5 55.4 55.4 0 0 1 7.24 27 56 56 0 0 1-56 56 55.4 55.4 0 0 1-27-7.24A111.71 111.71 0 1 0 288 144zm284.52 97.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400c-98.65 0-189.09-55-237.93-144C98.91 167 189.34 112 288 112s189.09 55 237.93 144C477.1 345 386.66 400 288 400z"></path></svg> Download Sample Excel File Here</button></a><button onclick="openBaseUnitModal()" class="btn pl-1 pr-1" style="background-color: rgb(48, 102, 190); font-size: 10px; height: 27px; padding: 0px 10px; color: white;"> Base Unit Sample</button></div></div><div class="row mt-2"><div class="col-sm-12"><p style="font-size: 11px; margin-left: 20px;">तयारी बस्तु तलको लिस्टमा नभएमा ब्रान्ड रजिस्टर गर्न<span onclick="openRegisterProductModal()" style="color: red; text-decoration: underline; cursor: pointer;">यहाँ कि्लक</span> गर्नुहोस् |</p></div></div></div></div><div class="card mt-2" style="background-color: rgb(223, 233, 245); border: 1px solid gray;"></div></div></div>
+
+                            <!-- Transaction Details Section 3 (Finished Products) -->
+                            <div class="card mt-2" style="border: 1px solid gray; border-radius: 6px;">
+                                <div class="card-header" style="background-color: #e9ecef; color: black; font-size: 13px; font-weight: bold; padding: 10px 15px;">
+                                    Transaction Details
+                                </div>
+                                <div style="background-color: #e9ecef; border-bottom: 1px solid #dee2e6; padding: 10px 15px;">
+                                    <!-- Toolbar Buttons -->
+                                    <div style="display: flex; align-items: center; gap: 10px;">
+                                        <button onclick="addTransactionRow3()" class="btn" style="background-color: rgb(48, 102, 190); color: white; border-radius: 5px; padding: 6px 12px; font-size: 10px; display: inline-flex; align-items: center; gap: 6px; border: none; white-space: nowrap; height: 30px;">
+                                            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm144 276c0 6.6-5.4 12-12 12h-92v92c0 6.6-5.4 12-12 12h-56c-6.6 0-12-5.4-12-12v-92h-92c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12h92v-92c0-6.6 5.4-12 12-12h56c6.6 0 12 5.4 12 12v92h92c6.6 0 12 5.4 12 12v56z"></path></svg>
+                                            Add
+                                        </button>
+                                        <button class="btn" style="background-color: rgb(48, 102, 190); color: white; border-radius: 5px; padding: 6px 12px; font-size: 10px; border: none; white-space: nowrap; height: 30px;">
+                                            Show All
+                                        </button>
+                                        <button class="btn" style="background-color: rgb(48, 102, 190); color: white; border-radius: 5px; padding: 6px 12px; font-size: 10px; display: inline-flex; align-items: center; gap: 6px; border: none; white-space: nowrap; height: 30px;">
+                                            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"></path></svg>
+                                            Check Transactions
+                                        </button>
+                                        <button onclick="deleteAllTransactions3()" class="btn" style="background-color: rgb(48, 102, 190); color: white; border-radius: 5px; padding: 6px 12px; font-size: 10px; display: inline-flex; align-items: center; gap: 6px; border: none; white-space: nowrap; height: 30px;">
+                                            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"></path></svg>
+                                            Delete All
+                                        </button>
+                                        <button class="btn" style="background-color: rgb(48, 102, 190); color: white; border-radius: 5px; padding: 6px 12px; font-size: 10px; border: none; white-space: nowrap; height: 30px;">
+                                            Export To Excel
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card-body" style="background-color: #fff; padding: 15px;">
+                                    
+                                    <!-- Transaction Table -->
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered" style="font-size: 10px; margin-bottom: 0; width: 100%;">
+                                            <thead style="background-color: #f8f9fa;">
+                                                <tr>
+                                                    <th style="padding: 8px; text-align: center; vertical-align: middle;">Item Name</th>
+                                                    <th style="padding: 8px; text-align: center; vertical-align: middle;">Base Unit</th>
+                                                    <th style="padding: 8px; text-align: center; vertical-align: middle;">Strength</th>
+                                                    <th style="padding: 8px; text-align: center; vertical-align: middle;">Opening Stock(Qty)</th>
+                                                    <th style="padding: 8px; text-align: center; vertical-align: middle;">Production Quantity</th>
+                                                    <th style="padding: 8px; text-align: center; vertical-align: middle;">Sales Quantity</th>
+                                                    <th style="padding: 8px; text-align: center; vertical-align: middle;">Sales Amount</th>
+                                                    <th style="padding: 8px; text-align: center; vertical-align: middle;">Excise Amount (Sales)</th>
+                                                    <th style="padding: 8px; text-align: center; vertical-align: middle;">Closing Stock (Quantity)</th>
+                                                    <th style="padding: 8px; text-align: center; vertical-align: middle;">Remarks</th>
+                                                    <th style="padding: 8px; text-align: center; vertical-align: middle; width: 80px;">Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="transactionTableBody3">
+                                                <!-- Transaction rows will be dynamically inserted here -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Submit Buttons -->
+                            <div class="card-body white-bg">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <label class="pl-0 pr-0 form-label" style="margin-left: 140px;">
+                                            <input type="checkbox" class="form-check-input"> &nbsp; म, यस कर विवरणमा उल्लेख गरिएको जानकारी सत्य र पुरा भएको व्यहोरा प्रमाणित गर्दछु।
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="row" style="text-align: center; margin-top: 20px;">
+                                    <div class="col-sm-12">
+                                        <button class="btn m-1 pl-2 pr-2" style="background-color: rgb(48, 102, 190); color: white;" onclick="showSaveSuccessModal()">Save</button>
+                                        <button class="btn m-1 pl-2 pr-2" style="background-color: rgb(48, 102, 190); color: white;">Print</button>
+                                        <button class="btn m-1 pl-2 pr-2" style="background-color: rgb(48, 102, 190); color: white;">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END OF EXCISE FORM -->
+
+            </div>
+        </div>
+    </div>
+
+    <script src="../../js/excise/excise_return_entry.js"></script>
+    <script>
+        // Toggle submenu function
+        function toggleMenu(element) {
+            const submenu = element.nextElementSibling;
+            if (submenu && submenu.classList.contains('submenu')) {
+                const isOpen = submenu.style.display === 'block';
+                submenu.style.display = isOpen ? 'none' : 'block';
+            }
+        }
+
+        // Credit Modal Functions
+        function openCreditModal() {
+            document.getElementById('creditModal').style.display = 'block';
+        }
+
+        function closeCreditModal() {
+            document.getElementById('creditModal').style.display = 'none';
+        }
+
+        function saveCreditAdjustment() {
+            const advice = parseFloat(document.getElementById('creditAdvice').value) || 0;
+            const other = parseFloat(document.getElementById('creditOther').value) || 0;
+            const total = advice + other;
+            
+            document.getElementById('creditTotal').value = total;
+            document.getElementById('txtAdjCredit').value = total;
+            
+            closeCreditModal();
+        }
+
+        // Debit Modal Functions
+        function openDebitModal() {
+            document.getElementById('debitModal').style.display = 'block';
+        }
+
+        function closeDebitModal() {
+            document.getElementById('debitModal').style.display = 'none';
+        }
+
+        function saveDebitAdjustment() {
+            const advice = parseFloat(document.getElementById('debitAdvice').value) || 0;
+            const ticket = parseFloat(document.getElementById('debitTicket').value) || 0;
+            const other = parseFloat(document.getElementById('debitOther').value) || 0;
+            const total = advice + ticket + other;
+            
+            document.getElementById('debitTotal').value = total;
+            document.getElementById('txtAdjDebit').value = total;
+            
+            closeDebitModal();
+        }
+
+        // Auto-calculate credit total
+        document.addEventListener('DOMContentLoaded', function() {
+            const creditAdvice = document.getElementById('creditAdvice');
+            const creditOther = document.getElementById('creditOther');
+            
+            if (creditAdvice && creditOther) {
+                creditAdvice.addEventListener('input', updateCreditTotal);
+                creditOther.addEventListener('input', updateCreditTotal);
+            }
+
+            const debitAdvice = document.getElementById('debitAdvice');
+            const debitTicket = document.getElementById('debitTicket');
+            const debitOther = document.getElementById('debitOther');
+            
+            if (debitAdvice && debitTicket && debitOther) {
+                debitAdvice.addEventListener('input', updateDebitTotal);
+                debitTicket.addEventListener('input', updateDebitTotal);
+                debitOther.addEventListener('input', updateDebitTotal);
+            }
+        });
+
+        function updateCreditTotal() {
+            const advice = parseFloat(document.getElementById('creditAdvice').value) || 0;
+            const other = parseFloat(document.getElementById('creditOther').value) || 0;
+            document.getElementById('creditTotal').value = advice + other;
+        }
+
+        function updateDebitTotal() {
+            const advice = parseFloat(document.getElementById('debitAdvice').value) || 0;
+            const ticket = parseFloat(document.getElementById('debitTicket').value) || 0;
+            const other = parseFloat(document.getElementById('debitOther').value) || 0;
+            document.getElementById('debitTotal').value = advice + ticket + other;
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const creditModal = document.getElementById('creditModal');
+            const debitModal = document.getElementById('debitModal');
+            if (event.target == creditModal) {
+                closeCreditModal();
+            }
+            if (event.target == debitModal) {
+                closeDebitModal();
+            }
+        }
+    </script>
+
+    <!-- Credit Adjustment Modal -->
+    <div id="creditModal" class="modal" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4);">
+        <div class="modal-content" style="background-color: #fefefe; margin: 10% auto; padding: 0; border: 1px solid #888; width: 35%; border-radius: 8px;">
+            <div class="modal-header" style="padding: 15px; background-color: #e9ecef; border-bottom: 1px solid #dee2e6; border-radius: 8px 8px 0 0;">
+                <h5 style="margin: 0; font-size: 16px;">अन्य थपघट क्रेडिट</h5>
+            </div>
+            <div class="modal-body" style="padding: 20px;">
+                <h6 style="margin-bottom: 15px; font-size: 14px;">अन्य थपघटका कारणहरु</h6>
+                <table class="table table-bordered" style="font-size: 13px;">
+                    <thead>
+                        <tr style="background-color: #f8f9fa;">
+                            <th style="width: 50%; padding: 10px;">कारण</th>
+                            <th style="width: 50%; padding: 10px;">रकम</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 10px;">क्रेडिट एडभाइस</td>
+                            <td style="padding: 10px;"><input id="creditAdvice" type="text" class="form-control" style="font-size: 12px; text-align: right;"></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px;">अन्य</td>
+                            <td style="padding: 10px;"><input id="creditOther" type="text" class="form-control" style="font-size: 12px; text-align: right;"></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; text-align: center;"><strong>जम्मा रकम</strong></td>
+                            <td style="padding: 10px;"><input id="creditTotal" type="text" class="form-control" readonly value="0" style="font-size: 12px; text-align: right; background-color: #f8f9fa;"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="text-align: center; margin-top: 20px;">
+                    <button onclick="saveCreditAdjustment()" class="btn" style="background-color: #28a745; color: white; padding: 8px 30px; margin-right: 10px; border-radius: 4px; border: none; font-size: 13px;">OK</button>
+                    <button onclick="closeCreditModal()" class="btn" style="background-color: #dc3545; color: white; padding: 8px 30px; border-radius: 4px; border: none; font-size: 13px;">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Debit Adjustment Modal -->
+    <div id="debitModal" class="modal" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4);">
+        <div class="modal-content" style="background-color: #fefefe; margin: 10% auto; padding: 0; border: 1px solid #888; width: 35%; border-radius: 8px;">
+            <div class="modal-header" style="padding: 15px; background-color: #e9ecef; border-bottom: 1px solid #dee2e6; border-radius: 8px 8px 0 0;">
+                <h5 style="margin: 0; font-size: 16px;">अन्य थपघट डेबिट</h5>
+            </div>
+            <div class="modal-body" style="padding: 20px;">
+                <h6 style="margin-bottom: 15px; font-size: 14px;">अन्य थपघटका कारणहरु</h6>
+                <table class="table table-bordered" style="font-size: 13px;">
+                    <thead>
+                        <tr style="background-color: #f8f9fa;">
+                            <th style="width: 50%; padding: 10px;">कारण</th>
+                            <th style="width: 50%; padding: 10px;">रकम</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 10px;">डेबिट एडभाइस</td>
+                            <td style="padding: 10px;"><input id="debitAdvice" type="text" class="form-control" style="font-size: 12px; text-align: right;"></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px;">अन्त:शुल्क टिकट खरिद</td>
+                            <td style="padding: 10px;"><input id="debitTicket" type="text" class="form-control" style="font-size: 12px; text-align: right;"></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px;">अन्य</td>
+                            <td style="padding: 10px;"><input id="debitOther" type="text" class="form-control" style="font-size: 12px; text-align: right;"></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; text-align: center;"><strong>जम्मा रकम</strong></td>
+                            <td style="padding: 10px;"><input id="debitTotal" type="text" class="form-control" readonly value="0" style="font-size: 12px; text-align: right; background-color: #f8f9fa;"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="text-align: center; margin-top: 20px;">
+                    <button onclick="saveDebitAdjustment()" class="btn" style="background-color: #28a745; color: white; padding: 8px 30px; margin-right: 10px; border-radius: 4px; border: none; font-size: 13px;">OK</button>
+                    <button onclick="closeDebitModal()" class="btn" style="background-color: #dc3545; color: white; padding: 8px 30px; border-radius: 4px; border: none; font-size: 13px;">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Product Modal -->
+    <div id="registerProductModal" style="display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4);">
+        <div style="background-color: #fefefe; margin: 3% auto; padding: 0; border: 1px solid #888; width: 70%; max-width: 1000px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <div style="padding: 12px 15px; background-color: #d3d3d3; border-bottom: 1px solid #ccc; border-radius: 8px 8px 0 0;">
+                <h3 style="margin: 0; font-size: 14px; font-weight: bold; color: #333;">Register Product</h3>
+            </div>
+            <div style="padding: 20px;">
+                <div style="display: grid; grid-template-columns: 180px 1fr; gap: 12px; align-items: center; margin-bottom: 12px;">
+                    <label style="font-size: 11px; font-weight: normal;">समूह:</label>
+                    <select id="productGroup" class="form-control" style="font-size: 11px; padding: 6px;">
+                        <option value="">---छान्नुहोस्---</option>
+                        <option value="0201">𝟎𝟐𝟎𝟏 – चौपाया (कुखुराको जातिको) ताजा वा चिसो परेको (फल्सेस वा चिल्ड) मासु फेर्नेमा मात्र ।</option>
+                        <option value="0202">𝟎𝟐𝟎𝟐 – चौपाया (कुखुराको जातिको) हिमीकृत (फल्सेजेन) मासु फेर्नेमा मात्र ।</option>
+                        <option value="0203">𝟎𝟐𝟎𝟑 – सुंगुरको मासु ताजा, चिसो परेको वा हिमीकृत (फल्सेजेन, चिल्ड वा फ्रोजन) फेर्नेमा मात्र ।</option>
+                        <option value="0204">𝟎𝟐𝟎𝟒 – भेडा वा खसी बोकाको ताजा, चिसो परेको वा हिमीकृत मासु फेर्नेमा मात्र ।</option>
+                        <option value="0205">[0205] – भेडा, गाई, भैंसी र घोडासहितको ताजा, चिसो, वा हिमीकृत (फल्सेजेन) मासु फेर्नेमा मात्र ।</option>
+                        <option value="0206">[0206] – चौपाया जातिका (कुखुरा, हाँस, बटेर, टर्की, आदि) मासु तथा तिनका खाने योग्य भाग (फल्सेजेन, चिल्ड वा हिमीकृत) खाने हुने कच्चा मासु (हड्डी, छाला आदि सहित) ।</option>
+                        <option value="0207">[0207] – रक्तको ०.९% भन्दा कमको ताजा, चिसो परेको वा हिमीकृत मासु खाने वा अन्य फल्सेजेन मासु फेर्नेमा मात्र ।</option>
+                        <option value="0208">[0208] – ताजा, चिसो परेको वा हिमीकृत अन्य मासु र खाने हुने अपल मासु फेर्नेमा मात्र ।</option>
+                        <option value="0209">[0209] – चराचुरुङ्गी वा अन्य प्रकारले नसुकेको, ताजा, चिरिएको, हिमीकृत, नुन पानीमा डुबाएको, सुखाएको वा धुवाँमा नभएको सुकेको बोसो (फ्याट) ।</option>
+                        <option value="0210">[0210] – मासु र खाने हुने अपल मासुहरू हल्का नुन पानीमा डुबाएको, सुखाएको वा धुवाँ (स्मोक) वा हावा (ड्राइङ) लगाई वा फल्सेज एण्ड मिल्क समेत फेर्नेमा मात्र ।</option>
+                        <option value="0304">[0304] – ताजा, चिसो परेको र हिमीकृत माछा फेर्नेमा मात्र, माछाका फिलेट र अन्य माछाका मासुका टुक्राहरू फेर्नेमा मात्र ।</option>
+                        <option value="0305">[0305] – सुकेको, नुनिलो गरेको वा नुन पानीमा हालिएको माछा; धुवाँमा पकाएको माछा; माछाको मासु वा धुवाँ गर्दा पूर्ण रूपमा नपकाएको; माछाको खाने हुने धुलो, पिठो र प्यालेट फेर्नेमा मात्र ।</option>
+                        <option value="0306">[0306] – खबड मिश्र भएको वा नभएको जीवित, ताजा, चिसो परेको, हिमीकृत, सुकेको, नुनिलो गरेको वा नुन पानीमा हालिएको क्रस्टेसियन; खबड मिश्र भएको वा नभएको, धुवाँमा पकाएको ।</option>
+                        <option value="0307">[0307] – खबड मिश्र भएको वा नभएको, जीवित, ताजा, चिसो परेको, हिमीकृत, सुकेको, नुनिलो गरिएको वा नुन पानीमा राखिएको मोलस्क्स; खबड मिश्र भएको वा नभएको, धुवाँमा पकाएको ।</option>
+                        <option value="0308">[0308] – क्रस्टेसियन र मोलस्क्स बाहेकका, जीवित, ताजा, चिरिएको, हिमीकृत, सुखाएको, नुनिलो पारिएको वा नुनिलो पानीमा राखिएका डाइभ हाड नभएका जलचरहरू; धुवाँमा पकाएको ।</option>
+                        <option value="0802">[0802] – अन्य कागजहरू, ताजा वा सुखाएको, खबड नछोडिएको वा नछोडिएको, बोक्रा लागेको वा नलागेको फेर्नेमा मात्र ।</option>
+                        <option value="0804">[0804] – खजुर (छोटो), अंजीर, सुक्खा द्राक्ष (मनुका जस्तो फल), अनार, आँप, पाइनएप्पल, ताजा वा सुक्का फेर्नेमा मात्र ।</option>
+                        <option value="0806">[0806] – ताजा अथवा सुख्खा अङ्गुर फेर्नेमा मात्र ।</option>
+                        <option value="0809">[0809] – खुर्पानी (एप्रिकोट), चेरी (पेचिङ्ग), आरु (नेक्टारिन समेत), आलुबखडा (प्लम) र स्याउ (स्लो), ताजा फेर्नेमा मात्र ।</option>
+                        <option value="0812">[0812] – अस्थायी रूपमा संरक्षित फलफूल (नुन पानी, चिनी पानी वा यसै अन्य सुरक्षित राख्ने तरल पदार्थमा राखी) अस्थायी रूपमा सुरक्षित गरिएको, तर यस स्थितिमा तुरुन्त खाने उद्देश्यका लागि होइन ।</option>
+                        <option value="0813">[0813] – शीर्षक ०८.०२ देखि ०८.०६ सम्मको बाहेक सुखाएको फलफूल; यसमा कागतीको बोक्रा वा सुन्तला फलफूलहरूको मिश्रण फेर्नेमा मात्र ।</option>
+                        <option value="0906">[0906] – दालचिनी र दालचिनीको टुक्राको फूलहरू फेर्नेमा मात्र ।</option>
+                        <option value="1404">[1404] – अन्य अप्रशोधित तरल पदार्थ ।</option>
+                        <option value="1601">[1601] – ससेज र मासु, अफल र रगतबाट बनेको उत्पादन ।</option>
+                        <option value="1602">[1602] – तयार वा सुरक्षित मासु, अफल वा रगत ।</option>
+                        <option value="1603">[1603] – मासु, माछा, क्रस्टेसियन, मोलस्क वा अन्य जलीय इनभर्टिब्रेटको सार र रस ।</option>
+                        <option value="1604">[1604] – तयार वा सुरक्षित माछा ।</option>
+                        <option value="1605">[1605] – तयार वा सुरक्षित क्रस्टेसियन, मोलस्क र अन्य हाडको हाड नभएका (इनभर्टिब्रेट) जलचरहरू ।</option>
+                        <option value="1701">[1701] – चिनी वा चुकन्दर र रासायनिक रूपमा शुद्ध गरिएको सुक्रोज (ठोस पनि) ।</option>
+                        <option value="1703">[1703] – चिनीबाट निकालिने सिरा वा चुक्को रस (स्रोत चुक्को समेत) ।</option>
+                        <option value="1704" style="font-weight: normal;">[1704] – कोको नभएको चिनीको मिठाई (सेतो चकलेट सहित) ।</option>
+                        <option value="1805">𝟏𝟖𝟎𝟓 – कोकोको धुलो, चिनी वा गुलियो पदार्थ नहालेको ।</option>
+                        <option value="1806">𝟏𝟖𝟎𝟔 – चकलेट र अन्य कोको मिश्रित खाद्य पदार्थ ।</option>
+                        <option value="1902">𝟏𝟗𝟎𝟐 – पास्ता, चाहे पकाएको, भरेको (मासु वा अन्य पदार्थ) वा वर्णन गरिएको वा अन्य किसिमले तयार गरिएको । [1902] – स्पेगेटी, म्याकरोनी, नुडल्स, लसाने, ग्नोकी, राभियोली, क्यानेलोनी कुकुर जस्ता पास्ताहरू वा पकाएको, (मासु वा अन्य पदार्थ) भरिएको वा नभरिएको वा अन्य किसिमले तयार गरिएको ।</option>
+                        <option value="1905">𝟏𝟗𝟎𝟓 – कोको परेको वा नपरेको फार्टो, ब्रेड, केक, बिस्कुट र अरु रोटी सम्बन्धी सामान; कन्फेक्सनरी, केकहरू (पाकेको रोटी बिक्रीका लागि काम गर्ने), औषधि मर्मत हुने चल्ने बिस्कुट ।</option>
+                        <option value="2005" style="font-weight: normal;">[2005] – निको (भिनेगर) वा एसिटिक एसिडबाट बनेर विभिन्न तरिकाबाट तयार वा सुरक्षित गरिएको, हिमीकृत नगरीएका अन्य तरकारीहरू, शीर्षक ०७.०६ का उत्पादनहरू बाहेक ।</option>
+                        <option value="2008" style="font-weight: normal;">[2008] – चिनी वा चिनीमा घुलिने पदार्थ हालि सुरक्षित गरिएको वा अन्य प्रकारले तयार गरिएको अन्य फलफूल, काक्रोफल र अन्य बोट बिरुवाबाट खान हुने अंश ।</option>
+                        <option value="2009">𝟐𝟎𝟎𝟗 – चिनी हालिएको वा नहालिएको, फ्रुट जुस (अङ्गुरको रस समेत) र तरकारी रस ।</option>
+                        <option value="2101">[2101] – कफी, चिया वा माटे र तिनका एसन्स, एक्स्ट्र्याक्ट र कन्सन्ट्रेट; कफी, चिया वा माटेमा आधारित वा कफी, चिया वा माटेको आधार लिइ बनाइएको तयारी पदार्थहरू (चिकोरी समेत) ।</option>
+                        <option value="2105">[2105] – आइसक्रिम र अन्य खाद्य आइस ।</option>
+                        <option value="2106">[2106] – अन्य नरोकिएको खाद्य पदार्थ ।</option>
+                        <option value="2202">[2202] – चिनी हालिएको वा नहालिएको वा स्वाद आउने सुरक्षित पानी, प्राकृतिक र कृत्रिम खनिज पानी र वायु प्रवाहित पानी (एरियटेड) समेत; शीर्षक २०.०९ का फलफूल रस र तरकारी रस बाहेक ।</option>
+                        <option value="2203">[2203] – जौबाट बनेको बियर ।</option>
+                        <option value="2204">[2204] – ताजा अङ्गुरबाट बनाइएको वाइन, अन्य किण्वित पेयहरू समेत; शीर्षक २०.०९ को दाख रस (ग्रेप मस्ट) ।</option>
+                        <option value="2205">[2205] – भर्मुथ र अन्य अङ्गुर रस वा सुगन्धित बोट बिरुवा मिश्रित ताजा अङ्गुरको अन्य वाइन ।</option>
+                        <option value="2206">[2206] – अन्य किण्वित पेयहरू (उदाहरण: साइडर, नासपातीबाट बनेको पेरी, कुहिएको मह र पानी मिसाएको मिड); अन्य नरोकिएको वा समावेश गरिएको ।</option>
+                        <option value="2207">[2207] – ८० प्रतिशतभन्दा बढी अल्कोहल शक्ति भएको अधिनिष्क्रिय इथाइल अल्कोहल र जुनुकै अल्कोहल शक्ति भएको अधिनिष्क्रिय इथाइल अल्कोहल ।</option>
+                        <option value="2208">[2208] – ८० प्रतिशतभन्दा कम अल्कोहल शक्ति भएको अधिनिष्क्रिय इथाइल अल्कोहल; अरक (स्पिरिट), मदिरा (लिकर) र अन्य मादक (स्पिरिटुअस) पेयहरू ।</option>
+                        <option value="2401">[2401] – अप्रसोधित (अनम्यानुफ्याक्चर्ड) सुर्ती, सुर्तीको अवशेष (फेर्नेमा मात्र) ।</option>
+                        <option value="2402">[2402] – सुर्ती वा सुर्तीको प्रतिस्थापक (सब्स्टिच्युट) भएको सिगरेट, सिगार (सिगारिल्ला) र चुरोट (सिगरेट) ।</option>
+                        <option value="2403">[2403] – अन्य निर्मित (म्यानुफ्याक्चर्ड) सुर्ती र सुर्तीका विकल्प; सुँघ्ने (स्नफिङ्ग) वा चपाउने सुर्ती; सुर्तीको रस र सार ।</option>
+                        <option value="2515">[2515] – अलि अलि काटिएको वा क्रान्तिबाट काटेको वा अन्य किसिमले काटेको विशेष गुरुत्व २.५ वा बढी भएको च्यापटे (मार्बल समेत) ढुंगा वा पाता मार्बल (स्लिम्बर), टाइल्स ।</option>
+                        <option value="2516">[2516] – क्रान्तिबाट वा अन्य किसिमले अलि अलि काटिएको, काटिएको वा टुक्राएको च्यापटे (ग्रेनाइट समेत) ढुंगा वा पाताको रूपमा रहेको ग्रेनाइट (कडा पत्थर), पर्फिरी ।</option>
+                        <option value="2523">[2523] – पोर्टल्यान्ड सिमेन्ट ।</option>
+                        <option value="3208">[3208] – जलमै माध्यम भएका (एक्रिलिक) वा इमल्सन (डिस्पर्सन) भएका कृत्रिम पोलिमरहरू (रङ्गमा) वा रासायनिक रूपले परिवर्तन गरिएको प्राकृतिक पोलिमरहरूमा आधारित रङ्ग ।</option>
+                        <option value="3209">[3209] – अन्य माध्यममा आधारित (डिस्पर्सन) रङ्गहरू (जस्तै: सिंथेटिक रासायनिक पदार्थमा आधारित); रासायनिक रूपले परिवर्तन गरिएको प्राकृतिक पोलिमरहरूमा आधारित रङ्गहरू ।</option>
+                        <option value="3210">[3210] – अन्य रङ्गहरू र पिग्मेन्टहरू (भर्निश, एनामेल, लाख) र इन्डस्ट्रियल साइज र फिलरहरू; रङ्ग बनाउन प्रयोग गरिने तयारी पदार्थहरू ।</option>
+                        <option value="3214">[3214] – फ्लेक्स, प्रिन्टरको मसी, लेख्ने मसी, सिमेन्ट, कोक (सिंथेटिक) ग्राफाइट र अन्य मसीहरू (छोटो); चित्रकारको मसी (फिल्मिङ) हरू; मुद्रण मसी ।</option>
+                        <option value="3303">[3303] – सुगन्धित वा शरीर सफाइ सम्बन्धी पानी ।</option>
+                        <option value="3304">[3304] – सौन्दर्य वा रूप-सज्जा (मेक-अप) का सामानहरू (औषधि बाहेक), छालाको सुरक्षाको लागि प्रयोग गरिने वस्तुहरू; घाम छल्ने वा घामबाट बचाउने (सनस्क्रिन) सामग्री ।</option>
+                        <option value="3305">[3305] – कपालका लागि तयारी सामग्रीहरू ।</option>
+                        <option value="3306">[3306] – मुख सम्बन्धी (ओरल) वा दन्त सम्बन्धी (डेन्टल) स्वास्थ्य (हाइजिन) निमित्तका तयारी वस्तुहरू (प्रिपरेसन), दन्त स्टिकर, दाँत सफा गर्ने चूर्ण (डेन्टल फिक्सिङ पेस्ट र पाउडर) ।</option>
+                        <option value="3307">[3307] – दाह्री बनाउने (शेभिङ), शोडिङ र आफ्टरशेभ सामानहरू; गन्ध हटाउने, दुर्गन्ध हटाउने सामानहरू; र दुर्गन्ध हटाउने अन्य तयारी; अन्य सुगन्धित शारीरिक वा सरसफाइका तयारी ।</option>
+                        <option value="3401">[3401] – साबुन; साबुन भएको वा नभएको छाला धुने (बार) टिकिया (केक); साबुन भएको वा नभएको, बाह्य प्रभाव पार्ने (सर्फेस एक्टिभ) शारीरिक धुने तयारी ।</option>
+                        <option value="3402">[3402] – शारीरिक बाह्य प्रभाव पार्ने कारकहरू (एजेन्ट) (साबुन बाहेक); बाह्य प्रभाव पार्ने तयारी वस्तुहरू; धुने (वासिङ) उत्पादनहरू (धुने सहायक सामान समेत) र सफा गर्ने तयारी ।</option>
+                        <option value="3814">[3814] – कार्बनिक संयुक्त द्रावक (सोल्भेन्ट) र पेन्ट हटाउने (थिनर) पदार्थ, अन्य नरोकिएको; पेन्ट र रोगन (वार्निस) हटाउने तयारी सामग्री ।</option>
+                        <option value="3916">[3916] – प्लास्टिकको कुनै पनि कट मेसनले बनाएको ९ एम.एम. भन्दा बढी मोटाइ भएको मोनोफिलामेन्ट, स्ट्रिप (तस्मा) कारी गरिएको वा नगरेको वा त्यस बाहेकको कुनै पनि आकारको ।</option>
+                        <option value="3920">[3920] – अन्य प्लास्टिक प्लेट, सिट, फिल्म, फोइल र स्ट्रिप, आत्म-चिप्किने (लमिनेट) गरिएको, आधार (सपोर्ट) सहितको वा त्यसबाहेकको ।</option>
+                        <option value="3921">[3921] – प्लास्टिकका अन्य प्लेट, सिट, फिल्म, फोइल र स्ट्रिप ।</option>
+                        <option value="3922">[3922] – प्लास्टिकका स्यानिटरी (बाथ) हरू, दुहाइ स्यानिटरी (सावर बाथ) हरू, पानी आउने र निकास व्यवस्था सहितको टब (सिंक) हरू, प्रवाहानुसार (फ्लो-बेसिन), स्यानिटरी ।</option>
+                        <option value="3923">[3923] – मालसामानको ओसारपसार (कन्टेनर) वा प्याकेजिङ (प्याक) गर्न प्लास्टिकका सामानहरू; प्लास्टिकको बोतल वा जार (स्टोरेज ड्रम), बक्स (क्यारेज) र अन्य ।</option>
+                        <option value="3924">[3924] – प्लास्टिकका भान्साका उपकरणहरू (डिनर-वेयर), भान्साको पकाउने उपकरणहरू (किचन-वेयर), अन्य घरेलु सामानहरू र सरसफाइ सम्बन्धी (हाइजिनिक) वा शृङ्गार (टॉयलेट) का सामानहरू ।</option>
+                        <option value="3925">[3925] – अन्य नरोकिएका कृत्रिम प्लास्टिकका सामग्रीहरू (लाइटर कभर) ।</option>
+                        <option value="3926">[3926] – प्लास्टिकबाट बनेका अन्य सामग्रीहरू शीर्षक ३९.०१ देखि ३९.१४ बाहेक ।</option>
+                        <option value="4402">[4402] – काठबाट तयार गरिएको कोइला (चारकोल), खबड (लम्प) का वा पिसिएको (पाउडर) को गोल समेत ।</option>
+                        <option value="4403">[4403] – बोक्रा नहटाइएको काठ वा आंशिक रूपमा छालासहितको काठ, चिरिएको वा नचिरिएको वा मनोनीत ढङ्गले परेको अप्रशोधित काठ ।</option>
+                        <option value="6305">[6305] – बस्त्रबाट बनेका थैलाहरू (साक), जूट आदि ।</option>
+                        <option value="6802">[6802] – शीर्षक ६८.०१ का बाहेक ढुंगाका स्मारक वा निर्माणका लागि तयार गरिएका ढुंगा (स्लेट ढुंगा) र तिनका सामानहरू, चिल्लो सामग्री (व्यक्तिक) भएको वा नभएको प्राकृतिक ।</option>
+                        <option value="6803">[6803] – शीर्षक ६८.०१ का बाहेक ढुंगाका स्मारक वा निर्माणका लागि तयार गरिएका ढुंगा (स्लेट ढुंगा) र तिनका सामानहरू, चिल्लो सामग्री (व्यक्तिक) भएको वा नभएको प्राकृतिक ।</option>
+                        <option value="6813">[6813] – अस्बेस्टस (एस्बेस्टस) वा अन्य तन्तुबाट बनेका सामग्रीहरू, कागज वा अन्य आधार पदार्थमा आधारित (फ्रिक्सन सामग्री) जस्तै: ब्रेक वा क्लच प्याड, लाइनिङ ।</option>
+                        <option value="6908">[6908] – ग्लेज गरिएको (लेड गरेको) माटोको टाइल, अग्नि वा चुना नलागेको फिनिशिङ टाइल; असर (व्यक्तिक) भएको वा नभएको ग्लेज गरिएको सिरेमिक टाइल ।</option>
+                        <option value="7003">[7003] – अवशोषक, प्रतिबिम्बित वा अप्रतिबिम्बित तह (लेयर) भएको वा नभएको, पाता (सिट) वा प्रोफाइलको रूपमा भएको, अझ कुनै किसिमको काम नगरेको, ढलाइएको काँच ।</option>
+                        <option value="7004">[7004] – अवशोषक, प्रतिबिम्बित वा अप्रतिबिम्बित तह (लेयर) भएको वा नभएको, तर अन्य कुनै काम नगरेको, पाता (सिट) को रूपमा भएको तनावरहित (फ्लोट) काँच ।</option>
+                        <option value="7005">[7005] – अवशोषक, प्रतिबिम्बित वा अप्रतिबिम्बित तह (लेयर) भएको वा नभएको, तर अन्य किसिमको कुनै काम नगरेको, पाता (सिट) मा भएको फ्लोट ग्लास वा सतह गरिएको काँच ।</option>
+                        <option value="7006">[7006] – शीर्षक ७०.०३, ७०.०४ वा ७०.०५ का काँचबाट बनेका वस्तुहरू; ढिक्का (ब्लक), किनाराको काम गरिएको (एज वर्क), खोक्रो (ड्रिल), इनेमल लगाइएको वा अन्य ।</option>
+                        <option value="7007">[7007] – कडा बनाइएको वा टेम्पर्ड काँच भएको सुरक्षा काँच ।</option>
+                        <option value="7008">[7008] – काँचको बहुपरतिय अवशोषक इकाइ (मल्टिपल वाल इन्सुलेटेड युनिट) ।</option>
+                    </select>
+                </div>
+                <div style="display: grid; grid-template-columns: 180px 1fr; gap: 12px; align-items: center; margin-bottom: 12px;">
+                    <label style="font-size: 11px; font-weight: normal;">उप-समूह:</label>
+                    <select id="productSubGroup" class="form-control" style="font-size: 11px; padding: 6px;">
+                        <option value="">---छान्नुहोस्---</option>
+                    </select>
+                </div>
+                <div style="display: grid; grid-template-columns: 180px 1fr; gap: 12px; align-items: center; margin-bottom: 12px;">
+                    <label style="font-size: 11px; font-weight: normal;">उत्पादनको नाम (नेपालीमा):</label>
+                    <input type="text" id="productNameNepali" class="form-control" style="font-size: 11px; padding: 6px;">
+                </div>
+                <div style="display: grid; grid-template-columns: 180px 1fr; gap: 12px; align-items: center; margin-bottom: 12px;">
+                    <label style="font-size: 11px; font-weight: normal;">Product Name (English):</label>
+                    <input type="text" id="productNameEnglish" class="form-control" style="font-size: 11px; padding: 6px;">
+                </div>
+                <div style="display: grid; grid-template-columns: 180px 1fr; gap: 12px; align-items: center; margin-bottom: 15px;">
+                    <label style="font-size: 11px; font-weight: normal;">Base Unit:</label>
+                    <select id="productBaseUnit" class="form-control" style="font-size: 11px; padding: 6px; width: 400px;">
+                        <option value="">---छान्नुहोस्---</option>
+                        <option value="10M">10M</option>
+                        <option value="1M">1M</option>
+                        <option value="30PKT-400GM">30PKT-400GM</option>
+                        <option value="50PKT-8GM">50PKT-8GM</option>
+                        <option value="5M">5M</option>
+                        <option value="BAG">BAG</option>
+                        <option value="BOT25UP180ML">BOT25UP180ML</option>
+                        <option value="BOT25UP375ML">BOT25UP375ML</option>
+                        <option value="BOT25UP750ML">BOT25UP750ML</option>
+                        <option value="BOT30UP1000ML">BOT30UP1000ML</option>
+                        <option value="BOT30UP180ML">BOT30UP180ML</option>
+                        <option value="BOT30UP375ML">BOT30UP375ML</option>
+                        <option value="BOT30UP750ML">BOT30UP750ML</option>
+                        <option value="BOT30UP90ML">BOT30UP90ML</option>
+                        <option value="BOT325">BOT325</option>
+                        <option value="BOT330">BOT330</option>
+                        <option value="BOT40UP180ML">BOT40UP180ML</option>
+                        <option value="BOT40UP375ML">BOT40UP375ML</option>
+                        <option value="BOT40UP750ML">BOT40UP750ML</option>
+                        <option value="BOT50UP180ML">BOT50UP180ML</option>
+                        <option value="BOT50UP375ML">BOT50UP375ML</option>
+                        <option value="BOT50UP750ML">BOT50UP750ML</option>
+                        <option value="BOT650">BOT650</option>
+                        <option value="BOT70UP300ML">BOT70UP300ML</option>
+                        <option value="BOT750">BOT750</option>
+                        <option value="BOX">BOX</option>
+                        <option value="CAN330">CAN330</option>
+                        <option value="CASE-25UP-1000ML-9BOT">CASE-25UP-1000ML-9BOT</option>
+                        <option value="CASE-25UP-180ML-24BOT">CASE-25UP-180ML-24BOT</option>
+                        <option value="CASE-25UP-180ML-48BOT">CASE-25UP-180ML-48BOT</option>
+                        <option value="CASE-25UP-375ML-12BOT">CASE-25UP-375ML-12BOT</option>
+                        <option value="CASE-25UP-375ML-24BOT">CASE-25UP-375ML-24BOT</option>
+                        <option value="CASE-25UP-750ML-12BOT">CASE-25UP-750ML-12BOT</option>
+                        <option value="CASE-25UP-750ML-6BOT">CASE-25UP-750ML-6BOT</option>
+                        <option value="CASE-25UP-90ML-100BOT">CASE-25UP-90ML-100BOT</option>
+                        <option value="CASE-25UP-90ML-50BOT">CASE-25UP-90ML-50BOT</option>
+                        <option value="CASE-275ML-24BOT">CASE-275ML-24BOT</option>
+                        <option value="CASE-275ML-24CAN">CASE-275ML-24CAN</option>
+                        <option value="CASE-30UP-1000ML-9BOT">CASE-30UP-1000ML-9BOT</option>
+                        <option value="CASE-30UP-180ML-24BOT">CASE-30UP-180ML-24BOT</option>
+                        <option value="CASE-30UP-180ML-48BOT">CASE-30UP-180ML-48BOT</option>
+                        <option value="CASE-30UP-375ML-12BOT">CASE-30UP-375ML-12BOT</option>
+                        <option value="CASE-30UP-375ML-24BOT">CASE-30UP-375ML-24BOT</option>
+                        <option value="CASE-30UP-750ML-12BOT">CASE-30UP-750ML-12BOT</option>
+                        <option value="CASE-30UP-750ML-6BOT">CASE-30UP-750ML-6BOT</option>
+                        <option value="CASE-30UP-90ML-100BOT">CASE-30UP-90ML-100BOT</option>
+                        <option value="CASE-30UP-90ML-50BOT">CASE-30UP-90ML-50BOT</option>
+                        <option value="CASE-375ML-24BOT">CASE-375ML-24BOT</option>
+                        <option value="CASE-40UP-180ML-24BOT">CASE-40UP-180ML-24BOT</option>
+                        <option value="CASE-40UP-180ML-48BOT">CASE-40UP-180ML-48BOT</option>
+                        <option value="CASE-40UP-375ML-12BOT">CASE-40UP-375ML-12BOT</option>
+                        <option value="CASE-40UP-375ML-24BOT">CASE-40UP-375ML-24BOT</option>
+                        <option value="CASE-40UP-750ML-12BOT">CASE-40UP-750ML-12BOT</option>
+                        <option value="CASE-40UP-750ML-6BOT">CASE-40UP-750ML-6BOT</option>
+                        <option value="CASE-4L-4BAG">CASE-4L-4BAG</option>
+                        <option value="CASE-500ML-12BOT">CASE-500ML-12BOT</option>
+                        <option value="CASE-500ML-12CAN">CASE-500ML-12CAN</option>
+                        <option value="CASE-50UP-180ML-24BOT">CASE-50UP-180ML-24BOT</option>
+                        <option value="CASE-50UP-180ML-48BOT">CASE-50UP-180ML-48BOT</option>
+                        <option value="CASE-50UP-500ML-18BOT">CASE-50UP-500ML-18BOT</option>
+                        <option value="CASE-650ML-12BOT">CASE-650ML-12BOT</option>
+                        <option value="CASE-70UP-300ML-30BOT">CASE-70UP-300ML-30BOT</option>
+                        <option value="CASE-750ML-12BOT">CASE-750ML-12BOT</option>
+                        <option value="CASEBOT250ML-12BOT">CASEBOT250ML-12BOT</option>
+                        <option value="CASEBOT330-24BOT">CASEBOT330-24BOT</option>
+                        <option value="CASEBOT500-12BOT">CASEBOT500-12BOT</option>
+                        <option value="CASEBOT650-12BOT">CASEBOT650-12BOT</option>
+                        <option value="CASEBOT750-12BOT">CASEBOT750-12BOT</option>
+                        <option value="CASECAN250-24CANS">CASECAN250-24CANS</option>
+                        <option value="CASECAN330-24CANS">CASECAN330-24CANS</option>
+                        <option value="CASECAN500-12CAN">CASECAN500-12CAN</option>
+                        <option value="CFT">CFT</option>
+                        <option value="GM">GM</option>
+                        <option value="KEG-10L">KEG-10L</option>
+                        <option value="KEG-20L">KEG-20L</option>
+                        <option value="KEG-30L">KEG-30L</option>
+                        <option value="KEG-50L">KEG-50L</option>
+                        <option value="KG">KG</option>
+                        <option value="LPLTR">LPLTR</option>
+                        <option value="LTR">LTR</option>
+                        <option value="LTR-25up">LTR-25up</option>
+                        <option value="LTR-30UP">LTR-30UP</option>
+                        <option value="LTR-40UP">LTR-40UP</option>
+                        <option value="LTR-50UP">LTR-50UP</option>
+                        <option value="LTR-70UP">LTR-70UP</option>
+                        <option value="MT">MT</option>
+                        <option value="PIECE">PIECE</option>
+                        <option value="PKT-150GM">PKT-150GM</option>
+                        <option value="PKT-400GM">PKT-400GM</option>
+                        <option value="PKT-450GM">PKT-450GM</option>
+                        <option value="PKT-750GM">PKT-750GM</option>
+                        <option value="QNT">QNT</option>
+                        <option value="SFT">SFT</option>
+                        <option value="SQFT">SQFT</option>
+                        <option value="stick">stick</option>
+                        <option value="TON">TON</option>
+                    </select>
+                </div>
+                <div style="text-align: center; margin-bottom: 15px;">
+                    <button onclick="addProductToTable()" class="btn" style="background-color: #4a90e2; color: white; padding: 6px 30px; margin-right: 8px; border-radius: 4px; border: none; font-size: 11px; font-weight: 500;">💾 Ok</button>
+                    <button onclick="closeRegisterProductModal()" class="btn" style="background-color: #4a90e2; color: white; padding: 6px 30px; border-radius: 4px; border: none; font-size: 11px; font-weight: 500;">💾 Cancel</button>
+                </div>
+                <div style="margin-top: 15px;">
+                    <table class="table table-bordered" style="font-size: 10px; width: 100%;">
+                        <thead style="background-color: #f8f9fa;">
+                            <tr>
+                                <th style="padding: 8px; text-align: center; border: 1px solid #dee2e6;">HRGroupCode</th>
+                                <th style="padding: 8px; text-align: center; border: 1px solid #dee2e6;">HRSubGroupCode</th>
+                                <th style="padding: 8px; text-align: center; border: 1px solid #dee2e6;">ProductDescNep</th>
+                                <th style="padding: 8px; text-align: center; border: 1px solid #dee2e6;">ProductDescEng</th>
+                                <th style="padding: 8px; text-align: center; border: 1px solid #dee2e6;">Base Unit</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productTableBody">
+                            <!-- Product rows will be added here -->
+                        </tbody>
+                    </table>
+                </div>
+                <div style="text-align: center; margin-top: 15px;">
+                    <button onclick="saveProducts()" class="btn" style="background-color: #4a90e2; color: white; padding: 6px 30px; border-radius: 4px; border: none; font-size: 11px; font-weight: 500;">💾 Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Base Unit Sample Modal -->
+    <div id="baseUnitModal" style="display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4);">
+        <div style="background-color: #fefefe; margin: 5% auto; padding: 0; border: 1px solid #888; width: 30%; max-width: 400px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <div style="background-color: #e9ecef; padding: 12px 15px; border-bottom: 1px solid #dee2e6; border-radius: 8px 8px 0 0;">
+                <h5 style="margin: 0; font-size: 14px; font-weight: bold;">Base Unit Sample</h5>
+            </div>
+            <div style="padding: 15px; max-height: 400px; overflow-y: auto;">
+                <table class="table table-bordered" style="margin-bottom: 15px; font-size: 12px;">
+                    <thead style="background-color: #f8f9fa;">
+                        <tr>
+                            <th style="padding: 8px; text-align: left; font-size: 12px;">Base Unit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td style="padding: 8px; font-size: 11px;">CFT</td></tr>
+                        <tr><td style="padding: 8px; font-size: 11px;">SFT</td></tr>
+                        <tr><td style="padding: 8px; font-size: 11px;">GM</td></tr>
+                        <tr><td style="padding: 8px; font-size: 11px;">BAG</td></tr>
+                        <tr><td style="padding: 8px; font-size: 11px;">stick</td></tr>
+                        <tr><td style="padding: 8px; font-size: 11px;">TON</td></tr>
+                        <tr><td style="padding: 8px; font-size: 11px;">LPLTR</td></tr>
+                        <tr><td style="padding: 8px; font-size: 11px;">PIECE</td></tr>
+                        <tr><td style="padding: 8px; font-size: 11px;">MT</td></tr>
+                        <tr><td style="padding: 8px; font-size: 11px;">BOX</td></tr>
+                        <tr><td style="padding: 8px; font-size: 11px;">LTR</td></tr>
+                        <tr><td style="padding: 8px; font-size: 11px;">BOT650</td></tr>
+                        <tr><td style="padding: 8px; font-size: 11px;">KG</td></tr>
+                        <tr><td style="padding: 8px; font-size: 11px;">EM</td></tr>
+                    </tbody>
+                </table>
+                <div style="text-align: center;">
+                    <button onclick="closeBaseUnitModal()" class="btn" style="background-color: #28a745; color: white; padding: 6px 25px; border-radius: 4px; border: none; font-size: 12px;">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Save Success Modal -->
+    <div id="saveSuccessModal" style="display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4);">
+        <div style="background-color: #fefefe; margin: 15% auto; padding: 0; border: 1px solid #888; width: 400px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <div style="padding: 20px; text-align: center;">
+                <div style="margin-bottom: 20px;">
+                    <svg width="60" height="60" viewBox="0 0 60 60" style="margin: 0 auto;">
+                        <circle cx="30" cy="30" r="28" fill="#4CAF50" />
+                        <path d="M 15 30 L 25 40 L 45 20" stroke="white" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <h3 style="margin: 0 0 10px 0; font-size: 18px; font-weight: bold; color: #333;">सफलतापूर्वक सुरक्षित गरियो!</h3>
+                <p style="margin: 0 0 20px 0; font-size: 14px; color: #666;">Saved Successfully!</p>
+                <button onclick="closeSaveSuccessModal()" style="background-color: #4CAF50; color: white; border: none; padding: 10px 30px; border-radius: 4px; font-size: 14px; cursor: pointer;">ठीक छ (OK)</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openBaseUnitModal() {
+            document.getElementById('baseUnitModal').style.display = 'block';
+        }
+
+        function closeBaseUnitModal() {
+            document.getElementById('baseUnitModal').style.display = 'none';
+        }
+
+        function openRegisterProductModal() {
+            document.getElementById('registerProductModal').style.display = 'block';
+        }
+
+        // Populate sub-group dropdown based on selected group
+        document.addEventListener('DOMContentLoaded', function() {
+            const groupSelect = document.getElementById('productGroup');
+            const subGroupSelect = document.getElementById('productSubGroup');
+
+            // Sub-group data for each group
+            const subGroupData = {
+                '0201': [
+                    { value: '0201.10.00', text: '[0201.10.00] — सिङ्गो र आधा शरीरहरू (करकस र हाफ करकस)' },
+                    { value: '0201.20.00', text: '[0201.20.00] — हाड सहितको अन्य टुक्राहरू' },
+                    { value: '0201.30.00', text: '[0201.30.00] — हाड नभएको' }
+                ],
+                '0202': [
+                    { value: '0202.10.00', text: '[0202.10.00] — सिङ्गो र आधा शरीरहरू (करकस र हाफ करकस)' },
+                    { value: '0202.20.00', text: '[0202.20.00] — हाड सहितको अन्य टुक्राहरू' },
+                    { value: '0202.30.00', text: '[0202.30.00] — हाड नभएको' }
+                ],
+                '0203': [
+                    { value: '0203.11.00', text: '[0203.11.00] — सिङ्गो र आधा शरीरहरू (करकस र हाफ करकस)' },
+                    { value: '0203.12.00', text: '[0203.12.00] — हाड सहितको अगाडि र पछाडिको सापहरू र सापबाट काटिएका अन्य टुक्राहरू' },
+                    { value: '0203.19.00', text: '[0203.19.00] — अन्य' },
+                    { value: '0203.21.00', text: '[0203.21.00] — सिङ्गो र आधा शरीरहरू (करकस र हाफ करकस)' },
+                    { value: '0203.22.00', text: '[0203.22.00] — हाड सहितको अगाडि र पछाडिको सापहरू र सापबाट काटिएका अन्य टुक्राहरू' },
+                    { value: '0203.29.00', text: '[0203.29.00] — अन्य' }
+                ],
+                '0204': [
+                    { value: '0204.10.00', text: '[0204.10.00] — भेडा (पाठो) को ताजा वा चिसो परेको सिङ्गो र आधा शरीरहरू (करकस र हाफ करकस)' },
+                    { value: '0204.21.00', text: '[0204.21.00] — सिङ्गो र आधा शरीरहरू (करकस र हाफ करकस)' },
+                    { value: '0204.22.00', text: '[0204.22.00] — हाडसहितको अन्य टुक्रा' },
+                    { value: '0204.23.00', text: '[0204.23.00] — हाड नभएको' },
+                    { value: '0204.30.00', text: '[0204.30.00] — भेडा (पाठो) को हिमीकृत (फ्रोजन) सिङ्गो र आधा शरीरहरू (करकस र हाफ करकस)' },
+                    { value: '0204.41.00', text: '[0204.41.00] — सिङ्गो र आधा शरीरहरू (करकस र हाफ करकस)' },
+                    { value: '0204.42.00', text: '[0204.42.00] — हाडसहितको अन्य टुक्राहरू' },
+                    { value: '0204.43.00', text: '[0204.43.00] — हाड नभएको' },
+                    { value: '0204.50.00', text: '[0204.50.00] — खसी बोकाको मासु' }
+                ],
+                '1805': [
+                    { value: '1805.00.00', text: '[1805.00.00] — कोकोको धुलो, चिनी वा गुलियो पदार्थ नहालेको ।' }
+                ],
+                '1806': [
+                    { value: '1806.10.00', text: '[1806.10.00] — कोकोको धुलो, चिनी वा गुलियो पदार्थ हालेको' },
+                    { value: '1806.20.00', text: '[1806.20.00] — २ केजी भन्दा बढी तौलको टिक्का (ब्लक वा स्ल्याब) वा डण्डी (बार) को रूपमा रहेका अन्य परिकार, तरल, माण्ड, धुलो, दानादार वा अन्य यथ्री (बल्क) को रूपमा' },
+                    { value: '1806.31.00', text: '[1806.31.00] — भरिएको' },
+                    { value: '1806.32.00', text: '[1806.32.00] — नभएको' },
+                    { value: '1806.90.00', text: '[1806.90.00] — अन्य' }
+                ],
+                '1902': [
+                    { value: '1902.11.00', text: '[1902.11.00] — फूल हालेको' },
+                    { value: '1902.19.00', text: '[1902.19.00] — अन्य' },
+                    { value: '1902.20.00', text: '[1902.20.00] — पकाएको वा नपकाएको वा अन्य प्रकारले तयार गरेको भरेको पास्ता (मुछेको पिठो)' },
+                    { value: '1902.30.00', text: '[1902.30.00] — अन्य पास्ता (मुछेको पिठो)' },
+                    { value: '1902.40.00', text: '[1902.40.00] — कुसकुस (उत्तरी अफ्रिकी खाद्य पदार्थ)' }
+                ],
+                '1905': [
+                    { value: '1905.10.00', text: '[1905.10.00] — चुरम चुरम जाने रोटी (क्रिस्प ब्रेड)' },
+                    { value: '1905.20.00', text: '[1905.20.00] — अदुवा हालेको एक किसिमको रोटी (जिन्जर ब्रेड)' },
+                    { value: '1905.31.00', text: '[1905.31.00] — गुलियो बिस्कुटहरू' },
+                    { value: '1905.32.00', text: '[1905.32.00] — पिठो मुछेर बनाएको एक किसिमको खरो (क्रिस्प) रोटी (वेफर) र पातलो रोटी (वेफर्स)' },
+                    { value: '1905.40.00', text: '[1905.40.00] — पास्ताको धुलोबाट बनेको रोटी वा बिस्कुट (रस्क), टोस्ट गरेको रोटी र त्यस्तै उत्पादन' },
+                    { value: '1905.90.10', text: '[1905.90.10] — पिज्जा' },
+                    { value: '1905.90.20', text: '[1905.90.20] — आलु चिप्स, कुरकुरे, कुरमुरे, लेज, चिजबल' },
+                    { value: '1905.90.70', text: '[1905.90.70] — पास्तोटी' },
+                    { value: '1905.90.30', text: '[1905.90.30] — पापड' },
+                    { value: '1905.90.50', text: '[1905.90.50] — अन्यत्र उल्लेख नभएका बिस्कुटहरू' },
+                    { value: '1905.90.60', text: '[1905.90.60] — केक, कुकीज र पेष्टी' },
+                    { value: '1905.90.81', text: '[1905.90.81] — फ्राई नगरेका' },
+                    { value: '1905.90.89', text: '[1905.90.89] — अन्य' },
+                    { value: '1905.90.90', text: '[1905.90.90] — अन्य' }
+                ],
+                '2009': [
+                    { value: '2009.11.00', text: '[2009.11.00] — हिमीकृत (फ्रोजन)' },
+                    { value: '2009.12.00', text: '[2009.12.00] — हिमीकृत नगरीएको, वृक्ष मूल्य २० ननाघेको' },
+                    { value: '2009.19.00', text: '[2009.19.00] — अन्य' },
+                    { value: '2009.21.00', text: '[2009.21.00] — वृक्ष मूल्य २० ननाघेको' },
+                    { value: '2009.29.00', text: '[2009.29.00] — अन्य' },
+                    { value: '2009.31.00', text: '[2009.31.00] — वृक्ष मूल्य २० ननाघेको' },
+                    { value: '2009.39.00', text: '[2009.39.00] — अन्य' },
+                    { value: '2009.41.00', text: '[2009.41.00] — वृक्ष मूल्य २० भन्दा बढी नभएको' },
+                    { value: '2009.49.00', text: '[2009.49.00] — अन्य' },
+                    { value: '2009.50.00', text: '[2009.50.00] — गोलभेँडाको रस (टमाटो जुस)' },
+                    { value: '2009.61.00', text: '[2009.61.00] — वृक्ष मूल्य ३० ननाघेको' },
+                    { value: '2009.69.00', text: '[2009.69.00] — अन्य' },
+                    { value: '2009.71.00', text: '[2009.71.00] — वृक्ष मूल्य २० ननाघेको' },
+                    { value: '2009.79.00', text: '[2009.79.00] — अन्य' },
+                    { value: '2009.81.00', text: '[2009.81.00] — क्रानबेरी (भ्याक्सिनियम म्याक्रोकार्पोन, भ्याक्सिनियम अक्सिकार्पस, भ्याक्सिनियम मिटिस–इडिया) को रस (जुस)' },
+                    { value: '2009.89.00', text: '[2009.89.00] — अन्य' },
+                    { value: '2009.89.10', text: '[2009.89.10] — आँपको रस' },
+                    { value: '2009.89.90', text: '[2009.89.90] — अन्य' },
+                    { value: '2009.90.00', text: '[2009.90.00] — रसको मिश्रण' }
+                ]
+            };
+
+            groupSelect.addEventListener('change', function() {
+                const selectedGroup = this.value;
+                
+                // Clear existing options except the first one
+                subGroupSelect.innerHTML = '<option value="">---छान्नुहोस्---</option>';
+                
+                // If group has sub-groups, populate them
+                if (selectedGroup && subGroupData[selectedGroup]) {
+                    subGroupData[selectedGroup].forEach(function(item) {
+                        const option = document.createElement('option');
+                        option.value = item.value;
+                        option.textContent = item.text;
+                        subGroupSelect.appendChild(option);
+                    });
+                }
+            });
+        });
+
+        function closeRegisterProductModal() {
+            document.getElementById('registerProductModal').style.display = 'none';
+            // Clear form fields
+            document.getElementById('productGroup').value = '';
+            document.getElementById('productSubGroup').value = '';
+            document.getElementById('productNameNepali').value = '';
+            document.getElementById('productNameEnglish').value = '';
+            document.getElementById('productBaseUnit').value = '';
+        }
+
+        function addProductToTable() {
+            const group = document.getElementById('productGroup').value;
+            const subGroup = document.getElementById('productSubGroup').value;
+            const nameNepali = document.getElementById('productNameNepali').value;
+            const nameEnglish = document.getElementById('productNameEnglish').value;
+            const baseUnit = document.getElementById('productBaseUnit').value;
+
+            if (!group || !subGroup || !nameNepali || !nameEnglish || !baseUnit) {
+                alert('कृपया सबै फिल्ड भर्नुहोस् (Please fill all fields)');
+                return;
+            }
+
+            const tbody = document.getElementById('productTableBody');
+            const tr = document.createElement('tr');
+            
+            tr.innerHTML = `
+                <td style="padding: 8px; border: 1px solid #dee2e6; font-size: 10px;">${group}</td>
+                <td style="padding: 8px; border: 1px solid #dee2e6; font-size: 10px;">${subGroup}</td>
+                <td style="padding: 8px; border: 1px solid #dee2e6; font-size: 10px;">${nameNepali}</td>
+                <td style="padding: 8px; border: 1px solid #dee2e6; font-size: 10px;">${nameEnglish}</td>
+                <td style="padding: 8px; border: 1px solid #dee2e6; font-size: 10px;">${baseUnit}</td>
+            `;
+            
+            tbody.appendChild(tr);
+
+            // Clear form fields after adding
+            document.getElementById('productGroup').value = '';
+            document.getElementById('productSubGroup').value = '';
+            document.getElementById('productNameNepali').value = '';
+            document.getElementById('productNameEnglish').value = '';
+            document.getElementById('productBaseUnit').value = '';
+        }
+
+        function saveProducts() {
+            const tbody = document.getElementById('productTableBody');
+            if (tbody.children.length === 0) {
+                closeRegisterProductModal();
+                return;
+            }
+            
+            // Clear table after saving
+            tbody.innerHTML = '';
+            closeRegisterProductModal();
+        }
+
+        // Show save success modal
+        function showSaveSuccessModal() {
+            document.getElementById('saveSuccessModal').style.display = 'block';
+        }
+
+        // Close save success modal
+        function closeSaveSuccessModal() {
+            document.getElementById('saveSuccessModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            const baseUnitModal = document.getElementById('baseUnitModal');
+            const registerProductModal = document.getElementById('registerProductModal');
+            if (event.target == baseUnitModal) {
+                baseUnitModal.style.display = 'none';
+            }
+            if (event.target == registerProductModal) {
+                registerProductModal.style.display = 'none';
+            }
+        }
+
+        function toggleExcelLoad() {
+            const checkbox = document.getElementById('excelLoadCheckbox');
+            const fileInput = document.getElementById('excelFileInput');
+            const loadBtn = document.getElementById('excelLoadBtn');
+            
+            if (checkbox.checked) {
+                // Enable file input and button
+                fileInput.disabled = false;
+                loadBtn.disabled = false;
+                loadBtn.style.backgroundColor = 'rgb(48, 102, 190)';
+            } else {
+                // Disable file input and button
+                fileInput.disabled = true;
+                fileInput.value = ''; // Clear selected file
+                loadBtn.disabled = true;
+                loadBtn.style.backgroundColor = 'rgb(169, 169, 169)';
+            }
+        }
+
+        function addTransactionRow() {
+            const tbody = document.getElementById('transactionTableBody');
+            const newRow = document.createElement('tr');
+            
+            newRow.innerHTML = `
+                <td style="padding: 5px;"><input type="text" class="form-control" style="font-size: 10px; height: 28px;"></td>
+                <td style="padding: 5px;">
+                    <select class="form-control" style="font-size: 10px; height: 28px;">
+                        <option value="">Select…</option>
+                        <option value="CFT">CFT</option>
+                        <option value="SFT">SFT</option>
+                        <option value="GM">GM</option>
+                        <option value="BAG">BAG</option>
+                        <option value="stick">stick</option>
+                        <option value="TON">TON</option>
+                        <option value="LPLTR">LPLTR</option>
+                        <option value="PIECE">PIECE</option>
+                        <option value="MT">MT</option>
+                        <option value="BOX">BOX</option>
+                        <option value="LTR">LTR</option>
+                        <option value="BOT650">BOT650</option>
+                        <option value="KG">KG</option>
+                        <option value="EM">EM</option>
+                    </select>
+                </td>
+                <td style="padding: 5px;"><input type="text" class="form-control" style="font-size: 10px; height: 28px;"></td>
+                <td style="padding: 5px;"><input type="number" class="form-control" style="font-size: 10px; height: 28px;"></td>
+                <td style="padding: 5px;"><input type="number" class="form-control" style="font-size: 10px; height: 28px;"></td>
+                <td style="padding: 5px;"><input type="number" class="form-control" style="font-size: 10px; height: 28px;"></td>
+                <td style="padding: 5px;"><input type="number" class="form-control" style="font-size: 10px; height: 28px;"></td>
+                <td style="padding: 5px;"><input type="number" class="form-control" style="font-size: 10px; height: 28px;"></td>
+                <td style="padding: 5px;"><input type="text" class="form-control" style="font-size: 10px; height: 28px;"></td>
+                <td style="padding: 5px; text-align: center;">
+                    <button onclick="saveRow(this)" class="btn btn-success" style="padding: 2px 6px; font-size: 10px; margin-right: 2px; border-radius: 3px;">
+                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="12" width="12" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"></path></svg>
+                    </button>
+                    <button onclick="deleteRow(this)" class="btn btn-danger" style="padding: 2px 6px; font-size: 10px; border-radius: 3px;">
+                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 352 512" height="12" width="12" xmlns="http://www.w3.org/2000/svg"><path d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg>
+                    </button>
+                </td>
+            `;
+            
+            tbody.appendChild(newRow);
+        }
+
+        function saveRow(button) {
+            // Save functionality - can be customized
+            const row = button.closest('tr');
+            alert('Row saved!');
+        }
+
+        function deleteRow(button) {
+            const row = button.closest('tr');
+            row.remove();
+        }
+
+        function deleteAllTransactions() {
+            const tbody = document.getElementById('transactionTableBody');
+            tbody.innerHTML = '';
+        }
+
+        function loadExcelData() {
+            const fileInput = document.getElementById('excelFileInput');
+            const file = fileInput.files[0];
+            
+            if (!file) {
+                alert('Please select an Excel file first.');
+                return;
+            }
+            
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                try {
+                    const data = new Uint8Array(e.target.result);
+                    const workbook = XLSX.read(data, { type: 'array' });
+                    
+                    // Get the first worksheet
+                    const firstSheetName = workbook.SheetNames[0];
+                    const worksheet = workbook.Sheets[firstSheetName];
+                    
+                    // Convert to JSON
+                    const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+                    
+                    // Clear existing rows
+                    deleteAllTransactions();
+                    
+                    const tbody = document.getElementById('transactionTableBody');
+                    
+                    // Skip header row (index 0) and process data rows
+                    for (let i = 1; i < jsonData.length; i++) {
+                        const row = jsonData[i];
+                        if (!row || row.length === 0) continue; // Skip empty rows
+                        
+                        const tr = document.createElement('tr');
+                        tr.style.fontSize = '10px';
+                        
+                        // Item Name
+                        const td1 = document.createElement('td');
+                        td1.style.padding = '5px';
+                        const input1 = document.createElement('input');
+                        input1.type = 'text';
+                        input1.className = 'form-control';
+                        input1.style.height = '28px';
+                        input1.style.fontSize = '10px';
+                        input1.value = row[0] || '';
+                        td1.appendChild(input1);
+                        tr.appendChild(td1);
+                        
+                        // Base Unit
+                        const td2 = document.createElement('td');
+                        td2.style.padding = '5px';
+                        const select = document.createElement('select');
+                        select.className = 'form-control';
+                        select.style.height = '28px';
+                        select.style.fontSize = '10px';
+                        const baseUnits = ['Select…', 'CFT', 'SFT', 'GM', 'BAG', 'stick', 'TON', 'LPLTR', 'PIECE', 'MT', 'BOX', 'LTR', 'BOT650', 'KG', 'EM'];
+                        baseUnits.forEach(unit => {
+                            const option = document.createElement('option');
+                            option.value = unit;
+                            option.textContent = unit;
+                            if (row[1] && row[1].toString().trim() === unit) {
+                                option.selected = true;
+                            }
+                            select.appendChild(option);
+                        });
+                        td2.appendChild(select);
+                        tr.appendChild(td2);
+                        
+                        // Strength
+                        const td3 = document.createElement('td');
+                        td3.style.padding = '5px';
+                        const input3 = document.createElement('input');
+                        input3.type = 'text';
+                        input3.className = 'form-control';
+                        input3.style.height = '28px';
+                        input3.style.fontSize = '10px';
+                        input3.value = row[2] || '';
+                        td3.appendChild(input3);
+                        tr.appendChild(td3);
+                        
+                        // Opening Stock(Qty)
+                        const td4 = document.createElement('td');
+                        td4.style.padding = '5px';
+                        const input4 = document.createElement('input');
+                        input4.type = 'number';
+                        input4.className = 'form-control';
+                        input4.style.height = '28px';
+                        input4.style.fontSize = '10px';
+                        input4.value = row[3] || '';
+                        td4.appendChild(input4);
+                        tr.appendChild(td4);
+                        
+                        // Purchase Quantity
+                        const td5 = document.createElement('td');
+                        td5.style.padding = '5px';
+                        const input5 = document.createElement('input');
+                        input5.type = 'number';
+                        input5.className = 'form-control';
+                        input5.style.height = '28px';
+                        input5.style.fontSize = '10px';
+                        input5.value = row[4] || '';
+                        td5.appendChild(input5);
+                        tr.appendChild(td5);
+                        
+                        // Consumption Quantity
+                        const td6 = document.createElement('td');
+                        td6.style.padding = '5px';
+                        const input6 = document.createElement('input');
+                        input6.type = 'number';
+                        input6.className = 'form-control';
+                        input6.style.height = '28px';
+                        input6.style.fontSize = '10px';
+                        input6.value = row[5] || '';
+                        td6.appendChild(input6);
+                        tr.appendChild(td6);
+                        
+                        // Sales Quantity
+                        const td7 = document.createElement('td');
+                        td7.style.padding = '5px';
+                        const input7 = document.createElement('input');
+                        input7.type = 'number';
+                        input7.className = 'form-control';
+                        input7.style.height = '28px';
+                        input7.style.fontSize = '10px';
+                        input7.value = row[6] || '';
+                        td7.appendChild(input7);
+                        tr.appendChild(td7);
+                        
+                        // Closing Stock(Qty)
+                        const td8 = document.createElement('td');
+                        td8.style.padding = '5px';
+                        const input8 = document.createElement('input');
+                        input8.type = 'number';
+                        input8.className = 'form-control';
+                        input8.style.height = '28px';
+                        input8.style.fontSize = '10px';
+                        input8.value = row[7] || '';
+                        td8.appendChild(input8);
+                        tr.appendChild(td8);
+                        
+                        // Remarks
+                        const td9 = document.createElement('td');
+                        td9.style.padding = '5px';
+                        const input9 = document.createElement('input');
+                        input9.type = 'text';
+                        input9.className = 'form-control';
+                        input9.style.height = '28px';
+                        input9.style.fontSize = '10px';
+                        input9.value = row[8] || '';
+                        td9.appendChild(input9);
+                        tr.appendChild(td9);
+                        
+                        // Actions
+                        const td10 = document.createElement('td');
+                        td10.style.padding = '5px';
+                        td10.style.textAlign = 'center';
+                        const saveBtn = document.createElement('button');
+                        saveBtn.className = 'btn btn-success';
+                        saveBtn.style.padding = '2px 6px';
+                        saveBtn.style.fontSize = '10px';
+                        saveBtn.style.marginRight = '2px';
+                        saveBtn.style.height = '28px';
+                        saveBtn.style.borderRadius = '3px';
+                        saveBtn.onclick = function() { saveRow(this); };
+                        saveBtn.innerHTML = '✓';
+                        saveBtn.style.fontSize = '12px';
+                        const deleteBtn = document.createElement('button');
+                        deleteBtn.className = 'btn btn-danger';
+                        deleteBtn.style.padding = '2px 6px';
+                        deleteBtn.style.fontSize = '10px';
+                        deleteBtn.style.height = '28px';
+                        deleteBtn.style.borderRadius = '3px';
+                        deleteBtn.onclick = function() { deleteRow(this); };
+                        deleteBtn.innerHTML = '✕';
+                        deleteBtn.style.fontSize = '12px';
+                        td10.appendChild(saveBtn);
+                        td10.appendChild(deleteBtn);
+                        tr.appendChild(td10);
+                        
+                        tbody.appendChild(tr);
+                    }
+                    
+                    alert('Excel data loaded successfully! ' + (jsonData.length - 1) + ' rows imported.');
+                    
+                } catch (error) {
+                    console.error('Error reading Excel file:', error);
+                    alert('Error reading Excel file. Please make sure it\'s a valid .xlsx file.');
+                }
+            };
+            
+            reader.onerror = function() {
+                alert('Error reading file. Please try again.');
+            };
+            
+            reader.readAsArrayBuffer(file);
+        }
+
+        // Functions for Semi-finished Products (Section 2)
+        function toggleExcelLoad2() {
+            const checkbox = document.getElementById('excelLoadCheckbox2');
+            const fileInput = document.getElementById('excelFileInput2');
+            const loadBtn = document.getElementById('excelLoadBtn2');
+            
+            if (checkbox.checked) {
+                fileInput.disabled = false;
+                loadBtn.disabled = false;
+                loadBtn.style.backgroundColor = 'rgb(48, 102, 190)';
+            } else {
+                fileInput.disabled = true;
+                fileInput.value = '';
+                loadBtn.disabled = true;
+                loadBtn.style.backgroundColor = 'rgb(169, 169, 169)';
+            }
+        }
+
+        function addTransactionRow2() {
+            const tbody = document.getElementById('transactionTableBody2');
+            const tr = document.createElement('tr');
+            tr.style.fontSize = '10px';
+            
+            // Item Name
+            const td1 = document.createElement('td');
+            td1.style.padding = '5px';
+            const input1 = document.createElement('input');
+            input1.type = 'text';
+            input1.className = 'form-control';
+            input1.style.height = '28px';
+            input1.style.fontSize = '10px';
+            td1.appendChild(input1);
+            tr.appendChild(td1);
+            
+            // Base Unit
+            const td2 = document.createElement('td');
+            td2.style.padding = '5px';
+            const select = document.createElement('select');
+            select.className = 'form-control';
+            select.style.height = '28px';
+            select.style.fontSize = '10px';
+            const baseUnits = ['Select…', 'CFT', 'SFT', 'GM', 'BAG', 'stick', 'TON', 'LPLTR', 'PIECE', 'MT', 'BOX', 'LTR', 'BOT650', 'KG', 'EM'];
+            baseUnits.forEach(unit => {
+                const option = document.createElement('option');
+                option.value = unit;
+                option.textContent = unit;
+                select.appendChild(option);
+            });
+            td2.appendChild(select);
+            tr.appendChild(td2);
+            
+            // Strength
+            const td3 = document.createElement('td');
+            td3.style.padding = '5px';
+            const input3 = document.createElement('input');
+            input3.type = 'text';
+            input3.className = 'form-control';
+            input3.style.height = '28px';
+            input3.style.fontSize = '10px';
+            td3.appendChild(input3);
+            tr.appendChild(td3);
+            
+            // Opening Stock(Qty)
+            const td4 = document.createElement('td');
+            td4.style.padding = '5px';
+            const input4 = document.createElement('input');
+            input4.type = 'number';
+            input4.className = 'form-control';
+            input4.style.height = '28px';
+            input4.style.fontSize = '10px';
+            td4.appendChild(input4);
+            tr.appendChild(td4);
+            
+            // Purchase Quantity
+            const td5 = document.createElement('td');
+            td5.style.padding = '5px';
+            const input5 = document.createElement('input');
+            input5.type = 'number';
+            input5.className = 'form-control';
+            input5.style.height = '28px';
+            input5.style.fontSize = '10px';
+            td5.appendChild(input5);
+            tr.appendChild(td5);
+            
+            // Consumption Quantity
+            const td6 = document.createElement('td');
+            td6.style.padding = '5px';
+            const input6 = document.createElement('input');
+            input6.type = 'number';
+            input6.className = 'form-control';
+            input6.style.height = '28px';
+            input6.style.fontSize = '10px';
+            td6.appendChild(input6);
+            tr.appendChild(td6);
+            
+            // Sales Quantity
+            const td7 = document.createElement('td');
+            td7.style.padding = '5px';
+            const input7 = document.createElement('input');
+            input7.type = 'number';
+            input7.className = 'form-control';
+            input7.style.height = '28px';
+            input7.style.fontSize = '10px';
+            td7.appendChild(input7);
+            tr.appendChild(td7);
+            
+            // Closing Stock(Qty)
+            const td8 = document.createElement('td');
+            td8.style.padding = '5px';
+            const input8 = document.createElement('input');
+            input8.type = 'number';
+            input8.className = 'form-control';
+            input8.style.height = '28px';
+            input8.style.fontSize = '10px';
+            td8.appendChild(input8);
+            tr.appendChild(td8);
+            
+            // Remarks
+            const td9 = document.createElement('td');
+            td9.style.padding = '5px';
+            const input9 = document.createElement('input');
+            input9.type = 'text';
+            input9.className = 'form-control';
+            input9.style.height = '28px';
+            input9.style.fontSize = '10px';
+            td9.appendChild(input9);
+            tr.appendChild(td9);
+            
+            // Actions
+            const td10 = document.createElement('td');
+            td10.style.padding = '5px';
+            td10.style.textAlign = 'center';
+            const saveBtn = document.createElement('button');
+            saveBtn.className = 'btn btn-success';
+            saveBtn.style.padding = '2px 6px';
+            saveBtn.style.fontSize = '10px';
+            saveBtn.style.marginRight = '2px';
+            saveBtn.style.height = '28px';
+            saveBtn.style.borderRadius = '3px';
+            saveBtn.onclick = function() { saveRow(this); };
+            saveBtn.innerHTML = '✓';
+            saveBtn.style.fontSize = '12px';
+            const deleteBtn = document.createElement('button');
+            deleteBtn.className = 'btn btn-danger';
+            deleteBtn.style.padding = '2px 6px';
+            deleteBtn.style.fontSize = '10px';
+            deleteBtn.style.height = '28px';
+            deleteBtn.style.borderRadius = '3px';
+            deleteBtn.onclick = function() { deleteRow(this); };
+            deleteBtn.innerHTML = '✕';
+            deleteBtn.style.fontSize = '12px';
+            td10.appendChild(saveBtn);
+            td10.appendChild(deleteBtn);
+            tr.appendChild(td10);
+            
+            tbody.appendChild(tr);
+        }
+
+        function deleteAllTransactions2() {
+            const tbody = document.getElementById('transactionTableBody2');
+            tbody.innerHTML = '';
+        }
+
+        function loadExcelData2() {
+            const fileInput = document.getElementById('excelFileInput2');
+            const file = fileInput.files[0];
+            
+            if (!file) {
+                alert('Please select an Excel file first.');
+                return;
+            }
+            
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                try {
+                    const data = new Uint8Array(e.target.result);
+                    const workbook = XLSX.read(data, { type: 'array' });
+                    
+                    // Get the first worksheet
+                    const firstSheetName = workbook.SheetNames[0];
+                    const worksheet = workbook.Sheets[firstSheetName];
+                    
+                    // Convert to JSON
+                    const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+                    
+                    // Clear existing rows
+                    deleteAllTransactions2();
+                    
+                    const tbody = document.getElementById('transactionTableBody2');
+                    
+                    // Skip header row (index 0) and process data rows
+                    for (let i = 1; i < jsonData.length; i++) {
+                        const row = jsonData[i];
+                        if (!row || row.length === 0) continue; // Skip empty rows
+                        
+                        const tr = document.createElement('tr');
+                        tr.style.fontSize = '10px';
+                        
+                        // Item Name
+                        const td1 = document.createElement('td');
+                        td1.style.padding = '5px';
+                        const input1 = document.createElement('input');
+                        input1.type = 'text';
+                        input1.className = 'form-control';
+                        input1.style.height = '28px';
+                        input1.style.fontSize = '10px';
+                        input1.value = row[0] || '';
+                        td1.appendChild(input1);
+                        tr.appendChild(td1);
+                        
+                        // Base Unit
+                        const td2 = document.createElement('td');
+                        td2.style.padding = '5px';
+                        const select = document.createElement('select');
+                        select.className = 'form-control';
+                        select.style.height = '28px';
+                        select.style.fontSize = '10px';
+                        const baseUnits = ['Select…', 'CFT', 'SFT', 'GM', 'BAG', 'stick', 'TON', 'LPLTR', 'PIECE', 'MT', 'BOX', 'LTR', 'BOT650', 'KG', 'EM'];
+                        baseUnits.forEach(unit => {
+                            const option = document.createElement('option');
+                            option.value = unit;
+                            option.textContent = unit;
+                            if (row[1] && row[1].toString().trim() === unit) {
+                                option.selected = true;
+                            }
+                            select.appendChild(option);
+                        });
+                        td2.appendChild(select);
+                        tr.appendChild(td2);
+                        
+                        // Strength
+                        const td3 = document.createElement('td');
+                        td3.style.padding = '5px';
+                        const input3 = document.createElement('input');
+                        input3.type = 'text';
+                        input3.className = 'form-control';
+                        input3.style.height = '28px';
+                        input3.style.fontSize = '10px';
+                        input3.value = row[2] || '';
+                        td3.appendChild(input3);
+                        tr.appendChild(td3);
+                        
+                        // Opening Stock(Qty)
+                        const td4 = document.createElement('td');
+                        td4.style.padding = '5px';
+                        const input4 = document.createElement('input');
+                        input4.type = 'number';
+                        input4.className = 'form-control';
+                        input4.style.height = '28px';
+                        input4.style.fontSize = '10px';
+                        input4.value = row[3] || '';
+                        td4.appendChild(input4);
+                        tr.appendChild(td4);
+                        
+                        // Purchase Quantity
+                        const td5 = document.createElement('td');
+                        td5.style.padding = '5px';
+                        const input5 = document.createElement('input');
+                        input5.type = 'number';
+                        input5.className = 'form-control';
+                        input5.style.height = '28px';
+                        input5.style.fontSize = '10px';
+                        input5.value = row[4] || '';
+                        td5.appendChild(input5);
+                        tr.appendChild(td5);
+                        
+                        // Consumption Quantity
+                        const td6 = document.createElement('td');
+                        td6.style.padding = '5px';
+                        const input6 = document.createElement('input');
+                        input6.type = 'number';
+                        input6.className = 'form-control';
+                        input6.style.height = '28px';
+                        input6.style.fontSize = '10px';
+                        input6.value = row[5] || '';
+                        td6.appendChild(input6);
+                        tr.appendChild(td6);
+                        
+                        // Sales Quantity
+                        const td7 = document.createElement('td');
+                        td7.style.padding = '5px';
+                        const input7 = document.createElement('input');
+                        input7.type = 'number';
+                        input7.className = 'form-control';
+                        input7.style.height = '28px';
+                        input7.style.fontSize = '10px';
+                        input7.value = row[6] || '';
+                        td7.appendChild(input7);
+                        tr.appendChild(td7);
+                        
+                        // Closing Stock(Qty)
+                        const td8 = document.createElement('td');
+                        td8.style.padding = '5px';
+                        const input8 = document.createElement('input');
+                        input8.type = 'number';
+                        input8.className = 'form-control';
+                        input8.style.height = '28px';
+                        input8.style.fontSize = '10px';
+                        input8.value = row[7] || '';
+                        td8.appendChild(input8);
+                        tr.appendChild(td8);
+                        
+                        // Remarks
+                        const td9 = document.createElement('td');
+                        td9.style.padding = '5px';
+                        const input9 = document.createElement('input');
+                        input9.type = 'text';
+                        input9.className = 'form-control';
+                        input9.style.height = '28px';
+                        input9.style.fontSize = '10px';
+                        input9.value = row[8] || '';
+                        td9.appendChild(input9);
+                        tr.appendChild(td9);
+                        
+                        // Actions
+                        const td10 = document.createElement('td');
+                        td10.style.padding = '5px';
+                        td10.style.textAlign = 'center';
+                        const saveBtn = document.createElement('button');
+                        saveBtn.className = 'btn btn-success';
+                        saveBtn.style.padding = '2px 6px';
+                        saveBtn.style.fontSize = '10px';
+                        saveBtn.style.marginRight = '2px';
+                        saveBtn.style.height = '28px';
+                        saveBtn.style.borderRadius = '3px';
+                        saveBtn.onclick = function() { saveRow(this); };
+                        saveBtn.innerHTML = '✓';
+                        saveBtn.style.fontSize = '12px';
+                        const deleteBtn = document.createElement('button');
+                        deleteBtn.className = 'btn btn-danger';
+                        deleteBtn.style.padding = '2px 6px';
+                        deleteBtn.style.fontSize = '10px';
+                        deleteBtn.style.height = '28px';
+                        deleteBtn.style.borderRadius = '3px';
+                        deleteBtn.onclick = function() { deleteRow(this); };
+                        deleteBtn.innerHTML = '✕';
+                        deleteBtn.style.fontSize = '12px';
+                        td10.appendChild(saveBtn);
+                        td10.appendChild(deleteBtn);
+                        tr.appendChild(td10);
+                        
+                        tbody.appendChild(tr);
+                    }
+                    
+                    alert('Excel data loaded successfully! ' + (jsonData.length - 1) + ' rows imported.');
+                    
+                } catch (error) {
+                    console.error('Error reading Excel file:', error);
+                    alert('Error reading Excel file. Please make sure it\'s a valid .xlsx file.');
+                }
+            };
+            
+            reader.onerror = function() {
+                alert('Error reading file. Please try again.');
+            };
+            
+            reader.readAsArrayBuffer(file);
+        }
+
+        // Functions for Finished Products (Section 3)
+        function toggleExcelLoad3() {
+            const checkbox = document.getElementById('excelLoadCheckbox3');
+            const fileInput = document.getElementById('excelFileInput3');
+            const loadBtn = document.getElementById('excelLoadBtn3');
+            
+            if (checkbox.checked) {
+                fileInput.disabled = false;
+                loadBtn.disabled = false;
+                loadBtn.style.backgroundColor = 'rgb(48, 102, 190)';
+            } else {
+                fileInput.disabled = true;
+                fileInput.value = '';
+                loadBtn.disabled = true;
+                loadBtn.style.backgroundColor = 'rgb(169, 169, 169)';
+            }
+        }
+
+        function addTransactionRow3() {
+            const tbody = document.getElementById('transactionTableBody3');
+            const tr = document.createElement('tr');
+            tr.style.fontSize = '10px';
+            
+            // Item Name
+            const td1 = document.createElement('td');
+            td1.style.padding = '5px';
+            const input1 = document.createElement('input');
+            input1.type = 'text';
+            input1.className = 'form-control';
+            input1.style.height = '28px';
+            input1.style.fontSize = '10px';
+            td1.appendChild(input1);
+            tr.appendChild(td1);
+            
+            // Base Unit
+            const td2 = document.createElement('td');
+            td2.style.padding = '5px';
+            const select = document.createElement('select');
+            select.className = 'form-control';
+            select.style.height = '28px';
+            select.style.fontSize = '10px';
+            const baseUnits = ['Select…', 'CFT', 'SFT', 'GM', 'BAG', 'stick', 'TON', 'LPLTR', 'PIECE', 'MT', 'BOX', 'LTR', 'BOT650', 'KG', 'EM'];
+            baseUnits.forEach(unit => {
+                const option = document.createElement('option');
+                option.value = unit;
+                option.textContent = unit;
+                select.appendChild(option);
+            });
+            td2.appendChild(select);
+            tr.appendChild(td2);
+            
+            // Strength
+            const td3 = document.createElement('td');
+            td3.style.padding = '5px';
+            const input3 = document.createElement('input');
+            input3.type = 'text';
+            input3.className = 'form-control';
+            input3.style.height = '28px';
+            input3.style.fontSize = '10px';
+            td3.appendChild(input3);
+            tr.appendChild(td3);
+            
+            // Opening Stock(Qty)
+            const td4 = document.createElement('td');
+            td4.style.padding = '5px';
+            const input4 = document.createElement('input');
+            input4.type = 'number';
+            input4.className = 'form-control';
+            input4.style.height = '28px';
+            input4.style.fontSize = '10px';
+            td4.appendChild(input4);
+            tr.appendChild(td4);
+            
+            // Production Quantity
+            const td5 = document.createElement('td');
+            td5.style.padding = '5px';
+            const input5 = document.createElement('input');
+            input5.type = 'number';
+            input5.className = 'form-control';
+            input5.style.height = '28px';
+            input5.style.fontSize = '10px';
+            td5.appendChild(input5);
+            tr.appendChild(td5);
+            
+            // Sales Quantity
+            const td6 = document.createElement('td');
+            td6.style.padding = '5px';
+            const input6 = document.createElement('input');
+            input6.type = 'number';
+            input6.className = 'form-control';
+            input6.style.height = '28px';
+            input6.style.fontSize = '10px';
+            td6.appendChild(input6);
+            tr.appendChild(td6);
+            
+            // Sales Amount
+            const td7 = document.createElement('td');
+            td7.style.padding = '5px';
+            const input7 = document.createElement('input');
+            input7.type = 'number';
+            input7.className = 'form-control';
+            input7.style.height = '28px';
+            input7.style.fontSize = '10px';
+            td7.appendChild(input7);
+            tr.appendChild(td7);
+            
+            // Excise Amount (Sales)
+            const td8 = document.createElement('td');
+            td8.style.padding = '5px';
+            const input8 = document.createElement('input');
+            input8.type = 'number';
+            input8.className = 'form-control';
+            input8.style.height = '28px';
+            input8.style.fontSize = '10px';
+            td8.appendChild(input8);
+            tr.appendChild(td8);
+            
+            // Closing Stock (Quantity)
+            const td9 = document.createElement('td');
+            td9.style.padding = '5px';
+            const input9 = document.createElement('input');
+            input9.type = 'number';
+            input9.className = 'form-control';
+            input9.style.height = '28px';
+            input9.style.fontSize = '10px';
+            td9.appendChild(input9);
+            tr.appendChild(td9);
+            
+            // Remarks
+            const td10 = document.createElement('td');
+            td10.style.padding = '5px';
+            const input10 = document.createElement('input');
+            input10.type = 'text';
+            input10.className = 'form-control';
+            input10.style.height = '28px';
+            input10.style.fontSize = '10px';
+            td10.appendChild(input10);
+            tr.appendChild(td10);
+            
+            // Actions
+            const td11 = document.createElement('td');
+            td11.style.padding = '5px';
+            td11.style.textAlign = 'center';
+            const saveBtn = document.createElement('button');
+            saveBtn.className = 'btn btn-success';
+            saveBtn.style.padding = '2px 6px';
+            saveBtn.style.fontSize = '10px';
+            saveBtn.style.marginRight = '2px';
+            saveBtn.style.height = '28px';
+            saveBtn.style.borderRadius = '3px';
+            saveBtn.onclick = function() { saveRow(this); };
+            saveBtn.innerHTML = '✓';
+            saveBtn.style.fontSize = '12px';
+            const deleteBtn = document.createElement('button');
+            deleteBtn.className = 'btn btn-danger';
+            deleteBtn.style.padding = '2px 6px';
+            deleteBtn.style.fontSize = '10px';
+            deleteBtn.style.height = '28px';
+            deleteBtn.style.borderRadius = '3px';
+            deleteBtn.onclick = function() { deleteRow(this); };
+            deleteBtn.innerHTML = '✕';
+            deleteBtn.style.fontSize = '12px';
+            td11.appendChild(saveBtn);
+            td11.appendChild(deleteBtn);
+            tr.appendChild(td11);
+            
+            tbody.appendChild(tr);
+        }
+
+        function deleteAllTransactions3() {
+            const tbody = document.getElementById('transactionTableBody3');
+            tbody.innerHTML = '';
+        }
+
+        function loadExcelData3() {
+            const fileInput = document.getElementById('excelFileInput3');
+            const file = fileInput.files[0];
+            
+            if (!file) {
+                alert('Please select an Excel file first.');
+                return;
+            }
+            
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                try {
+                    const data = new Uint8Array(e.target.result);
+                    const workbook = XLSX.read(data, { type: 'array' });
+                    
+                    // Get the first worksheet
+                    const firstSheetName = workbook.SheetNames[0];
+                    const worksheet = workbook.Sheets[firstSheetName];
+                    
+                    // Convert to JSON
+                    const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+                    
+                    // Clear existing rows
+                    deleteAllTransactions3();
+                    
+                    const tbody = document.getElementById('transactionTableBody3');
+                    
+                    // Skip header row (index 0) and process data rows
+                    for (let i = 1; i < jsonData.length; i++) {
+                        const row = jsonData[i];
+                        if (!row || row.length === 0) continue; // Skip empty rows
+                        
+                        const tr = document.createElement('tr');
+                        tr.style.fontSize = '10px';
+                        
+                        // Item Name
+                        const td1 = document.createElement('td');
+                        td1.style.padding = '5px';
+                        const input1 = document.createElement('input');
+                        input1.type = 'text';
+                        input1.className = 'form-control';
+                        input1.style.height = '28px';
+                        input1.style.fontSize = '10px';
+                        input1.value = row[0] || '';
+                        td1.appendChild(input1);
+                        tr.appendChild(td1);
+                        
+                        // Base Unit
+                        const td2 = document.createElement('td');
+                        td2.style.padding = '5px';
+                        const select = document.createElement('select');
+                        select.className = 'form-control';
+                        select.style.height = '28px';
+                        select.style.fontSize = '10px';
+                        const baseUnits = ['Select…', 'CFT', 'SFT', 'GM', 'BAG', 'stick', 'TON', 'LPLTR', 'PIECE', 'MT', 'BOX', 'LTR', 'BOT650', 'KG', 'EM'];
+                        baseUnits.forEach(unit => {
+                            const option = document.createElement('option');
+                            option.value = unit;
+                            option.textContent = unit;
+                            if (row[1] && row[1].toString().trim() === unit) {
+                                option.selected = true;
+                            }
+                            select.appendChild(option);
+                        });
+                        td2.appendChild(select);
+                        tr.appendChild(td2);
+                        
+                        // Strength
+                        const td3 = document.createElement('td');
+                        td3.style.padding = '5px';
+                        const input3 = document.createElement('input');
+                        input3.type = 'text';
+                        input3.className = 'form-control';
+                        input3.style.height = '28px';
+                        input3.style.fontSize = '10px';
+                        input3.value = row[2] || '';
+                        td3.appendChild(input3);
+                        tr.appendChild(td3);
+                        
+                        // Opening Stock(Qty)
+                        const td4 = document.createElement('td');
+                        td4.style.padding = '5px';
+                        const input4 = document.createElement('input');
+                        input4.type = 'number';
+                        input4.className = 'form-control';
+                        input4.style.height = '28px';
+                        input4.style.fontSize = '10px';
+                        input4.value = row[3] || '';
+                        td4.appendChild(input4);
+                        tr.appendChild(td4);
+                        
+                        // Production Quantity
+                        const td5 = document.createElement('td');
+                        td5.style.padding = '5px';
+                        const input5 = document.createElement('input');
+                        input5.type = 'number';
+                        input5.className = 'form-control';
+                        input5.style.height = '28px';
+                        input5.style.fontSize = '10px';
+                        input5.value = row[4] || '';
+                        td5.appendChild(input5);
+                        tr.appendChild(td5);
+                        
+                        // Sales Quantity
+                        const td6 = document.createElement('td');
+                        td6.style.padding = '5px';
+                        const input6 = document.createElement('input');
+                        input6.type = 'number';
+                        input6.className = 'form-control';
+                        input6.style.height = '28px';
+                        input6.style.fontSize = '10px';
+                        input6.value = row[5] || '';
+                        td6.appendChild(input6);
+                        tr.appendChild(td6);
+                        
+                        // Sales Amount
+                        const td7 = document.createElement('td');
+                        td7.style.padding = '5px';
+                        const input7 = document.createElement('input');
+                        input7.type = 'number';
+                        input7.className = 'form-control';
+                        input7.style.height = '28px';
+                        input7.style.fontSize = '10px';
+                        input7.value = row[6] || '';
+                        td7.appendChild(input7);
+                        tr.appendChild(td7);
+                        
+                        // Excise Amount (Sales)
+                        const td8 = document.createElement('td');
+                        td8.style.padding = '5px';
+                        const input8 = document.createElement('input');
+                        input8.type = 'number';
+                        input8.className = 'form-control';
+                        input8.style.height = '28px';
+                        input8.style.fontSize = '10px';
+                        input8.value = row[7] || '';
+                        td8.appendChild(input8);
+                        tr.appendChild(td8);
+                        
+                        // Closing Stock (Quantity)
+                        const td9 = document.createElement('td');
+                        td9.style.padding = '5px';
+                        const input9 = document.createElement('input');
+                        input9.type = 'number';
+                        input9.className = 'form-control';
+                        input9.style.height = '28px';
+                        input9.style.fontSize = '10px';
+                        input9.value = row[8] || '';
+                        td9.appendChild(input9);
+                        tr.appendChild(td9);
+                        
+                        // Remarks
+                        const td10 = document.createElement('td');
+                        td10.style.padding = '5px';
+                        const input10 = document.createElement('input');
+                        input10.type = 'text';
+                        input10.className = 'form-control';
+                        input10.style.height = '28px';
+                        input10.style.fontSize = '10px';
+                        input10.value = row[9] || '';
+                        td10.appendChild(input10);
+                        tr.appendChild(td10);
+                        
+                        // Actions
+                        const td11 = document.createElement('td');
+                        td11.style.padding = '5px';
+                        td11.style.textAlign = 'center';
+                        const saveBtn = document.createElement('button');
+                        saveBtn.className = 'btn btn-success';
+                        saveBtn.style.padding = '2px 6px';
+                        saveBtn.style.fontSize = '10px';
+                        saveBtn.style.marginRight = '2px';
+                        saveBtn.style.height = '28px';
+                        saveBtn.style.borderRadius = '3px';
+                        saveBtn.onclick = function() { saveRow(this); };
+                        saveBtn.innerHTML = '✓';
+                        saveBtn.style.fontSize = '12px';
+                        const deleteBtn = document.createElement('button');
+                        deleteBtn.className = 'btn btn-danger';
+                        deleteBtn.style.padding = '2px 6px';
+                        deleteBtn.style.fontSize = '10px';
+                        deleteBtn.style.height = '28px';
+                        deleteBtn.style.borderRadius = '3px';
+                        deleteBtn.onclick = function() { deleteRow(this); };
+                        deleteBtn.innerHTML = '✕';
+                        deleteBtn.style.fontSize = '12px';
+                        td11.appendChild(saveBtn);
+                        td11.appendChild(deleteBtn);
+                        tr.appendChild(td11);
+                        
+                        tbody.appendChild(tr);
+                    }
+                    
+                    alert('Excel data loaded successfully! ' + (jsonData.length - 1) + ' rows imported.');
+                    
+                } catch (error) {
+                    console.error('Error reading Excel file:', error);
+                    alert('Error reading Excel file. Please make sure it\'s a valid .xlsx file.');
+                }
+            };
+            
+            reader.onerror = function() {
+                alert('Error reading file. Please try again.');
+            };
+            
+            reader.readAsArrayBuffer(file);
+        }
+    </script>
+    <script src="../../js/xlsx.full.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D-03 Registration Success</title>
+    <link rel="stylesheet" type="text/css" href="../../extjs/resources/ext-all.css">
+    <link rel="stylesheet" type="text/css" href="../../css/all.css">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 20px;
+            background-color: #DFE9F6;
+            font-family: Arial, sans-serif;
+        }
+        
+        .success-container {
+            background-color: #DFE9F6;
+            padding: 30px;
+            text-align: center;
+            border-right: 2px solid #1F548A;
+            min-height: 400px;
+        }
+        
+        .success-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #000;
+            margin-bottom: 10px;
+        }
+        
+        .success-subtitle {
+            font-size: 16px;
+            color: #000;
+            margin-bottom: 30px;
+        }
+        
+        .info-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .info-item {
+            font-size: 15px;
+        }
+        
+        .info-label {
+            font-weight: normal;
+            color: #000;
+        }
+        
+        .info-value {
+            font-weight: bold;
+            color: #000;
+        }
+        
+        .proceed-button {
+            background: linear-gradient(180deg, #FEFEFE 0%, #E6E6E6 100%);
+            border: 1px solid #B5B8C8;
+            padding: 5px 15px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-top: 20px;
+        }
+        
+        .proceed-button:hover {
+            background: linear-gradient(180deg, #F5F5F5 0%, #D5D5D5 100%);
+        }
+        
+        /* Disclaimer Banner */
+        .disclaimer-banner {
+            background-color: #fff3cd;
+            border: 2px solid #ffc107;
+            color: #856404;
+            padding: 15px 20px;
+            margin: 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            line-height: 1.6;
+            text-align: left;
+        }
+
+        @media screen and (max-width: 768px) {
+            .disclaimer-banner {
+                font-size: 12px;
+                padding: 12px 15px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .disclaimer-banner {
+                font-size: 11px;
+                padding: 10px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="success-container">
+        <div class="success-title">तपाई सफलतापूर्वक दर्ता हुनुभयो!!!</div>
+        <div class="success-subtitle">कृपया तपाईको सब्मिशन नं., प्रयोगकर्ताको नाम र पासवर्ड टिपिराख्नुहोस् ।</div>
+        
+        <div class="info-container">
+            <div class="info-item">
+                <span class="info-label">तपाईको सब्मिशन नं.: </span>
+                <span id="submissionNo" class="info-value"></span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">प्रयोगकर्ताको नाम : </span>
+                <span id="userName" class="info-value"></span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">स्था. ले. नं. : </span>
+                <span id="panNo" class="info-value"></span>
+            </div>
+        </div>
+        
+        <div style="text-align: left; margin-top: 30px;">
+            <button class="proceed-button" onclick="proceedToD03Form()">Proceed &gt;</button>
+        </div>
+    </div>
+    
+    <script src="../../js/income_tax/d03_form_page.js"></script>
+</body>
+</html>
