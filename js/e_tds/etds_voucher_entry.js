@@ -82,18 +82,37 @@ function initializeEventListeners() {
         const payMode = this.value;
         const cashCodeContainer = document.getElementById('cboVITDSCashCodeContainer');
         const bankCodeContainer = document.getElementById('cboVITDSBankCodeContainer');
+        const bankNameContainer = document.getElementById('cboVITDSBankNameContainer');
+        const goodForPaymentContainer = document.getElementById('cboVITDSGoodForPaymentContainer');
         const cashCodeLabel = document.getElementById('lblVITDSCashCode');
         const bankCodeLabel = document.getElementById('lblVITDSBankCode');
         
+        // Hide all dropdowns first
+        cashCodeContainer.style.display = 'none';
+        bankCodeContainer.style.display = 'none';
+        bankNameContainer.style.display = 'none';
+        goodForPaymentContainer.style.display = 'none';
+        cashCodeLabel.style.display = 'none';
+        bankCodeLabel.style.display = 'none';
+        
+        // Clear all dropdown values
+        document.getElementById('cboVITDSCashCode').value = '';
+        document.getElementById('cboVITDSBankCode').value = '';
+        document.getElementById('cboVITDSBankName').value = '';
+        document.getElementById('cboVITDSGoodForPayment').value = '';
+        
+        // Show appropriate dropdown based on payment mode
         if (payMode === 'Cash') {
             cashCodeContainer.style.display = 'block';
-            bankCodeContainer.style.display = 'none';
             cashCodeLabel.style.display = 'block';
-            bankCodeLabel.style.display = 'none';
-        } else {
-            cashCodeContainer.style.display = 'none';
+        } else if (payMode === 'Bank') {
+            bankNameContainer.style.display = 'block';
+            bankCodeLabel.style.display = 'block';
+        } else if (payMode === 'Good for Payment') {
+            goodForPaymentContainer.style.display = 'block';
+            bankCodeLabel.style.display = 'block';
+        } else if (payMode === 'Tax office' || payMode === 'Online Payment') {
             bankCodeContainer.style.display = 'block';
-            cashCodeLabel.style.display = 'none';
             bankCodeLabel.style.display = 'block';
         }
     });
@@ -107,6 +126,8 @@ function addVoucher() {
     const payDate = document.getElementById('txtVITDSPayDate').value.trim();
     const cashCode = document.getElementById('cboVITDSCashCode').value;
     const bankCode = document.getElementById('cboVITDSBankCode').value;
+    const bankName = document.getElementById('cboVITDSBankName').value;
+    const goodForPayment = document.getElementById('cboVITDSGoodForPayment').value;
     const amount = document.getElementById('txtVITDSAmt').value.trim();
     
     // Get date type
@@ -142,6 +163,10 @@ function addVoucher() {
     let bankOrIro = '';
     if (payMode === 'Cash') {
         bankOrIro = cashCode || '';
+    } else if (payMode === 'Bank') {
+        bankOrIro = bankName || '';
+    } else if (payMode === 'Good for Payment') {
+        bankOrIro = goodForPayment || '';
     } else {
         bankOrIro = bankCode || '';
     }
@@ -186,6 +211,8 @@ function resetForm() {
     document.getElementById('txtVITDSPayDate').value = '';
     document.getElementById('cboVITDSCashCode').value = '';
     document.getElementById('cboVITDSBankCode').value = '';
+    document.getElementById('cboVITDSBankName').value = '';
+    document.getElementById('cboVITDSGoodForPayment').value = '';
     document.getElementById('txtVITDSAmt').value = '';
     document.getElementById('chkVITDSBS').checked = true;
     document.getElementById('chkVITDSAD').checked = false;
@@ -194,6 +221,8 @@ function resetForm() {
     // Reset bank/IRO visibility
     document.getElementById('cboVITDSCashCodeContainer').style.display = 'none';
     document.getElementById('cboVITDSBankCodeContainer').style.display = 'block';
+    document.getElementById('cboVITDSBankNameContainer').style.display = 'none';
+    document.getElementById('cboVITDSGoodForPaymentContainer').style.display = 'none';
     document.getElementById('lblVITDSCashCode').style.display = 'none';
     document.getElementById('lblVITDSBankCode').style.display = 'block';
 }
@@ -266,10 +295,32 @@ function editVoucher(id) {
         document.getElementById('cboVITDSCashCode').value = voucher.bankOrIro;
         document.getElementById('cboVITDSCashCodeContainer').style.display = 'block';
         document.getElementById('cboVITDSBankCodeContainer').style.display = 'none';
+        document.getElementById('cboVITDSBankNameContainer').style.display = 'none';
+        document.getElementById('cboVITDSGoodForPaymentContainer').style.display = 'none';
         document.getElementById('lblVITDSCashCode').style.display = 'block';
         document.getElementById('lblVITDSBankCode').style.display = 'none';
+    } else if (voucher.payMode === 'Bank') {
+        document.getElementById('cboVITDSBankName').value = voucher.bankOrIro;
+        document.getElementById('cboVITDSBankNameContainer').style.display = 'block';
+        document.getElementById('cboVITDSBankCodeContainer').style.display = 'none';
+        document.getElementById('cboVITDSCashCodeContainer').style.display = 'none';
+        document.getElementById('cboVITDSGoodForPaymentContainer').style.display = 'none';
+        document.getElementById('lblVITDSBankCode').style.display = 'block';
+        document.getElementById('lblVITDSCashCode').style.display = 'none';
+    } else if (voucher.payMode === 'Good for Payment') {
+        document.getElementById('cboVITDSGoodForPayment').value = voucher.bankOrIro;
+        document.getElementById('cboVITDSGoodForPaymentContainer').style.display = 'block';
+        document.getElementById('cboVITDSBankCodeContainer').style.display = 'none';
+        document.getElementById('cboVITDSBankNameContainer').style.display = 'none';
+        document.getElementById('cboVITDSCashCodeContainer').style.display = 'none';
+        document.getElementById('lblVITDSBankCode').style.display = 'block';
+        document.getElementById('lblVITDSCashCode').style.display = 'none';
     } else {
         document.getElementById('cboVITDSBankCode').value = voucher.bankOrIro;
+        document.getElementById('cboVITDSBankCodeContainer').style.display = 'block';
+        document.getElementById('cboVITDSBankNameContainer').style.display = 'none';
+        document.getElementById('cboVITDSGoodForPaymentContainer').style.display = 'none';
+        document.getElementById('cboVITDSCashCodeContainer').style.display = 'none';
     }
     
     document.getElementById('txtVITDSAmt').value = voucher.amount;
