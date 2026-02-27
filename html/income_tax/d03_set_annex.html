@@ -1,0 +1,459 @@
+    <!-- Warning Popup Modal for Annex 5(ka) -->
+    <div id="annex5kaWarningModal" style="display:none;position:fixed;z-index:10000;left:0;top:0;width:100vw;height:100vh;background:rgba(0,0,0,0.10);align-items:flex-start;justify-content:center;">
+        <div style="background:#d9e9f7;border-radius:8px;min-width:450px;max-width:90vw;box-shadow:0 2px 16px #0002;position:relative;border:1.5px solid #6b9cd4;margin-top:90px;padding:0;">
+            <div style="padding:10px 18px 0 18px;font-size:16px;font-weight:bold;color:#1a4b8c;letter-spacing:0.5px;">WARNING
+                <span onclick="closeAnnex5kaWarning()" style="position:absolute;top:8px;right:14px;font-size:18px;cursor:pointer;color:#888;">&times;</span>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:15px;padding:15px 18px;">
+                <span style="display:inline-block;margin-top:0px;flex-shrink:0;">
+                    <svg width="50" height="50" viewBox="0 0 50 50">
+                        <polygon points="25,5 45,40 5,40" fill="#f4d03f" stroke="#d4a017" stroke-width="2"/>
+                        <text x="25" y="32" text-anchor="middle" font-size="24" fill="#333" font-family="Arial, sans-serif" font-weight="bold">!</text>
+                    </svg>
+                </span>
+                <div style="font-size:14px;color:#222;line-height:1.7;flex:1;">
+                    यहाँले कर छुटको प्रमाणपत्र नलिएको वा प्रमाणपत्र नवीकरण नगराएको वा कम्प्युटर प्रणालीमा कर छुट पाएको व्यहोरा नजनिएकोले यो अनुसूची भर्न पाउनु भएन । तसर्थ कर छुट पाएको र नवीकरण गराएको भए अनुसूची भर्न सम्बन्धित राजस्व कार्यालयमा सम्पर्क राख्नु हुन अनुरोध गरिन्छ ।
+                </div>
+            </div>
+            <div style="text-align:center;padding:12px 0 15px 0;">
+                <button onclick="closeAnnex5kaWarning()" style="padding:5px 40px;background:#e3eaf3;border:1.5px solid #6b9cd4;border-radius:3px;font-size:15px;cursor:pointer;color:#1a4b8c;font-weight:bold;">OK</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Success Popup Modal -->
+    <div id="finalizeSuccessModal" style="display:none;position:fixed;z-index:10000;left:0;top:0;width:100vw;height:100vh;background:rgba(0,0,0,0.10);align-items:flex-start;justify-content:center;">
+        <div style="background:#eaf1fa;border-radius:8px;min-width:320px;max-width:90vw;box-shadow:0 2px 16px #0002;position:relative;border:1.5px solid #b5cbe7;margin-top:90px;padding:0;">
+            <div style="padding:10px 18px 0 18px;font-size:16px;font-weight:bold;color:#1a4b8c;letter-spacing:0.5px;">SUCCESS
+                <span onclick="hideFinalizeSuccessModal()" style="position:absolute;top:8px;right:14px;font-size:18px;cursor:pointer;color:#888;">&times;</span>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 18px 0 18px;">
+                <span style="display:inline-block;margin-top:2px;">
+                    <svg width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="#b5cbe7"/><text x="16" y="22" text-anchor="middle" font-size="20" fill="#1a4b8c" font-family="Arial, sans-serif">i</text></svg>
+                </span>
+                <span id="finalizeSuccessMsg" style="font-size:15px;color:#222;line-height:1.5;"></span>
+            </div>
+            <div style="text-align:center;padding:16px 0 10px 0;">
+                <button id="finalizeSuccessOkBtn" style="padding:3px 32px;background:#e3eaf3;border:1.5px solid #b5cbe7;border-radius:3px;font-size:15px;cursor:pointer;color:#1a4b8c;font-weight:bold;">OK</button>
+            </div>
+        </div>
+    </div>
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Annex - D-03</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background-color: #dfe9f6;
+            padding: 20px;
+        }
+        
+        .main-container {
+            background-color: #dfe9f6;
+            border: 1px solid #99BCE8;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: linear-gradient(to bottom, #D9E8FB 0%, #C5D9ED 100%);
+            border-bottom: 1px solid #99BCE8;
+            padding: 8px 12px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .content {
+            padding: 15px;
+            overflow: auto;
+            max-height: 700px;
+        }
+        
+        .button-row {
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .btn {
+            padding: 6px 12px;
+            background: linear-gradient(to bottom, #f5f5f5 0%, #e8e8e8 100%);
+            border: 1px solid #a0a0a0;
+            cursor: pointer;
+            font-size: 13px;
+            border-radius: 3px;
+        }
+        
+        .btn:hover {
+            background: linear-gradient(to bottom, #e8e8e8 0%, #d8d8d8 100%);
+        }
+        
+        .instructions {
+            margin: 15px 0;
+            padding: 10px;
+            background-color: #dfe9f6;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .instructions p {
+            margin: 5px 0;
+            font-size: 13px;
+        }
+        
+        .finalize-btn {
+            padding: 6px 20px;
+            background: linear-gradient(to bottom, #f5f5f5 0%, #e8e8e8 100%);
+            border: 1px solid #a0a0a0;
+            cursor: pointer;
+            font-size: 13px;
+            border-radius: 3px;
+            margin: 10px 0;
+        }
+        
+        .section-panel {
+            margin: 15px 0;
+            border: 1px solid #99BCE8;
+        }
+        
+        .section-header {
+            background: linear-gradient(to bottom, #D9E8FB 0%, #C5D9ED 100%);
+            border-bottom: 1px solid #99BCE8;
+            padding: 6px 10px;
+            font-weight: bold;
+            font-size: 13px;
+        }
+        
+        .section-toolbar {
+            background-color: #fff;
+            padding: 5px 10px;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 12px;
+        }
+        
+        .section-toolbar a {
+            color: red;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        
+        .annex-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+        }
+        
+        .annex-table tr {
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .annex-table tr:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .annex-table td {
+            padding: 8px 10px;
+            font-size: 13px;
+            vertical-align: middle;
+        }
+        
+        .annex-name {
+            width: 120px;
+        }
+        
+        .annex-desc {
+            width: auto;
+        }
+        
+        .annex-action {
+            width: 250px;
+            text-align: left;
+            padding-left: 5px;
+            padding-right: 10px;
+            white-space: nowrap;
+        }
+        
+        .action-icon {
+            cursor: pointer;
+            font-size: 18px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        
+        /* Print styles */
+        @media print {
+            .btn {
+                display: none !important;
+            }
+            .button-row {
+                display: none !important;
+            }
+            body {
+                background: white;
+            }
+            .main-container {
+                background: white;
+                box-shadow: none;
+            }
+        }
+
+        /* Disclaimer Banner */
+        .disclaimer-banner {
+            background-color: #fff3cd;
+            border: 2px solid #ffc107;
+            color: #856404;
+            padding: 15px 20px;
+            margin: 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            line-height: 1.6;
+            text-align: left;
+        }
+
+        @media screen and (max-width: 768px) {
+            .disclaimer-banner {
+                font-size: 12px;
+                padding: 12px 15px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .disclaimer-banner {
+                font-size: 11px;
+                padding: 10px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+        <div class="header">Set Annex</div>
+        
+        <div class="content">
+            <div class="button-row">
+                <button class="btn" onclick="backToD03()">← Back to D03</button>
+                <button class="btn" onclick="printPage()">🖨 Print Pages</button>
+            </div>
+            
+            <div class="instructions">
+                <p>• अनुसूचीहरु तल दिएको क्रम अनुसार भर्नु पर्नेछ ।</p>
+                <p>• अनुसूची - १ र अनुसूची - २ स्वत: भरिन्छ , छुट र शुल्कहरु मात्र भर्नुपर्छ ।</p>
+                <p>• निकायले अनिवार्य कागजातहरु upload अनिवार्य गर्नुपर्नेछ ।</p>
+                <p>• आँफै भरिएको अनुसुची १ र अनुसुची २ हेरी ठीक छ भने Set Annex Button क्लिक गर्नु होला ।</p>
+            </div>
+            
+            <button class="finalize-btn" id="finalizeSubmitBtn">✓ Finalized Submit</button>
+            <button class="proceed-payment-btn" id="proceedPaymentBtn" style="display:none;margin-left:12px;padding:5px 18px 5px 12px;background:#eaf3fb;border:1.5px solid #8cb3df;border-radius:3px;font-size:15px;cursor:pointer;color:#222;font-weight:normal;vertical-align:middle;align-items:center;gap:6px;">
+                <span style="color:#27ae60;font-size:18px;vertical-align:middle;">✓</span> Proceed to Payment
+            </button>
+                <!-- Finalize Confirmation Modal -->
+                <div id="finalizeConfirmModal" style="display:none;position:fixed;z-index:9999;left:0;top:0;width:100vw;height:100vh;background:rgba(0,0,0,0.18);align-items:flex-start;justify-content:center;">
+                    <div style="background:#ced9e7;border-radius:12px;width:370px;max-width:95vw;min-height:270px;box-shadow:0 4px 24px #0002;position:relative;border:1.5px solid #8cb3df;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:0;margin-top:60px;">
+                        <div style="width:100%;padding:18px 28px 0 28px;">
+                        <div style="font-size:17px;font-weight:bold;color:#003366;margin-bottom:10px;display:flex;align-items:center;gap:7px;">
+                            <img src="https://cdn-icons-png.flaticon.com/512/3524/3524752.png" style="height:24px;vertical-align:middle;"> Confirm Action
+                            <span onclick="hideFinalizeModal()" style="position:absolute;top:12px;right:22px;font-size:22px;cursor:pointer;color:#888;">&times;</span>
+                        </div>
+                        <div style="font-size:15px;margin-bottom:10px;line-height:1.6;">
+                            आय विवरणका अनुसूचीहरूमा भर्नु पर्ने सबै विवरणहरू भर्नु भयो ?<br>
+                            आय विवरणका अनुसूचीहरूमा भर्नु पर्ने सबै विवरणहरू अनिवार्य रूपमा भरेर मात्र आय विवरण Submit गर्नु हुन अनुरोध छ ।<br>
+                            <span id="taxSummaryBlock">
+                                जम्मा तिर्नु पर्ने कर : <span id="totalTaxAmount">रु ०</span><br>
+                                जम्मा तिरेको कर : <span id="paidTaxAmount">रु ०</span><br>
+                            </span>
+                            एक पटक Submit गरिसकेपछि अर्को पटक विवरण फेरि परिवर्तन गर्न पाइने छैन । के तपाई Submit गर्न चाहनुहुन्छ ?
+                        </div>
+                        </div>
+                        <div style="width:100%;padding:0 0 18px 0;display:flex;justify-content:center;align-items:center;">
+                            <button id="finalizeYesBtn" style="padding:4px 22px;background:#eaf3fb;border:1.5px solid #8cb3df;border-radius:3px;font-size:15px;cursor:pointer;color:#003366;font-weight:bold;margin-right:10px;">Yes</button>
+                            <button id="finalizeNoBtn" style="padding:4px 22px;background:#f5f5f5;border:1.5px solid #ccc;border-radius:3px;font-size:15px;cursor:pointer;color:#444;font-weight:bold;">No</button>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                // ...existing code...
+                document.getElementById('finalizeSubmitBtn').onclick = function() {
+                    // Get total tax from annex 2
+                    let totalTax = 0;
+                    let paidTax = 0;
+                    try {
+                        const annex2 = localStorage.getItem('d03_annex2_data');
+                        if (annex2) {
+                            const data = JSON.parse(annex2);
+                            // Get total tax from annex 2
+                            if (data && data.totalTax) {
+                                totalTax = parseFloat((data.totalTax+'').replace(/,/g, '')) || 0;
+                            } else if (data && data.taxAmount) {
+                                totalTax = parseFloat((data.taxAmount+'').replace(/,/g, '')) || 0;
+                            }
+                            // Get paid tax if available
+                            if (data && data.paidTax) {
+                                paidTax = parseFloat((data.paidTax+'').replace(/,/g, '')) || 0;
+                            }
+                        }
+                    } catch(e) {}
+                    document.getElementById('totalTaxAmount').innerText = 'रु ' + (totalTax ? totalTax.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) : '०');
+                    document.getElementById('paidTaxAmount').innerText = 'रु ' + (paidTax ? paidTax.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) : '०');
+                    document.getElementById('finalizeConfirmModal').style.display = 'flex';
+                };
+                function hideFinalizeModal() {
+                    document.getElementById('finalizeConfirmModal').style.display = 'none';
+                }
+                document.getElementById('finalizeNoBtn').onclick = hideFinalizeModal;
+                document.getElementById('finalizeYesBtn').onclick = function() {
+                    hideFinalizeModal();
+                    // Lock the form
+                    localStorage.setItem('d03_finalized', '1');
+                    document.getElementById('finalizeSubmitBtn').disabled = true;
+                    // Get submission number from localStorage (from registration)
+                    var submissionNo = '';
+                    try {
+                        const currentUser = sessionStorage.getItem('d03_current_registration');
+                        if (currentUser) {
+                            const userData = JSON.parse(currentUser);
+                            submissionNo = userData.submissionNumber || userData.submissionNo || '';
+                        } else {
+                            const returnData = localStorage.getItem('d03_return_data');
+                            if (returnData) {
+                                const data = JSON.parse(returnData);
+                                submissionNo = data.submissionNo || '';
+                            }
+                        }
+                    } catch(e) {}
+                    // Show success modal with submission number
+                    document.getElementById('finalizeSuccessMsg').innerHTML = (submissionNo || 'Tax Return') + ' Finalized Successfully.';
+                    document.getElementById('finalizeSuccessModal').style.display = 'flex';
+                };
+
+                function hideFinalizeSuccessModal() {
+                    document.getElementById('finalizeSuccessModal').style.display = 'none';
+                }
+                
+                function showAnnex5kaWarning() {
+                    document.getElementById('annex5kaWarningModal').style.display = 'flex';
+                }
+                
+                function closeAnnex5kaWarning() {
+                    document.getElementById('annex5kaWarningModal').style.display = 'none';
+                }
+                
+                document.getElementById('finalizeSuccessOkBtn').onclick = function() {
+                    hideFinalizeSuccessModal();
+                    // Show Proceed to Payment button
+                    document.getElementById('proceedPaymentBtn').style.display = 'inline-block';
+                };
+                </script>
+            
+            <!-- Section 1: आय अनुसूची भर्ने ब्लक -->
+            <div class="section-panel">
+                <div class="section-header">१. आय अनुसूची भर्ने ब्लक</div>
+                <div class="section-toolbar">
+                    अन्य अनिवार्य कागजातहरु upload गर्न को लागि <a href="d03_doc_upload.html" style="color:red;text-decoration:underline;" target="_self">यहाँ क्लिक</a> गर्नुहोस् ।
+                </div>
+                <table class="annex-table">
+                    <tr>
+                        <td class="annex-name">अनुसूची - ५(क)</td>
+                        <td class="annex-desc">कर छुट कारोबारको विवरण राख्ने</td>
+                        <td class="annex-action">
+                            <span class="action-icon" style="color: green; font-size: 18px; cursor: pointer;" title="Add New" onclick="showAnnex5kaWarning()">➕</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="annex-name">अनुसूची - ५</td>
+                        <td class="annex-desc">व्यापार आयको विवरण राख्ने</td>
+                        <td class="annex-action">
+                            <span class="action-icon" style="color: green; font-size: 18px; cursor: pointer;" title="Add New" onclick="openAnnex5()">➕</span>
+                            <span id="annex5BusinessLink" style="display: none; margin-left: 10px;">
+                                <a href="#" style="color: #003d82; text-decoration: underline; font-size: 13px; font-weight: bold;">Business1</a>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="annex-name">अनुसूची - ७</td>
+                        <td class="annex-desc">लगानीबाट भएको आयको गणानाको विवरण राख्ने</td>
+                        <td class="annex-action">
+                            <span class="action-icon" style="color: green; font-size: 18px; cursor: pointer;" title="Add New" onclick="openAnnex7()">➕</span>
+                            <span id="annex7Link" style="display: none; margin-left: 10px;">
+                                <a href="#" onclick="openAnnex7(); return false;" style="color: #0066cc; text-decoration: underline; cursor: pointer;">Business1</a>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="annex-name">अनुसूची - ८</td>
+                        <td class="annex-desc">गैर व्यावसायिक सम्पत्तिको निसर्गबाट प्राप्त खुद लाभ</td>
+                        <td class="annex-action">
+                            <span class="action-icon" style="color: green; font-size: 18px;" title="Add New" onclick="openAnnex8()">➕</span>
+                            <span id="annex8Link" style="display: none; margin-left: 10px;"><a href="d03_annex_8.html" style="color: blue; text-decoration: underline;">Asset Disposal1</a></span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            
+            <!-- Section 2: अनुसूची १ वा अनुसूची २ -->
+            <div class="section-panel" id="annex2Section" style="display: none;">
+                <div class="section-header">२. अनुसूची १ वा अनुसूची २</div>
+                <table class="annex-table">
+                    <tr>
+                        <td class="annex-name">अनुसूची - २</td>
+                        <td class="annex-desc">करको गणना (निकायको लागि) विवरण राख्ने</td>
+                        <td class="annex-action">
+                            <span class="action-icon" style="color: blue; font-size: 18px;" title="Save">💾</span>
+                            <span id="annex2UpdateText" style="color: blue; font-size: 14px; margin-left: 10px; display: none;">( Update )</span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            
+            <!-- Section 3: करदाबी अनुसूची -->
+            <div class="section-panel">
+                <div class="section-header">३. करदाबी अनुसूची</div>
+                <table class="annex-table">
+                    <tr>
+                        <td class="annex-name">अनुसूची - १०</td>
+                        <td class="annex-desc">कर मिलान सम्बन्धी विवरण राख्ने</td>
+                        <td class="annex-action">
+                            <span class="action-icon" style="color: blue; font-size: 18px; cursor: pointer;" title="Save" onclick="openAnnex10()">💾</span>
+                            <span id="annex10UpdateLabel" style="display: none; margin-left: 10px; color: blue; font-weight: bold;">( Update )</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="annex-name">अनुसूची - १२</td>
+                        <td class="annex-desc">विदेशमा तिरेको कर मिलान दावीको विवरण राख्ने</td>
+                        <td class="annex-action">
+                            <span class="action-icon" style="color: blue; font-size: 18px; cursor: pointer;" title="Save" onclick="openAnnex12()">💾</span>
+                            <span id="annex12Link" style="display: none; margin-left: 10px;"><a href="d03_annex_12.html" style="color: blue; text-decoration: none; font-weight: bold;">(Update)</a></span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            
+            <!-- Section 4: बित्तीय विवरण तथा अन्य विवरणका सुचनाहरु -->
+            <div class="section-panel">
+                <div class="section-header">४. बित्तीय विवरण तथा अन्य विवरणका सुचनाहरु</div>
+                <table class="annex-table">
+                    <tr>
+                        <td class="annex-name">अनुसूची - १३</td>
+                        <td class="annex-desc">वित्तिय तथा खरिद बिक्री विवरण</td>
+                        <td class="annex-action">
+                            <span class="action-icon" style="color: blue; cursor: pointer;" title="Open Annex 13" onclick="openAnnex13()">💾</span>
+                            <span id="annex13UpdateLabel" style="display: none; margin-left: 10px; color: blue; font-weight: bold;">( Update )</span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <script src="../../js/income_tax/d03_set_annex.js"></script>
+</body>
+</html>

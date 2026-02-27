@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CBMS Dashboard - Central Billing Monitoring System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f0f2f5;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: #198cce;
+            color: white;
+            padding: 12px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-info {
+            font-size: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .logout-btn {
+            background: white;
+            color: #198cce;
+            border: none;
+            padding: 6px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #f0f0f0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .ant-layout {
+            display: flex;
+            min-height: calc(100vh - 60px);
+        }
+
+        .ant-layout-sider {
+            background: #2F4F7F;
+            width: 200px;
+            min-width: 200px;
+            flex: 0 0 200px;
+            max-width: 200px;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .ant-layout-sider-collapsed {
+            width: 80px;
+            min-width: 80px;
+            flex: 0 0 80px;
+            max-width: 80px;
+        }
+
+        .ant-layout-sider-children {
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .ant-menu {
+            background: #2F4F7F;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .ant-menu-item {
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            height: 40px;
+            line-height: 40px;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: white;
+            font-size: 14px;
+        }
+
+        .ant-menu-item:hover {
+            background: #4A6FA5;
+            color: white;
+        }
+
+        .ant-menu-item-icon {
+            font-size: 16px;
+            margin-right: 10px;
+        }
+
+        .ant-menu-submenu-title {
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            height: 40px;
+            line-height: 40px;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: white;
+            font-size: 14px;
+            position: relative;
+        }
+
+        .ant-menu-submenu-title:hover {
+            background: #4A6FA5;
+            color: white;
+        }
+
+        .ant-menu-submenu-arrow {
+            position: absolute;
+            right: 16px;
+            transition: transform 0.3s;
+            color: white;
+        }
+
+        .ant-menu-submenu-arrow::before {
+            content: '▶';
+            font-size: 10px;
+        }
+
+        .ant-menu-submenu-open .ant-menu-submenu-arrow {
+            transform: rotate(90deg);
+        }
+
+        .ant-menu-sub {
+            list-style: none;
+            padding: 0;
+            background: #7691C7;
+            display: none;
+        }
+
+        .ant-menu-submenu-open .ant-menu-sub {
+            display: block;
+        }
+
+        .ant-menu-sub .ant-menu-item {
+            padding-left: 48px;
+            color: white;
+        }
+
+        .ant-menu-sub .ant-menu-item:hover {
+            background: #8AA5D9;
+            color: white;
+        }
+
+        .ant-layout-sider-trigger {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 48px;
+            background: #1F3F7F;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-top: 1px solid #2F4F7F;
+        }
+
+        .ant-layout-sider-trigger:hover {
+            background: #2F5A8F;
+        }
+
+        .ant-layout-content {
+            flex: 1;
+            padding: 24px;
+            background: #f0f2f5;
+        }
+
+        .ant-breadcrumb {
+            margin-bottom: 16px;
+            font-size: 14px;
+        }
+
+        .ant-breadcrumb a {
+            color: rgba(0, 0, 0, 0.45);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .ant-breadcrumb a:hover {
+            color: #1890ff;
+        }
+
+        .ant-breadcrumb-separator {
+            margin: 0 8px;
+            color: rgba(0, 0, 0, 0.45);
+        }
+
+        .ant-row {
+            display: flex;
+            flex-wrap: wrap;
+            margin-left: -8px;
+            margin-right: -8px;
+            row-gap: 16px;
+        }
+
+        .ant-col {
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+
+        .ant-col-12 {
+            flex: 0 0 50%;
+            max-width: 50%;
+        }
+
+        .ant-col-24 {
+            flex: 0 0 100%;
+            max-width: 100%;
+        }
+
+        .ant-card {
+            background: white;
+            border-radius: 2px;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03), 0 1px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px 0 rgba(0, 0, 0, 0.02);
+            height: 100%;
+        }
+
+        .ant-card-head {
+            padding: 0 24px;
+            color: rgba(0, 0, 0, 0.85);
+            font-weight: 500;
+            font-size: 16px;
+            background: transparent;
+            border-bottom: 1px solid #f0f0f0;
+            border-radius: 2px 2px 0 0;
+            min-height: 48px;
+            display: flex;
+            align-items: center;
+        }
+
+        .ant-card-body {
+            padding: 24px;
+        }
+
+        .ant-typography {
+            margin-bottom: 0.5em;
+            color: rgba(0, 0, 0, 0.85);
+            font-weight: 500;
+            font-size: 16px;
+        }
+
+        .ant-table-wrapper {
+            margin-top: 16px;
+        }
+
+        .ant-table {
+            background: white;
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .ant-table-thead > tr > th {
+            background: #fafafa;
+            color: rgba(0, 0, 0, 0.85);
+            font-weight: 500;
+            text-align: left;
+            padding: 16px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .ant-table-tbody > tr > td {
+            padding: 16px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .ant-table-tbody > tr:hover > td {
+            background: #fafafa;
+        }
+
+        .ant-empty {
+            text-align: center;
+            padding: 32px 0;
+        }
+
+        .ant-empty-image {
+            font-size: 48px;
+            margin-bottom: 8px;
+            opacity: 0.3;
+        }
+
+        .ant-empty-description {
+            color: rgba(0, 0, 0, 0.25);
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 10px 20px;
+            }
+
+            .ant-layout-sider {
+                position: fixed;
+                left: -200px;
+                z-index: 100;
+                height: 100vh;
+                transition: left 0.3s;
+            }
+
+            .ant-layout-sider.visible {
+                left: 0;
+            }
+
+            .ant-layout-content {
+                padding: 16px;
+            }
+
+            .ant-col-12 {
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="header-left">
+            <img src="../../media/resources/header-slogan.png" alt="IRD" style="height: 50px;">
+            <h1 style="font-size: 20px; font-weight: 400;">Central Billing Monitoring System</h1>
+        </div>
+        <div class="header-right">
+            <div class="user-info">
+                <div style="font-weight: 500;" id="userDisplay">Admin User</div>
+                <div style="opacity: 0.9;" id="panDisplay">PAN: 610015263</div>
+            </div>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+    </div>
+
+    <!-- Main Layout -->
+    <section class="ant-layout">
+        <!-- Sidebar -->
+        <aside class="ant-layout-sider" id="sidebar">
+            <div class="ant-layout-sider-children">
+                <ul class="ant-menu">
+                    <li class="ant-menu-item">
+                        <span class="ant-menu-item-icon">🔌</span>
+                        <span class="ant-menu-title-content">
+                            <span>Onboarding</span>
+                        </span>
+                    </li>
+
+                    <li class="ant-menu-submenu">
+                        <div class="ant-menu-submenu-title" onclick="toggleSubmenu(this)">
+                            <span class="ant-menu-item-icon">📄</span>
+                            <span class="ant-menu-title-content">Billing Register</span>
+                            <i class="ant-menu-submenu-arrow"></i>
+                        </div>
+                        <ul class="ant-menu-sub">
+                            <li class="ant-menu-item">
+                                <span>Sales Register</span>
+                            </li>
+                            <li class="ant-menu-item">
+                                <span>Purchase Register</span>
+                            </li>
+                            <li class="ant-menu-item">
+                                <span>Upload</span>
+                            </li>
+                            <li class="ant-menu-item">
+                                <span>View Registers</span>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="ant-menu-submenu ant-menu-submenu-open">
+                        <div class="ant-menu-submenu-title" onclick="toggleSubmenu(this)">
+                            <span class="ant-menu-item-icon">⊞</span>
+                            <span class="ant-menu-title-content">Report</span>
+                            <i class="ant-menu-submenu-arrow"></i>
+                        </div>
+                        <ul class="ant-menu-sub">
+                            <li class="ant-menu-item">
+                                <span>Sales Register Sync</span>
+                            </li>
+                            <li class="ant-menu-item">
+                                <span>My Purchase Sync</span>
+                            </li>
+                            <li class="ant-menu-item">
+                                <span>Sales Register</span>
+                            </li>
+                            <li class="ant-menu-item">
+                                <span>Sales Return Report</span>
+                            </li>
+                            <li class="ant-menu-item">
+                                <span>Purchase Return Report</span>
+                            </li>
+                            <li class="ant-menu-item">
+                                <span>Purchase Register</span>
+                            </li>
+                            <li class="ant-menu-item">
+                                <span>Sales Utility</span>
+                            </li>
+                            <li class="ant-menu-item">
+                                <span>Sales Return Utility</span>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="ant-menu-item">
+                        <span class="ant-menu-item-icon">🐞</span>
+                        <span class="ant-menu-title-content">
+                            <span>Grievance</span>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            <div class="ant-layout-sider-trigger" onclick="toggleSidebar()">
+                <span id="sidebarIcon">◀</span>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="ant-layout-content">
+            <!-- Breadcrumb -->
+            <div class="ant-breadcrumb">
+                <span>
+                    <a href="cbms_dashboard.html">
+                        <span>🏠</span>
+                        <span>Home</span>
+                    </a>
+                    <span class="ant-breadcrumb-separator">/</span>
+                </span>
+            </div>
+
+            <!-- Cards Row -->
+            <div class="ant-row" style="margin-bottom: 16px;">
+                <div class="ant-col ant-col-12">
+                    <div class="ant-card">
+                        <div class="ant-card-body">
+                            <div style="padding: 15px;">
+                                <h5 class="ant-typography">Sales Summary (API)</h5>
+                                <p>No data has been sync of this month.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ant-col ant-col-12">
+                    <div class="ant-card">
+                        <div class="ant-card-body">
+                            <div style="padding: 15px;">
+                                <h5 class="ant-typography">Sales Summary (Excel)</h5>
+                                <p>Excel data has not been uploaded this month.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Table Card -->
+            <div class="ant-row">
+                <div class="ant-col ant-col-24">
+                    <div class="ant-card">
+                        <div class="ant-card-head">
+                            <div class="ant-card-head-title">Last Upload Excel File Status</div>
+                        </div>
+                        <div class="ant-card-body">
+                            <div class="ant-table-wrapper">
+                                <table class="ant-table">
+                                    <thead class="ant-table-thead">
+                                        <tr>
+                                            <th style="width: 60px;">S.N</th>
+                                            <th>Fiscal Year</th>
+                                            <th>Month</th>
+                                            <th>File Name</th>
+                                            <th>File Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="ant-table-tbody" id="tableBody">
+                                        <tr>
+                                            <td colspan="5" style="text-align: center;">
+                                                <div class="ant-empty">
+                                                    <div class="ant-empty-image">📂</div>
+                                                    <div class="ant-empty-description">No Data</div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </section>
+
+    <script>
+        // Load user data from localStorage
+        window.addEventListener('DOMContentLoaded', function() {
+            const loginData = JSON.parse(localStorage.getItem('cbmsLoginData') || '{}');
+            
+            if (loginData.panNo) {
+                document.getElementById('panDisplay').textContent = 'PAN: ' + loginData.panNo;
+            }
+            
+            if (loginData.userType) {
+                const userTypeText = loginData.userType === 'admin' ? 'Admin User' : 'CBMS User';
+                document.getElementById('userDisplay').textContent = userTypeText;
+            }
+            
+            console.log('CBMS Dashboard loaded for:', loginData);
+        });
+
+        // Toggle submenu
+        function toggleSubmenu(element) {
+            const submenu = element.closest('.ant-menu-submenu');
+            submenu.classList.toggle('ant-menu-submenu-open');
+        }
+
+        // Toggle sidebar collapse
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const icon = document.getElementById('sidebarIcon');
+            sidebar.classList.toggle('ant-layout-sider-collapsed');
+            icon.textContent = sidebar.classList.contains('ant-layout-sider-collapsed') ? '▶' : '◀';
+        }
+
+        // Logout function
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                localStorage.removeItem('cbmsLoginData');
+                window.location.href = 'cbms_login.html';
+            }
+        }
+
+        // Menu item click handlers
+        document.querySelectorAll('.ant-menu-item:not(.ant-menu-submenu .ant-menu-item)').forEach(item => {
+            item.addEventListener('click', function(e) {
+                if (!this.querySelector('a')) {
+                    e.preventDefault();
+                    alert('This feature is under development');
+                }
+            });
+        });
+
+        document.querySelectorAll('.ant-menu-sub .ant-menu-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('This feature is under development');
+            });
+        });
+    </script>
+</body>
+</html>

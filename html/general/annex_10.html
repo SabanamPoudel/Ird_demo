@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>करदाताको अनुसुची १० का भौचरहरु</title>
+    <link rel="stylesheet" href="../../extjs/resources/ext-all.css">
+    <link rel="stylesheet" href="../../css/all.css">
+    <script src="../../js/xlsx.full.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #C5D9ED;
+            font-family: tahoma, arial, verdana, sans-serif;
+            font-size: 11px;
+        }
+        
+        .page-header {
+            background: #D5E3F1;
+            padding: 8px 10px;
+            border-bottom: 1px solid #99BCE8;
+            font-weight: bold;
+            color: #15428B;
+        }
+        
+        .page-subtitle {
+            background: #E8F1FA;
+            padding: 6px 10px;
+            border-bottom: 1px solid #B5B8C8;
+            color: #000;
+        }
+        
+        .content-area {
+            background: #DFE9F6;
+            padding: 10px;
+            min-height: 500px;
+        }
+        
+        .form-row {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .form-field {
+            display: flex;
+            align-items: center;
+        }
+        
+        .form-field label {
+            margin-right: 5px;
+            white-space: nowrap;
+        }
+        
+        .form-field input,
+        .form-field select {
+            padding: 2px 4px;
+            border: 1px solid #B5B8C8;
+            font-size: 11px;
+            font-family: tahoma, arial, verdana, sans-serif;
+        }
+        
+        .back-btn {
+            background: linear-gradient(to bottom, #ffffff 0%, #e0e0e0 100%);
+            border: 1px solid #8DB2E3;
+            padding: 2px 8px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 11px;
+            margin-bottom: 10px;
+        }
+        
+        .back-btn:hover {
+            background: linear-gradient(to bottom, #f0f0f0 0%, #d0d0d0 100%);
+        }
+        
+        .action-btn {
+            background: linear-gradient(to bottom, #ffffff 0%, #e0e0e0 100%);
+            border: 1px solid #8DB2E3;
+            padding: 3px 10px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 11px;
+            margin-right: 8px;
+        }
+        
+        .action-btn:hover {
+            background: linear-gradient(to bottom, #f0f0f0 0%, #d0d0d0 100%);
+        }
+        
+        .voucher-section {
+            margin-top: 15px;
+            border: 1px solid #99BCE8;
+            background: white;
+        }
+        
+        .section-header {
+            background: linear-gradient(to bottom, #E8F1FA 0%, #D0E4F7 100%);
+            padding: 4px 8px;
+            border-bottom: 1px solid #99BCE8;
+            font-weight: bold;
+            font-size: 11px;
+        }
+        
+        .grid-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+        
+        .grid-table thead th {
+            background: linear-gradient(to bottom, #F5F5F5 0%, #E5E5E5 100%);
+            border: 1px solid #D0D0D0;
+            padding: 4px 6px;
+            font-size: 11px;
+            font-weight: normal;
+            text-align: left;
+        }
+        
+        .grid-table tbody td {
+            border: 1px solid #E0E0E0;
+            padding: 4px 6px;
+            font-size: 11px;
+        }
+        
+        .grid-table tbody tr:hover {
+            background: #F0F8FF;
+        }
+        
+        .total-row {
+            background: #F5F5F5;
+            padding: 5px 10px;
+            border-top: 1px solid #99BCE8;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+        
+        .total-row label {
+            font-weight: bold;
+        }
+        
+        .total-row input {
+            text-align: right;
+            padding: 2px 4px;
+            border: 1px solid #B5B8C8;
+            width: 100px;
+            background: #F0F0F0;
+        }
+        
+        .note-text {
+            margin-top: 8px;
+            font-size: 11px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <!-- Page Subtitle -->
+    <div class="page-subtitle">
+        करदाताको अनुसुची १० का भौचरहरु
+    </div>
+    
+    <!-- Content Area -->
+    <div class="content-area">
+        <!-- Form Fields Row -->
+        <div class="form-row">
+            <div class="form-field">
+                <label>स्थायी लेखा नम्बर:</label>
+                <input type="text" id="panNumber" value="" readonly style="width: 120px; background: #F0F0F0;">
+            </div>
+            <div class="form-field">
+                <label>करदाताको नाम:</label>
+                <input type="text" id="taxpayerName" value="" style="width: 250px;">
+            </div>
+            <div class="form-field">
+                <label>आर्थिक वर्ष:</label>
+                <select id="fiscalYear" style="width: 120px;">
+                    <option value="" selected></option>
+                    <option value="2082.083">2082.083</option>
+                    <option value="2081.082">2081.082</option>
+                    <option value="2080.081">2080.081</option>
+                    <option value="2079.080">2079.080</option>
+                    <option value="2078.079">2078.079</option>
+                    <option value="2077.078">2077.078</option>
+                    <option value="2076.077">2076.077</option>
+                    <option value="2075.076">2075.076</option>
+                    <option value="2074.075">2074.075</option>
+                    <option value="2073.074">2073.074</option>
+                    <option value="2072.073">2072.073</option>
+                    <option value="2071.072">2071.072</option>
+                    <option value="2070.071">2070.071</option>
+                    <option value="2069.070">2069.070</option>
+                    <option value="2068.069">2068.069</option>
+                    <option value="2067.068">2067.068</option>
+                    <option value="2066.067">2066.067</option>
+                    <option value="2065.066">2065.066</option>
+                    <option value="2064.065">2064.065</option>
+                    <option value="2063.064">2063.064</option>
+                    <option value="2062.063">2062.063</option>
+                    <option value="2061.062">2061.062</option>
+                    <option value="2060.061">2060.061</option>
+                    <option value="2059.060">2059.060</option>
+                    <option value="2058.059">2058.059</option>
+                </select>
+            </div>
+        </div>
+        
+        <!-- Action Buttons -->
+        <div class="form-row">
+            <button class="action-btn" onclick="searchVouchers()">
+                <span>✓</span>
+                <span>Search</span>
+            </button>
+            <button class="action-btn" onclick="resetSearch()">
+                <span>✗</span>
+                <span>Reset</span>
+            </button>
+        </div>
+        
+        <!-- Excel Export Button -->
+        <div class="form-row">
+            <button class="action-btn" onclick="exportExcel()">
+                <span>📊</span>
+                <span>Excel Export</span>
+            </button>
+        </div>
+        
+        <!-- Voucher Information Section -->
+        <div class="voucher-section">
+            <div class="section-header">Voucher Information</div>
+            <div style="overflow-x: auto;">
+                <table class="grid-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 40px;"></th>
+                            <th>Tax Office</th>
+                            <th>Voucher No</th>
+                            <th>Voucher Date</th>
+                            <th>Bank</th>
+                            <th>Fiscal Year</th>
+                            <th>Revenue Account</th>
+                            <th>Amount</th>
+                            <th>Tax Return</th>
+                        </tr>
+                    </thead>
+                    <tbody id="voucherTableBody">
+                        <tr>
+                            <td colspan="9" style="text-align: center; padding: 20px; color: #999;">
+                                No data available
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="total-row">
+                <label>Total Credit</label>
+                <input type="text" id="totalCredit" value="0.00" readonly>
+            </div>
+        </div>
+        
+        <!-- TDS Note -->
+        <div class="note-text">*TDS deposited by withholding agent.</div>
+    </div>
+    
+    <script>
+        // Load user data from session on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const panNumber = sessionStorage.getItem('taxpayerPAN') || '610015263';
+            const username = sessionStorage.getItem('taxpayerUsername') || 'आता विजनेश एकेडेमी प्रा.लि.';
+            
+            document.getElementById('panNumber').value = panNumber;
+            document.getElementById('taxpayerName').value = username;
+        });
+        
+        function closeAnnex10() {
+            // Close the modal if opened from dashboard
+            if (window.parent && window.parent.closeAnnex10Modal) {
+                window.parent.closeAnnex10Modal();
+            } else {
+                window.location.href = 'taxpayer_dashboard.html';
+            }
+        }
+        
+        function searchVouchers() {
+            console.log('Searching vouchers...');
+            loadDemoData();
+        }
+        
+        function resetSearch() {
+            document.getElementById('taxpayerName').value = '';
+            document.getElementById('voucherTableBody').innerHTML = '<tr><td colspan="9" style="text-align: center; padding: 20px; color: #999;">No data available</td></tr>';
+            document.getElementById('totalCredit').value = '0.00';
+        }
+        
+        function exportExcel() {
+            const selectedYear = document.getElementById('fiscalYear').value;
+            const panNumber = document.getElementById('panNumber').value;
+            const taxpayerName = document.getElementById('taxpayerName').value;
+            
+            // Get all data
+            const allData = [
+                { office: 'Inland Revenue Department', voucher: '57784241', date: '2080.10.02', bank: 'Rastriya Banijya Bank', fiscal: '2079.080', revenue: '11123', amount: '3749', return: 'CREDIT' },
+                { office: 'Inland Revenue Department', voucher: '58302534', date: '2080.10.02', bank: 'Rastriya Banijya Bank', fiscal: '2079.080', revenue: '11123', amount: '5000', return: 'CREDIT' },
+                { office: 'Inland Revenue Department', voucher: '58302535', date: '2080.10.02', bank: 'Rastriya Banijya Bank', fiscal: '2079.080', revenue: '11123', amount: '528', return: 'CREDIT' },
+                { office: 'Large Taxpayer Office', voucher: '790050470792', date: '2079.10.15', bank: 'सुनार्इट लिम्टेड प्रा...', fiscal: '2079.080', revenue: '11123', amount: '480', return: 'TDS' },
+                { office: 'Inland Revenue Department', voucher: '790050509578', date: '2079.10.20', bank: 'हाइल्याण्ड डिस्टिल...', fiscal: '2079.080', revenue: '11123', amount: '960', return: 'TDS' },
+                { office: 'Inland Revenue Department', voucher: '790050501462', date: '2079.10.24', bank: 'अमेरिश डिस्टिलरी (...', fiscal: '2079.080', revenue: '11123', amount: '960', return: 'TDS' },
+                { office: 'Large Taxpayer Office', voucher: '790050497973', date: '2079.10.29', bank: 'प्राईम इन्टरप्राइजनल ...', fiscal: '2079.080', revenue: '11123', amount: '960', return: 'TDS' },
+                { office: 'Inland Revenue Department', voucher: '800055585941', date: '2080.03.31', bank: 'आर स्टोर', fiscal: '2080.081', revenue: '11123', amount: '480', return: 'TDS' },
+                { office: 'IRD Kathmandu', voucher: '810234567', date: '2081.01.15', bank: 'NIC Asia Bank', fiscal: '2081.082', revenue: '11123', amount: '50000', return: 'Income Tax' },
+                { office: 'IRD Kathmandu', voucher: '810234568', date: '2081.02.10', bank: 'Global IME Bank', fiscal: '2081.082', revenue: '11123', amount: '25000', return: 'TDS' },
+                { office: 'IRD Lalitpur', voucher: '810234569', date: '2081.03.05', bank: 'Nabil Bank', fiscal: '2081.082', revenue: '11123', amount: '30000', return: 'Advance Tax' },
+                { office: 'IRD Pokhara', voucher: '810234570', date: '2081.04.20', bank: 'Standard Chartered Bank', fiscal: '2081.082', revenue: '11123', amount: '15000', return: 'TDS' },
+                { office: 'Large Taxpayer Office', voucher: '810234571', date: '2081.05.12', bank: 'Everest Bank', fiscal: '2081.082', revenue: '11123', amount: '45000', return: 'Income Tax' },
+                { office: 'IRD Biratnagar', voucher: '810234572', date: '2081.06.08', bank: 'Himalayan Bank', fiscal: '2081.082', revenue: '11123', amount: '8500', return: 'TDS' },
+                { office: 'IRD Birgunj', voucher: '810234573', date: '2081.07.15', bank: 'Nepal SBI Bank', fiscal: '2081.082', revenue: '11123', amount: '12000', return: 'Advance Tax' },
+                { office: 'IRD Kathmandu', voucher: '810234574', date: '2081.08.22', bank: 'Sanima Bank', fiscal: '2081.082', revenue: '11123', amount: '35000', return: 'Income Tax' },
+                { office: 'IRD Dharan', voucher: '820345678', date: '2082.01.10', bank: 'Prabhu Bank', fiscal: '2082.083', revenue: '11123', amount: '60000', return: 'Income Tax' },
+                { office: 'IRD Kathmandu', voucher: '820345679', date: '2082.02.15', bank: 'Mega Bank', fiscal: '2082.083', revenue: '11123', amount: '42000', return: 'TDS' },
+                { office: 'Large Taxpayer Office', voucher: '820345680', date: '2082.03.20', bank: 'Citizens Bank International', fiscal: '2082.083', revenue: '11123', amount: '75000', return: 'Income Tax' },
+                { office: 'IRD Lalitpur', voucher: '820345681', date: '2082.04.05', bank: 'Prime Commercial Bank', fiscal: '2082.083', revenue: '11123', amount: '28000', return: 'Advance Tax' },
+                { office: 'IRD Bhaktapur', voucher: '820345682', date: '2082.05.12', bank: 'Sunrise Bank', fiscal: '2082.083', revenue: '11123', amount: '18500', return: 'TDS' },
+                { office: 'IRD Pokhara', voucher: '820345683', date: '2082.06.18', bank: 'Nepal Bank Limited', fiscal: '2082.083', revenue: '11123', amount: '52000', return: 'Income Tax' },
+                { office: 'IRD Hetauda', voucher: '820345684', date: '2082.07.25', bank: 'Agricultural Development Bank', fiscal: '2082.083', revenue: '11123', amount: '14200', return: 'TDS' },
+                { office: 'IRD Butwal', voucher: '820345685', date: '2082.08.30', bank: 'Machhapuchhre Bank', fiscal: '2082.083', revenue: '11123', amount: '31000', return: 'Advance Tax' }
+            ];
+            
+            // Filter data by selected fiscal year
+            const filteredData = allData.filter(row => row.fiscal === selectedYear);
+            
+            if (filteredData.length === 0) {
+                alert('No data available to export for the selected fiscal year.');
+                return;
+            }
+            
+            // Calculate total
+            let total = 0;
+            filteredData.forEach(row => {
+                total += parseFloat(row.amount.replace(/,/g, ''));
+            });
+            
+            // Prepare Excel data
+            const excelData = [];
+            
+            // Add header information
+            excelData.push(['करदाताको अनुसुची १० का भौचरहरु']);
+            excelData.push(['Taxpayer Annex 10 Vouchers']);
+            excelData.push([]);
+            excelData.push(['PAN Number:', panNumber]);
+            excelData.push(['Taxpayer Name:', taxpayerName]);
+            excelData.push(['Fiscal Year:', selectedYear]);
+            excelData.push([]);
+            
+            // Add table headers
+            excelData.push(['S.N.', 'Tax Office', 'Voucher No', 'Voucher Date', 'Bank', 'Fiscal Year', 'Revenue Account', 'Amount', 'Tax Return']);
+            
+            // Add data rows
+            filteredData.forEach((row, index) => {
+                excelData.push([
+                    index + 1,
+                    row.office,
+                    row.voucher,
+                    row.date,
+                    row.bank,
+                    row.fiscal,
+                    row.revenue,
+                    parseFloat(row.amount.replace(/,/g, '')),
+                    row.return
+                ]);
+            });
+            
+            // Add total row
+            excelData.push([]);
+            excelData.push(['', '', '', '', '', '', 'Total Credit', total, '']);
+            excelData.push([]);
+            excelData.push(['*TDS deposited by withholding agent.']);
+            
+            // Create workbook and worksheet
+            const wb = XLSX.utils.book_new();
+            const ws = XLSX.utils.aoa_to_sheet(excelData);
+            
+            // Set column widths
+            ws['!cols'] = [
+                { wch: 5 },  // S.N.
+                { wch: 30 }, // Tax Office
+                { wch: 15 }, // Voucher No
+                { wch: 15 }, // Voucher Date
+                { wch: 30 }, // Bank
+                { wch: 12 }, // Fiscal Year
+                { wch: 18 }, // Revenue Account
+                { wch: 12 }, // Amount
+                { wch: 15 }  // Tax Return
+            ];
+            
+            // Add worksheet to workbook
+            XLSX.utils.book_append_sheet(wb, ws, 'Annex 10 Vouchers');
+            
+            // Generate filename
+            const filename = `Annex_10_Vouchers_${selectedYear}_${panNumber}.xlsx`;
+            
+            // Save file
+            XLSX.writeFile(wb, filename);
+        }
+        
+        function loadDemoData() {
+            const tbody = document.getElementById('voucherTableBody');
+            const selectedYear = document.getElementById('fiscalYear').value;
+            
+            const allData = [
+                { office: 'Inland Revenue Department', voucher: '57784241', date: '2080.10.02', bank: 'Rastriya Banijya Bank', fiscal: '2079.080', revenue: '11123', amount: '3749', return: 'CREDIT' },
+                { office: 'Inland Revenue Department', voucher: '58302534', date: '2080.10.02', bank: 'Rastriya Banijya Bank', fiscal: '2079.080', revenue: '11123', amount: '5000', return: 'CREDIT' },
+                { office: 'Inland Revenue Department', voucher: '58302535', date: '2080.10.02', bank: 'Rastriya Banijya Bank', fiscal: '2079.080', revenue: '11123', amount: '528', return: 'CREDIT' },
+                { office: 'Large Taxpayer Office', voucher: '790050470792', date: '2079.10.15', bank: 'सुनार्इट लिम्टेड प्रा...', fiscal: '2079.080', revenue: '11123', amount: '480', return: 'TDS' },
+                { office: 'Inland Revenue Department', voucher: '790050509578', date: '2079.10.20', bank: 'हाइल्याण्ड डिस्टिल...', fiscal: '2079.080', revenue: '11123', amount: '960', return: 'TDS' },
+                { office: 'Inland Revenue Department', voucher: '790050501462', date: '2079.10.24', bank: 'अमेरिश डिस्टिलरी (...', fiscal: '2079.080', revenue: '11123', amount: '960', return: 'TDS' },
+                { office: 'Large Taxpayer Office', voucher: '790050497973', date: '2079.10.29', bank: 'प्राईम इन्टरप्राइजनल ...', fiscal: '2079.080', revenue: '11123', amount: '960', return: 'TDS' },
+                { office: 'Inland Revenue Department', voucher: '800055585941', date: '2080.03.31', bank: 'आर स्टोर', fiscal: '2080.081', revenue: '11123', amount: '480', return: 'TDS' },
+                { office: 'IRD Kathmandu', voucher: '810234567', date: '2081.01.15', bank: 'NIC Asia Bank', fiscal: '2081.082', revenue: '11123', amount: '50000', return: 'Income Tax' },
+                { office: 'IRD Kathmandu', voucher: '810234568', date: '2081.02.10', bank: 'Global IME Bank', fiscal: '2081.082', revenue: '11123', amount: '25000', return: 'TDS' },
+                { office: 'IRD Lalitpur', voucher: '810234569', date: '2081.03.05', bank: 'Nabil Bank', fiscal: '2081.082', revenue: '11123', amount: '30000', return: 'Advance Tax' },
+                { office: 'IRD Pokhara', voucher: '810234570', date: '2081.04.20', bank: 'Standard Chartered Bank', fiscal: '2081.082', revenue: '11123', amount: '15000', return: 'TDS' },
+                { office: 'Large Taxpayer Office', voucher: '810234571', date: '2081.05.12', bank: 'Everest Bank', fiscal: '2081.082', revenue: '11123', amount: '45000', return: 'Income Tax' },
+                { office: 'IRD Biratnagar', voucher: '810234572', date: '2081.06.08', bank: 'Himalayan Bank', fiscal: '2081.082', revenue: '11123', amount: '8500', return: 'TDS' },
+                { office: 'IRD Birgunj', voucher: '810234573', date: '2081.07.15', bank: 'Nepal SBI Bank', fiscal: '2081.082', revenue: '11123', amount: '12000', return: 'Advance Tax' },
+                { office: 'IRD Kathmandu', voucher: '810234574', date: '2081.08.22', bank: 'Sanima Bank', fiscal: '2081.082', revenue: '11123', amount: '35000', return: 'Income Tax' },
+                { office: 'IRD Dharan', voucher: '820345678', date: '2082.01.10', bank: 'Prabhu Bank', fiscal: '2082.083', revenue: '11123', amount: '60000', return: 'Income Tax' },
+                { office: 'IRD Kathmandu', voucher: '820345679', date: '2082.02.15', bank: 'Mega Bank', fiscal: '2082.083', revenue: '11123', amount: '42000', return: 'TDS' },
+                { office: 'Large Taxpayer Office', voucher: '820345680', date: '2082.03.20', bank: 'Citizens Bank International', fiscal: '2082.083', revenue: '11123', amount: '75000', return: 'Income Tax' },
+                { office: 'IRD Lalitpur', voucher: '820345681', date: '2082.04.05', bank: 'Prime Commercial Bank', fiscal: '2082.083', revenue: '11123', amount: '28000', return: 'Advance Tax' },
+                { office: 'IRD Bhaktapur', voucher: '820345682', date: '2082.05.12', bank: 'Sunrise Bank', fiscal: '2082.083', revenue: '11123', amount: '18500', return: 'TDS' },
+                { office: 'IRD Pokhara', voucher: '820345683', date: '2082.06.18', bank: 'Nepal Bank Limited', fiscal: '2082.083', revenue: '11123', amount: '52000', return: 'Income Tax' },
+                { office: 'IRD Hetauda', voucher: '820345684', date: '2082.07.25', bank: 'Agricultural Development Bank', fiscal: '2082.083', revenue: '11123', amount: '14200', return: 'TDS' },
+                { office: 'IRD Butwal', voucher: '820345685', date: '2082.08.30', bank: 'Machhapuchhre Bank', fiscal: '2082.083', revenue: '11123', amount: '31000', return: 'Advance Tax' }
+            ];
+            
+            // Filter data by selected fiscal year
+            const filteredData = allData.filter(row => row.fiscal === selectedYear);
+            
+            if (filteredData.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="9" style="text-align: center; padding: 20px; color: #999;">No data available</td></tr>';
+                document.getElementById('totalCredit').value = '0.00';
+                return;
+            }
+            
+            let html = '';
+            let total = 0;
+            
+            filteredData.forEach((row, index) => {
+                const amount = parseFloat(row.amount.replace(/,/g, ''));
+                total += amount;
+                
+                html += `
+                    <tr>
+                        <td style="text-align: center;">${index + 1}</td>
+                        <td>${row.office}</td>
+                        <td>${row.voucher}</td>
+                        <td>${row.date}</td>
+                        <td>${row.bank}</td>
+                        <td>${row.fiscal}</td>
+                        <td>${row.revenue}</td>
+                        <td style="text-align: right;">${amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                        <td>${row.return}</td>
+                    </tr>
+                `;
+            });
+            
+            tbody.innerHTML = html;
+            document.getElementById('totalCredit').value = total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+    </script>
+</body>
+</html>

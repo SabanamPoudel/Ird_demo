@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CBMS External Portal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: #198cce;
+            color: white;
+            padding: 12px 40px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header-logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-title {
+            flex: 1;
+            text-align: center;
+        }
+
+        .header-title h1 {
+            font-size: 20px;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 20px;
+        }
+
+        .login-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+            width: 100%;
+            max-width: 420px;
+            overflow: hidden;
+        }
+
+        .login-header {
+            background: white;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 3px solid #2196F3;
+        }
+
+        .login-title {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 90px;
+            height: 90px;
+            border: 3px solid #2196F3;
+            border-radius: 50%;
+            margin: 0 auto;
+        }
+
+        .login-title h2 {
+            font-size: 18px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .login-body {
+            padding: 20px 30px 25px;
+        }
+
+        .user-type {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 15px;
+            justify-content: center;
+        }
+
+        .radio-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .radio-group input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: #2196F3;
+        }
+
+        .radio-group label {
+            font-size: 13px;
+            color: #333;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-group label {
+            display: inline-block;
+            min-width: 90px;
+            margin-bottom: 0;
+            color: #333;
+            font-size: 12px;
+            font-weight: 500;
+            text-align: left;
+        }
+
+        .form-group label .required {
+            color: #e53935;
+            margin-right: 3px;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            flex: 1;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 10px;
+            color: #999;
+            font-size: 14px;
+            pointer-events: none;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="password"] {
+            width: 100%;
+            padding: 8px 8px 8px 34px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 13px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input[type="text"]:focus,
+        .form-group input[type="password"]:focus {
+            outline: none;
+            border-color: #2196F3;
+        }
+
+        .form-group input::placeholder {
+            color: #aaa;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            color: #999;
+            cursor: pointer;
+            font-size: 16px;
+            user-select: none;
+        }
+
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .remember-me input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+            accent-color: #2196F3;
+        }
+
+        .remember-me label {
+            font-size: 12px;
+            color: #333;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .forgot-password {
+            color: #2196F3;
+            text-decoration: none;
+            font-size: 12px;
+            transition: color 0.3s;
+        }
+
+        .forgot-password:hover {
+            color: #1976D2;
+            text-decoration: underline;
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 10px;
+            background: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .login-button:hover {
+            background: #1976D2;
+        }
+
+        .login-button:active {
+            background: #1565C0;
+        }
+
+        .footer {
+            background: #198cce;
+            color: white;
+            padding: 10px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+        }
+
+        .footer a {
+            color: white;
+            text-decoration: none;
+            font-size: 13px;
+            transition: opacity 0.3s;
+        }
+
+        .footer a:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 10px 20px;
+            }
+
+            .header-title h1 {
+                font-size: 16px;
+            }
+
+            .login-body {
+                padding: 15px 25px 20px;
+            }
+
+            .user-type {
+                gap: 25px;
+            }
+
+            .footer {
+                padding: 8px 20px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="header-logo">
+            <img src="../../media/resources/header-slogan.png" alt="Government of Nepal - Ministry of Finance - Inland Revenue Department" style="height: 50px;">
+        </div>
+        <div class="header-title">
+            <h1>Welcome to Central Billing Monitoring System</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="login-container">
+            <div class="login-header">
+                <div class="login-title">
+                    <h2>Login</h2>
+                </div>
+            </div>
+            
+            <div class="login-body">
+                <form id="cbmsLoginForm">
+                    <!-- User Type Selection -->
+                    <div class="user-type">
+                        <div class="radio-group">
+                            <input type="radio" id="adminUser" name="userType" value="admin" checked>
+                            <label for="adminUser">Admin User</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" id="cbmsUser" name="userType" value="cbms">
+                            <label for="cbmsUser">CBMS User</label>
+                        </div>
+                    </div>
+
+                    <!-- PAN Number -->
+                    <div class="form-group">
+                        <label><span class="required">*</span> Pan No :</label>
+                        <div class="input-wrapper">
+                            <span class="input-icon">👤</span>
+                            <input type="text" id="panNo" name="panNo" placeholder="panNo" maxlength="9" required>
+                        </div>
+                    </div>
+
+                    <!-- Username -->
+                    <div class="form-group">
+                        <label><span class="required">*</span> Username :</label>
+                        <div class="input-wrapper">
+                            <span class="input-icon">👤</span>
+                            <input type="text" id="username" name="username" placeholder="Username" required>
+                        </div>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="form-group">
+                        <label><span class="required">*</span> Password :</label>
+                        <div class="input-wrapper">
+                            <span class="input-icon">🔒</span>
+                            <input type="password" id="password" name="password" placeholder="Password" required>
+                            <span class="toggle-password" onclick="togglePassword()">👁️</span>
+                        </div>
+                    </div>
+
+                    <!-- Remember Me & Forgot Password -->
+                    <div class="form-options">
+                        <div class="remember-me">
+                            <input type="checkbox" id="rememberMe" name="rememberMe" checked>
+                            <label for="rememberMe">Remember me</label>
+                        </div>
+                        <a href="#" class="forgot-password">Forgot password</a>
+                    </div>
+
+                    <!-- Login Button -->
+                    <button type="submit" class="login-button">Log in</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div>Powered by PCS</div>
+        <a href="#" onclick="goToInternalPortal()">Go to Internal Portal</a>
+    </div>
+
+    <script>
+        // Toggle password visibility
+        function togglePassword() {
+            const passwordField = document.getElementById('password');
+            const toggleIcon = document.querySelector('.toggle-password');
+            
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                toggleIcon.textContent = '🙈';
+            } else {
+                passwordField.type = 'password';
+                toggleIcon.textContent = '👁️';
+            }
+        }
+
+        // Handle form submission
+        document.getElementById('cbmsLoginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                userType: document.querySelector('input[name="userType"]:checked').value,
+                panNo: document.getElementById('panNo').value,
+                username: document.getElementById('username').value,
+                password: document.getElementById('password').value,
+                rememberMe: document.getElementById('rememberMe').checked
+            };
+
+            // Validation
+            if (!formData.panNo || !formData.username || !formData.password) {
+                alert('कृपया सबै आवश्यक जानकारी भर्नुहोस्। (Please fill all required fields)');
+                return;
+            }
+
+            // PAN validation (9 digits)
+            if (formData.panNo.length !== 9 || !/^\d+$/.test(formData.panNo)) {
+                alert('स्थायी लेखा नम्बर ९ अंकको हुनुपर्छ। (PAN Number must be 9 digits)');
+                return;
+            }
+
+            // Log the login attempt
+            console.log('=== CBMS Login Attempt ===');
+            console.log('User Type:', formData.userType);
+            console.log('PAN Number:', formData.panNo);
+            console.log('Username:', formData.username);
+            console.log('Remember Me:', formData.rememberMe);
+            console.log('Timestamp:', new Date().toLocaleString());
+            console.log('==========================');
+
+            // Save to localStorage
+            localStorage.setItem('cbmsLoginData', JSON.stringify(formData));
+            
+            // Redirect to CBMS dashboard
+            console.log('CBMS system authenticated. Redirecting to CBMS dashboard...');
+            window.location.href = 'cbms_dashboard.html';
+        });
+
+        // Handle PAN number input (only numbers)
+        document.getElementById('panNo').addEventListener('input', function() {
+            this.value = this.value.replace(/[^0-9]/g, '');
+            if (this.value.length > 9) {
+                this.value = this.value.substring(0, 9);
+            }
+        });
+
+        // Go to Internal Portal
+        function goToInternalPortal() {
+            alert('यो सुविधा हाल उपलब्ध छैन। (This feature is currently not available.)');
+        }
+
+        // Load remembered credentials if available
+        window.addEventListener('DOMContentLoaded', function() {
+            const savedData = localStorage.getItem('cbmsLoginData');
+            if (savedData) {
+                try {
+                    const data = JSON.parse(savedData);
+                    if (data.rememberMe) {
+                        document.getElementById('panNo').value = data.panNo || '';
+                        document.getElementById('username').value = data.username || '';
+                        document.querySelector(`input[name="userType"][value="${data.userType}"]`).checked = true;
+                    }
+                } catch (e) {
+                    console.error('Error loading saved credentials:', e);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

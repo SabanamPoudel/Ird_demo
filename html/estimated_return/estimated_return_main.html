@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estimated Return - IRD Nepal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #dfe9f6;
+            overflow: hidden;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100vh;
+            border: none;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <iframe id="mainFrame" src="estimated_return_form.html"></iframe>
+    <script>
+        // Pass URL parameters to iframe
+        window.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const submissionNo = urlParams.get('submissionNo');
+            const username = urlParams.get('username');
+            const panNo = urlParams.get('panNo');
+            
+            const iframe = document.getElementById('mainFrame');
+            if (submissionNo && username && panNo) {
+                iframe.src = `estimated_return_form.html?submissionNo=${submissionNo}&username=${username}&panNo=${panNo}`;
+            }
+        });
+    </script>
+</body>
+</html>
