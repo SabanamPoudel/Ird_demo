@@ -1044,7 +1044,7 @@ function initializeModals() {
             const total = parseFloat(document.getElementById('totalCreditAmount')?.textContent || '0');
             const creditField = document.querySelector('input[name="txtAdjCredit"]');
             if (creditField) {
-                creditField.value = total.toFixed(2);
+                creditField.value = Math.round(total);
                 // Trigger calculation after updating the field
                 const event = new Event('input', { bubbles: true });
                 creditField.dispatchEvent(event);
@@ -1117,7 +1117,7 @@ function initializeModals() {
             const total = parseFloat(document.getElementById('totalDebitAmount')?.textContent || '0');
             const debitField = document.querySelector('input[name="txtAdjDebit"]');
             if (debitField) {
-                debitField.value = total.toFixed(2);
+                debitField.value = Math.round(total);
                 // Trigger calculation after updating the field
                 const event = new Event('input', { bubbles: true });
                 debitField.dispatchEvent(event);
