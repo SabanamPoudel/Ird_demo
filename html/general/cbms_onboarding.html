@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OnBoarding Add - CBMS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f0f2f5;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: #198cce;
+            color: white;
+            padding: 12px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-info {
+            font-size: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .logout-btn {
+            background: white;
+            color: #198cce;
+            border: none;
+            padding: 6px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #f0f0f0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .ant-layout {
+            display: flex;
+            min-height: calc(100vh - 60px);
+        }
+
+        .ant-layout-sider {
+            background: #2F4F7F;
+            width: 200px;
+            min-width: 200px;
+            flex: 0 0 200px;
+            max-width: 200px;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .ant-layout-sider-children {
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .ant-menu {
+            background: #2F4F7F;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .ant-menu-item {
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            height: 40px;
+            line-height: 40px;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: white;
+            font-size: 14px;
+        }
+
+        .ant-menu-item:hover {
+            background: #4A6FA5;
+            color: white;
+        }
+
+        .ant-menu-item.active {
+            background: #4A6FA5;
+        }
+
+        .ant-menu-item-icon {
+            font-size: 16px;
+            margin-right: 10px;
+        }
+
+        .ant-menu-submenu-title {
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            height: 40px;
+            line-height: 40px;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: white;
+            font-size: 14px;
+            position: relative;
+        }
+
+        .ant-menu-submenu-title:hover {
+            background: #4A6FA5;
+            color: white;
+        }
+
+        .ant-menu-submenu-arrow {
+            position: absolute;
+            right: 16px;
+            transition: transform 0.3s;
+            color: white;
+        }
+
+        .ant-menu-submenu-arrow::before {
+            content: '▶';
+            font-size: 10px;
+        }
+
+        .ant-menu-submenu-open .ant-menu-submenu-arrow {
+            transform: rotate(90deg);
+        }
+
+        .ant-menu-sub {
+            list-style: none;
+            padding: 0;
+            background: #7691C7;
+            display: none;
+        }
+
+        .ant-menu-submenu-open .ant-menu-sub {
+            display: block;
+        }
+
+        .ant-menu-sub .ant-menu-item {
+            padding-left: 48px;
+            color: white;
+        }
+
+        .ant-menu-sub .ant-menu-item:hover {
+            background: #8AA5D9;
+            color: white;
+        }
+
+        .ant-layout-content {
+            flex: 1;
+            padding: 24px;
+            background: #f0f2f5;
+        }
+
+        .ant-breadcrumb {
+            margin-bottom: 16px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .ant-breadcrumb a {
+            color: rgba(0, 0, 0, 0.45);
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .ant-breadcrumb a:hover {
+            color: #1890ff;
+        }
+
+        .ant-breadcrumb-separator {
+            margin: 0 8px;
+            color: rgba(0, 0, 0, 0.45);
+        }
+
+        .ant-form {
+            background: white;
+            padding: 24px;
+            border-radius: 2px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+        }
+
+        .form-title {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .ant-row {
+            display: flex;
+            flex-wrap: wrap;
+            margin-left: -6px;
+            margin-right: -6px;
+            row-gap: 16px;
+        }
+
+        .ant-col {
+            padding-left: 6px;
+            padding-right: 6px;
+        }
+
+        .ant-col-8 {
+            flex: 0 0 33.33%;
+            max-width: 33.33%;
+        }
+
+        .ant-col-24 {
+            flex: 0 0 100%;
+            max-width: 100%;
+        }
+
+        .ant-form-item {
+            margin-bottom: 16px;
+        }
+
+        .ant-form-item-label {
+            margin-bottom: 8px;
+        }
+
+        .ant-form-item-label label {
+            font-size: 14px;
+            color: rgba(0, 0, 0, 0.85);
+        }
+
+        .ant-form-item-required::before {
+            content: '* ';
+            color: #ff4d4f;
+            margin-right: 4px;
+        }
+
+        .ant-select,
+        .ant-input,
+        .ant-input-textarea textarea {
+            width: 100%;
+            padding: 4px 11px;
+            font-size: 14px;
+            border: 1px solid #d9d9d9;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        .ant-select:hover,
+        .ant-input:hover,
+        .ant-input-textarea textarea:hover {
+            border-color: #40a9ff;
+        }
+
+        .ant-select:focus,
+        .ant-input:focus,
+        .ant-input-textarea textarea:focus {
+            border-color: #40a9ff;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+        }
+
+        .ant-input-textarea textarea {
+            resize: vertical;
+            min-height: 140px;
+        }
+
+        .ant-tabs {
+            border: 1px solid #ccc;
+            padding: 2em;
+            margin-bottom: 1em;
+            height: 30em;
+            overflow: auto;
+        }
+
+        .ant-tabs-nav {
+            border-bottom: 1px solid #f0f0f0;
+            margin-bottom: 16px;
+        }
+
+        .ant-tabs-tab {
+            padding: 12px 16px;
+            cursor: pointer;
+            border: 1px solid transparent;
+            border-bottom: none;
+            background: #fafafa;
+            margin-right: 2px;
+            display: inline-block;
+        }
+
+        .ant-tabs-tab-active {
+            background: white;
+            border-color: #f0f0f0;
+            border-bottom-color: white;
+            color: #1890ff;
+        }
+
+        .ant-btn {
+            padding: 4px 15px;
+            font-size: 14px;
+            border-radius: 2px;
+            border: 1px solid #d9d9d9;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .ant-btn:hover {
+            color: #40a9ff;
+            border-color: #40a9ff;
+        }
+
+        .ant-btn-primary {
+            background: #1890ff;
+            border-color: #1890ff;
+            color: white;
+        }
+
+        .ant-btn-primary:hover {
+            background: #40a9ff;
+            border-color: #40a9ff;
+        }
+
+        .ant-btn-primary:disabled {
+            background: #f5f5f5;
+            border-color: #d9d9d9;
+            color: rgba(0, 0, 0, 0.25);
+            cursor: not-allowed;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 16px;
+        }
+
+        .table-head {
+            background: #fafafa;
+            padding: 16px;
+            text-align: left;
+            border-bottom: 1px solid #f0f0f0;
+            font-weight: 500;
+        }
+
+        .ant-checkbox-wrapper {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .ant-checkbox {
+            position: relative;
+            width: 16px;
+            height: 16px;
+            margin-right: 8px;
+        }
+
+        .ant-checkbox-input {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+
+        .button-row {
+            margin-top: 24px;
+            display: flex;
+            gap: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .ant-col-8 {
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="header-left">
+            <img src="../../media/resources/header-slogan.png" alt="IRD" style="height: 50px;">
+            <h1 style="font-size: 20px; font-weight: 400;">Central Billing Monitoring System</h1>
+        </div>
+        <div class="header-right">
+            <div class="user-info">
+                <div style="font-weight: 500;" id="userDisplay">Admin User</div>
+                <div style="opacity: 0.9;" id="panDisplay">PAN: 610015263</div>
+            </div>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+    </div>
+
+    <!-- Main Layout -->
+    <section class="ant-layout">
+        <!-- Sidebar -->
+        <aside class="ant-layout-sider" id="sidebar">
+            <div class="ant-layout-sider-children">
+                <ul class="ant-menu">
+                    <li class="ant-menu-item active">
+                        <span class="ant-menu-item-icon">🔌</span>
+                        <span class="ant-menu-title-content">
+                            <a href="cbms_onboarding.html" style="color: inherit; text-decoration: none;">Onboarding</a>
+                        </span>
+                    </li>
+                    
+                    <li class="ant-menu-submenu">
+                        <div class="ant-menu-submenu-title" onclick="toggleSubmenu(this)">
+                            <span class="ant-menu-item-icon">📊</span>
+                            <span class="ant-menu-title-content">Billing Register</span>
+                            <span class="ant-menu-submenu-arrow">▶</span>
+                        </div>
+                        <ul class="ant-menu-sub">
+                            <li class="ant-menu-item">
+                                <span class="ant-menu-title-content">Upload</span>
+                            </li>
+                            <li class="ant-menu-item">
+                                <span class="ant-menu-title-content">
+                                    <a href="cbms_billing_download.html" style="color: inherit; text-decoration: none;">Download Format</a>
+                                </span>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <li class="ant-menu-submenu">
+                        <div class="ant-menu-submenu-title" onclick="toggleSubmenu(this)">
+                            <span class="ant-menu-item-icon">📄</span>
+                            <span class="ant-menu-title-content">Report</span>
+                            <span class="ant-menu-submenu-arrow">▶</span>
+                        </div>
+                        <ul class="ant-menu-sub">
+                            <li class="ant-menu-item">
+                                <span class="ant-menu-title-content">Sales Report</span>
+                            </li>
+                            <li class="ant-menu-item">
+                                <span class="ant-menu-title-content">Purchase Report</span>
+                            </li>
+                            <li class="ant-menu-item">
+                                <span class="ant-menu-title-content">Tax Summary</span>
+                            </li>
+                            <li class="ant-menu-item">
+                                <span class="ant-menu-title-content">Monthly Report</span>
+                            </li>
+                            <li class="ant-menu-item">
+                                <span class="ant-menu-title-content">Quarterly Report</span>
+                            </li>
+                            <li class="ant-menu-item">
+                                <span class="ant-menu-title-content">Annual Report</span>
+                            </li>
+                            <li class="ant-menu-item">
+                                <span class="ant-menu-title-content">Custom Report</span>
+                            </li>
+                            <li class="ant-menu-item">
+                                <span class="ant-menu-title-content">Export Data</span>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <li class="ant-menu-item">
+                        <span class="ant-menu-item-icon">💬</span>
+                        <span class="ant-menu-title-content">Grievance</span>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="ant-layout-content">
+            <!-- Breadcrumbs -->
+            <div class="ant-breadcrumb">
+                <span>
+                    <a href="cbms_dashboard.html">
+                        <span>🏠</span>
+                        <span>Home</span>
+                    </a>
+                    <span class="ant-breadcrumb-separator">/</span>
+                </span>
+                <span>
+                    <a href="#">
+                        <span>👤</span>
+                        <span>OnBoarding List</span>
+                    </a>
+                    <span class="ant-breadcrumb-separator">/</span>
+                </span>
+                <span>
+                    <span>OnBoarding Add</span>
+                    <span class="ant-breadcrumb-separator">/</span>
+                </span>
+            </div>
+
+            <!-- Form -->
+            <form class="ant-form" id="onboardingForm">
+                <div class="form-title">
+                    <span>OnBoarding Add</span>
+                </div>
+
+                <div class="ant-row">
+                    <!-- OnBoarding Type -->
+                    <div class="ant-col ant-col-8">
+                        <div class="ant-form-item">
+                            <div class="ant-form-item-label">
+                                <label class="ant-form-item-required">OnBoarding Type</label>
+                            </div>
+                            <div class="ant-form-item-control">
+                                <select class="ant-select" id="onBoardingType" required>
+                                    <option value="">Select OnBoarding</option>
+                                    <option value="new">New Registration</option>
+                                    <option value="renewal">Renewal</option>
+                                    <option value="update">Update Information</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Business -->
+                    <div class="ant-col ant-col-8">
+                        <div class="ant-form-item">
+                            <div class="ant-form-item-label">
+                                <label>Business</label>
+                            </div>
+                            <div class="ant-form-item-control">
+                                <select class="ant-select" id="businessId">
+                                    <option value="">Select Business</option>
+                                    <option value="retail">Retail Trade</option>
+                                    <option value="wholesale">Wholesale Trade</option>
+                                    <option value="manufacturing">Manufacturing</option>
+                                    <option value="services">Services</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Branch -->
+                    <div class="ant-col ant-col-8">
+                        <div class="ant-form-item">
+                            <div class="ant-form-item-label">
+                                <label>Branch</label>
+                            </div>
+                            <div class="ant-form-item-control">
+                                <select class="ant-select" id="branchId">
+                                    <option value="">Select Branch</option>
+                                    <option value="kathmandu">Kathmandu</option>
+                                    <option value="pokhara">Pokhara</option>
+                                    <option value="biratnagar">Biratnagar</option>
+                                    <option value="birgunj">Birgunj</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Remarks -->
+                    <div class="ant-col ant-col-24">
+                        <div class="ant-form-item">
+                            <div class="ant-form-item-label">
+                                <label>Remarks</label>
+                            </div>
+                            <div class="ant-form-item-control">
+                                <div class="ant-input-textarea">
+                                    <textarea id="remarks" placeholder="Remarks" maxlength="10000"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Documents Tab -->
+                    <div class="ant-col ant-col-24">
+                        <div class="ant-tabs">
+                            <div class="ant-tabs-nav">
+                                <div class="ant-tabs-tab ant-tabs-tab-active">Documents</div>
+                            </div>
+                            <div class="ant-tabs-content">
+                                <div class="ant-row">
+                                    <div class="ant-col ant-col-24">
+                                        <span style="color: red;">Document should be in pdf format</span>
+                                        <button type="button" class="ant-btn ant-btn-primary" style="float: right; margin-bottom: 1em;" onclick="addDocument()">
+                                            <span>+</span>
+                                            <span>Add Document</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th class="table-head">SN</th>
+                                            <th class="table-head">Name</th>
+                                            <th class="table-head">File</th>
+                                            <th class="table-head">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="documentsTable">
+                                        <tr>
+                                            <td colspan="4" style="text-align: center; padding: 24px; color: rgba(0,0,0,0.25);">
+                                                No documents added yet
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Terms Checkbox -->
+                    <div class="ant-col ant-col-24">
+                        <label class="ant-checkbox-wrapper">
+                            <input type="checkbox" id="agreeTerms" class="ant-checkbox-input">
+                            <span> I Agree To The Terms And Conditions</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Buttons -->
+                <div class="button-row">
+                    <button type="submit" class="ant-btn ant-btn-primary" id="submitBtn" disabled>
+                        <span>💾</span>
+                        <span>Submit</span>
+                    </button>
+                    <button type="button" class="ant-btn" onclick="resetForm()">
+                        <span>🔄</span>
+                        <span>Reset</span>
+                    </button>
+                </div>
+            </form>
+        </main>
+    </section>
+
+    <script>
+        // Load user data
+        window.addEventListener('DOMContentLoaded', function() {
+            const loginData = JSON.parse(localStorage.getItem('cbmsLoginData') || '{}');
+            
+            if (loginData.panNo) {
+                document.getElementById('panDisplay').textContent = 'PAN: ' + loginData.panNo;
+            }
+            
+            if (loginData.userType) {
+                const userTypeText = loginData.userType === 'admin' ? 'Admin User' : 'CBMS User';
+                document.getElementById('userDisplay').textContent = userTypeText;
+            }
+        });
+
+        // Enable submit button when terms are agreed
+        document.getElementById('agreeTerms').addEventListener('change', function() {
+            document.getElementById('submitBtn').disabled = !this.checked;
+        });
+
+        // Add document functionality
+        let docCount = 0;
+        function addDocument() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.pdf';
+            input.onchange = function(e) {
+                const file = e.target.files[0];
+                if (file && file.type === 'application/pdf') {
+                    docCount++;
+                    addDocumentRow(docCount, file.name, file);
+                } else {
+                    alert('Please select a PDF file only.');
+                }
+            };
+            input.click();
+        }
+
+        function addDocumentRow(sn, fileName, file) {
+            const tbody = document.getElementById('documentsTable');
+            if (tbody.querySelector('td[colspan="4"]')) {
+                tbody.innerHTML = '';
+            }
+
+            const row = tbody.insertRow();
+            row.innerHTML = `
+                <td style="padding: 12px; border-bottom: 1px solid #f0f0f0;">${sn}</td>
+                <td style="padding: 12px; border-bottom: 1px solid #f0f0f0;">
+                    <input type="text" class="ant-input" value="Document ${sn}" style="width: 200px;">
+                </td>
+                <td style="padding: 12px; border-bottom: 1px solid #f0f0f0;">${fileName}</td>
+                <td style="padding: 12px; border-bottom: 1px solid #f0f0f0;">
+                    <button type="button" class="ant-btn" onclick="this.closest('tr').remove()">
+                        <span>🗑️</span>
+                        <span>Delete</span>
+                    </button>
+                </td>
+            `;
+        }
+
+        // Form submission
+        document.getElementById('onboardingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                onBoardingType: document.getElementById('onBoardingType').value,
+                business: document.getElementById('businessId').value,
+                branch: document.getElementById('branchId').value,
+                remarks: document.getElementById('remarks').value,
+                timestamp: new Date().toLocaleString()
+            };
+
+            console.log('OnBoarding Form Submitted:', formData);
+            alert('OnBoarding request submitted successfully!');
+            resetForm();
+        });
+
+        // Reset form
+        function resetForm() {
+            document.getElementById('onboardingForm').reset();
+            document.getElementById('documentsTable').innerHTML = `
+                <tr>
+                    <td colspan="4" style="text-align: center; padding: 24px; color: rgba(0,0,0,0.25);">
+                        No documents added yet
+                    </td>
+                </tr>
+            `;
+            docCount = 0;
+            document.getElementById('submitBtn').disabled = true;
+        }
+
+        // Toggle submenu
+        function toggleSubmenu(element) {
+            const submenu = element.parentElement;
+            submenu.classList.toggle('ant-menu-submenu-open');
+        }
+
+        // Logout
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                localStorage.removeItem('cbmsLoginData');
+                window.location.href = 'cbms_login.html';
+            }
+        }
+    </script>
+</body>
+</html>

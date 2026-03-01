@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Billing Register Download - CBMS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            background: #f0f2f5;
+        }
+
+        /* Header */
+        .header {
+            background: #198cce;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-section img {
+            height: 40px;
+        }
+
+        .header-title {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .user-name {
+            font-size: 14px;
+        }
+
+        .logout-btn {
+            background: white;
+            color: #198cce;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .logout-btn:hover {
+            background: #f0f0f0;
+        }
+
+        /* Layout */
+        .ant-layout {
+            display: flex;
+            min-height: calc(100vh - 70px);
+        }
+
+        .ant-layout-sider {
+            width: 200px;
+            background: #2F4F7F;
+            min-height: 100%;
+        }
+
+        .ant-layout-sider-children {
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .ant-menu {
+            background: #2F4F7F;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .ant-menu-item {
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            height: 40px;
+            line-height: 40px;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: white;
+            font-size: 14px;
+        }
+
+        .ant-menu-item:hover {
+            background: #4A6FA5;
+            color: white;
+        }
+
+        .ant-menu-item.active {
+            background: #4A6FA5;
+        }
+
+        .ant-menu-item-icon {
+            font-size: 16px;
+            margin-right: 10px;
+        }
+
+        .ant-menu-submenu-title {
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            height: 40px;
+            line-height: 40px;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: white;
+            font-size: 14px;
+            position: relative;
+        }
+
+        .ant-menu-submenu-title:hover {
+            background: #4A6FA5;
+            color: white;
+        }
+
+        .ant-menu-submenu-arrow {
+            position: absolute;
+            right: 16px;
+            transition: transform 0.3s;
+            color: white;
+            font-size: 10px;
+        }
+
+        .ant-menu-submenu-open .ant-menu-submenu-arrow {
+            transform: rotate(90deg);
+        }
+
+        .ant-menu-sub {
+            list-style: none;
+            padding: 0;
+            background: #7691C7;
+            display: none;
+        }
+
+        .ant-menu-submenu-open .ant-menu-sub {
+            display: block;
+        }
+
+        .ant-menu-sub .ant-menu-item {
+            padding-left: 48px;
+            color: white;
+        }
+
+        .ant-menu-sub .ant-menu-item:hover {
+            background: #8AA5D9;
+            color: white;
+        }
+
+        .ant-layout-content {
+            flex: 1;
+            padding: 40px;
+            background: white;
+        }
+
+        /* Breadcrumb */
+        .ant-breadcrumb {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .ant-breadcrumb a {
+            color: #198cce;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .ant-breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .ant-breadcrumb-separator {
+            margin: 0 8px;
+            color: rgba(0, 0, 0, 0.45);
+        }
+
+        .anticon {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .anticon svg {
+            width: 1em;
+            height: 1em;
+            fill: currentColor;
+        }
+
+        /* Page Title Section */
+        .page-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .page-header h1 {
+            font-size: 32px;
+            font-weight: bold;
+            margin: 0 0 20px 0;
+            color: #000;
+        }
+
+        .validator-btn-container {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        /* Table */
+        .ant-table-wrapper {
+            background: white;
+        }
+
+        .ant-table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #e8e8e8;
+        }
+
+        .ant-table-container {
+            overflow-x: auto;
+        }
+
+        .ant-table-thead th {
+            background: #fafafa;
+            color: rgba(0, 0, 0, 0.85);
+            font-weight: 500;
+            text-align: left;
+            padding: 16px 24px;
+            border: 1px solid #e8e8e8;
+            font-size: 14px;
+        }
+
+        .ant-table-thead th:first-child {
+            text-align: center;
+        }
+
+        .ant-table-tbody td {
+            padding: 20px 24px;
+            border: 1px solid #e8e8e8;
+            color: rgba(0, 0, 0, 0.85);
+            font-size: 14px;
+            vertical-align: middle;
+        }
+
+        .ant-table-tbody td:first-child {
+            text-align: center;
+        }
+
+        .ant-table-tbody tr {
+            background: white;
+        }
+
+        .ant-table-tbody tr:nth-child(even) {
+            background: #fafafa;
+        }
+
+        .ant-table-tbody td.text-center {
+            text-align: center;
+        }
+
+        /* Button */
+        .ant-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            background: white;
+            border: 1px solid #d9d9d9;
+            border-radius: 2px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+            color: rgba(0, 0, 0, 0.85);
+        }
+
+        .ant-btn:hover {
+            color: #40a9ff;
+            border-color: #40a9ff;
+        }
+
+        .ant-btn-primary {
+            background: white;
+            color: rgba(0, 0, 0, 0.85);
+            border-color: #d9d9d9;
+        }
+
+        .ant-btn-primary:hover {
+            color: #40a9ff;
+            border-color: #40a9ff;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="logo-section">
+            <img src="../../media/resources/ird_logo.png" alt="IRD Logo" onerror="this.style.display='none'">
+            <div class="header-title">Central Billing Monitoring System</div>
+        </div>
+        <div class="user-info">
+            <span class="user-name">Welcome, <span id="userName">User</span></span>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+    </div>
+
+    <!-- Main Layout -->
+    <section class="ant-layout">
+        <!-- Sidebar -->
+        <aside class="ant-layout-sider" id="sidebar">
+            <div class="ant-layout-sider-children">
+                <ul class="ant-menu">
+                    <li class="ant-menu-item">
+                        <span class="ant-menu-item-icon">🔌</span>
+                        <span class="ant-menu-title-content">
+                            <a href="cbms_onboarding.html" style="color: inherit; text-decoration: none;">Onboarding</a>
+                        </span>
+                    </li>
+                    
+                    <li class="ant-menu-submenu ant-menu-submenu-open">
+                        <div class="ant-menu-submenu-title" onclick="toggleSubmenu(this)">
+                            <span class="ant-menu-item-icon">📊</span>
+                            <span class="ant-menu-title-content">Billing Register</span>
+                            <span class="ant-menu-submenu-arrow">▶</span>
+                        </div>
+                        <ul class="ant-menu-sub">
+                            <li class="ant-menu-item">
+                                <span class="ant-menu-title-content">Upload</span>
+                            </li>
+                            <li class="ant-menu-item active">
+                                <span class="ant-menu-title-content">
+                                    <a href="cbms_billing_download.html" style="color: inherit; text-decoration: none;">Download Format</a>
+                                </span>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <li class="ant-menu-submenu">
+                        <div class="ant-menu-submenu-title" onclick="toggleSubmenu(this)">
+                            <span class="ant-menu-item-icon">📄</span>
+                            <span class="ant-menu-title-content">Report</span>
+                            <span class="ant-menu-submenu-arrow">▶</span>
+                        </div>
+                        <ul class="ant-menu-sub">
+                            <li class="ant-menu-item">
+                                <span class="ant-menu-title-content">Sales Report</span>
+                            </li>
+                            <li class="ant-menu-item">
+                                <span class="ant-menu-title-content">Purchase Report</span>
+                            </li>
+                            <li class="ant-menu-item">
+                                <span class="ant-menu-title-content">Tax Summary</span>
+                            </li>
+                            <li class="ant-menu-item">
+                                <span class="ant-menu-title-content">Monthly Report</span>
+                            </li>
+                            <li class="ant-menu-item">
+                                <span class="ant-menu-title-content">Quarterly Report</span>
+                            </li>
+                            <li class="ant-menu-item">
+                                <span class="ant-menu-title-content">Annual Report</span>
+                            </li>
+                            <li class="ant-menu-item">
+                                <span class="ant-menu-title-content">Custom Report</span>
+                            </li>
+                            <li class="ant-menu-item">
+                                <span class="ant-menu-title-content">Export Data</span>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <li class="ant-menu-item">
+                        <span class="ant-menu-item-icon">💬</span>
+                        <span class="ant-menu-title-content">Grievance</span>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="ant-layout-content content">
+            <!-- Breadcrumb -->
+            <div class="ant-breadcrumb breadcrumbs">
+                <a class="ant-breadcrumb-link" href="cbms_dashboard.html">
+                    <span role="img" aria-label="home" class="anticon anticon-home">
+                        <svg viewBox="64 64 896 896" focusable="false" data-icon="home" width="1em" height="1em" fill="currentColor" aria-hidden="true">
+                            <path d="M946.5 505L560.1 118.8l-25.9-25.9a31.5 31.5 0 00-44.4 0L77.5 505a63.9 63.9 0 00-18.8 46c.4 35.2 29.7 63.3 64.9 63.3h42.5V940h691.8V614.3h43.4c17.1 0 33.2-6.7 45.3-18.8a63.6 63.6 0 0018.7-45.3c0-17-6.7-33.1-18.8-45.2zM568 868H456V664h112v204zm217.9-325.7V868H632V640c0-22.1-17.9-40-40-40H432c-22.1 0-40 17.9-40 40v228H238.1V542.3h-96l370-369.7 23.1 23.1L882 542.3h-96.1z"></path>
+                        </svg>
+                    </span>
+                    Home
+                </a>
+                <span class="ant-breadcrumb-separator">/</span>
+                <a class="ant-breadcrumb-link" href="#">
+                    <span role="img" aria-label="user" class="anticon anticon-user">
+                        <svg viewBox="64 64 896 896" focusable="false" data-icon="user" width="1em" height="1em" fill="currentColor" aria-hidden="true">
+                            <path d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"></path>
+                        </svg>
+                    </span>
+                    Billing Register Download
+                </a>
+                <span class="ant-breadcrumb-separator">/</span>
+                <span class="ant-breadcrumb-link">Download</span>
+            </div>
+
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1>Downloads</h1>
+            </div>
+
+            <!-- Validator Button -->
+            <div class="validator-btn-container">
+                <button type="button" class="ant-btn ant-btn-primary" onclick="downloadValidator()">
+                    <span role="img" aria-label="download" class="anticon anticon-download">
+                        <svg viewBox="64 64 896 896" focusable="false" data-icon="download" width="1em" height="1em" fill="currentColor" aria-hidden="true">
+                            <path d="M505.7 661a8 8 0 0012.6 0l112-141.7c4.1-5.2.4-12.9-6.3-12.9h-74.1V168c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v338.3H400c-6.7 0-10.4 7.7-6.3 12.9l112 141.8zM878 626h-60c-4.4 0-8 3.6-8 8v154H214V634c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v198c0 17.7 14.3 32 32 32h684c17.7 0 32-14.3 32-32V634c0-4.4-3.6-8-8-8z"></path>
+                        </svg>
+                    </span>
+                    <span>Download File Validator</span>
+                </button>
+            </div>
+
+            <!-- Downloads Table -->
+            <div class="ant-table-wrapper components-table-demo-nested">
+                <div class="ant-spin-nested-loading">
+                    <div class="ant-spin-container">
+                        <div class="ant-table">
+                            <div class="ant-table-container">
+                                <table>
+                                    <colgroup>
+                                        <col style="width: 100px;">
+                                        <col style="width: 250px;">
+                                        <col style="width: 300px;">
+                                        <col style="width: 300px;">
+                                    </colgroup>
+                                    <thead class="ant-table-thead">
+                                        <tr>
+                                            <th class="ant-table-cell">S.N</th>
+                                            <th class="ant-table-cell">Type</th>
+                                            <th class="ant-table-cell">Format Download</th>
+                                            <th class="ant-table-cell">Sample Download</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="ant-table-tbody">
+                                        <tr data-row-key="0" class="ant-table-row ant-table-row-level-0">
+                                            <td class="ant-table-cell">1</td>
+                                            <td class="ant-table-cell">Sales</td>
+                                            <td class="ant-table-cell">
+                                                <button type="button" class="ant-btn" onclick="downloadFile('sales_format')">
+                                                    <span role="img" aria-label="download" class="anticon anticon-download">
+                                                        <svg viewBox="64 64 896 896" focusable="false" data-icon="download" width="1em" height="1em" fill="currentColor" aria-hidden="true">
+                                                            <path d="M505.7 661a8 8 0 0012.6 0l112-141.7c4.1-5.2.4-12.9-6.3-12.9h-74.1V168c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v338.3H400c-6.7 0-10.4 7.7-6.3 12.9l112 141.8zM878 626h-60c-4.4 0-8 3.6-8 8v154H214V634c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v198c0 17.7 14.3 32 32 32h684c17.7 0 32-14.3 32-32V634c0-4.4-3.6-8-8-8z"></path>
+                                                        </svg>
+                                                    </span>
+                                                    <span>Download</span>
+                                                </button>
+                                            </td>
+                                            <td class="ant-table-cell">
+                                                <button type="button" class="ant-btn" onclick="downloadFile('sales_sample')">
+                                                    <span role="img" aria-label="download" class="anticon anticon-download">
+                                                        <svg viewBox="64 64 896 896" focusable="false" data-icon="download" width="1em" height="1em" fill="currentColor" aria-hidden="true">
+                                                            <path d="M505.7 661a8 8 0 0012.6 0l112-141.7c4.1-5.2.4-12.9-6.3-12.9h-74.1V168c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v338.3H400c-6.7 0-10.4 7.7-6.3 12.9l112 141.8zM878 626h-60c-4.4 0-8 3.6-8 8v154H214V634c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v198c0 17.7 14.3 32 32 32h684c17.7 0 32-14.3 32-32V634c0-4.4-3.6-8-8-8z"></path>
+                                                        </svg>
+                                                    </span>
+                                                    <span>Download</span>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr data-row-key="1" class="ant-table-row ant-table-row-level-0">
+                                            <td class="ant-table-cell">2</td>
+                                            <td class="ant-table-cell">Purchase</td>
+                                            <td class="ant-table-cell">
+                                                <button type="button" class="ant-btn" onclick="downloadFile('purchase_format')">
+                                                    <span role="img" aria-label="download" class="anticon anticon-download">
+                                                        <svg viewBox="64 64 896 896" focusable="false" data-icon="download" width="1em" height="1em" fill="currentColor" aria-hidden="true">
+                                                            <path d="M505.7 661a8 8 0 0012.6 0l112-141.7c4.1-5.2.4-12.9-6.3-12.9h-74.1V168c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v338.3H400c-6.7 0-10.4 7.7-6.3 12.9l112 141.8zM878 626h-60c-4.4 0-8 3.6-8 8v154H214V634c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v198c0 17.7 14.3 32 32 32h684c17.7 0 32-14.3 32-32V634c0-4.4-3.6-8-8-8z"></path>
+                                                        </svg>
+                                                    </span>
+                                                    <span>Download</span>
+                                                </button>
+                                            </td>
+                                            <td class="ant-table-cell">
+                                                <button type="button" class="ant-btn" onclick="downloadFile('purchase_sample')">
+                                                    <span role="img" aria-label="download" class="anticon anticon-download">
+                                                        <svg viewBox="64 64 896 896" focusable="false" data-icon="download" width="1em" height="1em" fill="currentColor" aria-hidden="true">
+                                                            <path d="M505.7 661a8 8 0 0012.6 0l112-141.7c4.1-5.2.4-12.9-6.3-12.9h-74.1V168c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v338.3H400c-6.7 0-10.4 7.7-6.3 12.9l112 141.8zM878 626h-60c-4.4 0-8 3.6-8 8v154H214V634c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v198c0 17.7 14.3 32 32 32h684c17.7 0 32-14.3 32-32V634c0-4.4-3.6-8-8-8z"></path>
+                                                        </svg>
+                                                    </span>
+                                                    <span>Download</span>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr data-row-key="2" class="ant-table-row ant-table-row-level-0">
+                                            <td class="ant-table-cell">3</td>
+                                            <td class="ant-table-cell">Sales Return</td>
+                                            <td class="ant-table-cell">
+                                                <button type="button" class="ant-btn" onclick="downloadFile('sales_return_format')">
+                                                    <span role="img" aria-label="download" class="anticon anticon-download">
+                                                        <svg viewBox="64 64 896 896" focusable="false" data-icon="download" width="1em" height="1em" fill="currentColor" aria-hidden="true">
+                                                            <path d="M505.7 661a8 8 0 0012.6 0l112-141.7c4.1-5.2.4-12.9-6.3-12.9h-74.1V168c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v338.3H400c-6.7 0-10.4 7.7-6.3 12.9l112 141.8zM878 626h-60c-4.4 0-8 3.6-8 8v154H214V634c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v198c0 17.7 14.3 32 32 32h684c17.7 0 32-14.3 32-32V634c0-4.4-3.6-8-8-8z"></path>
+                                                        </svg>
+                                                    </span>
+                                                    <span>Download</span>
+                                                </button>
+                                            </td>
+                                            <td class="ant-table-cell">
+                                                <button type="button" class="ant-btn" onclick="downloadFile('sales_return_sample')">
+                                                    <span role="img" aria-label="download" class="anticon anticon-download">
+                                                        <svg viewBox="64 64 896 896" focusable="false" data-icon="download" width="1em" height="1em" fill="currentColor" aria-hidden="true">
+                                                            <path d="M505.7 661a8 8 0 0012.6 0l112-141.7c4.1-5.2.4-12.9-6.3-12.9h-74.1V168c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v338.3H400c-6.7 0-10.4 7.7-6.3 12.9l112 141.8zM878 626h-60c-4.4 0-8 3.6-8 8v154H214V634c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v198c0 17.7 14.3 32 32 32h684c17.7 0 32-14.3 32-32V634c0-4.4-3.6-8-8-8z"></path>
+                                                        </svg>
+                                                    </span>
+                                                    <span>Download</span>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr data-row-key="3" class="ant-table-row ant-table-row-level-0">
+                                            <td class="ant-table-cell">4</td>
+                                            <td class="ant-table-cell">Purchase Return</td>
+                                            <td class="ant-table-cell">
+                                                <button type="button" class="ant-btn" onclick="downloadFile('purchase_return_format')">
+                                                    <span role="img" aria-label="download" class="anticon anticon-download">
+                                                        <svg viewBox="64 64 896 896" focusable="false" data-icon="download" width="1em" height="1em" fill="currentColor" aria-hidden="true">
+                                                            <path d="M505.7 661a8 8 0 0012.6 0l112-141.7c4.1-5.2.4-12.9-6.3-12.9h-74.1V168c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v338.3H400c-6.7 0-10.4 7.7-6.3 12.9l112 141.8zM878 626h-60c-4.4 0-8 3.6-8 8v154H214V634c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v198c0 17.7 14.3 32 32 32h684c17.7 0 32-14.3 32-32V634c0-4.4-3.6-8-8-8z"></path>
+                                                        </svg>
+                                                    </span>
+                                                    <span>Download</span>
+                                                </button>
+                                            </td>
+                                            <td class="ant-table-cell">
+                                                <button type="button" class="ant-btn" onclick="downloadFile('purchase_return_sample')">
+                                                    <span role="img" aria-label="download" class="anticon anticon-download">
+                                                        <svg viewBox="64 64 896 896" focusable="false" data-icon="download" width="1em" height="1em" fill="currentColor" aria-hidden="true">
+                                                            <path d="M505.7 661a8 8 0 0012.6 0l112-141.7c4.1-5.2.4-12.9-6.3-12.9h-74.1V168c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v338.3H400c-6.7 0-10.4 7.7-6.3 12.9l112 141.8zM878 626h-60c-4.4 0-8 3.6-8 8v154H214V634c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v198c0 17.7 14.3 32 32 32h684c17.7 0 32-14.3 32-32V634c0-4.4-3.6-8-8-8z"></path>
+                                                        </svg>
+                                                    </span>
+                                                    <span>Download</span>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </section>
+
+    <script>
+        // Load user data
+        window.addEventListener('DOMContentLoaded', function() {
+            const loginData = localStorage.getItem('cbmsLoginData');
+            if (loginData) {
+                const data = JSON.parse(loginData);
+                document.getElementById('userName').textContent = data.username || 'User';
+            }
+        });
+
+        // Toggle submenu
+        function toggleSubmenu(element) {
+            const submenu = element.parentElement;
+            submenu.classList.toggle('ant-menu-submenu-open');
+        }
+
+        // Download file function
+        function downloadFile(type) {
+            const fileMap = {
+                'sales_format': 'sales-format.xlsx',
+                'sales_sample': 'sales-sample.xlsx',
+                'purchase_format': 'purchase-format.xlsx',
+                'purchase_sample': 'purchase-sample.xlsx',
+                'sales_return_format': 'sales-return-format.xlsx',
+                'sales_return_sample': 'sales-return-format.xlsx', // Using format file as sample not available
+                'purchase_return_format': 'purchase-return-format.xlsx',
+                'purchase_return_sample': 'purchase-return-format.xlsx' // Using format file as sample not available
+            };
+
+            const filename = fileMap[type];
+            if (filename) {
+                const link = document.createElement('a');
+                link.href = '../../resources/downloads/' + filename;
+                link.download = filename;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            } else {
+                alert('File not found!');
+            }
+        }
+
+        // Download file validator
+        function downloadValidator() {
+            alert('File validator tool will be available soon.\n\nPlease use the format files to ensure your data is correctly structured.');
+        }
+
+        // Logout
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                localStorage.removeItem('cbmsLoginData');
+                window.location.href = 'cbms_login.html';
+            }
+        }
+    </script>
+</body>
+</html>
