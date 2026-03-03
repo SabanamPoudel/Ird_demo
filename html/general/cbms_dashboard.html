@@ -174,6 +174,14 @@
             color: white;
         }
 
+        .ant-menu-sub .ant-menu-item a {
+            display: block;
+            width: 100%;
+            height: 100%;
+            color: inherit;
+            text-decoration: none;
+        }
+
         .ant-layout-sider-trigger {
             position: absolute;
             bottom: 0;
@@ -380,11 +388,11 @@
                             <i class="ant-menu-submenu-arrow"></i>
                         </div>
                         <ul class="ant-menu-sub">
-                            <li class="ant-menu-item">
+                            <li class="ant-menu-item" onclick="event.stopPropagation(); loadInIframe('cbms_billing_upload_content.html');">
                                 <span>Upload</span>
                             </li>
-                            <li class="ant-menu-item">
-                                <a href="cbms_billing_download.html" style="color: inherit; text-decoration: none;">Download Format</a>
+                            <li class="ant-menu-item" onclick="event.stopPropagation(); loadInIframe('cbms_billing_download_content.html');">
+                                <span>Download Format</span>
                             </li>
                         </ul>
                     </li>
@@ -438,76 +446,82 @@
 
         <!-- Main Content -->
         <main class="ant-layout-content">
-            <!-- Breadcrumb -->
-            <div class="ant-breadcrumb">
-                <span>
-                    <a href="cbms_dashboard.html">
-                        <span>🏠</span>
-                        <span>Home</span>
-                    </a>
-                    <span class="ant-breadcrumb-separator">/</span>
-                </span>
+            <!-- Dashboard Home Content -->
+            <div id="dashboardHome">
+                <!-- Breadcrumb -->
+                <div class="ant-breadcrumb">
+                    <span>
+                        <a href="#" onclick="loadDashboardHome(); return false;">
+                            <span>🏠</span>
+                            <span>Home</span>
+                        </a>
+                        <span class="ant-breadcrumb-separator">/</span>
+                    </span>
+                </div>
+
+                <!-- Cards Row -->
+                <div class="ant-row" style="margin-bottom: 16px;">
+                    <div class="ant-col ant-col-12">
+                        <div class="ant-card">
+                            <div class="ant-card-body">
+                                <div style="padding: 15px;">
+                                    <h5 class="ant-typography">Sales Summary (API)</h5>
+                                    <p>No data has been sync of this month.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ant-col ant-col-12">
+                        <div class="ant-card">
+                            <div class="ant-card-body">
+                                <div style="padding: 15px;">
+                                    <h5 class="ant-typography">Sales Summary (Excel)</h5>
+                                    <p>Excel data has not been uploaded this month.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Table Card -->
+                <div class="ant-row">
+                    <div class="ant-col ant-col-24">
+                        <div class="ant-card">
+                            <div class="ant-card-head">
+                                <div class="ant-card-head-title">Last Upload Excel File Status</div>
+                            </div>
+                            <div class="ant-card-body">
+                                <div class="ant-table-wrapper">
+                                    <table class="ant-table">
+                                        <thead class="ant-table-thead">
+                                            <tr>
+                                                <th style="width: 60px;">S.N</th>
+                                                <th>Fiscal Year</th>
+                                                <th>Month</th>
+                                                <th>File Name</th>
+                                                <th>File Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="ant-table-tbody" id="tableBody">
+                                            <tr>
+                                                <td colspan="5" style="text-align: center;">
+                                                    <div class="ant-empty">
+                                                        <div class="ant-empty-image">📂</div>
+                                                        <div class="ant-empty-description">No Data</div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <!-- Cards Row -->
-            <div class="ant-row" style="margin-bottom: 16px;">
-                <div class="ant-col ant-col-12">
-                    <div class="ant-card">
-                        <div class="ant-card-body">
-                            <div style="padding: 15px;">
-                                <h5 class="ant-typography">Sales Summary (API)</h5>
-                                <p>No data has been sync of this month.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="ant-col ant-col-12">
-                    <div class="ant-card">
-                        <div class="ant-card-body">
-                            <div style="padding: 15px;">
-                                <h5 class="ant-typography">Sales Summary (Excel)</h5>
-                                <p>Excel data has not been uploaded this month.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Table Card -->
-            <div class="ant-row">
-                <div class="ant-col ant-col-24">
-                    <div class="ant-card">
-                        <div class="ant-card-head">
-                            <div class="ant-card-head-title">Last Upload Excel File Status</div>
-                        </div>
-                        <div class="ant-card-body">
-                            <div class="ant-table-wrapper">
-                                <table class="ant-table">
-                                    <thead class="ant-table-thead">
-                                        <tr>
-                                            <th style="width: 60px;">S.N</th>
-                                            <th>Fiscal Year</th>
-                                            <th>Month</th>
-                                            <th>File Name</th>
-                                            <th>File Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="ant-table-tbody" id="tableBody">
-                                        <tr>
-                                            <td colspan="5" style="text-align: center;">
-                                                <div class="ant-empty">
-                                                    <div class="ant-empty-image">📂</div>
-                                                    <div class="ant-empty-description">No Data</div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <!-- Iframe Container -->
+            <iframe id="contentIframe" style="display: none; width: 100%; height: calc(100vh - 80px); border: none;"></iframe>
         </main>
     </section>
 
@@ -527,6 +541,38 @@
             
             console.log('CBMS Dashboard loaded for:', loginData);
         });
+
+        // Load content in iframe
+        function loadInIframe(url) {
+            const dashboardHome = document.getElementById('dashboardHome');
+            const contentIframe = document.getElementById('contentIframe');
+            
+            dashboardHome.style.display = 'none';
+            contentIframe.style.display = 'block';
+            
+            // Force reload by clearing src first, then setting new url
+            if (contentIframe.src) {
+                contentIframe.src = 'about:blank';
+                setTimeout(() => {
+                    contentIframe.src = url;
+                }, 10);
+            } else {
+                contentIframe.src = url;
+            }
+        }
+
+        // Load dashboard home
+        function loadDashboardHome() {
+            const dashboardHome = document.getElementById('dashboardHome');
+            const contentIframe = document.getElementById('contentIframe');
+            
+            dashboardHome.style.display = 'block';
+            contentIframe.style.display = 'none';
+            contentIframe.src = '';
+        }
+
+        // Make loadDashboardHome available globally for iframe content
+        window.loadDashboardHome = loadDashboardHome;
 
         // Toggle submenu
         function toggleSubmenu(element) {
@@ -549,23 +595,6 @@
                 window.location.href = 'cbms_login.html';
             }
         }
-
-        // Menu item click handlers
-        document.querySelectorAll('.ant-menu-item:not(.ant-menu-submenu .ant-menu-item)').forEach(item => {
-            item.addEventListener('click', function(e) {
-                if (!this.querySelector('a')) {
-                    e.preventDefault();
-                    alert('This feature is under development');
-                }
-            });
-        });
-
-        document.querySelectorAll('.ant-menu-sub .ant-menu-item').forEach(item => {
-            item.addEventListener('click', function(e) {
-                e.preventDefault();
-                alert('This feature is under development');
-            });
-        });
     </script>
 </body>
 </html>

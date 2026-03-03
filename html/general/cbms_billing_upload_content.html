@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Billing Register Upload</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            background: #f0f2f5;
+            padding: 24px;
+        }
+
+        /* Breadcrumb */
+        .ant-breadcrumb {
+            display: flex;
+            align-items: center;
+            margin-bottom: 24px;
+            font-size: 14px;
+            background: white;
+            padding: 16px;
+            border-radius: 2px;
+        }
+
+        .ant-breadcrumb a {
+            color: #198cce;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .ant-breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .ant-breadcrumb-separator {
+            margin: 0 8px;
+            color: rgba(0, 0, 0, 0.45);
+        }
+
+        .anticon {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .anticon svg {
+            width: 1em;
+            height: 1em;
+            fill: currentColor;
+        }
+
+        /* Content Container */
+        .content-container {
+            background: white;
+            padding: 24px;
+            border-radius: 2px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+        }
+
+        /* Info Alert */
+        .info-alert {
+            background: #f0f0f0;
+            border: 1px solid #d9d9d9;
+            padding: 16px;
+            border-radius: 2px;
+            margin-bottom: 24px;
+        }
+
+        .info-alert-title {
+            font-weight: 500;
+            color: rgba(0, 0, 0, 0.85);
+            margin-bottom: 8px;
+        }
+
+        .info-alert-text {
+            color: #ff4d4f;
+            font-size: 14px;
+        }
+
+        /* Form Section */
+        .form-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-label {
+            margin-bottom: 8px;
+            color: rgba(0, 0, 0, 0.85);
+            font-size: 14px;
+        }
+
+        .form-label.required::before {
+            content: '* ';
+            color: #ff4d4f;
+        }
+
+        .form-control {
+            padding: 8px 12px;
+            border: 1px solid #d9d9d9;
+            border-radius: 2px;
+            font-size: 14px;
+        }
+
+        .form-control:focus {
+            border-color: #40a9ff;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+        }
+
+        /* Add File Button */
+        .add-file-button {
+            background: #1890ff;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 2px;
+            cursor: pointer;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .add-file-button:hover {
+            background: #40a9ff;
+        }
+
+        /* Table */
+        .ant-table-wrapper {
+            background: white;
+            margin-bottom: 24px;
+        }
+
+        .ant-table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #f0f0f0;
+        }
+
+        .ant-table-container {
+            overflow-x: auto;
+        }
+
+        .ant-table-thead th {
+            background: #fafafa;
+            color: rgba(0, 0, 0, 0.85);
+            font-weight: 500;
+            text-align: left;
+            padding: 16px;
+            border-bottom: 1px solid #f0f0f0;
+            border-right: 1px solid #f0f0f0;
+            font-size: 14px;
+        }
+
+        .ant-table-thead th:first-child {
+            text-align: center;
+            width: 60px;
+        }
+
+        .ant-table-tbody td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #f0f0f0;
+            border-right: 1px solid #f0f0f0;
+            color: rgba(0, 0, 0, 0.85);
+            font-size: 14px;
+            vertical-align: middle;
+        }
+
+        .ant-table-tbody td:first-child {
+            text-align: center;
+        }
+
+        .ant-table-tbody tr:hover {
+            background: #fafafa;
+        }
+
+        /* Expand Icon */
+        .expand-icon {
+            width: 24px;
+            height: 24px;
+            border: 1px solid #d9d9d9;
+            background: white;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            color: #1890ff;
+            border-radius: 2px;
+        }
+
+        .expand-icon:hover {
+            border-color: #40a9ff;
+            color: #40a9ff;
+        }
+
+        /* Expanded Row */
+        .expanded-row {
+            background: #fafafa !important;
+        }
+
+        .expanded-row td {
+            padding: 0 !important;
+        }
+
+        .expanded-content {
+            padding: 16px 48px;
+        }
+
+        .nested-table {
+            background: white;
+            border: 1px solid #f0f0f0;
+            margin: 0;
+        }
+
+        .nested-table th {
+            background: #fafafa;
+            padding: 12px 16px;
+            border-bottom: 1px solid #f0f0f0;
+            border-right: 1px solid #f0f0f0;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .nested-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #f0f0f0;
+            border-right: 1px solid #f0f0f0;
+        }
+
+        .status-success {
+            color: #52c41a;
+        }
+
+        .status-pending {
+            color: #faad14;
+        }
+
+        .edit-icon {
+            color: #1890ff;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .edit-icon:hover {
+            color: #40a9ff;
+        }
+
+        /* Table Input Fields */
+        .table-input {
+            width: 100%;
+            padding: 6px 12px;
+            border: 1px solid #d9d9d9;
+            border-radius: 2px;
+            font-size: 14px;
+        }
+
+        .table-input:focus {
+            border-color: #40a9ff;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+        }
+
+        .table-select {
+            width: 100%;
+            padding: 6px 12px;
+            border: 1px solid #d9d9d9;
+            border-radius: 2px;
+            font-size: 14px;
+            background: white;
+        }
+
+        .table-select:focus {
+            border-color: #40a9ff;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+        }
+
+        /* Upload Button in Table */
+        .upload-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border: 1px solid #d9d9d9;
+            background: white;
+            border-radius: 2px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .upload-btn:hover {
+            color: #40a9ff;
+            border-color: #40a9ff;
+        }
+
+        /* Remove Button */
+        .remove-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #ff4d4f;
+            font-size: 20px;
+            padding: 0;
+            width: 24px;
+            height: 24px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .remove-btn:hover {
+            background: #fff1f0;
+        }
+
+        /* Submit Button */
+        .submit-button-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 24px;
+            padding-top: 24px;
+        }
+
+        .submit-button {
+            background: #d9d9d9;
+            color: rgba(0, 0, 0, 0.25);
+            border: none;
+            padding: 8px 32px;
+            border-radius: 2px;
+            cursor: not-allowed;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .submit-button.active {
+            background: #1890ff;
+            color: white;
+            cursor: pointer;
+        }
+
+        .submit-button.active:hover {
+            background: #40a9ff;
+        }
+
+        /* Hidden File Input */
+        .hidden-file-input {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Breadcrumb -->
+    <div class="ant-breadcrumb">
+        <a class="ant-breadcrumb-link" href="#" onclick="parent.loadDashboardHome(); return false;">
+            <span role="img" aria-label="home" class="anticon anticon-home">
+                <svg viewBox="64 64 896 896" focusable="false" data-icon="home" width="1em" height="1em" fill="currentColor" aria-hidden="true">
+                    <path d="M946.5 505L560.1 118.8l-25.9-25.9a31.5 31.5 0 00-44.4 0L77.5 505a63.9 63.9 0 00-18.8 46c.4 35.2 29.7 63.3 64.9 63.3h42.5V940h691.8V614.3h43.4c17.1 0 33.2-6.7 45.3-18.8a63.6 63.6 0 0018.7-45.3c0-17-6.7-33.1-18.8-45.2zM568 868H456V664h112v204zm217.9-325.7V868H632V640c0-22.1-17.9-40-40-40H432c-22.1 0-40 17.9-40 40v228H238.1V542.3h-96l370-369.7 23.1 23.1L882 542.3h-96.1z"></path>
+                </svg>
+            </span>
+            Home
+        </a>
+        <span class="ant-breadcrumb-separator">/</span>
+        <span class="ant-breadcrumb-link">Billing Register</span>
+    </div>
+
+    <!-- List View (Level 1) -->
+    <div class="content-container" id="listView">
+        <!-- Add Button and Warning -->
+        <div style="margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+            <button type="button" class="add-file-button" onclick="showUploadForm()">
+                <span role="img" aria-label="plus" class="anticon anticon-plus">
+                    <svg viewBox="64 64 896 896" focusable="false" data-icon="plus" width="1em" height="1em" fill="currentColor" aria-hidden="true">
+                        <path d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z"></path>
+                        <path d="M176 474h672q8 0 8 8v60q0 8-8 8H176q-8 0-8-8v-60q0-8 8-8z"></path>
+                    </svg>
+                </span>
+                <span>Add</span>
+            </button>
+            <span style="color: red; font-size: 14px;">To see the uploaded file processing status, please Click on (+) button to expand the details !!!</span>
+        </div>
+
+        <!-- Uploads Table -->
+        <div class="ant-table-wrapper">
+            <div class="ant-table">
+                <div class="ant-table-container">
+                    <table>
+                        <colgroup>
+                            <col style="width: 60px;">
+                            <col style="width: 100px;">
+                            <col style="width: 250px;">
+                            <col style="width: 250px;">
+                            <col style="width: 250px;">
+                        </colgroup>
+                        <thead class="ant-table-thead">
+                            <tr>
+                                <th class="ant-table-cell"></th>
+                                <th class="ant-table-cell">S/N</th>
+                                <th class="ant-table-cell">Fiscal Year</th>
+                                <th class="ant-table-cell">Month</th>
+                                <th class="ant-table-cell">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="ant-table-tbody" id="uploadsTableBody">
+                            <tr class="ant-table-row">
+                                <td colspan="5" class="ant-table-cell" style="text-align: center; padding: 64px;">
+                                    <div style="display: inline-block;">
+                                        <svg class="ant-empty-img-simple" width="64" height="41" viewBox="0 0 64 41" xmlns="http://www.w3.org/2000/svg">
+                                            <g transform="translate(0 1)" fill="none" fill-rule="evenodd">
+                                                <ellipse style="fill: #f5f5f5;" cx="32" cy="33" rx="32" ry="7"></ellipse>
+                                                <g style="fill: #d9d9d9;" fill-rule="nonzero">
+                                                    <path d="M55 12.76L44.854 1.258C44.367.474 43.656 0 42.907 0H21.093c-.749 0-1.46.474-1.947 1.257L9 12.761V22h46v-9.24z"></path>
+                                                    <path d="M41.613 15.931c0-1.605.994-2.93 2.227-2.931H55v18.137C55 33.26 53.68 35 52.05 35h-40.1C10.32 35 9 33.259 9 31.137V13h11.16c1.233 0 2.227 1.323 2.227 2.928v.022c0 1.605 1.005 2.901 2.237 2.901h14.752c1.232 0 2.237-1.308 2.237-2.913v-.007z" style="fill: #fafafa;"></path>
+                                                </g>
+                                            </g>
+                                        </svg>
+                                        <p style="margin-top: 8px; color: rgba(0, 0, 0, 0.25);">No Data</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Upload Form View (Level 2) -->
+    <div class="content-container" id="uploadFormView" style="display: none;">
+        <!-- Info Alert -->
+        <div class="info-alert">
+            <div class="info-alert-title">Billing Register</div>
+            <div class="info-alert-text">( To download billing register format, please go the Billing Register Menu and Click on Download Format thereafter download the Billing Format )</div>
+        </div>
+
+        <!-- Form Section -->
+        <div class="form-section">
+            <div class="form-group">
+                <label class="form-label required">Fiscal Year</label>
+                <select class="form-control" id="fiscalYear">
+                    <option value="">Select Fiscal Year</option>
+                    <option value="2080/081">2080/081</option>
+                    <option value="2081/082">2081/082</option>
+                    <option value="2082/083">2082/083</option>
+                    <option value="2079/080">2079/080</option>
+                    <option value="2078/079">2078/079</option>
+                    <option value="2077/078">2077/078</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label required">Month</label>
+                <select class="form-control" id="month">
+                    <option value="">Select Month</option>
+                    <option value="Baisakh">Baisakh</option>
+                    <option value="Jestha">Jestha</option>
+                    <option value="Ashadh">Ashadh</option>
+                    <option value="Shrawan">Shrawan</option>
+                    <option value="Bhadra">Bhadra</option>
+                    <option value="Ashwin">Ashwin</option>
+                    <option value="Kartik">Kartik</option>
+                    <option value="Mangsir">Mangsir</option>
+                    <option value="Poush">Poush</option>
+                    <option value="Magh">Magh</option>
+                    <option value="Falgun">Falgun</option>
+                    <option value="Chaitra">Chaitra</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Add File Button -->
+        <button type="button" class="add-file-button" onclick="addFileRow()">
+            <span role="img" aria-label="plus" class="anticon anticon-plus">
+                <svg viewBox="64 64 896 896" focusable="false" data-icon="plus" width="1em" height="1em" fill="currentColor" aria-hidden="true">
+                    <path d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z"></path>
+                    <path d="M176 474h672q8 0 8 8v60q0 8-8 8H176q-8 0-8-8v-60q0-8 8-8z"></path>
+                </svg>
+            </span>
+            <span>Add File</span>
+        </button>
+
+        <!-- Table -->
+        <div class="ant-table-wrapper">
+            <div class="ant-table">
+                <div class="ant-table-container">
+                    <table>
+                        <thead class="ant-table-thead">
+                            <tr>
+                                <th class="ant-table-cell">SN</th>
+                                <th class="ant-table-cell">Type</th>
+                                <th class="ant-table-cell">File Description</th>
+                                <th class="ant-table-cell">File (max 100 mb)</th>
+                                <th class="ant-table-cell">Status</th>
+                                <th class="ant-table-cell">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="ant-table-tbody" id="fileTableBody">
+                            <!-- Rows will be added dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="submit-button-container">
+            <button type="button" class="submit-button" id="submitBtn" onclick="submitUpload()">
+                <span role="img" aria-label="upload" class="anticon anticon-upload">
+                    <svg viewBox="64 64 896 896" focusable="false" data-icon="upload" width="1em" height="1em" fill="currentColor" aria-hidden="true">
+                        <path d="M400 317.7h73.9V656c0 4.4 3.6 8 8 8h60c4.4 0 8-3.6 8-8V317.7H624c6.7 0 10.4-7.7 6.3-12.9L518.3 163a8 8 0 00-12.6 0l-112 141.7c-4.1 5.3-.4 13 6.3 13zM878 626h-60c-4.4 0-8 3.6-8 8v154H214V634c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v198c0 17.7 14.3 32 32 32h684c17.7 0 32-14.3 32-32V634c0-4.4-3.6-8-8-8z"></path>
+                    </svg>
+                </span>
+                Submit
+            </button>
+        </div>
+    </div>
+
+    <script>
+        let fileRows = [];
+        let rowCounter = 0;
+        let uploadsList = [];
+
+        // Show upload form view
+        function showUploadForm() {
+            document.getElementById('listView').style.display = 'none';
+            document.getElementById('uploadFormView').style.display = 'block';
+            
+            // Add "Upload" to breadcrumb
+            const breadcrumb = document.querySelector('.ant-breadcrumb');
+            if (!breadcrumb.querySelector('.upload-breadcrumb')) {
+                const separator = document.createElement('span');
+                separator.className = 'ant-breadcrumb-separator upload-breadcrumb';
+                separator.textContent = '/';
+                const upload = document.createElement('span');
+                upload.className = 'ant-breadcrumb-link upload-breadcrumb';
+                upload.textContent = 'Upload';
+                breadcrumb.appendChild(separator);
+                breadcrumb.appendChild(upload);
+            }
+        }
+
+        // Show list view
+        function showListView() {
+            document.getElementById('listView').style.display = 'block';
+            document.getElementById('uploadFormView').style.display = 'none';
+            
+            // Remove upload breadcrumb
+            document.querySelectorAll('.upload-breadcrumb').forEach(el => el.remove());
+            
+            // Reset form
+            document.getElementById('fiscalYear').value = '';
+            document.getElementById('month').value = '';
+            fileRows = [];
+            rowCounter = 0;
+            renderTable();
+            updateSubmitButton();
+        }
+
+        // Render uploads list
+        function renderUploadsList() {
+            const tbody = document.getElementById('uploadsTableBody');
+            
+            if (uploadsList.length === 0) {
+                tbody.innerHTML = `
+                    <tr class="ant-table-row">
+                        <td colspan="5" class="ant-table-cell" style="text-align: center; padding: 64px;">
+                            <div style="display: inline-block;">
+                                <svg class="ant-empty-img-simple" width="64" height="41" viewBox="0 0 64 41" xmlns="http://www.w3.org/2000/svg">
+                                    <g transform="translate(0 1)" fill="none" fill-rule="evenodd">
+                                        <ellipse style="fill: #f5f5f5;" cx="32" cy="33" rx="32" ry="7"></ellipse>
+                                        <g style="fill: #d9d9d9;" fill-rule="nonzero">
+                                            <path d="M55 12.76L44.854 1.258C44.367.474 43.656 0 42.907 0H21.093c-.749 0-1.46.474-1.947 1.257L9 12.761V22h46v-9.24z"></path>
+                                            <path d="M41.613 15.931c0-1.605.994-2.93 2.227-2.931H55v18.137C55 33.26 53.68 35 52.05 35h-40.1C10.32 35 9 33.259 9 31.137V13h11.16c1.233 0 2.227 1.323 2.227 2.928v.022c0 1.605 1.005 2.901 2.237 2.901h14.752c1.232 0 2.237-1.308 2.237-2.913v-.007z" style="fill: #fafafa;"></path>
+                                        </g>
+                                    </g>
+                                </svg>
+                                <p style="margin-top: 8px; color: rgba(0, 0, 0, 0.25);">No Data</p>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            let html = '';
+            uploadsList.forEach((upload, index) => {
+                const isExpanded = upload.expanded || false;
+                const expandIcon = isExpanded ? '−' : '+';
+                
+                // Main row
+                html += `
+                    <tr class="ant-table-row">
+                        <td class="ant-table-cell">
+                            <button class="expand-icon" onclick="toggleExpand(${index})">${expandIcon}</button>
+                        </td>
+                        <td class="ant-table-cell">${index + 1}</td>
+                        <td class="ant-table-cell">${upload.fiscalYear}</td>
+                        <td class="ant-table-cell">${upload.month}</td>
+                        <td class="ant-table-cell">
+                            <span class="edit-icon" onclick="alert('Edit upload ${index + 1}')" title="Edit">✎</span>
+                        </td>
+                    </tr>
+                `;
+                
+                // Expanded row with file details
+                if (isExpanded) {
+                    html += `
+                        <tr class="ant-table-row expanded-row" id="expanded-${index}">
+                            <td colspan="5" class="ant-table-cell">
+                                <div class="expanded-content">
+                                    <table class="nested-table" style="width: 100%;">
+                                        <thead>
+                                            <tr>
+                                                <th>Type</th>
+                                                <th>Name</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                    `;
+                    
+                    upload.files.forEach((file) => {
+                        const statusClass = file.status === 'Successfully Completed' ? 'status-success' : 'status-pending';
+                        const statusText = file.status || 'Successfully Completed';
+                        html += `
+                            <tr>
+                                <td>${file.type}</td>
+                                <td>${file.description}</td>
+                                <td class="${statusClass}">${statusText}</td>
+                                <td>
+                                    <span class="edit-icon" onclick="alert('Edit file: ${file.description}')" title="Edit">✎</span>
+                                </td>
+                            </tr>
+                        `;
+                    });
+                    
+                    html += `
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                }
+            });
+            tbody.innerHTML = html;
+        }
+
+        // Toggle expand/collapse
+        function toggleExpand(index) {
+            uploadsList[index].expanded = !uploadsList[index].expanded;
+            renderUploadsList();
+        }
+
+        // Load sample data for demonstration
+        function loadSampleData() {
+            uploadsList = [
+                {
+                    fiscalYear: '2081/082',
+                    month: 'Jestha',
+                    files: [
+                        { type: 'Purchase', description: 'Purchase reg Falgun 81', status: 'Successfully Completed' },
+                        { type: 'Sales Return', description: 'Sales Return 11', status: 'Pending' },
+                        { type: 'Sales', description: 'Sales 11', status: 'Successfully Completed' },
+                        { type: 'Purchase', description: 'Purchase reg Falgun 81', status: 'Successfully Completed' }
+                    ],
+                    expanded: false
+                },
+                {
+                    fiscalYear: '2081/082',
+                    month: 'Baishakh',
+                    files: [
+                        { type: 'Sales', description: 'Sales Baishakh 82', status: 'Successfully Completed' },
+                        { type: 'Purchase', description: 'Purchase Baishakh 82', status: 'Successfully Completed' }
+                    ],
+                    expanded: false
+                },
+                {
+                    fiscalYear: '2081/082',
+                    month: 'Chaitra',
+                    files: [
+                        { type: 'Sales Return', description: 'Sales Return Chaitra 81', status: 'Pending' },
+                        { type: 'Purchase Return', description: 'Purchase Return Chaitra 81', status: 'Successfully Completed' }
+                    ],
+                    expanded: false
+                },
+                {
+                    fiscalYear: '2081/082',
+                    month: 'Falgun',
+                    files: [
+                        { type: 'Purchase', description: 'Purchase reg Falgun 81', status: 'Successfully Completed' },
+                        { type: 'Sales Return', description: 'Sales Return 11', status: 'Pending' },
+                        { type: 'Sales', description: 'Sales 11', status: 'Successfully Completed' },
+                        { type: 'Purchase', description: 'Purchase reg Falgun 81', status: 'Successfully Completed' }
+                    ],
+                    expanded: false
+                }
+            ];
+            renderUploadsList();
+        }
+
+        // Add file row to table
+        function addFileRow() {
+            rowCounter++;
+            const row = {
+                id: rowCounter,
+                sn: rowCounter,
+                type: '',
+                description: '',
+                file: null,
+                status: ''
+            };
+            
+            fileRows.push(row);
+            renderTable();
+            updateSubmitButton();
+        }
+
+        // Render table
+        function renderTable() {
+            const tbody = document.getElementById('fileTableBody');
+            
+            if (fileRows.length === 0) {
+                tbody.innerHTML = '';
+                return;
+            }
+
+            let html = '';
+            fileRows.forEach((row, index) => {
+                html += `
+                    <tr class="ant-table-row" data-row-key="${row.id}">
+                        <td class="ant-table-cell">${row.sn}</td>
+                        <td class="ant-table-cell">
+                            <select class="table-select" onchange="updateRowType(${row.id}, this.value)">
+                                <option value="">Select Type</option>
+                                <option value="Sales" ${row.type === 'Sales' ? 'selected' : ''}>Sales</option>
+                                <option value="Purchase" ${row.type === 'Purchase' ? 'selected' : ''}>Purchase</option>
+                                <option value="Sales Return" ${row.type === 'Sales Return' ? 'selected' : ''}>Sales Return</option>
+                                <option value="Purchase Return" ${row.type === 'Purchase Return' ? 'selected' : ''}>Purchase Return</option>
+                            </select>
+                        </td>
+                        <td class="ant-table-cell">
+                            <input type="text" class="table-input" placeholder="Enter name" value="${row.description}" onchange="updateRowDescription(${row.id}, this.value)">
+                        </td>
+                        <td class="ant-table-cell">
+                            <button type="button" class="upload-btn" onclick="document.getElementById('fileInput-${row.id}').click()">
+                                <span role="img" aria-label="upload" class="anticon anticon-upload">
+                                    <svg viewBox="64 64 896 896" focusable="false" data-icon="upload" width="1em" height="1em" fill="currentColor" aria-hidden="true">
+                                        <path d="M400 317.7h73.9V656c0 4.4 3.6 8 8 8h60c4.4 0 8-3.6 8-8V317.7H624c6.7 0 10.4-7.7 6.3-12.9L518.3 163a8 8 0 00-12.6 0l-112 141.7c-4.1 5.3-.4 13 6.3 13zM878 626h-60c-4.4 0-8 3.6-8 8v154H214V634c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v198c0 17.7 14.3 32 32 32h684c17.7 0 32-14.3 32-32V634c0-4.4-3.6-8-8-8z"></path>
+                                    </svg>
+                                </span>
+                                <span>${row.file ? row.file.name : 'Upload'}</span>
+                            </button>
+                            <input type="file" id="fileInput-${row.id}" class="hidden-file-input" accept=".xlsx,.xls,.csv" onchange="handleRowFileSelect(${row.id}, event)">
+                        </td>
+                        <td class="ant-table-cell">${row.status}</td>
+                        <td class="ant-table-cell">
+                            <button type="button" class="remove-btn" onclick="removeRow(${row.id})" title="Remove">
+                                ⊗
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            tbody.innerHTML = html;
+        }
+
+        // Update row type
+        function updateRowType(id, value) {
+            const row = fileRows.find(r => r.id === id);
+            if (row) {
+                row.type = value;
+                updateSubmitButton();
+            }
+        }
+
+        // Update row description
+        function updateRowDescription(id, value) {
+            const row = fileRows.find(r => r.id === id);
+            if (row) {
+                row.description = value;
+                updateSubmitButton();
+            }
+        }
+
+        // Handle file selection for row
+        function handleRowFileSelect(id, event) {
+            const file = event.target.files[0];
+            const row = fileRows.find(r => r.id === id);
+            
+            if (file && row) {
+                // Check file size (100 MB = 100 * 1024 * 1024 bytes)
+                if (file.size > 100 * 1024 * 1024) {
+                    alert('File size exceeds 100 MB limit!');
+                    event.target.value = '';
+                    return;
+                }
+                
+                row.file = file;
+                renderTable();
+                updateSubmitButton();
+            }
+        }
+
+        // Remove row
+        function removeRow(id) {
+            fileRows = fileRows.filter(r => r.id !== id);
+            // Re-number rows
+            fileRows.forEach((row, index) => {
+                row.sn = index + 1;
+            });
+            renderTable();
+            updateSubmitButton();
+        }
+
+        // Update submit button state
+        function updateSubmitButton() {
+            const submitBtn = document.getElementById('submitBtn');
+            const fiscalYear = document.getElementById('fiscalYear').value;
+            const month = document.getElementById('month').value;
+            
+            // Check if fiscal year and month are selected
+            if (!fiscalYear || !month) {
+                submitBtn.classList.remove('active');
+                submitBtn.disabled = true;
+                return;
+            }
+            
+            // Check if there are rows and all have required fields
+            if (fileRows.length === 0) {
+                submitBtn.classList.remove('active');
+                submitBtn.disabled = true;
+                return;
+            }
+            
+            const allValid = fileRows.every(row => 
+                row.type && row.description && row.file
+            );
+            
+            if (allValid) {
+                submitBtn.classList.add('active');
+                submitBtn.disabled = false;
+            } else {
+                submitBtn.classList.remove('active');
+                submitBtn.disabled = true;
+            }
+        }
+
+        // Submit upload
+        function submitUpload() {
+            const fiscalYear = document.getElementById('fiscalYear').value;
+            const month = document.getElementById('month').value;
+            
+            if (!fiscalYear || !month) {
+                alert('Please select Fiscal Year and Month!');
+                return;
+            }
+            
+            if (fileRows.length === 0) {
+                alert('Please add at least one file!');
+                return;
+            }
+            
+            const allValid = fileRows.every(row => 
+                row.type && row.description && row.file
+            );
+            
+            if (!allValid) {
+                alert('Please complete all fields for each file row!');
+                return;
+            }
+            
+            // Add status to each file (randomly assign for demo)
+            const filesWithStatus = fileRows.map(file => ({
+                ...file,
+                status: Math.random() > 0.3 ? 'Successfully Completed' : 'Pending'
+            }));
+            
+            // Add to uploads list
+            uploadsList.push({
+                fiscalYear: fiscalYear,
+                month: month,
+                files: filesWithStatus,
+                expanded: false
+            });
+            
+            // Show success message
+            alert(`Upload successful!\n\nFiscal Year: ${fiscalYear}\nMonth: ${month}\nFiles: ${fileRows.length}`);
+            
+            // Return to list view
+            showListView();
+            renderUploadsList();
+        }
+
+        // Initialize when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            // Update button state on dropdown change
+            const fiscalYearSelect = document.getElementById('fiscalYear');
+            const monthSelect = document.getElementById('month');
+            
+            if (fiscalYearSelect) {
+                fiscalYearSelect.addEventListener('change', updateSubmitButton);
+            }
+            if (monthSelect) {
+                monthSelect.addEventListener('change', updateSubmitButton);
+            }
+            
+            // Load sample data automatically
+            loadSampleData();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Billing Register Upload - CBMS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            background: #f0f2f5;
+        }
+
+        /* Header */
+        .header {
+            background: #198cce;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-section img {
+            height: 40px;
+        }
+
+        .header-title {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .user-name {
+            font-size: 14px;
+        }
+
+        .logout-btn {
+            background: white;
+            color: #198cce;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .logout-btn:hover {
+            background: #f0f0f0;
+        }
+
+        /* Layout */
+        .ant-layout {
+            display: flex;
+            min-height: calc(100vh - 70px);
+        }
+
+        .ant-layout-sider {
+            width: 200px;
+            background: #2F4F7F;
+            min-height: 100%;
+        }
+
+        .ant-layout-sider-children {
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .ant-menu {
+            background: #2F4F7F;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .ant-menu-item {
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            height: 40px;
+            line-height: 40px;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: white;
+            font-size: 14px;
+        }
+
+        .ant-menu-item:hover {
+            background: #4A6FA5;
+            color: white;
+        }
+
+        .ant-menu-item.active {
+            background: #4A6FA5;
+        }
+
+        .ant-menu-item-icon {
+            font-size: 16px;
+            margin-right: 10px;
+        }
+
+        .ant-menu-submenu-title {
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            height: 40px;
+            line-height: 40px;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: white;
+            font-size: 14px;
+            position: relative;
+        }
+
+        .ant-menu-submenu-title:hover {
+            background: #4A6FA5;
+            color: white;
+        }
+
+        .ant-menu-submenu-arrow {
+            position: absolute;
+            right: 16px;
+            transition: transform 0.3s;
+            color: white;
+            font-size: 10px;
+        }
+
+        .ant-menu-submenu-open .ant-menu-submenu-arrow {
+            transform: rotate(90deg);
+        }
+
+        .ant-menu-sub {
+            list-style: none;
+            padding: 0;
+            background: #7691C7;
+            display: none;
+        }
+
+        .ant-menu-submenu-open .ant-menu-sub {
+            display: block;
+        }
+
+        .ant-menu-sub .ant-menu-item {
+            padding-left: 48px;
+            color: white;
+        }
+
+        .ant-menu-sub .ant-menu-item:hover {
+            background: #8AA5D9;
+            color: white;
+        }
+
+        .ant-layout-content {
+            flex: 1;
+            padding: 40px;
+            background: white;
+        }
+
+        /* Breadcrumb */
+        .ant-breadcrumb {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .ant-breadcrumb a {
+            color: #198cce;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .ant-breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .ant-breadcrumb-separator {
+            margin: 0 8px;
+            color: rgba(0, 0, 0, 0.45);
+        }
+
+        .anticon {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .anticon svg {
+            width: 1em;
+            height: 1em;
+            fill: currentColor;
+        }
+
+        /* Button Section */
+        .button-section {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .add-button {
+            background: #1890ff;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 2px;
+            cursor: pointer;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .add-button:hover {
+            background: #40a9ff;
+        }
+
+        .warning-text {
+            color: red;
+            font-size: 14px;
+        }
+
+        /* Table */
+        .ant-table-wrapper {
+            background: white;
+        }
+
+        .ant-table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #e8e8e8;
+        }
+
+        .ant-table-container {
+            overflow-x: auto;
+        }
+
+        .ant-table-thead th {
+            background: #fafafa;
+            color: rgba(0, 0, 0, 0.85);
+            font-weight: 500;
+            text-align: left;
+            padding: 16px 24px;
+            border: 1px solid #e8e8e8;
+            font-size: 14px;
+        }
+
+        .ant-table-thead th:first-child {
+            text-align: center;
+            width: 60px;
+        }
+
+        .ant-table-tbody td {
+            padding: 20px 24px;
+            border: 1px solid #e8e8e8;
+            color: rgba(0, 0, 0, 0.85);
+            font-size: 14px;
+            vertical-align: middle;
+        }
+
+        .ant-table-tbody td:first-child {
+            text-align: center;
+        }
+
+        .ant-table-tbody tr {
+            background: white;
+        }
+
+        .ant-table-tbody tr:nth-child(even) {
+            background: #fafafa;
+        }
+
+        /* Empty State */
+        .ant-table-placeholder {
+            text-align: center;
+        }
+
+        .ant-empty {
+            padding: 32px;
+            text-align: center;
+        }
+
+        .ant-empty-image {
+            margin-bottom: 8px;
+        }
+
+        .ant-empty-img-simple {
+            display: inline-block;
+        }
+
+        .ant-empty-img-simple-ellipse {
+            fill: #f5f5f5;
+        }
+
+        .ant-empty-img-simple-g {
+            fill: #d9d9d9;
+        }
+
+        .ant-empty-img-simple-path {
+            fill: #fafafa;
+        }
+
+        .ant-empty-description {
+            color: rgba(0, 0, 0, 0.25);
+            font-size: 14px;
+        }
+
+        /* Expand Icon */
+        .ant-table-row-expand-icon-cell {
+            width: 60px;
+            text-align: center;
+        }
+
+        .expand-icon {
+            cursor: pointer;
+            font-size: 16px;
+            color: #1890ff;
+            display: inline-block;
+            transition: transform 0.3s;
+        }
+
+        .expand-icon.expanded {
+            transform: rotate(90deg);
+        }
+
+        .expanded-row {
+            display: none;
+            background: #f9f9f9;
+        }
+
+        .expanded-row.show {
+            display: table-row;
+        }
+
+        .expanded-content {
+            padding: 16px;
+            border: 1px solid #e8e8e8;
+        }
+
+        /* Action Buttons */
+        .action-btn {
+            padding: 4px 12px;
+            border: 1px solid #d9d9d9;
+            background: white;
+            border-radius: 2px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-right: 8px;
+        }
+
+        .action-btn:hover {
+            color: #40a9ff;
+            border-color: #40a9ff;
+        }
+
+        .action-btn-danger {
+            color: #ff4d4f;
+            border-color: #ff4d4f;
+        }
+
+        .action-btn-danger:hover {
+            color: #ff7875;
+            border-color: #ff7875;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.45);
+            z-index: 1000;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal {
+            background: white;
+            border-radius: 2px;
+            width: 600px;
+            max-width: 90%;
+            box-shadow: 0 3px 6px -4px rgba(0,0,0,.12), 0 6px 16px 0 rgba(0,0,0,.08), 0 9px 28px 8px rgba(0,0,0,.05);
+        }
+
+        .modal-header {
+            padding: 16px 24px;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: rgba(0, 0, 0, 0.85);
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: rgba(0, 0, 0, 0.45);
+        }
+
+        .modal-close:hover {
+            color: rgba(0, 0, 0, 0.75);
+        }
+
+        .modal-body {
+            padding: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: rgba(0, 0, 0, 0.85);
+            font-size: 14px;
+        }
+
+        .form-label.required::before {
+            content: '* ';
+            color: #ff4d4f;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #d9d9d9;
+            border-radius: 2px;
+            font-size: 14px;
+        }
+
+        .form-control:focus {
+            border-color: #40a9ff;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+        }
+
+        .file-upload {
+            border: 1px dashed #d9d9d9;
+            border-radius: 2px;
+            padding: 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+
+        .file-upload:hover {
+            border-color: #40a9ff;
+        }
+
+        .file-upload-icon {
+            font-size: 48px;
+            color: #40a9ff;
+            margin-bottom: 8px;
+        }
+
+        .file-upload-text {
+            color: rgba(0, 0, 0, 0.85);
+            margin-bottom: 4px;
+        }
+
+        .file-upload-hint {
+            color: rgba(0, 0, 0, 0.45);
+            font-size: 12px;
+        }
+
+        .modal-footer {
+            padding: 10px 16px;
+            border-top: 1px solid #f0f0f0;
+            text-align: right;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border-radius: 2px;
+            font-size: 14px;
+            cursor: pointer;
+            border: 1px solid #d9d9d9;
+            background: white;
+            margin-left: 8px;
+        }
+
+        .btn-primary {
+            background: #1890ff;
+            color: white;
+            border-color: #1890ff;
+        }
+
+        .btn-primary:hover {
+            background: #40a9ff;
+            border-color: #40a9ff;
+        }
+
+        .btn:hover {
+            color: #40a9ff;
+            border-color: #40a9ff;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="logo-section">
+            <img src="../../media/resources/ird_logo.png" alt="IRD Logo" onerror="this.style.display='none'">
+            <div class="header-title">Central Billing Monitoring System</div>
+        </div>
+        <div class="user-info">
+            <span class="user-name">Welcome, <span id="userName">User</span></span>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+    </div>
+
+    <!-- Main Layout -->
+    <section class="ant-layout">
+        <!-- Sidebar -->
+        <aside class="ant-layout-sider" id="sidebar">
+            <div class="ant-layout-sider-children">
+                <ul class="ant-menu">
+                    <li class="ant-menu-item">
+                        <span class="ant-menu-item-icon">🔌</span>
+                        <span class="ant-menu-title-content">
+                            <a href="cbms_onboarding.html" style="color: inherit; text-decoration: none;">Onboarding</a>
+                        </span>
+                    </li>
+                    
+                    <li class="ant-menu-submenu ant-menu-submenu-open">
+                        <div class="ant-menu-submenu-title" onclick="toggleSubmenu(this)">
+                            <span class="ant-menu-item-icon">📊</span>
+                            <span class="ant-menu-title-content">Billing Register</span>
+                            <span class="ant-menu-submenu-arrow">▶</span>
+                        </div>
+                        <ul class="ant-menu-sub">
+                            <li class="ant-menu-item active">
+                                <span class="ant-menu-title-content">
+                                    <a href="cbms_billing_upload.html" style="color: inherit; text-decoration: none;">Upload</a>
+                                </span>
+                            </li>
+                            <li class="ant-menu-item">
+                                <span class="ant-menu-title-content">
+                                    <a href="cbms_billing_download.html" style="color: inherit; text-decoration: none;">Download Format</a>
+                                </span>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <li class="ant-menu-submenu">
+                        <div class="ant-menu-submenu-title" onclick="toggleSubmenu(this)">
+                            <span class="ant-menu-item-icon">📄</span>
+                            <span class="ant-menu-title-content">Report</span>
+                            <span class="ant-menu-submenu-arrow">▶</span>
+                        </div>
+                        <ul class="ant-menu-sub">
+                            <li class="ant-menu-item">
+                                <span class="ant-menu-title-content">Sales Report</span>
+                            </li>
+                            <li class="ant-menu-item">
+                                <span class="ant-menu-title-content">Purchase Report</span>
+                            </li>
+                            <li class="ant-menu-item">
+                                <span class="ant-menu-title-content">Tax Summary</span>
+                            </li>
+                            <li class="ant-menu-item">
+                                <span class="ant-menu-title-content">Monthly Report</span>
+                            </li>
+                            <li class="ant-menu-item">
+                                <span class="ant-menu-title-content">Quarterly Report</span>
+                            </li>
+                            <li class="ant-menu-item">
+                                <span class="ant-menu-title-content">Annual Report</span>
+                            </li>
+                            <li class="ant-menu-item">
+                                <span class="ant-menu-title-content">Custom Report</span>
+                            </li>
+                            <li class="ant-menu-item">
+                                <span class="ant-menu-title-content">Export Data</span>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <li class="ant-menu-item">
+                        <span class="ant-menu-item-icon">💬</span>
+                        <span class="ant-menu-title-content">Grievance</span>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="ant-layout-content content">
+            <!-- Breadcrumb -->
+            <div class="ant-breadcrumb breadcrumbs">
+                <a class="ant-breadcrumb-link" href="cbms_dashboard.html">
+                    <span role="img" aria-label="home" class="anticon anticon-home">
+                        <svg viewBox="64 64 896 896" focusable="false" data-icon="home" width="1em" height="1em" fill="currentColor" aria-hidden="true">
+                            <path d="M946.5 505L560.1 118.8l-25.9-25.9a31.5 31.5 0 00-44.4 0L77.5 505a63.9 63.9 0 00-18.8 46c.4 35.2 29.7 63.3 64.9 63.3h42.5V940h691.8V614.3h43.4c17.1 0 33.2-6.7 45.3-18.8a63.6 63.6 0 0018.7-45.3c0-17-6.7-33.1-18.8-45.2zM568 868H456V664h112v204zm217.9-325.7V868H632V640c0-22.1-17.9-40-40-40H432c-22.1 0-40 17.9-40 40v228H238.1V542.3h-96l370-369.7 23.1 23.1L882 542.3h-96.1z"></path>
+                        </svg>
+                    </span>
+                    Home
+                </a>
+                <span class="ant-breadcrumb-separator">/</span>
+                <span class="ant-breadcrumb-link">Billing Register</span>
+            </div>
+
+            <!-- Button Section -->
+            <div class="button-section">
+                <button type="button" class="add-button" onclick="openAddModal()">
+                    <span role="img" aria-label="plus" class="anticon anticon-plus">
+                        <svg viewBox="64 64 896 896" focusable="false" data-icon="plus" width="1em" height="1em" fill="currentColor" aria-hidden="true">
+                            <path d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z"></path>
+                            <path d="M176 474h672q8 0 8 8v60q0 8-8 8H176q-8 0-8-8v-60q0-8 8-8z"></path>
+                        </svg>
+                    </span>
+                    <span>Add</span>
+                </button>
+                <span class="warning-text">To see the uploaded file processing status, please Click on (+) button to expand the details !!!</span>
+            </div>
+
+            <!-- Table -->
+            <div class="ant-table-wrapper components-table-demo-nested">
+                <div class="ant-spin-nested-loading">
+                    <div class="ant-spin-container">
+                        <div class="ant-table ant-table-middle">
+                            <div class="ant-table-container">
+                                <div class="ant-table-content">
+                                    <table style="table-layout: auto;">
+                                        <thead class="ant-table-thead">
+                                            <tr>
+                                                <th class="ant-table-cell ant-table-row-expand-icon-cell"></th>
+                                                <th class="ant-table-cell">S/N</th>
+                                                <th class="ant-table-cell">Fiscal Year</th>
+                                                <th class="ant-table-cell">Month</th>
+                                                <th class="ant-table-cell">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="ant-table-tbody" id="uploadTableBody">
+                                            <tr class="ant-table-placeholder">
+                                                <td colspan="5" class="ant-table-cell">
+                                                    <div class="ant-empty ant-empty-normal">
+                                                        <div class="ant-empty-image">
+                                                            <svg class="ant-empty-img-simple" width="64" height="41" viewBox="0 0 64 41" xmlns="http://www.w3.org/2000/svg">
+                                                                <g transform="translate(0 1)" fill="none" fill-rule="evenodd">
+                                                                    <ellipse class="ant-empty-img-simple-ellipse" cx="32" cy="33" rx="32" ry="7"></ellipse>
+                                                                    <g class="ant-empty-img-simple-g" fill-rule="nonzero">
+                                                                        <path d="M55 12.76L44.854 1.258C44.367.474 43.656 0 42.907 0H21.093c-.749 0-1.46.474-1.947 1.257L9 12.761V22h46v-9.24z"></path>
+                                                                        <path d="M41.613 15.931c0-1.605.994-2.93 2.227-2.931H55v18.137C55 33.26 53.68 35 52.05 35h-40.1C10.32 35 9 33.259 9 31.137V13h11.16c1.233 0 2.227 1.323 2.227 2.928v.022c0 1.605 1.005 2.901 2.237 2.901h14.752c1.232 0 2.237-1.308 2.237-2.913v-.007z" class="ant-empty-img-simple-path"></path>
+                                                                    </g>
+                                                                </g>
+                                                            </svg>
+                                                        </div>
+                                                        <div class="ant-empty-description">No Data</div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </section>
+
+    <!-- Add Upload Modal -->
+    <div class="modal-overlay" id="addModal">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-title">Upload Billing Register</div>
+                <button class="modal-close" onclick="closeAddModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="uploadForm">
+                    <div class="form-group">
+                        <label class="form-label required">Fiscal Year</label>
+                        <select class="form-control" id="fiscalYear" required>
+                            <option value="">Select Fiscal Year</option>
+                            <option value="2080/81">2080/81</option>
+                            <option value="2081/82">2081/82</option>
+                            <option value="2082/83">2082/83</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label required">Month</label>
+                        <select class="form-control" id="month" required>
+                            <option value="">Select Month</option>
+                            <option value="Baisakh">Baisakh</option>
+                            <option value="Jestha">Jestha</option>
+                            <option value="Ashadh">Ashadh</option>
+                            <option value="Shrawan">Shrawan</option>
+                            <option value="Bhadra">Bhadra</option>
+                            <option value="Ashwin">Ashwin</option>
+                            <option value="Kartik">Kartik</option>
+                            <option value="Mangsir">Mangsir</option>
+                            <option value="Poush">Poush</option>
+                            <option value="Magh">Magh</option>
+                            <option value="Falgun">Falgun</option>
+                            <option value="Chaitra">Chaitra</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label required">Upload File</label>
+                        <div class="file-upload" onclick="document.getElementById('fileInput').click()">
+                            <div class="file-upload-icon">📁</div>
+                            <div class="file-upload-text">Click to upload or drag and drop</div>
+                            <div class="file-upload-hint">Excel files only (.xlsx, .xls)</div>
+                        </div>
+                        <input type="file" id="fileInput" accept=".xlsx,.xls" style="display: none;" onchange="handleFileSelect(event)">
+                        <div id="fileName" style="margin-top: 8px; color: #1890ff; font-size: 14px;"></div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" onclick="closeAddModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="submitUpload()">Upload</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let uploadData = [];
+        let uploadCounter = 0;
+
+        // Load user data
+        window.addEventListener('DOMContentLoaded', function() {
+            const loginData = localStorage.getItem('cbmsLoginData');
+            if (loginData) {
+                const data = JSON.parse(loginData);
+                document.getElementById('userName').textContent = data.username || 'User';
+            }
+            
+            // Load saved uploads
+            const saved = localStorage.getItem('cbmsUploads');
+            if (saved) {
+                uploadData = JSON.parse(saved);
+                uploadCounter = uploadData.length;
+                renderTable();
+            }
+        });
+
+        // Toggle submenu
+        function toggleSubmenu(element) {
+            const submenu = element.parentElement;
+            submenu.classList.toggle('ant-menu-submenu-open');
+        }
+
+        // Modal functions
+        function openAddModal() {
+            document.getElementById('addModal').classList.add('show');
+        }
+
+        function closeAddModal() {
+            document.getElementById('addModal').classList.remove('show');
+            document.getElementById('uploadForm').reset();
+            document.getElementById('fileName').textContent = '';
+        }
+
+        // File selection
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (file) {
+                document.getElementById('fileName').textContent = '📄 ' + file.name;
+            }
+        }
+
+        // Submit upload
+        function submitUpload() {
+            const fiscalYear = document.getElementById('fiscalYear').value;
+            const month = document.getElementById('month').value;
+            const fileInput = document.getElementById('fileInput');
+            
+            if (!fiscalYear || !month || !fileInput.files[0]) {
+                alert('Please fill all required fields and select a file!');
+                return;
+            }
+
+            uploadCounter++;
+            const newUpload = {
+                id: uploadCounter,
+                sn: uploadCounter,
+                fiscalYear: fiscalYear,
+                month: month,
+                fileName: fileInput.files[0].name,
+                uploadDate: new Date().toLocaleString(),
+                status: 'Processing'
+            };
+
+            uploadData.push(newUpload);
+            localStorage.setItem('cbmsUploads', JSON.stringify(uploadData));
+            
+            renderTable();
+            closeAddModal();
+            alert('File uploaded successfully!');
+        }
+
+        // Render table
+        function renderTable() {
+            const tbody = document.getElementById('uploadTableBody');
+            
+            if (uploadData.length === 0) {
+                tbody.innerHTML = `
+                    <tr class="ant-table-placeholder">
+                        <td colspan="5" class="ant-table-cell">
+                            <div class="ant-empty ant-empty-normal">
+                                <div class="ant-empty-image">
+                                    <svg class="ant-empty-img-simple" width="64" height="41" viewBox="0 0 64 41" xmlns="http://www.w3.org/2000/svg">
+                                        <g transform="translate(0 1)" fill="none" fill-rule="evenodd">
+                                            <ellipse class="ant-empty-img-simple-ellipse" cx="32" cy="33" rx="32" ry="7"></ellipse>
+                                            <g class="ant-empty-img-simple-g" fill-rule="nonzero">
+                                                <path d="M55 12.76L44.854 1.258C44.367.474 43.656 0 42.907 0H21.093c-.749 0-1.46.474-1.947 1.257L9 12.761V22h46v-9.24z"></path>
+                                                <path d="M41.613 15.931c0-1.605.994-2.93 2.227-2.931H55v18.137C55 33.26 53.68 35 52.05 35h-40.1C10.32 35 9 33.259 9 31.137V13h11.16c1.233 0 2.227 1.323 2.227 2.928v.022c0 1.605 1.005 2.901 2.237 2.901h14.752c1.232 0 2.237-1.308 2.237-2.913v-.007z" class="ant-empty-img-simple-path"></path>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </div>
+                                <div class="ant-empty-description">No Data</div>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            let html = '';
+            uploadData.forEach((item, index) => {
+                html += `
+                    <tr class="ant-table-row" data-row-key="${item.id}">
+                        <td class="ant-table-cell ant-table-row-expand-icon-cell">
+                            <span class="expand-icon" onclick="toggleExpand(${item.id})">▶</span>
+                        </td>
+                        <td class="ant-table-cell">${item.sn}</td>
+                        <td class="ant-table-cell">${item.fiscalYear}</td>
+                        <td class="ant-table-cell">${item.month}</td>
+                        <td class="ant-table-cell">
+                            <button class="action-btn" onclick="viewDetails(${item.id})">View</button>
+                            <button class="action-btn action-btn-danger" onclick="deleteUpload(${item.id})">Delete</button>
+                        </td>
+                    </tr>
+                    <tr class="expanded-row" id="expand-${item.id}">
+                        <td colspan="5">
+                            <div class="expanded-content">
+                                <p><strong>File Name:</strong> ${item.fileName}</p>
+                                <p><strong>Upload Date:</strong> ${item.uploadDate}</p>
+                                <p><strong>Status:</strong> <span style="color: #52c41a;">${item.status}</span></p>
+                                <p><strong>Details:</strong> File has been successfully processed and saved to the system.</p>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            tbody.innerHTML = html;
+        }
+
+        // Toggle expand
+        function toggleExpand(id) {
+            const expandRow = document.getElementById('expand-' + id);
+            const icon = event.target;
+            
+            expandRow.classList.toggle('show');
+            icon.classList.toggle('expanded');
+        }
+
+        // View details
+        function viewDetails(id) {
+            const item = uploadData.find(u => u.id === id);
+            if (item) {
+                alert(`Upload Details:\n\nFiscal Year: ${item.fiscalYear}\nMonth: ${item.month}\nFile: ${item.fileName}\nUploaded: ${item.uploadDate}\nStatus: ${item.status}`);
+            }
+        }
+
+        // Delete upload
+        function deleteUpload(id) {
+            if (confirm('Are you sure you want to delete this upload?')) {
+                uploadData = uploadData.filter(u => u.id !== id);
+                localStorage.setItem('cbmsUploads', JSON.stringify(uploadData));
+                renderTable();
+            }
+        }
+
+        // Logout
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                localStorage.removeItem('cbmsLoginData');
+                window.location.href = 'cbms_login.html';
+            }
+        }
+    </script>
+</body>
+</html>
