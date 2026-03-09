@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Register Sync Report</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            background: #f0f2f5;
+            padding: 24px;
+        }
+
+        /* Breadcrumb */
+        .ant-breadcrumb {
+            display: flex;
+            align-items: center;
+            margin-bottom: 24px;
+            font-size: 14px;
+            background: white;
+            padding: 16px;
+            border-radius: 2px;
+        }
+
+        .ant-breadcrumb a {
+            color: #198cce;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .ant-breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .ant-breadcrumb-separator {
+            margin: 0 8px;
+            color: rgba(0, 0, 0, 0.45);
+        }
+
+        .anticon {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .anticon svg {
+            width: 1em;
+            height: 1em;
+            fill: currentColor;
+        }
+
+        /* Content Container */
+        .content-container {
+            background: white;
+            padding: 24px;
+            border-radius: 2px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+        }
+
+        /* Form Section */
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 0.5fr 0.5fr;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-label {
+            margin-bottom: 8px;
+            color: rgba(0, 0, 0, 0.85);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .form-label.required::before {
+            content: '* ';
+            color: #ff4d4f;
+        }
+
+        .form-control {
+            padding: 8px 12px;
+            border: 1px solid #d9d9d9;
+            border-radius: 2px;
+            font-size: 14px;
+            height: 40px;
+        }
+
+        .form-control:focus {
+            border-color: #40a9ff;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+        }
+
+        /* Buttons */
+        .btn-primary {
+            background: #1890ff;
+            color: white;
+            border: none;
+            padding: 8px 24px;
+            border-radius: 2px;
+            cursor: pointer;
+            font-size: 14px;
+            height: 40px;
+            margin-top: 30px;
+        }
+
+        .btn-primary:hover {
+            background: #40a9ff;
+        }
+
+        /* Title */
+        .page-title {
+            text-align: center;
+            font-weight: bold;
+            font-size: 24px;
+            margin: 24px 0;
+            color: rgba(0, 0, 0, 0.85);
+        }
+
+        /* Table */
+        .ant-table-wrapper {
+            margin-bottom: 24px;
+        }
+
+        .ant-table {
+            width: 100%;
+            border: 1px solid #f0f0f0;
+        }
+
+        .ant-table-container {
+            overflow-x: auto;
+        }
+
+        .ant-table table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+
+        .ant-table-thead th {
+            background: #fafafa;
+            color: rgba(0, 0, 0, 0.85);
+            font-weight: 500;
+            text-align: left;
+            padding: 12px 16px;
+            border: 1px solid #f0f0f0;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+        .ant-table-tbody td {
+            padding: 12px 16px;
+            border: 1px solid #f0f0f0;
+            color: rgba(0, 0, 0, 0.85);
+            font-size: 14px;
+        }
+
+        /* Empty State */
+        .ant-table-placeholder {
+            text-align: center;
+            padding: 64px 0;
+        }
+
+        .ant-empty {
+            display: inline-block;
+        }
+
+        .ant-empty-image {
+            margin-bottom: 8px;
+        }
+
+        .ant-empty-description {
+            color: rgba(0, 0, 0, 0.25);
+        }
+
+        /* Pagination */
+        .pagination-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 16px;
+        }
+
+        .ant-pagination {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            list-style: none;
+        }
+
+        .ant-pagination-total-text {
+            margin-right: 16px;
+            color: rgba(0, 0, 0, 0.85);
+            font-size: 14px;
+        }
+
+        .ant-pagination-prev,
+        .ant-pagination-next,
+        .ant-pagination-item {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 32px;
+            height: 32px;
+            line-height: 30px;
+            border: 1px solid #d9d9d9;
+            border-radius: 2px;
+            background: white;
+            cursor: pointer;
+        }
+
+        .ant-pagination-disabled {
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        .ant-pagination-item-link {
+            border: none;
+            background: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ant-pagination-disabled .ant-pagination-item-link {
+            cursor: not-allowed;
+        }
+    </style>
+    <script src="../../js/exceljs.min.js"></script>
+</head>
+<body>
+    <!-- Breadcrumb -->
+    <div class="ant-breadcrumb">
+        <a class="ant-breadcrumb-link" href="#" onclick="parent.loadDashboardHome(); return false;">
+            <span role="img" aria-label="home" class="anticon anticon-home">
+                <svg viewBox="64 64 896 896" focusable="false" data-icon="home" width="1em" height="1em" fill="currentColor" aria-hidden="true">
+                    <path d="M946.5 505L560.1 118.8l-25.9-25.9a31.5 31.5 0 00-44.4 0L77.5 505a63.9 63.9 0 00-18.8 46c.4 35.2 29.7 63.3 64.9 63.3h42.5V940h691.8V614.3h43.4c17.1 0 33.2-6.7 45.3-18.8a63.6 63.6 0 0018.7-45.3c0-17-6.7-33.1-18.8-45.2zM568 868H456V664h112v204zm217.9-325.7V868H632V640c0-22.1-17.9-40-40-40H432c-22.1 0-40 17.9-40 40v228H238.1V542.3h-96l370-369.7 23.1 23.1L882 542.3h-96.1z"></path>
+                </svg>
+            </span>
+            Home
+        </a>
+        <span class="ant-breadcrumb-separator">/</span>
+        <span class="ant-breadcrumb-link">Sales Register Sync Report</span>
+    </div>
+
+    <!-- Content Container -->
+    <div class="content-container">
+        <!-- Form Section -->
+        <form class="ant-form">
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label required">Fiscal Year</label>
+                    <select class="form-control" id="fiscalYear">
+                        <option value="">Select Fiscal Year</option>
+                        <option value="2082/083">2082/083</option>
+                        <option value="2081/082">2081/082</option>
+                        <option value="2080/081">2080/081</option>
+                        <option value="2079/080">2079/080</option>
+                        <option value="2078/079">2078/079</option>
+                        <option value="2077/078">2077/078</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label required">Month</label>
+                    <select class="form-control" id="month">
+                        <option value="">Select Month</option>
+                        <option value="Baisakh">Baisakh</option>
+                        <option value="Jestha">Jestha</option>
+                        <option value="Ashadh">Ashadh</option>
+                        <option value="Shrawan">Shrawan</option>
+                        <option value="Bhadra">Bhadra</option>
+                        <option value="Ashwin">Ashwin</option>
+                        <option value="Kartik">Kartik</option>
+                        <option value="Mangsir">Mangsir</option>
+                        <option value="Poush">Poush</option>
+                        <option value="Magh">Magh</option>
+                        <option value="Falgun">Falgun</option>
+                        <option value="Chaitra">Chaitra</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn-primary" onclick="searchData()">Search</button>
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn-primary" onclick="exportToExcel()">Export to Excel</button>
+                </div>
+            </div>
+        </form>
+
+        <!-- Title -->
+        <h1 class="page-title">Sales Register Sync Report</h1>
+
+        <!-- Table -->
+        <div class="ant-table-wrapper">
+            <div class="ant-table">
+                <div class="ant-table-container">
+                    <table>
+                        <colgroup>
+                            <col style="width: 56px;">
+                            <col style="width: 98px;">
+                            <col style="width: 98px;">
+                            <col style="width: 98px;">
+                            <col style="width: 98px;">
+                            <col style="width: 98px;">
+                            <col style="width: 140px;">
+                            <col style="width: 112px;">
+                            <col style="width: 112px;">
+                            <col style="width: 112px;">
+                            <col style="width: 112px;">
+                            <col style="width: 140px;">
+                        </colgroup>
+                        <thead class="ant-table-thead">
+                            <tr>
+                                <th>S.N</th>
+                                <th>Type</th>
+                                <th>InvoiceDate</th>
+                                <th>Invoice No</th>
+                                <th>Buyer Name</th>
+                                <th>Buyer Pan</th>
+                                <th>Total Sales / Export</th>
+                                <th>Exempted Sale</th>
+                                <th>Taxable Sale</th>
+                                <th>VAT</th>
+                                <th>Exported Sales</th>
+                                <th>Sync Date</th>
+                            </tr>
+                        </thead>
+                        <tbody class="ant-table-tbody" id="tableBody">
+                            <tr class="ant-table-placeholder">
+                                <td colspan="12" style="text-align: center; padding: 64px 0;">
+                                    <div class="ant-empty">
+                                        <div class="ant-empty-image">
+                                            <svg class="ant-empty-img-simple" width="64" height="41" viewBox="0 0 64 41" xmlns="http://www.w3.org/2000/svg">
+                                                <g transform="translate(0 1)" fill="none" fill-rule="evenodd">
+                                                    <ellipse style="fill: #f5f5f5;" cx="32" cy="33" rx="32" ry="7"></ellipse>
+                                                    <g style="fill: #d9d9d9;" fill-rule="nonzero">
+                                                        <path d="M55 12.76L44.854 1.258C44.367.474 43.656 0 42.907 0H21.093c-.749 0-1.46.474-1.947 1.257L9 12.761V22h46v-9.24z"></path>
+                                                        <path d="M41.613 15.931c0-1.605.994-2.93 2.227-2.931H55v18.137C55 33.26 53.68 35 52.05 35h-40.1C10.32 35 9 33.259 9 31.137V13h11.16c1.233 0 2.227 1.323 2.227 2.928v.022c0 1.605 1.005 2.901 2.237 2.901h14.752c1.232 0 2.237-1.308 2.237-2.913v-.007z" style="fill: #fafafa;"></path>
+                                                    </g>
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="ant-empty-description">No Data</div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination-container">
+            <ul class="ant-pagination">
+                <li class="ant-pagination-total-text">Total 0 items</li>
+                <li class="ant-pagination-prev ant-pagination-disabled">
+                    <button class="ant-pagination-item-link" type="button" disabled>
+                        <span role="img" aria-label="left" class="anticon anticon-left">
+                            <svg viewBox="64 64 896 896" focusable="false" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true">
+                                <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
+                            </svg>
+                        </span>
+                    </button>
+                </li>
+                <li class="ant-pagination-item ant-pagination-disabled">
+                    <a>0</a>
+                </li>
+                <li class="ant-pagination-next ant-pagination-disabled">
+                    <button class="ant-pagination-item-link" type="button" disabled>
+                        <span role="img" aria-label="right" class="anticon anticon-right">
+                            <svg viewBox="64 64 896 896" focusable="false" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true">
+                                <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"></path>
+                            </svg>
+                        </span>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Sample data for demonstration
+        const sampleData = [
+            { sn: 1, type: 'Sales', invoiceDate: '2079/11/15', invoiceNo: 'INV-001', buyerName: 'ABC Trading Pvt Ltd', buyerPan: '123456789', totalSales: '125,000.00', exemptedSale: '0.00', taxableSale: '125,000.00', vat: '16,250.00', exportedSales: '0.00', syncDate: '2079/12/01' },
+            { sn: 2, type: 'Sales', invoiceDate: '2079/11/16', invoiceNo: 'INV-002', buyerName: 'XYZ Corporation', buyerPan: '987654321', totalSales: '85,500.00', exemptedSale: '5,500.00', taxableSale: '80,000.00', vat: '10,400.00', exportedSales: '0.00', syncDate: '2079/12/01' },
+            { sn: 3, type: 'Export', invoiceDate: '2079/11/17', invoiceNo: 'EXP-001', buyerName: 'International Traders', buyerPan: '456789123', totalSales: '250,000.00', exemptedSale: '0.00', taxableSale: '0.00', vat: '0.00', exportedSales: '250,000.00', syncDate: '2079/12/02' },
+            { sn: 4, type: 'Sales', invoiceDate: '2079/11/18', invoiceNo: 'INV-003', buyerName: 'Nepal Suppliers Ltd', buyerPan: '789456123', totalSales: '95,000.00', exemptedSale: '0.00', taxableSale: '95,000.00', vat: '12,350.00', exportedSales: '0.00', syncDate: '2079/12/02' },
+            { sn: 5, type: 'Sales', invoiceDate: '2079/11/19', invoiceNo: 'INV-004', buyerName: 'Himalayan Enterprises', buyerPan: '321654987', totalSales: '156,000.00', exemptedSale: '6,000.00', taxableSale: '150,000.00', vat: '19,500.00', exportedSales: '0.00', syncDate: '2079/12/03' },
+            { sn: 6, type: 'Sales', invoiceDate: '2079/11/20', invoiceNo: 'INV-005', buyerName: 'Kathmandu Mart', buyerPan: '654987321', totalSales: '48,500.00', exemptedSale: '0.00', taxableSale: '48,500.00', vat: '6,305.00', exportedSales: '0.00', syncDate: '2079/12/03' },
+            { sn: 7, type: 'Export', invoiceDate: '2079/11/21', invoiceNo: 'EXP-002', buyerName: 'Global Import Co', buyerPan: '147258369', totalSales: '180,000.00', exemptedSale: '0.00', taxableSale: '0.00', vat: '0.00', exportedSales: '180,000.00', syncDate: '2079/12/04' },
+            { sn: 8, type: 'Sales', invoiceDate: '2079/11/22', invoiceNo: 'INV-006', buyerName: 'Pokhara Distributors', buyerPan: '963852741', totalSales: '72,000.00', exemptedSale: '2,000.00', taxableSale: '70,000.00', vat: '9,100.00', exportedSales: '0.00', syncDate: '2079/12/04' }
+        ];
+
+        function searchData() {
+            const fiscalYear = document.getElementById('fiscalYear').value;
+            const month = document.getElementById('month').value;
+            
+            if (!fiscalYear || !month) {
+                alert('Please select both Fiscal Year and Month!');
+                return;
+            }
+            
+            // Populate table with sample data
+            const tableBody = document.getElementById('tableBody');
+            let html = '';
+            
+            sampleData.forEach(row => {
+                html += `
+                    <tr>
+                        <td>${row.sn}</td>
+                        <td>${row.type}</td>
+                        <td>${row.invoiceDate}</td>
+                        <td>${row.invoiceNo}</td>
+                        <td>${row.buyerName}</td>
+                        <td>${row.buyerPan}</td>
+                        <td style="text-align: right;">${row.totalSales}</td>
+                        <td style="text-align: right;">${row.exemptedSale}</td>
+                        <td style="text-align: right;">${row.taxableSale}</td>
+                        <td style="text-align: right;">${row.vat}</td>
+                        <td style="text-align: right;">${row.exportedSales}</td>
+                        <td>${row.syncDate}</td>
+                    </tr>
+                `;
+            });
+            
+            tableBody.innerHTML = html;
+            
+            // Update pagination
+            document.querySelector('.ant-pagination-total-text').textContent = `Total ${sampleData.length} items`;
+            document.querySelector('.ant-pagination-item a').textContent = '1';
+            
+            // Enable pagination buttons
+            const prevBtn = document.querySelector('.ant-pagination-prev');
+            const nextBtn = document.querySelector('.ant-pagination-next');
+            const pageItem = document.querySelector('.ant-pagination-item');
+            
+            prevBtn.classList.add('ant-pagination-disabled');
+            nextBtn.classList.add('ant-pagination-disabled');
+            pageItem.classList.remove('ant-pagination-disabled');
+        }
+
+        async function exportToExcel() {
+            const fiscalYear = document.getElementById('fiscalYear').value;
+            const month = document.getElementById('month').value;
+            
+            if (!fiscalYear || !month) {
+                alert('Please select both Fiscal Year and Month before exporting!');
+                return;
+            }
+            
+            // Check if data is loaded
+            const tableBody = document.getElementById('tableBody');
+            if (tableBody.querySelector('.ant-table-placeholder')) {
+                alert('Please search for data first before exporting!');
+                return;
+            }
+            
+            // Create Excel workbook using ExcelJS
+            const workbook = new ExcelJS.Workbook();
+            const worksheet = workbook.addWorksheet('Nepali SB');
+            
+            // Row 1: Title
+            const row1 = worksheet.getRow(1);
+            row1.getCell(5).value = 'बिक्री खाता';
+            row1.getCell(5).font = { bold: true, size: 16 };
+            row1.getCell(5).alignment = { horizontal: 'center', vertical: 'middle' };
+            row1.height = 25;
+            worksheet.mergeCells('E1:G1');
+            
+            // Row 2: Subtitle
+            const row2 = worksheet.getRow(2);
+            row2.getCell(4).value = '(नियम २३ को उपनियम (१) को खण्ड (ज) संग सम्बन्धित )';
+            row2.getCell(4).alignment = { horizontal: 'center', vertical: 'middle' };
+            row2.height = 20;
+            worksheet.mergeCells('D2:L2');
+            
+            // Row 3: Empty
+            worksheet.getRow(3).height = 15;
+            
+            // Row 4: Taxpayer details
+            const row4 = worksheet.getRow(4);
+            row4.getCell(4).value = 'करदाता दर्ता न (PAN) : ..................';
+            row4.getCell(5).value = 'करदाताको नाम: .........................';
+            row4.getCell(6).value = 'साल ........';
+            row4.getCell(8).value = 'कर अवधि: .................';
+            row4.height = 20;
+            worksheet.mergeCells('F4:G4');
+            worksheet.mergeCells('H4:L4');
+            
+            // Row 5: Group headers
+            const row5 = worksheet.getRow(5);
+            row5.height = 20;
+            row5.getCell(6).value = 'बीजक';
+            row5.getCell(8).value = 'करयोग्य बिक्री';
+            row5.getCell(11).value = 'निकासी';
+            worksheet.mergeCells('F5:G5');
+            worksheet.mergeCells('H5:I5');
+            worksheet.mergeCells('K5:L5');
+            
+            // Style group headers
+            ['F5', 'H5', 'K5'].forEach(cell => {
+                const c = worksheet.getCell(cell);
+                c.font = { bold: true };
+                c.alignment = { horizontal: 'center', vertical: 'middle' };
+                c.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFD9D9D9' } };
+                c.border = {
+                    top: { style: 'thin' },
+                    left: { style: 'thin' },
+                    bottom: { style: 'thin' },
+                    right: { style: 'thin' }
+                };
+            });
+            
+            // Row 6: Column headers
+            const row6 = worksheet.getRow(6);
+            row6.height = 60;
+            const headers = [
+                'मिति',
+                'बीजक नम्बर',
+                'खरिदकर्ताको नाम',
+                'खरिदकर्ताको स्थायी लेखा नम्बर',
+                'जम्मा बिक्री / निकासी (रु)',
+                'स्थानीय कर छुटको बिक्री मूल्य (रु)',
+                'करयोग्य बिक्री मूल्य (रु)',
+                'कर (रु)',
+                'निकासी गरेको वस्तु वा सेवाको मूल्य (रु)',
+                'निकासी गरेको देश',
+                'निकासी नम्बर',
+                'निकासी प्रमाणपत्र मिति'
+            ];
+            
+            headers.forEach((header, index) => {
+                const cell = row6.getCell(index + 1);
+                cell.value = header;
+                cell.font = { bold: true };
+                cell.alignment = { horizontal: 'center', vertical: 'middle', wrapText: true };
+                cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFD9D9D9' } };
+                cell.border = {
+                    top: { style: 'thin' },
+                    left: { style: 'thin' },
+                    bottom: { style: 'thin' },
+                    right: { style: 'thin' }
+                };
+            });
+            
+            // Data rows (starting from row 7)
+            sampleData.forEach((data, index) => {
+                const rowNum = 7 + index;
+                const row = worksheet.getRow(rowNum);
+                const rowData = [
+                    data.invoiceDate,
+                    data.invoiceNo,
+                    data.buyerName,
+                    data.buyerPan,
+                    data.totalSales,
+                    data.exemptedSale,
+                    data.taxableSale,
+                    data.vat,
+                    data.exportedSales,
+                    '',
+                    '',
+                    data.syncDate
+                ];
+                
+                rowData.forEach((value, colIndex) => {
+                    const cell = row.getCell(colIndex + 1);
+                    cell.value = value;
+                    cell.alignment = { vertical: 'middle' };
+                    cell.border = {
+                        top: { style: 'thin' },
+                        left: { style: 'thin' },
+                        bottom: { style: 'thin' },
+                        right: { style: 'thin' }
+                    };
+                });
+            });
+            
+            // Set column widths
+            worksheet.columns = [
+                { width: 12 },  // A: मिति
+                { width: 14 },  // B: बीजक नम्बर
+                { width: 28 },  // C: खरिदकर्ताको नाम
+                { width: 22 },  // D: खरिदकर्ताको PAN
+                { width: 20 },  // E: जम्मा बिक्री
+                { width: 22 },  // F: कर छुटको बिक्री
+                { width: 20 },  // G: करयोग्य बिक्री
+                { width: 14 },  // H: कर
+                { width: 24 },  // I: निकासी मूल्य
+                { width: 16 },  // J: निकासी देश
+                { width: 16 },  // K: निकासी नम्बर
+                { width: 20 }   // L: मिति
+            ];
+            
+            // Generate filename and download
+            const filename = `sales-format_${fiscalYear.replace('/', '-')}_${month}.xlsx`;
+            const buffer = await workbook.xlsx.writeBuffer();
+            const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>
