@@ -316,17 +316,11 @@
                         <th>Invoice No.</th>
                         <th>Buyer Name</th>
                         <th>Buyer PAN</th>
-                        <th>Item Name</th>
-                        <th>Quantity</th>
-                        <th>Total Sales</th>
-                        <th>Tax Exempt</th>
-                        <th>Taxable Amount</th>
-                        <th>VAT</th>
                     </tr>
                 </thead>
                 <tbody id="tableBody">
                     <tr>
-                        <td colspan="11">
+                        <td colspan="5">
                             <div class="empty-state">
                                 <svg viewBox="64 64 896 896" focusable="false">
                                     <path d="M304 176h80v48h-80zm168 0h80v48h-80zm-336 0h80v48h-80zm584 0h80v48h-80zM184 432h-80v48h80zm0 120h-80v48h80zm0-240h-80v48h80zm0 360h-80v48h80zm0 120h-80v48h80zm640-480h80v48h-80zm0 120h80v48h-80zm0 120h80v48h-80zm0 120h80v48h-80zm0 120h80v48h-80zm-480-48h80v48h-80zm168 0h80v48h-80zm-168-120h80v48h-80zm168 0h80v48h-80zm-168-120h80v48h-80zm168 0h80v48h-80z" opacity="0.3" fill="#e0e0e0"></path>
@@ -396,12 +390,6 @@
                         <td>${row.invoiceNo}</td>
                         <td>${row.buyerName}</td>
                         <td>${row.buyerPan}</td>
-                        <td>${row.itemName}</td>
-                        <td style="text-align: right;">${row.quantity}</td>
-                        <td style="text-align: right;">${row.totalSales.toFixed(2)}</td>
-                        <td style="text-align: right;">${row.taxExempt.toFixed(2)}</td>
-                        <td style="text-align: right;">${row.taxableAmount.toFixed(2)}</td>
-                        <td style="text-align: right;">${row.vat.toFixed(2)}</td>
                     </tr>
                 `;
             });
