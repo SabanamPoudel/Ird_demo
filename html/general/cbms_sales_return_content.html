@@ -359,9 +359,15 @@
     <script>
         // Sample data for demonstration
         const sampleData = [
-            { sn: 1, date: '2081.05.05', invoiceNo: 'RET-001', buyerName: 'ABC Trading Pvt. Ltd.', buyerPan: '123456789' },
-            { sn: 2, date: '2081.05.06', invoiceNo: 'RET-002', buyerName: 'XYZ Industries', buyerPan: '987654321' },
-            { sn: 3, date: '2081.05.07', invoiceNo: 'RET-003', buyerName: 'Nepal Traders', buyerPan: '456789123' }
+            { sn: 1, date: '', invoiceNo: 'CRNOTE-0052', buyerName: 'Shree nagardanda secondary School', buyerPan: '', itemName: '', quantity: 1, unit: '', totalReturn: 106194.82, taxExemptReturn: 0, value: 106194.82, tax: 13805.3266 },
+            { sn: 2, date: '', invoiceNo: 'CRNOTE-0053', buyerName: 'Kotihome Mandir', buyerPan: '', itemName: '', quantity: 1, unit: '', totalReturn: 7964.60, taxExemptReturn: 0, value: 7964.60, tax: 1035.398 },
+            { sn: 3, date: '', invoiceNo: 'IN-107490', buyerName: 'Madhyabindu Nagarpalika', buyerPan: '', itemName: '', quantity: 1, unit: '', totalReturn: 23008.8496, taxExemptReturn: 0, value: 23008.8496, tax: 2991.15 },
+            { sn: 4, date: '', invoiceNo: 'CRNOTE-0055', buyerName: 'shivrajmun.(srot kendra)', buyerPan: '', itemName: '', quantity: 1, unit: '', totalReturn: 7522.12, taxExemptReturn: 0, value: 7522.12, tax: 977.8756 },
+            { sn: 5, date: '', invoiceNo: 'CRNOTE-0056', buyerName: 'shivrajmun.(nagrik arogya kendra)', buyerPan: '', itemName: '', quantity: 1, unit: '', totalReturn: 7433.63, taxExemptReturn: 0, value: 7433.63, tax: 966.3719 },
+            { sn: 6, date: '', invoiceNo: 'IN-109364', buyerName: 'Palungtar Poultry Pvt. Ltd', buyerPan: '', itemName: '', quantity: 1, unit: '', totalReturn: 35000, taxExemptReturn: 0, value: 35000, tax: 4550 },
+            { sn: 7, date: '', invoiceNo: 'IN-110426', buyerName: 'madhya Nepal Saving And credit Co-operative socity ltd', buyerPan: '', itemName: '', quantity: 1, unit: '', totalReturn: 69911.5044, taxExemptReturn: 0, value: 69911.5044, tax: 9088.4956 },
+            { sn: 8, date: '', invoiceNo: 'CRNOTE-0057', buyerName: 'Sahaj Network Pvt. Ltd.', buyerPan: '', itemName: '', quantity: 1, unit: '', totalReturn: 123893.81, taxExemptReturn: 0, value: 123893.81, tax: 16106.1953 },
+            { sn: 9, date: '2080.10.03', invoiceNo: 'IN-61400', buyerName: 'Liberty Energy Company Ltd.', buyerPan: '', itemName: '', quantity: 1, unit: '', totalReturn: 35309.736, taxExemptReturn: 0, value: 35309.736, tax: 4590.2657 }
         ];
 
         function searchData() {
@@ -418,20 +424,79 @@
             const workbook = new ExcelJS.Workbook();
             const worksheet = workbook.addWorksheet('Sales Return');
 
-            // Add headers
-            worksheet.addRow(['S.N', 'Date', 'Invoice No.', 'Buyer Name', 'Buyer PAN']);
-            
-            // Style header row
-            const headerRow = worksheet.getRow(1);
-            headerRow.font = { bold: true };
-            headerRow.fill = {
+            // Row 1: Title
+            worksheet.mergeCells('A1:K1');
+            const titleRow = worksheet.getRow(1);
+            titleRow.getCell(1).value = 'बिक्री फिर्ती खाता';
+            titleRow.getCell(1).font = { bold: true, size: 14 };
+            titleRow.getCell(1).alignment = { horizontal: 'center', vertical: 'middle' };
+            titleRow.height = 20;
+
+            // Row 2: Regulation reference
+            worksheet.mergeCells('A2:K2');
+            const regRow = worksheet.getRow(2);
+            regRow.getCell(1).value = '(नियम २३ को उपनियम (१) को खण्ड (ज) सँग सम्बन्धित )';
+            regRow.getCell(1).font = { size: 10 };
+            regRow.getCell(1).alignment = { horizontal: 'center', vertical: 'middle' };
+            regRow.height = 18;
+
+            // Row 3: Empty
+            worksheet.getRow(3).height = 6;
+
+            // Row 4: Company info
+            const infoRow = worksheet.getRow(4);
+            infoRow.getCell(1).value = 'करदाता दर्ता नं (PAN): 609684816';
+            worksheet.mergeCells('A4:D4');
+            infoRow.getCell(5).value = 'करदाताको नाम: ....';
+            worksheet.mergeCells('E4:F4');
+            infoRow.getCell(7).value = `साल: ${fiscalYear}`;
+            worksheet.mergeCells('G4:H4');
+            infoRow.getCell(9).value = `कर अवधि: ${month}`;
+            worksheet.mergeCells('I4:K4');
+            infoRow.height = 18;
+
+            // Row 5: Section headers
+            worksheet.mergeCells('A5:D5');
+            const section1Row = worksheet.getRow(5);
+            section1Row.getCell(1).value = 'बीजक';
+            section1Row.getCell(1).font = { bold: true };
+            section1Row.getCell(1).alignment = { horizontal: 'center', vertical: 'middle' };
+            worksheet.mergeCells('E5:G5');
+            section1Row.getCell(5).value = 'वस्तु वा सेवाको';
+            section1Row.getCell(5).font = { bold: true };
+            section1Row.getCell(5).alignment = { horizontal: 'center', vertical: 'middle' };
+            worksheet.mergeCells('H5:K5');
+            section1Row.getCell(8).value = 'फिर्ती';
+            section1Row.getCell(8).font = { bold: true };
+            section1Row.getCell(8).alignment = { horizontal: 'center', vertical: 'middle' };
+            section1Row.height = 18;
+
+            // Row 6: Main column headers
+            const headerRow6 = worksheet.getRow(6);
+            headerRow6.values = [
+                'मिति',
+                'बीजक नम्बर',
+                'खरिदकर्ताको नाम',
+                'खरिदकर्ताको स्थायी लेखा नम्बर',
+                'नाम',
+                'परिमाण',
+                'एकाइ',
+                'उम्मा फिर्ती (र)',
+                'स्थानीय कर छुटको फिर्ती मूल्य (र)',
+                'मूल्य (र)',
+                'कर (र)'
+            ];
+            headerRow6.font = { bold: true, size: 10 };
+            headerRow6.alignment = { horizontal: 'center', vertical: 'middle', wrapText: true };
+            headerRow6.height = 45;
+            headerRow6.fill = {
                 type: 'pattern',
                 pattern: 'solid',
                 fgColor: { argb: 'FFD3D3D3' }
             };
-            
-            // Add borders to header
-            headerRow.eachCell((cell) => {
+
+            // Add borders to header row 6
+            headerRow6.eachCell((cell) => {
                 cell.border = {
                     top: { style: 'thin' },
                     left: { style: 'thin' },
@@ -443,11 +508,17 @@
             // Add data rows
             sampleData.forEach(row => {
                 const dataRow = worksheet.addRow([
-                    row.sn,
                     row.date,
                     row.invoiceNo,
                     row.buyerName,
-                    row.buyerPan
+                    row.buyerPan,
+                    row.itemName,
+                    row.quantity,
+                    row.unit,
+                    row.totalReturn,
+                    row.taxExemptReturn,
+                    row.value,
+                    row.tax
                 ]);
                 
                 // Add borders to data cells
@@ -459,19 +530,32 @@
                         right: { style: 'thin' }
                     };
                 });
+
+                // Format number cells
+                [6, 8, 9, 10, 11].forEach(colNum => {
+                    const cell = dataRow.getCell(colNum);
+                    cell.numFmt = '0.00';
+                    cell.alignment = { horizontal: 'right' };
+                });
             });
 
             // Set column widths
             worksheet.columns = [
-                { width: 8 },   // S.N
-                { width: 14 },  // Date
-                { width: 16 },  // Invoice No.
-                { width: 30 },  // Buyer Name
-                { width: 16 }   // Buyer PAN
+                { width: 12 },  // A: मिति
+                { width: 16 },  // B: बीजक नम्बर
+                { width: 30 },  // C: खरिदकर्ताको नाम
+                { width: 20 },  // D: खरिदकर्ताको स्थायी लेखा नम्बर
+                { width: 12 },  // E: नाम
+                { width: 10 },  // F: परिमाण
+                { width: 10 },  // G: एकाइ
+                { width: 16 },  // H: उम्मा फिर्ती
+                { width: 20 },  // I: स्थानीय कर छुट
+                { width: 14 },  // J: मूल्य
+                { width: 12 }   // K: कर
             ];
             
             // Generate filename and download
-            const filename = `sales-return_${fiscalYear.replace('/', '-')}_${month}.xlsx`;
+            const filename = 'Sale-Return.xlsx';
             const buffer = await workbook.xlsx.writeBuffer();
             const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
             const url = window.URL.createObjectURL(blob);
