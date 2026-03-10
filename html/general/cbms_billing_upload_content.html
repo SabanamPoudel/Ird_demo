@@ -384,7 +384,7 @@
     <!-- List View (Level 1) -->
     <div class="content-container" id="listView">
         <!-- Add Button and Warning -->
-        <div style="margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+        <div style="margin-bottom: 20px; display: flex; align-items: center; gap: 10px; flex-wrap: nowrap;">
             <button type="button" class="add-file-button" onclick="showUploadForm()">
                 <span role="img" aria-label="plus" class="anticon anticon-plus">
                     <svg viewBox="64 64 896 896" focusable="false" data-icon="plus" width="1em" height="1em" fill="currentColor" aria-hidden="true">
@@ -394,7 +394,7 @@
                 </span>
                 <span>Add</span>
             </button>
-            <span style="color: red; font-size: 14px;">To see the uploaded file processing status, please Click on (+) button to expand the details !!!</span>
+            <span style="color: red; font-size: 14px; white-space: nowrap;">To see the uploaded file processing status, please Click on (+) button to expand the details !!!</span>
         </div>
 
         <!-- Uploads Table -->
