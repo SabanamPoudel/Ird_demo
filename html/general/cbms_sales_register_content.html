@@ -316,11 +316,17 @@
                         <th>Invoice No.</th>
                         <th>Buyer Name</th>
                         <th>Buyer PAN</th>
+                        <th>Item Name</th>
+                        <th>Quantity</th>
+                        <th>Total Sales</th>
+                        <th>Tax Exempt</th>
+                        <th>Taxable Amount</th>
+                        <th>VAT</th>
                     </tr>
                 </thead>
                 <tbody id="tableBody">
                     <tr>
-                        <td colspan="5">
+                        <td colspan="11">
                             <div class="empty-state">
                                 <svg viewBox="64 64 896 896" focusable="false">
                                     <path d="M304 176h80v48h-80zm168 0h80v48h-80zm-336 0h80v48h-80zm584 0h80v48h-80zM184 432h-80v48h80zm0 120h-80v48h80zm0-240h-80v48h80zm0 360h-80v48h80zm0 120h-80v48h80zm640-480h80v48h-80zm0 120h80v48h-80zm0 120h80v48h-80zm0 120h80v48h-80zm0 120h80v48h-80zm-480-48h80v48h-80zm168 0h80v48h-80zm-168-120h80v48h-80zm168 0h80v48h-80zm-168-120h80v48h-80zm168 0h80v48h-80z" opacity="0.3" fill="#e0e0e0"></path>
@@ -355,15 +361,18 @@
         </div>
     </div>
 
-    <script src="../../js/xlsx.full.min.js"></script>
+    <script src="../../js/exceljs.min.js"></script>
     <script>
         // Sample data for demonstration
         const sampleData = [
-            { sn: 1, date: '2081-01-15', invoiceNo: 'INV-001', buyerName: 'ABC Trading Pvt. Ltd.', buyerPan: '123456789' },
-            { sn: 2, date: '2081-01-16', invoiceNo: 'INV-002', buyerName: 'XYZ Industries', buyerPan: '987654321' },
-            { sn: 3, date: '2081-01-17', invoiceNo: 'INV-003', buyerName: 'Nepal Traders', buyerPan: '456789123' },
-            { sn: 4, date: '2081-01-18', invoiceNo: 'INV-004', buyerName: 'Himalayan Corp.', buyerPan: '321654987' },
-            { sn: 5, date: '2081-01-19', invoiceNo: 'INV-005', buyerName: 'Mountain Exports', buyerPan: '789123456' }
+            { sn: 1, date: '2081.05.01', invoiceNo: 'IN-6916', buyerName: 'Janga Badahur Aale Magar', buyerPan: '', itemName: 'AllItems', quantity: 1, unit: '', totalSales: 1130.00, taxExempt: 0.00, taxableAmount: 1000.00, vat: 130.00, exportValue: 0.00, exportCountry: '', exportDeclNo: '', exportDeclDate: '' },
+            { sn: 2, date: '2081.05.01', invoiceNo: 'IN-7045', buyerName: 'safik mohammad', buyerPan: '', itemName: 'AllItems', quantity: 1, unit: '', totalSales: 799.94, taxExempt: 0.00, taxableAmount: 707.91, vat: 92.03, exportValue: 0.00, exportCountry: '', exportDeclNo: '', exportDeclDate: '' },
+            { sn: 3, date: '2081.05.01', invoiceNo: 'IN-7146', buyerName: 'gauri kumal', buyerPan: '', itemName: 'AllItems', quantity: 1, unit: '', totalSales: 959.93, taxExempt: 0.00, taxableAmount: 849.50, vat: 110.43, exportValue: 0.00, exportCountry: '', exportDeclNo: '', exportDeclDate: '' },
+            { sn: 4, date: '2081.05.01', invoiceNo: 'IN-6952', buyerName: 'min prasad bohora', buyerPan: '', itemName: 'AllItems', quantity: 1, unit: '', totalSales: 1199.96, taxExempt: 0.00, taxableAmount: 1061.91, vat: 138.05, exportValue: 0.00, exportCountry: '', exportDeclNo: '', exportDeclDate: '' },
+            { sn: 5, date: '2081.05.01', invoiceNo: 'IN-7149', buyerName: 'Puspa Shrestha', buyerPan: '', itemName: 'AllItems', quantity: 1, unit: '', totalSales: 959.93, taxExempt: 0.00, taxableAmount: 849.50, vat: 110.43, exportValue: 0.00, exportCountry: '', exportDeclNo: '', exportDeclDate: '' },
+            { sn: 6, date: '2081.05.01', invoiceNo: 'IN-7167', buyerName: 'maiya dhungana manchauka', buyerPan: '', itemName: 'AllItems', quantity: 1, unit: '', totalSales: 959.93, taxExempt: 0.00, taxableAmount: 849.50, vat: 110.43, exportValue: 0.00, exportCountry: '', exportDeclNo: '', exportDeclDate: '' },
+            { sn: 7, date: '2081.05.01', invoiceNo: 'IN-6863', buyerName: 'Bishnu Adhikari', buyerPan: '', itemName: 'AllItems', quantity: 1, unit: '', totalSales: 8999.60, taxExempt: 0.00, taxableAmount: 7964.25, vat: 1035.35, exportValue: 0.00, exportCountry: '', exportDeclNo: '', exportDeclDate: '' },
+            { sn: 8, date: '2081.05.01', invoiceNo: 'IN-7084', buyerName: 'Anupam pun', buyerPan: '', itemName: 'AllItems', quantity: 1, unit: '', totalSales: 799.94, taxExempt: 0.00, taxableAmount: 707.91, vat: 92.03, exportValue: 0.00, exportCountry: '', exportDeclNo: '', exportDeclDate: '' }
         ];
 
         function searchData() {
@@ -387,6 +396,12 @@
                         <td>${row.invoiceNo}</td>
                         <td>${row.buyerName}</td>
                         <td>${row.buyerPan}</td>
+                        <td>${row.itemName}</td>
+                        <td style="text-align: right;">${row.quantity}</td>
+                        <td style="text-align: right;">${row.totalSales.toFixed(2)}</td>
+                        <td style="text-align: right;">${row.taxExempt.toFixed(2)}</td>
+                        <td style="text-align: right;">${row.taxableAmount.toFixed(2)}</td>
+                        <td style="text-align: right;">${row.vat.toFixed(2)}</td>
                     </tr>
                 `;
             });
@@ -420,20 +435,80 @@
             const workbook = new ExcelJS.Workbook();
             const worksheet = workbook.addWorksheet('Sales Register');
 
-            // Add headers
-            worksheet.addRow(['S.N', 'Date', 'Invoice No.', 'Buyer Name', 'Buyer PAN']);
-            
-            // Style header row
-            const headerRow = worksheet.getRow(1);
-            headerRow.font = { bold: true };
-            headerRow.fill = {
+            // Row 1: Title
+            worksheet.mergeCells('A1:P1');
+            const titleRow = worksheet.getRow(1);
+            titleRow.getCell(1).value = 'बिक्री खाता';
+            titleRow.getCell(1).font = { bold: true, size: 14 };
+            titleRow.getCell(1).alignment = { horizontal: 'center', vertical: 'middle' };
+            titleRow.height = 20;
+
+            // Row 2: Regulation reference
+            worksheet.mergeCells('A2:P2');
+            const regRow = worksheet.getRow(2);
+            regRow.getCell(1).value = '(नियम २२ को उपनियम (१) को खण्ड (ज) सँग सम्बन्धित )';
+            regRow.getCell(1).font = { size: 10 };
+            regRow.getCell(1).alignment = { horizontal: 'center', vertical: 'middle' };
+            regRow.height = 18;
+
+            // Row 3: Company info
+            const infoRow = worksheet.getRow(3);
+            infoRow.getCell(1).value = 'करदाता दर्ता नं (PAN): 609684816';
+            worksheet.mergeCells('A3:D3');
+            infoRow.getCell(5).value = 'करदाताको नाम: ....';
+            worksheet.mergeCells('E3:H3');
+            infoRow.getCell(9).value = `साल: ${fiscalYear}`;
+            worksheet.mergeCells('I3:K3');
+            infoRow.getCell(12).value = `कर अवधि: ${month}`;
+            worksheet.mergeCells('L3:P3');
+            infoRow.height = 18;
+
+            // Row 4: Section header
+            worksheet.mergeCells('A4:D4');
+            const sectionRow = worksheet.getRow(4);
+            sectionRow.getCell(1).value = 'बीजक / निकासी';
+            sectionRow.getCell(1).font = { bold: true };
+            sectionRow.getCell(1).alignment = { horizontal: 'center', vertical: 'middle' };
+            worksheet.mergeCells('E4:G4');
+            sectionRow.getCell(5).value = 'वस्तु वा सेवाको';
+            sectionRow.getCell(5).font = { bold: true };
+            sectionRow.getCell(5).alignment = { horizontal: 'center', vertical: 'middle' };
+            worksheet.mergeCells('L4:O4');
+            sectionRow.getCell(12).value = 'निकासी';
+            sectionRow.getCell(12).font = { bold: true };
+            sectionRow.getCell(12).alignment = { horizontal: 'center', vertical: 'middle' };
+            sectionRow.height = 18;
+
+            // Row 5: Main column headers
+            const headerRow5 = worksheet.getRow(5);
+            headerRow5.values = [
+                'मिति',
+                'बीजक नम्बर',
+                'खरिदकर्ताको नाम',
+                'खरिदकर्ताको स्थायी लेखा नम्बर',
+                'नाम',
+                'परिमाण',
+                'एकाइ',
+                'उम्मा बिक्री / निकासी (र)',
+                'स्थानीय कर छुटको बिक्री मूल्य (र)',
+                'मूल्य (र)',
+                'कर (र)',
+                'निकासी मूल्य (र)',
+                'निकासी गरेको देश',
+                'निकासी प्रज्ञापनपत्र नम्बर',
+                'निकासी प्रज्ञापनपत्र मिति'
+            ];
+            headerRow5.font = { bold: true, size: 10 };
+            headerRow5.alignment = { horizontal: 'center', vertical: 'middle', wrapText: true };
+            headerRow5.height = 45;
+            headerRow5.fill = {
                 type: 'pattern',
                 pattern: 'solid',
                 fgColor: { argb: 'FFD3D3D3' }
             };
-            
-            // Add borders to header
-            headerRow.eachCell((cell) => {
+
+            // Add borders to header row 5
+            headerRow5.eachCell((cell) => {
                 cell.border = {
                     top: { style: 'thin' },
                     left: { style: 'thin' },
@@ -445,11 +520,21 @@
             // Add data rows
             sampleData.forEach(row => {
                 const dataRow = worksheet.addRow([
-                    row.sn,
                     row.date,
                     row.invoiceNo,
                     row.buyerName,
-                    row.buyerPan
+                    row.buyerPan,
+                    row.itemName,
+                    row.quantity,
+                    row.unit,
+                    row.totalSales,
+                    row.taxExempt,
+                    row.taxableAmount,
+                    row.vat,
+                    row.exportValue,
+                    row.exportCountry,
+                    row.exportDeclNo,
+                    row.exportDeclDate
                 ]);
                 
                 // Add borders to data cells
@@ -461,19 +546,36 @@
                         right: { style: 'thin' }
                     };
                 });
+
+                // Format number cells
+                [8, 9, 10, 11, 12].forEach(colNum => {
+                    const cell = dataRow.getCell(colNum);
+                    cell.numFmt = '0.00';
+                    cell.alignment = { horizontal: 'right' };
+                });
             });
 
             // Set column widths
             worksheet.columns = [
-                { width: 8 },   // S.N
-                { width: 14 },  // Date
-                { width: 16 },  // Invoice No.
-                { width: 30 },  // Buyer Name
-                { width: 16 }   // Buyer PAN
+                { width: 12 },  // A: मिति
+                { width: 14 },  // B: बीजक नम्बर
+                { width: 24 },  // C: खरिदकर्ताको नाम
+                { width: 20 },  // D: खरिदकर्ताको स्थायी लेखा नम्बर
+                { width: 12 },  // E: नाम
+                { width: 10 },  // F: परिमाण
+                { width: 10 },  // G: एकाइ
+                { width: 16 },  // H: उम्मा बिक्री / निकासी
+                { width: 18 },  // I: स्थानीय कर छुट
+                { width: 14 },  // J: मूल्य
+                { width: 12 },  // K: कर
+                { width: 14 },  // L: निकासी मूल्य
+                { width: 14 },  // M: निकासी देश
+                { width: 20 },  // N: निकासी प्रज्ञापनपत्र नम्बर
+                { width: 18 }   // O: निकासी प्रज्ञापनपत्र मिति
             ];
             
             // Generate filename and download
-            const filename = `sales-register_${fiscalYear.replace('/', '-')}_${month}.xlsx`;
+            const filename = `Sales-Report.xlsx`;
             const buffer = await workbook.xlsx.writeBuffer();
             const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
             const url = window.URL.createObjectURL(blob);
