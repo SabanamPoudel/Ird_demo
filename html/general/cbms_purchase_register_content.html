@@ -419,6 +419,15 @@
             pageItem.classList.remove('ant-pagination-disabled');
         }
 
+        // Auto-load data on page load with default values
+        window.addEventListener('DOMContentLoaded', function() {
+            // Set default values
+            document.getElementById('fiscalYear').value = '2081/082';
+            document.getElementById('month').value = 'Shrawan';
+            // Auto-search to show data
+            searchData();
+        });
+
         async function exportToExcel() {
             const fiscalYear = document.getElementById('fiscalYear').value;
             const month = document.getElementById('month').value;
