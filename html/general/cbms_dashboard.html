@@ -192,19 +192,18 @@
             text-decoration: none;
         }
 
-        .ant-menu-item span,
+        .ant-menu-item > span:not(.ant-menu-item-icon),
+        .ant-menu-item > a,
         .ant-menu-sub .ant-menu-item span {
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
-            flex: 1;
         }
 
         .ant-menu-title-content {
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
-            flex-shrink: 1;
         }
 
         .ant-layout-sider-trigger {
@@ -401,9 +400,7 @@
                 <ul class="ant-menu">
                     <li class="ant-menu-item">
                         <span class="ant-menu-item-icon">🔌</span>
-                        <span class="ant-menu-title-content">
-                            <a href="cbms_onboarding.html" style="color: inherit; text-decoration: none;">Onboarding</a>
-                        </span>
+                        <a href="cbms_onboarding.html" style="color: inherit; text-decoration: none;">Onboarding</a>
                     </li>
 
                     <li class="ant-menu-submenu">
@@ -458,9 +455,7 @@
 
                     <li class="ant-menu-item">
                         <span class="ant-menu-item-icon">🐞</span>
-                        <span class="ant-menu-title-content">
-                            <span>Grievance</span>
-                        </span>
+                        <span>Grievance</span>
                     </li>
                 </ul>
             </div>
