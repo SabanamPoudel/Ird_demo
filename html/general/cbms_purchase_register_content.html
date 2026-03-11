@@ -360,9 +360,21 @@
     <script>
         // Sample data for demonstration
         const sampleData = [
-            { sn: 1, date: '2081.05.05', invoiceNo: 'PINV-001', declarationNo: 'DECL-001', sellerName: 'ABC Suppliers Pvt. Ltd.', sellerPan: '123456789' },
-            { sn: 2, date: '2081.05.06', invoiceNo: 'PINV-002', declarationNo: 'DECL-002', sellerName: 'XYZ Trading', sellerPan: '987654321' },
-            { sn: 3, date: '2081.05.07', invoiceNo: 'PINV-003', declarationNo: 'DECL-003', sellerName: 'Nepal Distributors', sellerPan: '456789123' }
+            { sn: 1, date: '2081.04.02', invoiceNo: '2081.04.02', declarationNo: '', sellerName: 'Nepal Electricity Board', sellerPan: '500056413' },
+            { sn: 2, date: '2081.04.02', invoiceNo: '2081.04.02', declarationNo: '', sellerName: 'Bijay 8E Emporium Udaan', sellerPan: '300228166' },
+            { sn: 3, date: '2081.04.03', invoiceNo: '2081.04.03', declarationNo: '', sellerName: 'Udaan Electronics Pvt. Ltd.', sellerPan: '609965047' },
+            { sn: 4, date: '2081.04.04', invoiceNo: '2081.04.04', declarationNo: '', sellerName: 'Konnect Pvt. Ltd.', sellerPan: '609684816' },
+            { sn: 5, date: '2081.04.06', invoiceNo: '2081.04.06', declarationNo: '', sellerName: 'Gigabyte Eam Pvt. Ltd.', sellerPan: '605605263' },
+            { sn: 6, date: '2081.04.09', invoiceNo: '2081.04.09', declarationNo: '', sellerName: 'Nikhil Electronics Udaan', sellerPan: '303562078' },
+            { sn: 7, date: '2081.04.09', invoiceNo: '2081.04.09', declarationNo: '', sellerName: 'Udaan Electronics Pvt. Ltd.', sellerPan: '609965047' },
+            { sn: 8, date: '2081.04.10', invoiceNo: '2081.04.10', declarationNo: '', sellerName: 'Nikhil Electronics', sellerPan: '303562078' },
+            { sn: 9, date: '2081.04.10', invoiceNo: '2081.04.10', declarationNo: '', sellerName: 'Chandradeep Enterprises Udaan', sellerPan: '300135675' },
+            { sn: 10, date: '2081.04.13', invoiceNo: '2081.04.13', declarationNo: '', sellerName: 'Udaan Electronics Pvt. Ltd.', sellerPan: '609965047' },
+            { sn: 11, date: '2081.04.14', invoiceNo: '2081.04.14', declarationNo: '', sellerName: 'Cas Cloud Pvt. Ltd.', sellerPan: '304727678' },
+            { sn: 12, date: '2081.04.14', invoiceNo: '2081.04.14', declarationNo: '', sellerName: 'Udaan Electronics Pvt. Ltd.', sellerPan: '609965047' },
+            { sn: 13, date: '2081.04.14', invoiceNo: '2081.04.14', declarationNo: '', sellerName: 'Balaji Technology Pvt. Ltd.', sellerPan: '603523322' },
+            { sn: 14, date: '2081.04.16', invoiceNo: '2081.04.16', declarationNo: '', sellerName: 'Manu Signage Pvt. Ltd.', sellerPan: '619825122' },
+            { sn: 15, date: '2081.04.16', invoiceNo: '2081.04.16', declarationNo: '', sellerName: 'Chitwan Trade link Udaan', sellerPan: '503896872' }
         ];
 
         function searchData() {
@@ -420,40 +432,118 @@
             const workbook = new ExcelJS.Workbook();
             const worksheet = workbook.addWorksheet('Purchase Register');
 
-            // Add headers
-            worksheet.addRow(['S.N', 'Date', 'Invoice No.', 'Declaration No.', 'Seller Name', 'Seller PAN']);
-            
-            // Style header row
-            const headerRow = worksheet.getRow(1);
-            headerRow.font = { bold: true };
-            headerRow.fill = {
-                type: 'pattern',
-                pattern: 'solid',
-                fgColor: { argb: 'FFD3D3D3' }
-            };
-            
-            // Add borders to header
-            headerRow.eachCell((cell) => {
-                cell.border = {
-                    top: { style: 'thin' },
-                    left: { style: 'thin' },
-                    bottom: { style: 'thin' },
-                    right: { style: 'thin' }
-                };
-            });
+            // Row 1: Title
+            worksheet.mergeCells('A1:O1');
+            worksheet.getCell('A1').value = 'खरिद खाता';
+            worksheet.getCell('A1').alignment = { horizontal: 'center', vertical: 'middle' };
+            worksheet.getCell('A1').font = { bold: true, size: 14 };
 
-            // Add data rows
-            sampleData.forEach(row => {
-                const dataRow = worksheet.addRow([
-                    row.sn,
-                    row.date,
-                    row.invoiceNo,
-                    row.declarationNo,
-                    row.sellerName,
-                    row.sellerPan
-                ]);
+            // Row 2: Subtitle
+            worksheet.mergeCells('A2:O2');
+            worksheet.getCell('A2').value = '(नियम ३३ को उपनियम (१) को खण्ड (क) को सम्बन्धमा)';
+            worksheet.getCell('A2').alignment = { horizontal: 'center', vertical: 'middle' };
+            worksheet.getCell('A2').font = { size: 11 };
+
+            // Row 3: Empty
+            worksheet.addRow([]);
+
+            // Row 4: Company details
+            worksheet.mergeCells('A4:C4');
+            worksheet.getCell('A4').value = 'करदाताको दर्ता नं (PAN): 609684816';
+            worksheet.mergeCells('D4:G4');
+            worksheet.getCell('D4').value = 'करदाताको नाम: ...';
+            worksheet.mergeCells('H4:J4');
+            worksheet.getCell('H4').value = `साल ${fiscalYear}`;
+            worksheet.mergeCells('K4:O4');
+            worksheet.getCell('K4').value = `कर आधि: ${month}`;
+
+            // Row 5: Section headers with merged cells
+            worksheet.mergeCells('A5:A6');
+            worksheet.getCell('A5').value = 'मिति';
+            
+            worksheet.mergeCells('B5:B6');
+            worksheet.getCell('B5').value = 'बीजक / प्रज्ञापन';
+            
+            worksheet.mergeCells('C5:C6');
+            worksheet.getCell('C5').value = 'प्रज्ञापन नं.';
+            
+            worksheet.mergeCells('D5:D6');
+            worksheet.getCell('D5').value = 'आपूर्तिकर्ताको नाम';
+            
+            worksheet.mergeCells('E5:E6');
+            worksheet.getCell('E5').value = 'आपूर्तिकर्ताको स्थायी लेखा नम्बर';
+            
+            worksheet.mergeCells('F5:G5');
+            worksheet.getCell('F5').value = 'खरिद/पुँजीगत सामानको सोधको';
+            
+            worksheet.mergeCells('H5:H6');
+            worksheet.getCell('H5').value = 'जम्मा खरीद मूल्य (रु)';
+            
+            worksheet.mergeCells('I5:I6');
+            worksheet.getCell('I5').value = 'कर छुट खुद सडको सोधको खरिद / पुँजीगत मूल्य (रु)';
+            
+            worksheet.mergeCells('J5:K5');
+            worksheet.getCell('J5').value = 'करयोग्य छूटहित (पुँजीगत बाहेक)';
+            
+            worksheet.mergeCells('L5:M5');
+            worksheet.getCell('L5').value = 'करयोग्य छूटहित (पुँजीगत बाहेक)';
+            
+            worksheet.mergeCells('N5:O5');
+            worksheet.getCell('N5').value = 'पुँजीगत करयोग्य छूटहित / रोइल्टी';
+
+            // Row 6: Column headers
+            worksheet.getCell('F6').value = 'विवरण';
+            worksheet.getCell('G6').value = 'परिमाण';
+            worksheet.getCell('J6').value = 'मूल्य (रु)';
+            worksheet.getCell('K6').value = 'कर (रु)';
+            worksheet.getCell('L6').value = 'मूल्य (रु)';
+            worksheet.getCell('M6').value = 'कर (रु)';
+            worksheet.getCell('N6').value = 'मूल्य (रु)';
+            worksheet.getCell('O6').value = 'कर (रु)';
+
+            // Style header rows
+            for (let row = 5; row <= 6; row++) {
+                for (let col = 1; col <= 15; col++) {
+                    const cell = worksheet.getRow(row).getCell(col);
+                    cell.alignment = { horizontal: 'center', vertical: 'middle', wrapText: true };
+                    cell.font = { bold: true };
+                    cell.fill = {
+                        type: 'pattern',
+                        pattern: 'solid',
+                        fgColor: { argb: 'FFD3D3D3' }
+                    };
+                    cell.border = {
+                        top: { style: 'thin' },
+                        left: { style: 'thin' },
+                        bottom: { style: 'thin' },
+                        right: { style: 'thin' }
+                    };
+                }
+            }
+
+            // Add data rows from screenshot (15 entries visible)
+            const purchaseData = [
+                ['2081.04.02', '2081.04.02', '', 'Nepal Electricity Board', '500056413', 'AllItems', '1', '1045849.19', '0.00', '1045849.19', '135960.39', '0.00', '0.00', '0.00', '0.00'],
+                ['2081.04.02', '2081.04.02', '', 'Bijay 8E Emporium Udaan', '300228166', 'AllItems', '1', '187610.61', '0.00', '0.00', '0.00', '0.00', '0.00', '187610.61', '24389.38'],
+                ['2081.04.03', '2081.04.03', '', 'Udaan Electronics Pvt. Ltd.', '609965047', 'AllItems', '1', '83042.50', '0.00', '83042.50', '10795.53', '0.00', '0.00', '0.00', '0.00'],
+                ['2081.04.04', '2081.04.04', '', 'Konnect Pvt. Ltd.', '609684816', 'AllItems', '1', '36205.81', '0.00', '36205.81', '4706.76', '0.00', '0.00', '0.00', '0.00'],
+                ['2081.04.06', '2081.04.06', '', 'Gigabyte Eam Pvt. Ltd.', '605605263', 'AllItems', '1', '35176.99', '0.00', '35176.99', '4573.01', '0.00', '0.00', '0.00', '0.00'],
+                ['2081.04.09', '2081.04.09', '', 'Nikhil Electronics Udaan', '303562078', 'AllItems', '1', '1770.00', '0.00', '1770.00', '230.10', '0.00', '0.00', '0.00', '0.00'],
+                ['2081.04.09', '2081.04.09', '', 'Udaan Electronics Pvt. Ltd.', '609965047', 'AllItems', '1', '175710.00', '0.00', '175710.00', '22842.30', '0.00', '0.00', '0.00', '0.00'],
+                ['2081.04.10', '2081.04.10', '', 'Nikhil Electronics', '303562078', 'AllItems', '1', '89567.84', '0.00', '89567.84', '11643.82', '0.00', '0.00', '0.00', '0.00'],
+                ['2081.04.10', '2081.04.10', '', 'Chandradeep Enterprises Udaan', '300135675', 'AllItems', '1', '23061.68', '0.00', '23061.68', '2998.02', '0.00', '0.00', '0.00', '0.00'],
+                ['2081.04.13', '2081.04.13', '', 'Udaan Electronics Pvt. Ltd.', '609965047', 'AllItems', '1', '4176753.00', '0.00', '0.00', '0.00', '0.00', '0.00', '4176753.00', '542977.89'],
+                ['2081.04.14', '2081.04.14', '', 'Cas Cloud Pvt. Ltd.', '304727678', 'AllItems', '1', '21780.00', '0.00', '21780.00', '2831.40', '0.00', '0.00', '0.00', '0.00'],
+                ['2081.04.14', '2081.04.14', '', 'Udaan Electronics Pvt. Ltd.', '609965047', 'AllItems', '1', '541623.50', '0.00', '0.00', '0.00', '0.00', '0.00', '541623.50', '70411.06'],
+                ['2081.04.14', '2081.04.14', '', 'Balaji Technology Pvt. Ltd.', '603523322', 'AllItems', '1', '1327.40', '0.00', '1327.40', '172.56', '0.00', '0.00', '0.00', '0.00'],
+                ['2081.04.16', '2081.04.16', '', 'Manu Signage Pvt. Ltd.', '619825122', 'AllItems', '1', '158584.06', '0.00', '158584.06', '20615.93', '0.00', '0.00', '0.00', '0.00'],
+                ['2081.04.16', '2081.04.16', '', 'Chitwan Trade link Udaan', '503896872', 'AllItems', '1', '34513.00', '0.00', '0.00', '0.00', '0.00', '0.00', '34513.00', '4486.69']
+            ];
+
+            purchaseData.forEach(rowData => {
+                const dataRow = worksheet.addRow(rowData);
                 
-                // Add borders to data cells
+                // Add borders to all cells
                 dataRow.eachCell((cell) => {
                     cell.border = {
                         top: { style: 'thin' },
@@ -461,21 +551,38 @@
                         bottom: { style: 'thin' },
                         right: { style: 'thin' }
                     };
+                    // Right align numeric columns
+                    if (cell.col >= 7) {
+                        cell.alignment = { horizontal: 'right', vertical: 'middle' };
+                    }
                 });
             });
 
             // Set column widths
             worksheet.columns = [
-                { width: 8 },   // S.N
-                { width: 14 },  // Date
-                { width: 16 },  // Invoice No.
-                { width: 18 },  // Declaration No.
-                { width: 30 },  // Seller Name
-                { width: 16 }   // Seller PAN
+                { width: 12 },  // A - मिति
+                { width: 12 },  // B - बीजक नं.
+                { width: 12 },  // C - प्रज्ञापन नं.
+                { width: 25 },  // D - आपूर्तिकर्ताको नाम
+                { width: 15 },  // E - PAN
+                { width: 12 },  // F - विवरण
+                { width: 10 },  // G - परिमाण
+                { width: 14 },  // H - जम्मा खरीद मूल्य
+                { width: 14 },  // I - कर छुट मूल्य
+                { width: 14 },  // J - मूल्य
+                { width: 12 },  // K - कर
+                { width: 14 },  // L - मूल्य
+                { width: 12 },  // M - कर
+                { width: 14 },  // N - मूल्य
+                { width: 12 }   // O - कर
             ];
+
+            // Set row heights
+            worksheet.getRow(5).height = 30;
+            worksheet.getRow(6).height = 30;
             
             // Generate filename and download
-            const filename = `purchase-register_${fiscalYear.replace('/', '-')}_${month}.xlsx`;
+            const filename = 'Purchase-Report.xlsx';
             const buffer = await workbook.xlsx.writeBuffer();
             const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
             const url = window.URL.createObjectURL(blob);
@@ -483,6 +590,8 @@
             a.href = url;
             a.download = filename;
             a.click();
+            window.URL.revokeObjectURL(url);
+        }
             window.URL.revokeObjectURL(url);
         }
     </script>
