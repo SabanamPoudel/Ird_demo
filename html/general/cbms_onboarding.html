@@ -427,9 +427,7 @@
                 <ul class="ant-menu">
                     <li class="ant-menu-item active">
                         <span class="ant-menu-item-icon">🔌</span>
-                        <span class="ant-menu-title-content">
-                            <a href="cbms_onboarding.html" style="color: inherit; text-decoration: none;">Onboarding</a>
-                        </span>
+                        <a href="#" onclick="showOnboardingForm(); return false;" style="color: inherit; text-decoration: none;">Onboarding</a>
                     </li>
                     
                     <li class="ant-menu-submenu">
@@ -439,15 +437,11 @@
                             <span class="ant-menu-submenu-arrow">▶</span>
                         </div>
                         <ul class="ant-menu-sub">
-                            <li class="ant-menu-item">
-                                <span class="ant-menu-title-content">
-                                    <a href="cbms_billing_upload.html" style="color: inherit; text-decoration: none;">Upload</a>
-                                </span>
+                            <li class="ant-menu-item" onclick="event.stopPropagation(); loadInIframe('cbms_billing_upload_content.html');">
+                                <span>Upload</span>
                             </li>
-                            <li class="ant-menu-item">
-                                <span class="ant-menu-title-content">
-                                    <a href="cbms_billing_download.html" style="color: inherit; text-decoration: none;">Download Format</a>
-                                </span>
+                            <li class="ant-menu-item" onclick="event.stopPropagation(); loadInIframe('cbms_billing_download_content.html');">
+                                <span>Download Format</span>
                             </li>
                         </ul>
                     </li>
@@ -459,36 +453,36 @@
                             <span class="ant-menu-submenu-arrow">▶</span>
                         </div>
                         <ul class="ant-menu-sub">
-                            <li class="ant-menu-item">
-                                <span class="ant-menu-title-content">Sales Register Sync</span>
+                            <li class="ant-menu-item" onclick="event.stopPropagation(); loadInIframe('cbms_sales_register_sync_content.html');">
+                                <span>Sales Register Sync</span>
                             </li>
-                            <li class="ant-menu-item">
-                                <span class="ant-menu-title-content">My Purchase Sync</span>
+                            <li class="ant-menu-item" onclick="event.stopPropagation(); loadInIframe('cbms_purchase_sync_content.html');">
+                                <span>My Purchase Sync</span>
                             </li>
-                            <li class="ant-menu-item">
-                                <span class="ant-menu-title-content">Sales Register</span>
+                            <li class="ant-menu-item" onclick="event.stopPropagation(); loadInIframe('cbms_sales_register_content.html');">
+                                <span>Sales Register</span>
                             </li>
-                            <li class="ant-menu-item">
-                                <span class="ant-menu-title-content">Sales Return Report</span>
+                            <li class="ant-menu-item" onclick="event.stopPropagation(); loadInIframe('cbms_sales_return_content.html');">
+                                <span>Sales Return Report</span>
                             </li>
-                            <li class="ant-menu-item">
-                                <span class="ant-menu-title-content">Purchase Return Report</span>
+                            <li class="ant-menu-item" onclick="event.stopPropagation(); loadInIframe('cbms_purchase_return_content.html');">
+                                <span>Purchase Return Report</span>
                             </li>
-                            <li class="ant-menu-item">
-                                <span class="ant-menu-title-content">Purchase Register</span>
+                            <li class="ant-menu-item" onclick="event.stopPropagation(); loadInIframe('cbms_purchase_register_content.html');">
+                                <span>Purchase Register</span>
                             </li>
-                            <li class="ant-menu-item">
-                                <span class="ant-menu-title-content">Sales Utility</span>
+                            <li class="ant-menu-item" onclick="event.stopPropagation(); loadInIframe('cbms_sales_utility_content.html');">
+                                <span>Sales Utility</span>
                             </li>
-                            <li class="ant-menu-item">
-                                <span class="ant-menu-title-content">Sales Return Utility</span>
+                            <li class="ant-menu-item" onclick="event.stopPropagation(); loadInIframe('cbms_sales_return_utility_content.html');">
+                                <span>Sales Return Utility</span>
                             </li>
                         </ul>
                     </li>
                     
                     <li class="ant-menu-item">
                         <span class="ant-menu-item-icon">💬</span>
-                        <span class="ant-menu-title-content">Grievance</span>
+                        <span>Grievance</span>
                     </li>
                 </ul>
             </div>
@@ -650,6 +644,9 @@
                     </button>
                 </div>
             </form>
+            
+            <!-- Content iframe for loading report pages -->
+            <iframe id="contentIframe" style="display: none; width: 100%; height: calc(100vh - 120px); border: none;"></iframe>
         </main>
     </section>
 
@@ -748,6 +745,38 @@
         function toggleSubmenu(element) {
             const submenu = element.parentElement;
             submenu.classList.toggle('ant-menu-submenu-open');
+        }
+
+        // Load content in iframe
+        function loadInIframe(url) {
+            const onboardingForm = document.querySelector('.ant-form');
+            const breadcrumbs = document.querySelector('.ant-breadcrumb');
+            const contentIframe = document.getElementById('contentIframe');
+            
+            onboardingForm.style.display = 'none';
+            breadcrumbs.style.display = 'none';
+            contentIframe.style.display = 'block';
+            
+            // Force reload by clearing src first, then setting new url
+            if (contentIframe.src) {
+                contentIframe.src = 'about:blank';
+                setTimeout(() => {
+                    contentIframe.src = url;
+                }, 100);
+            } else {
+                contentIframe.src = url;
+            }
+        }
+
+        // Show onboarding form
+        function showOnboardingForm() {
+            const onboardingForm = document.querySelector('.ant-form');
+            const breadcrumbs = document.querySelector('.ant-breadcrumb');
+            const contentIframe = document.getElementById('contentIframe');
+            
+            contentIframe.style.display = 'none';
+            onboardingForm.style.display = 'block';
+            breadcrumbs.style.display = 'block';
         }
 
         // Logout
