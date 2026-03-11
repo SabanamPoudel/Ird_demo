@@ -360,21 +360,21 @@
     <script>
         // Sample data for demonstration
         const sampleData = [
-            { sn: 1, date: '2081.04.02', invoiceNo: 'INV-2024-0001', declarationNo: '', sellerName: 'Nepal Electricity Board', sellerPan: '500056413' },
-            { sn: 2, date: '2081.04.05', invoiceNo: 'PUR-2025', declarationNo: 'DECL-001', sellerName: 'Bijay 8E Emporium Udaan', sellerPan: '300228166' },
-            { sn: 3, date: '2081.04.08', invoiceNo: 'BILL-3456', declarationNo: '', sellerName: 'Udaan Electronics Pvt. Ltd.', sellerPan: '609965047' },
-            { sn: 4, date: '2081.04.12', invoiceNo: 'INV-78901', declarationNo: '', sellerName: 'Konnect Pvt. Ltd.', sellerPan: '609684816' },
-            { sn: 5, date: '2081.04.15', invoiceNo: 'GB-2024-456', declarationNo: 'DECL-002', sellerName: 'Gigabyte Eam Pvt. Ltd.', sellerPan: '605605263' },
-            { sn: 6, date: '2081.04.18', invoiceNo: 'NE-0987', declarationNo: '', sellerName: 'Nikhil Electronics Udaan', sellerPan: '303562078' },
-            { sn: 7, date: '2081.04.20', invoiceNo: 'UE-5432', declarationNo: '', sellerName: 'Udaan Electronics Pvt. Ltd.', sellerPan: '609965047' },
-            { sn: 8, date: '2081.04.22', invoiceNo: 'INV-NE-234', declarationNo: 'DECL-003', sellerName: 'Nikhil Electronics', sellerPan: '303562078' },
-            { sn: 9, date: '2081.04.25', invoiceNo: 'CE-2024-111', declarationNo: '', sellerName: 'Chandradeep Enterprises Udaan', sellerPan: '300135675' },
-            { sn: 10, date: '2081.04.27', invoiceNo: 'UE-8765', declarationNo: 'DECL-004', sellerName: 'Udaan Electronics Pvt. Ltd.', sellerPan: '609965047' },
-            { sn: 11, date: '2081.04.28', invoiceNo: 'CC-4567', declarationNo: '', sellerName: 'Cas Cloud Pvt. Ltd.', sellerPan: '304727678' },
-            { sn: 12, date: '2081.04.29', invoiceNo: 'BILL-8899', declarationNo: '', sellerName: 'Udaan Electronics Pvt. Ltd.', sellerPan: '609965047' },
-            { sn: 13, date: '2081.04.30', invoiceNo: 'BT-2024-90', declarationNo: 'DECL-005', sellerName: 'Balaji Technology Pvt. Ltd.', sellerPan: '603523322' },
-            { sn: 14, date: '2081.05.02', invoiceNo: 'MS-5678', declarationNo: '', sellerName: 'Manu Signage Pvt. Ltd.', sellerPan: '619825122' },
-            { sn: 15, date: '2081.05.05', invoiceNo: 'CT-2024-345', declarationNo: 'DECL-006', sellerName: 'Chitwan Trade link Udaan', sellerPan: '503896872' }
+            { sn: 1, date: '2081.04.02', invoiceNo: 'INV-2024-0001', declarationNo: '', sellerName: 'ABC Suppliers Pvt. Ltd.', sellerPan: '100000001' },
+            { sn: 2, date: '2081.04.05', invoiceNo: 'PUR-2025', declarationNo: 'DECL-001', sellerName: 'XYZ Trading Company', sellerPan: '100000002' },
+            { sn: 3, date: '2081.04.08', invoiceNo: 'BILL-3456', declarationNo: '', sellerName: 'Demo Electronics Pvt. Ltd.', sellerPan: '100000003' },
+            { sn: 4, date: '2081.04.12', invoiceNo: 'INV-78901', declarationNo: '', sellerName: 'Sample Industries Ltd.', sellerPan: '100000004' },
+            { sn: 5, date: '2081.04.15', invoiceNo: 'GB-2024-456', declarationNo: 'DECL-002', sellerName: 'Test Hardware Store', sellerPan: '100000005' },
+            { sn: 6, date: '2081.04.18', invoiceNo: 'NE-0987', declarationNo: '', sellerName: 'Example Enterprises', sellerPan: '100000006' },
+            { sn: 7, date: '2081.04.20', invoiceNo: 'UE-5432', declarationNo: '', sellerName: 'Demo Tech Solutions', sellerPan: '100000007' },
+            { sn: 8, date: '2081.04.22', invoiceNo: 'INV-NE-234', declarationNo: 'DECL-003', sellerName: 'Sample Electronics', sellerPan: '100000008' },
+            { sn: 9, date: '2081.04.25', invoiceNo: 'CE-2024-111', declarationNo: '', sellerName: 'Test Trading House', sellerPan: '100000009' },
+            { sn: 10, date: '2081.04.27', invoiceNo: 'UE-8765', declarationNo: 'DECL-004', sellerName: 'Example Supply Co.', sellerPan: '100000010' },
+            { sn: 11, date: '2081.04.28', invoiceNo: 'CC-4567', declarationNo: '', sellerName: 'Demo Cloud Services', sellerPan: '100000011' },
+            { sn: 12, date: '2081.04.29', invoiceNo: 'BILL-8899', declarationNo: '', sellerName: 'Sample Tech Pvt. Ltd.', sellerPan: '100000012' },
+            { sn: 13, date: '2081.04.30', invoiceNo: 'BT-2024-90', declarationNo: 'DECL-005', sellerName: 'Test Technology Inc.', sellerPan: '100000013' },
+            { sn: 14, date: '2081.05.02', invoiceNo: 'MS-5678', declarationNo: '', sellerName: 'Example Signage Ltd.', sellerPan: '100000014' },
+            { sn: 15, date: '2081.05.05', invoiceNo: 'CT-2024-345', declarationNo: 'DECL-006', sellerName: 'Demo Distributors', sellerPan: '100000015' }
         ];
 
         function searchData() {
@@ -458,9 +458,9 @@
 
             // Row 4: Company details
             worksheet.mergeCells('A4:C4');
-            worksheet.getCell('A4').value = 'करदाताको दर्ता नं (PAN): 609684816';
+            worksheet.getCell('A4').value = 'करदाताको दर्ता नं (PAN): 999999999';
             worksheet.mergeCells('D4:G4');
-            worksheet.getCell('D4').value = 'करदाताको नाम: ...';
+            worksheet.getCell('D4').value = 'करदाताको नाम: Demo Company Pvt. Ltd.';
             worksheet.mergeCells('H4:J4');
             worksheet.getCell('H4').value = `साल ${fiscalYear}`;
             worksheet.mergeCells('K4:O4');
@@ -532,21 +532,21 @@
 
             // Add data rows from screenshot (15 entries visible)
             const purchaseData = [
-                ['2081.04.02', 'INV-2024-0001', '', 'Nepal Electricity Board', '500056413', 'AllItems', '1', '1045849.19', '0.00', '1045849.19', '135960.39', '0.00', '0.00', '0.00', '0.00'],
-                ['2081.04.05', 'PUR-2025', 'DECL-001', 'Bijay 8E Emporium Udaan', '300228166', 'AllItems', '1', '187610.61', '0.00', '0.00', '0.00', '0.00', '0.00', '187610.61', '24389.38'],
-                ['2081.04.08', 'BILL-3456', '', 'Udaan Electronics Pvt. Ltd.', '609965047', 'AllItems', '1', '83042.50', '0.00', '83042.50', '10795.53', '0.00', '0.00', '0.00', '0.00'],
-                ['2081.04.12', 'INV-78901', '', 'Konnect Pvt. Ltd.', '609684816', 'AllItems', '1', '36205.81', '0.00', '36205.81', '4706.76', '0.00', '0.00', '0.00', '0.00'],
-                ['2081.04.15', 'GB-2024-456', 'DECL-002', 'Gigabyte Eam Pvt. Ltd.', '605605263', 'AllItems', '1', '35176.99', '0.00', '35176.99', '4573.01', '0.00', '0.00', '0.00', '0.00'],
-                ['2081.04.18', 'NE-0987', '', 'Nikhil Electronics Udaan', '303562078', 'AllItems', '1', '1770.00', '0.00', '1770.00', '230.10', '0.00', '0.00', '0.00', '0.00'],
-                ['2081.04.20', 'UE-5432', '', 'Udaan Electronics Pvt. Ltd.', '609965047', 'AllItems', '1', '175710.00', '0.00', '175710.00', '22842.30', '0.00', '0.00', '0.00', '0.00'],
-                ['2081.04.22', 'INV-NE-234', 'DECL-003', 'Nikhil Electronics', '303562078', 'AllItems', '1', '89567.84', '0.00', '89567.84', '11643.82', '0.00', '0.00', '0.00', '0.00'],
-                ['2081.04.25', 'CE-2024-111', '', 'Chandradeep Enterprises Udaan', '300135675', 'AllItems', '1', '23061.68', '0.00', '23061.68', '2998.02', '0.00', '0.00', '0.00', '0.00'],
-                ['2081.04.27', 'UE-8765', 'DECL-004', 'Udaan Electronics Pvt. Ltd.', '609965047', 'AllItems', '1', '4176753.00', '0.00', '0.00', '0.00', '0.00', '0.00', '4176753.00', '542977.89'],
-                ['2081.04.28', 'CC-4567', '', 'Cas Cloud Pvt. Ltd.', '304727678', 'AllItems', '1', '21780.00', '0.00', '21780.00', '2831.40', '0.00', '0.00', '0.00', '0.00'],
-                ['2081.04.29', 'BILL-8899', '', 'Udaan Electronics Pvt. Ltd.', '609965047', 'AllItems', '1', '541623.50', '0.00', '0.00', '0.00', '0.00', '0.00', '541623.50', '70411.06'],
-                ['2081.04.30', 'BT-2024-90', 'DECL-005', 'Balaji Technology Pvt. Ltd.', '603523322', 'AllItems', '1', '1327.40', '0.00', '1327.40', '172.56', '0.00', '0.00', '0.00', '0.00'],
-                ['2081.05.02', 'MS-5678', '', 'Manu Signage Pvt. Ltd.', '619825122', 'AllItems', '1', '158584.06', '0.00', '158584.06', '20615.93', '0.00', '0.00', '0.00', '0.00'],
-                ['2081.05.05', 'CT-2024-345', 'DECL-006', 'Chitwan Trade link Udaan', '503896872', 'AllItems', '1', '34513.00', '0.00', '0.00', '0.00', '0.00', '0.00', '34513.00', '4486.69']
+                ['2081.04.02', 'INV-2024-0001', '', 'ABC Suppliers Pvt. Ltd.', '100000001', 'AllItems', '1', '1045849.19', '0.00', '1045849.19', '135960.39', '0.00', '0.00', '0.00', '0.00'],
+                ['2081.04.05', 'PUR-2025', 'DECL-001', 'XYZ Trading Company', '100000002', 'AllItems', '1', '187610.61', '0.00', '0.00', '0.00', '0.00', '0.00', '187610.61', '24389.38'],
+                ['2081.04.08', 'BILL-3456', '', 'Demo Electronics Pvt. Ltd.', '100000003', 'AllItems', '1', '83042.50', '0.00', '83042.50', '10795.53', '0.00', '0.00', '0.00', '0.00'],
+                ['2081.04.12', 'INV-78901', '', 'Sample Industries Ltd.', '100000004', 'AllItems', '1', '36205.81', '0.00', '36205.81', '4706.76', '0.00', '0.00', '0.00', '0.00'],
+                ['2081.04.15', 'GB-2024-456', 'DECL-002', 'Test Hardware Store', '100000005', 'AllItems', '1', '35176.99', '0.00', '35176.99', '4573.01', '0.00', '0.00', '0.00', '0.00'],
+                ['2081.04.18', 'NE-0987', '', 'Example Enterprises', '100000006', 'AllItems', '1', '1770.00', '0.00', '1770.00', '230.10', '0.00', '0.00', '0.00', '0.00'],
+                ['2081.04.20', 'UE-5432', '', 'Demo Tech Solutions', '100000007', 'AllItems', '1', '175710.00', '0.00', '175710.00', '22842.30', '0.00', '0.00', '0.00', '0.00'],
+                ['2081.04.22', 'INV-NE-234', 'DECL-003', 'Sample Electronics', '100000008', 'AllItems', '1', '89567.84', '0.00', '89567.84', '11643.82', '0.00', '0.00', '0.00', '0.00'],
+                ['2081.04.25', 'CE-2024-111', '', 'Test Trading House', '100000009', 'AllItems', '1', '23061.68', '0.00', '23061.68', '2998.02', '0.00', '0.00', '0.00', '0.00'],
+                ['2081.04.27', 'UE-8765', 'DECL-004', 'Example Supply Co.', '100000010', 'AllItems', '1', '4176753.00', '0.00', '0.00', '0.00', '0.00', '0.00', '4176753.00', '542977.89'],
+                ['2081.04.28', 'CC-4567', '', 'Demo Cloud Services', '100000011', 'AllItems', '1', '21780.00', '0.00', '21780.00', '2831.40', '0.00', '0.00', '0.00', '0.00'],
+                ['2081.04.29', 'BILL-8899', '', 'Sample Tech Pvt. Ltd.', '100000012', 'AllItems', '1', '541623.50', '0.00', '0.00', '0.00', '0.00', '0.00', '541623.50', '70411.06'],
+                ['2081.04.30', 'BT-2024-90', 'DECL-005', 'Test Technology Inc.', '100000013', 'AllItems', '1', '1327.40', '0.00', '1327.40', '172.56', '0.00', '0.00', '0.00', '0.00'],
+                ['2081.05.02', 'MS-5678', '', 'Example Signage Ltd.', '100000014', 'AllItems', '1', '158584.06', '0.00', '158584.06', '20615.93', '0.00', '0.00', '0.00', '0.00'],
+                ['2081.05.05', 'CT-2024-345', 'DECL-006', 'Demo Distributors', '100000015', 'AllItems', '1', '34513.00', '0.00', '0.00', '0.00', '0.00', '0.00', '34513.00', '4486.69']
             ];
 
             purchaseData.forEach(rowData => {
