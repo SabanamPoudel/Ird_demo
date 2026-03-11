@@ -70,10 +70,10 @@
 
         .ant-layout-sider {
             background: #2F4F7F;
-            width: 200px;
-            min-width: 200px;
-            flex: 0 0 200px;
-            max-width: 200px;
+            width: 240px;
+            min-width: 240px;
+            flex: 0 0 240px;
+            max-width: 240px;
             transition: all 0.2s;
             position: relative;
         }
@@ -107,6 +107,9 @@
             transition: all 0.3s;
             color: white;
             font-size: 14px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .ant-menu-item:hover {
@@ -130,6 +133,9 @@
             color: white;
             font-size: 14px;
             position: relative;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .ant-menu-submenu-title:hover {
@@ -167,6 +173,9 @@
         .ant-menu-sub .ant-menu-item {
             padding-left: 48px;
             color: white;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .ant-menu-sub .ant-menu-item:hover {
@@ -180,6 +189,21 @@
             height: 100%;
             color: inherit;
             text-decoration: none;
+        }
+
+        .ant-menu-item span,
+        .ant-menu-sub .ant-menu-item span {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            flex: 1;
+        }
+
+        .ant-menu-title-content {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            flex: 1;
         }
 
         .ant-layout-sider-trigger {
