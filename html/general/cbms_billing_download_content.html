@@ -331,15 +331,15 @@
                 'purchase_format': 'purchase-format.xlsx',
                 'purchase_sample': 'purchase-sample.xlsx',
                 'sales_return_format': 'sales-return-format.xlsx',
-                'sales_return_sample': 'sales-return-format.xlsx', 
+                'sales_return_sample': 'Sale-Return (1).xlsx',
                 'purchase_return_format': 'purchase-return-format.xlsx',
-                'purchase_return_sample': 'purchase-return-format.xlsx'
+                'purchase_return_sample': 'purchase-return-sample 2.xlsx'
             };
 
             const filename = fileMap[type];
             if (filename) {
                 const link = document.createElement('a');
-                link.href = '../../resources/downloads/' + filename;
+                link.href = '../../resources/downloads/' + encodeURIComponent(filename);
                 link.download = filename;
                 document.body.appendChild(link);
                 link.click();
